@@ -7,7 +7,7 @@ import type {
 import { LinkPreset } from './types/config'
 
 export const siteConfig: SiteConfig = {
-  title: 'Fuwari',
+  title: 'Shinbun',
   subtitle: 'Demo Site',
   lang: 'en',         // 'en', 'zh_CN', 'zh_TW', 'ja', 'ko', 'es', 'th'
   themeColor: {
@@ -51,21 +51,38 @@ export const navBarConfig: NavBarConfig = {
 }
 
 export const profileConfig: ProfileConfig = {
-  avatar: 'assets/images/avatar.png',  // Relative to the /src directory. Relative to the /public directory if it starts with '/'
+  avatar: 'assets/images/avatar.jpg',  // Relative to the /src directory. Relative to the /public directory if it starts with '/'
   name: 'Hoang Cao Luu',
   bio: 'Software Engineer | Backend Developer | Spring Boot Enthusiastic',
+  /*
+    Visit https://icones.js.org/ for icon codes
+    You will need to install the corresponding icon set if it's not already included
+    `pnpm add @iconify-json/<icon-set-name>`
+  */
   links: [
     {
-      name: 'Twitter',
-      icon: 'fa6-brands:twitter',       // Visit https://icones.js.org/ for icon codes
-                                        // You will need to install the corresponding icon set if it's not already included
-                                        // `pnpm add @iconify-json/<icon-set-name>`
-      url: 'https://twitter.com',
+      name: 'GitHub',
+      icon: 'fa6-brands:github', 
+      url: 'https://github.com/lcaohoanq/shinbun',
+    },{
+      name: 'GitLab',
+      icon: 'pajamas:tanuki',       
+      url: 'https://gitlab.com/lcaohoanq',
     },
     {
-      name: 'GitHub',
-      icon: 'fa6-brands:github',
-      url: 'https://github.com/lcaohoanq/shinbun',
+      name: 'LinkedIn',
+      icon: 'pajamas:linkedin',       
+      url: 'https://www.linkedin.com/in/lcaohoanq',
+    },
+    {
+      name: 'Instagram',
+      icon: 'fa6-brands:square-instagram',       
+      url: 'https://www.instagram.com/lcaohoanq',
+    },
+    {
+      name: 'Unsplash',
+      icon: 'fa6-brands:unsplash',       
+      url: 'https://www.unsplash.com/lcaohoanq',
     },
   ],
 }

@@ -1,5 +1,5 @@
 {
-  "name": "fuwari",
+  "name": "shinbun",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -60,6 +60,7 @@
   "devDependencies": {
     "@astrojs/ts-plugin": "^1.10.4",
     "@biomejs/biome": "1.8.3",
+    "@iconify-json/pajamas": "^1.2.4",
     "@rollup/plugin-yaml": "^4.1.2",
     "@types/markdown-it": "^14.1.2",
     "@types/mdast": "^4.0.4",

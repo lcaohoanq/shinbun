@@ -138,6 +138,9 @@ importers:
       '@biomejs/biome':
         specifier: 1.8.3
         version: 1.8.3
+      '@iconify-json/pajamas':
+        specifier: ^1.2.4
+        version: 1.2.4
       '@rollup/plugin-yaml':
         specifier: ^4.1.2
         version: 4.1.2(rollup@2.79.2)
@@ -1189,6 +1192,9 @@ packages:
 
   '@iconify-json/material-symbols@1.2.8':
     resolution: {integrity: sha512-X89QwN5eRMVHEfm5HWMYCZxkUqUPQM2TNv7D8rIPUn2jTzDmgjgiTMomn3DOXWyh1/geHPnTt1bTSFcUXlpGbw==}
+
+  '@iconify-json/pajamas@1.2.4':
+    resolution: {integrity: sha512-W6SmAX+eeVyREO91Ly50DpdG6h+9wk0DVm2PCohZxTmJ9gHfUOenpKnhYbh6+uzBCVcjbZTjBMxxn2YdwAvNOA==}
 
   '@iconify/svelte@4.0.2':
     resolution: {integrity: sha512-6BSrU85FzGfhQD3bTXpnkCCvBAglEt8T9QednVnXAYm4C+d3464y+pYMzhQNJm5mPId2cuiw+2wXlDflXllHDw==}
@@ -6222,6 +6228,10 @@ snapshots:
       '@iconify/types': 2.0.0
 
   '@iconify-json/material-symbols@1.2.8':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify-json/pajamas@1.2.4':
     dependencies:
       '@iconify/types': 2.0.0
 
