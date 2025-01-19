@@ -5,8 +5,8 @@ description: "Tại sao Java 8 phổ biến đến vậy?"
 image: https://hanam88.com/images/posts/091144-21122023-lambda-java8.jpg
 tags: []
 category: Tech
-draft: false 
-lang: ''
+draft: false
+lang: ""
 ---
 
 Java ra đời vào năm 1995, trải qua rất nhiều phiên bản, từ Java 1 (1996) đến Java 8 (2014). Mỗi phiên bản đều mang lại những cải tiến, những tính năng mới. Tuy nhiên, Java 8 là một bước tiến lớn trong lịch sử Java. Với Java 8, Java đã bắt kịp với các ngôn ngữ lập trình hiện đại hơn, giúp lập trình viên viết code ngắn gọn, dễ đọc hơn, với lambda expression, stream API, Optional, ...
@@ -22,7 +22,7 @@ public class Main {
         System.out.println("Hello Java 8");
 
         List<String> list = List.of("Java", "Kotlin", "Scala", "Groovy", "C#", "Python", "Ruby", "JavaScript");
-        
+
         for (String lang : list) {
             System.out.println(lang);
             //if want to filter
@@ -30,13 +30,13 @@ public class Main {
                 System.out.println("Java is the best");
             }
         }
-        
+
         // Java 8
         list.forEach(lang -> System.out.println(lang));
         list.stream().filter(lang -> lang.equals("Java")).forEach(lang -> System.out.println("Java is the best"));
 
     }
-    
+
 }
 ```
 
@@ -85,7 +85,6 @@ public class Main {
     }
 }
 ```
-
 
 # Functional Interface
 
@@ -168,7 +167,7 @@ class Student implements DefaultInterface {
     public void myDefaultMethod() {
         System.out.println("Student default method");
     }
-    
+
     @Override
     public void honk() {
         System.out.println("Honk honk");
@@ -180,7 +179,7 @@ class Main {
         DefaultInterface defaultInterface = new DefaultInterfaceImpl();
         defaultInterface.myDefaultMethod(); // My default method
         defaultInterface.honk(); // Honk honk
-        
+
         DefaultInterface student = new Student();
         student.myDefaultMethod(); // Student default method
     }
@@ -191,6 +190,7 @@ class Main {
 # Nashorn JavaScript Engine
 
 # Parallel Stream
+
 - Stream API can be used in parallel to increase the performance of the application.
 
 ```java
@@ -207,6 +207,7 @@ public class Main {
 ```
 
 # Collectors
+
 - Collectors are used to combine the result of processing on the elements of a stream. Collectors can be used to return a list or a string.
 
 ```java

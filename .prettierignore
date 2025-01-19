@@ -1,0 +1,7 @@
+coverage
+build
+dist
+node_modules
+.husky
+public
+.astro

@@ -1,10 +1,10 @@
 ---
-title: javi - Java Issues   
+title: javi - Java Issues
 published: 2025-01-18
 description: "All stuff about Java"
-image: ''
+image: ""
 tags: []
 category: Tech
-draft: false 
-lang: ''
+draft: false
+lang: ""
 ---

@@ -1,0 +1,2 @@
+# echo "Running pre-commit hook"
+pnpm run prettier:fix

@@ -1,17 +1,18 @@
 ---
-title: Project Lombok 
+title: Project Lombok
 published: 2025-01-18
 description: "Lombok - Best Java Library"
 image: https://miro.medium.com/v2/resize:fit:1400/0*xei_MJc3VW4mUAKx.jpg
 tags: []
 category: Tech
-draft: false 
-lang: ''
+draft: false
+lang: ""
 ---
 
 - Let's learn about most popular Java library - Lombok, with most useful, popular annotations.
 
 > ### Getter, SetterAnnotation
+>
 > - @Getter
 > - @Setter
 
@@ -52,6 +53,7 @@ public class GetterSetter {
 ```
 
 > ### ToString Annotation
+>
 > - @ToString
 
 ```java
@@ -88,6 +90,7 @@ public class ToString {
 ```
 
 > ### Data Annotation
+>
 > - @Data
 
 ```java
@@ -116,8 +119,9 @@ public class Data {
 ```
 
 > ### ...ArgsConstructor Annotation
-> - @NoArgsConstructor 
-> - @AllArgsConstructor 
+>
+> - @NoArgsConstructor
+> - @AllArgsConstructor
 > - @RequiredArgsConstructor
 
 ```java
