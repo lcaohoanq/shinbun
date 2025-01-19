@@ -3,8 +3,8 @@ title: DTO (Data Transfer Object) - What is it?
 published: 2025-01-19
 description: ''
 image: "https://github.com/user-attachments/assets/daa8e1b5-e08c-4ca5-b67c-2679c0c79391"
-tags: []
-category: ''
+tags: [Java]
+category: 'Tech'
 draft: false
 lang: ''
 ---

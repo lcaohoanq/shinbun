@@ -3,7 +3,7 @@ title: From Java to Kotlin
 published: 2025-01-18
 description: "Comprehensive guide to help you transition from Java to Kotlin"
 image: https://images.prismic.io/qovery/c952e642-7c8c-4e2f-854e-b14a14868b3e_kotlin.png?ixlib=gatsbyFP&auto=compress%2Cformat&fit=max
-tags: []
+tags: [Java,Kotlin]
 category: Tech
 draft: false
 lang: ""
@@ -616,7 +616,10 @@ fun getScore() = score // return-type is Int
 
 ---
 
-## Returning result of an operation
+## Single-expression functions
+
+> ### [Document](https://kotlinlang.org/docs/functions.html#single-expression-functions)
+> - Returning result of an operation
 
 > Java
 
@@ -643,7 +646,25 @@ fun getScore(value: Int): Int = 2 * value
 fun getScore(value: Int) = 2 * value // return-type is int
 ```
 
----
+```kotlin
+@PostMapping("/login")
+fun login(
+    @RequestBody @Valid userLoginDTO: AuthPort.UserLoginDTO
+): ResponseEntity<ApiResponse<AuthPort.LoginResponse>>
+    = ResponseEntity.ok(
+        ApiResponse.builder<AuthPort.LoginResponse>()
+            .message(localizationUtils.getLocalizedMessage(MessageKey.LOGIN_SUCCESSFULLY))
+            .statusCode(HttpStatus.OK.value())
+            .isSuccess(true)
+            .data(
+                authService.login(
+                    userLoginDTO.email,
+                    userLoginDTO.password
+                )
+            )
+            .build()
+    );
+```
 
 ## Constructors
 
@@ -1008,7 +1029,7 @@ internal lateinit var person: Person
 
 ---
 
-## enum
+## Enum
 
 > Java
 

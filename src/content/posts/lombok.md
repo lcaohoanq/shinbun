@@ -3,7 +3,7 @@ title: Project Lombok
 published: 2025-01-18
 description: "Lombok - Best Java Library"
 image: https://miro.medium.com/v2/resize:fit:1400/0*xei_MJc3VW4mUAKx.jpg
-tags: []
+tags: [Java, Java Libary]
 category: Tech
 draft: false
 lang: ""
