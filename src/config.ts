@@ -53,8 +53,8 @@ export const navBarConfig: NavBarConfig = {
 
 export const profileConfig: ProfileConfig = {
   avatar: "assets/images/avatar.jpg", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
-  name: "Hoang Cao Luu",
-  bio: "Software Engineer | Backend Developer | Spring Boot Enthusiastic",
+  name: "Lưu Cao Hoàng | ホアン・カオ・ルウ | Hoang Cao Luu",
+  bio: "Software Engineer | Backend Developer | Spring Boot Enthusiastic | ITエンジニア | Java開発エンジニア | バックエンデベロッパ",
   /*
     Visit https://icones.js.org/ for icon codes
     You will need to install the corresponding icon set if it's not already included
