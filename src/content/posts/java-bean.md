@@ -10,10 +10,10 @@ lang: ''
 ---
 
 > ###  A JavaBean is just a standard. It is a regular Java class, except it follows certain conventions:
-> All properties are private
-> Public getters/setters
-> A public no-argument constructor (public all-argument constructor, optional)
-> Implements Serializable.
+> - All properties are private
+> - Public getters/setters
+> - A public no-argument constructor (public all-argument constructor, optional)
+> - Implements Serializable.
 
 - Example code:
 
