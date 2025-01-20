@@ -8,7 +8,7 @@ Một mẫu blog tĩnh được xây dựng với [Astro](https://astro.build).
 
 > Phiên bản README: `2024-09-10`
 
-![Hình ảnh xem trước](https://raw.githubusercontent.com/saicaca/resource/main/fuwari/home.png)
+![image](https://github.com/user-attachments/assets/0cc757d6-a387-4b3b-ad2a-daf47084d79a)
 
 ## ✨ Tính năng
 
