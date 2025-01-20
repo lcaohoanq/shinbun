@@ -1,14 +1,10 @@
-# 🍥Fuwari (lcaohoanq)
+# 🍥Shinbun (lcaohoanq)
 
 A static blog template built with [Astro](https://astro.build).
 
-[**🖥️ Live Demo (Vercel)**](https://fuwari.vercel.app)&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
-[**📦 Old Hexo Version**](https://github.com/saicaca/hexo-theme-vivia)&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
-[**🌏 中文**](https://github.com/lcaohoanq/shinbun/blob/main/README.zh-CN.md)&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
-[**🌏 日本語**](https://github.com/lcaohoanq/shinbun/blob/main/README.ja-JP.md)&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
-[**🌏 한국어**](https://github.com/lcaohoanq/shinbun/blob/main/README.ko.md)&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
-[**🌏 Español**](https://github.com/lcaohoanq/shinbun/blob/main/README.es.md)&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
-[**🌏 ไทย**](https://github.com/lcaohoanq/shinbun/blob/main/README.th.md)
+[**🖥️ Live Demo (Vercel)**](https://shinbun.vercel.app)&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+[**🇻🇳 Tiếng Việt**](https://github.com/lcaohoanq/shinbun/blob/main/README.vi-VN.md)&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+[**🇯🇵 日本語**](https://github.com/lcaohoanq/shinbun/blob/main/README.ja-JP.md)&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
 
 > README version: `2024-09-10`
 
