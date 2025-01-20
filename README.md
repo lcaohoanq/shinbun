@@ -6,9 +6,9 @@ A static blog template built with [Astro](https://astro.build).
 [**🇻🇳 Tiếng Việt**](https://github.com/lcaohoanq/shinbun/blob/main/README.vi-VN.md)&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
 [**🇯🇵 日本語**](https://github.com/lcaohoanq/shinbun/blob/main/README.ja-JP.md)&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
 
-> README version: `2024-09-10`
+> README version: `2025-01-20`
 
-![Preview Image](https://raw.githubusercontent.com/saicaca/resource/main/fuwari/home.png)
+![image](https://github.com/user-attachments/assets/0cc757d6-a387-4b3b-ad2a-daf47084d79a)
 
 ## ✨ Features
 
