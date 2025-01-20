@@ -11,3 +11,22 @@ lang: ''
 
 > ### Documentation
 > - https://github.com/lcaohoanq/kotlin
+
+# Variables and data types
+
+## var and val
+- `var` is used to declare a mutable variable.
+- `val` is used to declare an immutable variable.
+
+```kotlin
+var name = "John"
+name = "Doe" // OK
+
+val age = 20
+age = 21 // Error
+```
+
+# OOP
+
+
+# Functions
