@@ -7,7 +7,7 @@
 
 > README バージョン：`2024-04-07`
 
-![Preview Image](https://raw.githubusercontent.com/saicaca/resource/main/fuwari/home.png)
+![image](https://github.com/user-attachments/assets/0cc757d6-a387-4b3b-ad2a-daf47084d79a)
 
 ## ✨ 特徴
 
