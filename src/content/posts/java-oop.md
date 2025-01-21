@@ -248,6 +248,10 @@ public class Main {
 
 ## 4. Tính trừu tượng (Abstraction)
 
+- Cách để đạt được tính trừu tượng:
+  - Abstract Class
+  - Interface
+
 - Trừu tượng là một tính chất cho phép tạo ra các lớp trừu tượng, không thể khởi tạo đối tượng từ lớp trừu tượng.
 
 - Trong Java, chúng ta sử dụng từ khóa **abstract** để tạo ra lớp trừu tượng và phương thức trừu tượng. Hàm abstract sẽ chưa được implement ở lớp cha, mà sẽ được implement ở lớp con, tăng tính linh hoạt và tái sử dụng code.
