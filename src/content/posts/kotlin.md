@@ -11,6 +11,7 @@ lang: ''
 
 > ### Documentation
 > - https://github.com/lcaohoanq/kotlin
+> - https://kotlinlang.org/docs/kotlin-reference.pdf
 
 # Variables and data types
 
