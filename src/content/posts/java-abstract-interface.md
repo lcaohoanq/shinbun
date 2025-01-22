@@ -4,7 +4,7 @@ published: 2025-01-21
 description: ''
 image: "https://s7280.pcdn.co/wp-content/uploads/2020/10/Hiring_big_data_blog-700x400-1.png"
 tags: [Java]
-category: 'Tech'
+category: 'Công nghệ'
 draft: false
 lang: ''
 ---

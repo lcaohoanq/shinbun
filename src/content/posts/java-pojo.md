@@ -4,7 +4,7 @@ published: 2025-01-19
 description: ''
 image: "https://www.boardinfinity.com/blog/content/images/2023/05/Pojo-class-in-java.png"
 tags: [Java]
-category: 'Tech'
+category: 'Công nghệ'
 draft: false
 lang: ''
 ---

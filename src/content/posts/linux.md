@@ -4,7 +4,7 @@ published: 2025-01-19
 description: All stuffs about linux with a perspective of Debian KDE Plasma user
 image: "https://github.com/lcaohoanq/Linux-Issues/assets/136492579/67567ea6-ef1c-4f92-8dd9-98979f1ba4e6"
 tags: [Linux, Documentation]
-category: 'Tech'
+category: 'Công nghệ'
 draft: false
 lang: ''
 ---

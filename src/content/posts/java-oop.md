@@ -4,7 +4,7 @@ published: 2025-01-21
 description: 'Một ngôn ngữ mang tính OOP cao nhất'
 image: "https://media2.dev.to/dynamic/image/width=1600,height=900,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fjnjgfl10cn4tm9qlztv1.png"
 tags: [Java]
-category: 'Tech'
+category: 'Công nghệ'
 draft: false
 lang: 'vi'
 ---

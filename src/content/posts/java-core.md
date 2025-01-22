@@ -4,7 +4,7 @@ published: 2025-01-18
 description: ""
 image: ""
 tags: [Java]
-category: 'Tech'
+category: 'Công nghệ'
 draft: false
 lang: ""
 ---

@@ -4,7 +4,7 @@ published: 2025-01-18
 description: "Tại sao Java 8 phổ biến đến vậy?"
 image: https://hanam88.com/images/posts/091144-21122023-lambda-java8.jpg
 tags: [Java, Java 8]
-category: Tech
+category: Công nghệ
 draft: false
 lang: ""
 ---

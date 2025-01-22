@@ -4,7 +4,7 @@ published: 2025-01-19
 description: ''
 image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNm9qY9fvsxhohz9_yzXWQS507fruhxNvdP6154E3HDjA3BFYxMZnv88TBDYYYdFOEwRU&usqp=CAU"
 tags: [Linux]
-category: 'Tech'
+category: 'Công nghệ'
 draft: false
 lang: ''
 ---

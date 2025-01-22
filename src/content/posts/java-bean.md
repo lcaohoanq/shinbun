@@ -4,7 +4,7 @@ published: 2025-01-19
 description: ''
 image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtw0bJN_peKfK9VqGLSAZ_PGTkDM4HAGjokg&s"
 tags: [Java]
-category: Tech
+category: 'Công nghệ'
 draft: false
 lang: ''
 ---
