@@ -31,7 +31,10 @@ lang: 'vi'
 
 # Coding
 
-- User Entity
+- User Entity, User Model,...
+- Đây là một bảng trong DB với tên users
+- Điều kiện để trở thành một Entity là xài 2 annotation: @Entity, @Table
+- Ngoài ra mình còn sử dụng những annotation của Lombok
 
 ```java
 package com.lcaohoanq.demo.domain.user;
@@ -49,8 +52,8 @@ import lombok.*;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false, updatable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //GenerationType.AUTO, GenerationType.SEQUENCE
+    @Column(name = "id", nullable = false, updatable = false) //if not provide name="id", JPA will automatically using the field name is userId
     private Long userId;
     private String username;
     private String password;
@@ -58,7 +61,7 @@ public class User {
 }
 ```
 
-- UserDTO
+- UserDTO (Data Transfer Object): Có thể sử dụng một classrecord đã đủ đáp ứng với **java 16+**,
 
 ```java
 record UserDTO(String username, String password) {}
@@ -232,7 +235,7 @@ spring.jpa.database-platform=org.hibernate.dialect.MySQLDialect
 spring.jpa.hibernate.ddl-auto=create
 spring.jpa.show-sql=true
 ```
-- Or application.yml
+- Hoặc xài application.yml
 
 ```yaml
 server:
