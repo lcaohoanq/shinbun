@@ -61,27 +61,87 @@ public class User {
 }
 ```
 
-- UserDTO (Data Transfer Object): Có thể sử dụng một classrecord đã đủ đáp ứng với **java 16+**,
+- UserDTO (Data Transfer Object): record **java 16+**, giống với data class của kotlin, mình có một bài viết về record tại đây [Java Record](https://shinbun.vercel.app/posts/java-record),
 
 ```java
 record UserDTO(String username, String password) {}
 ```
+- User Repository
 
-- User Controller
+```java
+package com.lcaohoanq.demo.domain.user;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+//@Repository //optional because JpaRepository already annotated with @Repository
+public interface UserRepository extends JpaRepository<User, String> {
+
+}
+```
+- Service là nơi để xử lí Bussiness Logic, tạo song song một interface và một implement class, khi sử dụng trong Controller ta sẽ dùng DI (Dependency Injection) với Interface
+
+- IUserService and UserService
+
+```java
+package com.lcaohoanq.demo.domain.user;
+
+public interface IUserService {
+
+    void save(User user);
+    User isExist(String userId);
+
+}
+
+```
+
+```java
+package com.lcaohoanq.demo.domain.user;
+
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+@RequiredArgsConstructor
+@Service
+public class UserService implements IUserService{
+
+    private final UserRepository userRepository;
+
+    @Override
+    public void save(User user) {
+        userRepository.save(user);
+    }
+
+    @Override
+    public User isExist(String userId) {
+        return userRepository.findById(userId).orElseThrow();
+    }
+}
+```
+
+
+- User Controller:
+  - @RestController: định nghĩa một REST API Endpoint
+  - @RequestMapping: áp dụng prefix cho tất cả endpoint trong class
+  - @GetMapping, @PostMapping, @PutMapping, @DeleteMapping, @PatchMapping,... cho những HTTP request tương ứng 
+  - Không nên sử dụng @Autowired, nên dùng @RequiredArgsContructor + private final -> Constructor Base Injection
 ```java
 package com.lcaohoanq.demo.domain.user;
 
 import jakarta.validation.Valid;
 import java.util.List;
+import lombok.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("${API_PREFIX}/users")
 public class UserController {
+
+   private final IUserService userService; //DI
 
     @GetMapping("")
     public String index() {
@@ -156,59 +216,6 @@ public class UserController {
 
 }
 ```
-
-- User Repository
-
-```java
-package com.lcaohoanq.demo.domain.user;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-
-//@Repository //optional because JpaRepository already annotated with @Repository
-public interface UserRepository extends JpaRepository<User, String> {
-
-}
-```
-
-- IUserService and UserService
-
-```java
-package com.lcaohoanq.demo.domain.user;
-
-public interface IUserService {
-
-    void save(User user);
-    User isExist(String userId);
-
-}
-
-```
-
-```java
-package com.lcaohoanq.demo.domain.user;
-
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-
-@RequiredArgsConstructor
-@Service
-public class UserService implements IUserService{
-
-    private final UserRepository userRepository;
-
-    @Override
-    public void save(User user) {
-        userRepository.save(user);
-    }
-
-    @Override
-    public User isExist(String userId) {
-        return userRepository.findById(userId).orElseThrow();
-    }
-}
-```
-
 
 # Config
 
