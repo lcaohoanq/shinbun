@@ -124,7 +124,7 @@ public class UserService implements IUserService{
   - @RestController: định nghĩa một REST API Endpoint
   - @RequestMapping: áp dụng prefix cho tất cả endpoint trong class
   - @GetMapping, @PostMapping, @PutMapping, @DeleteMapping, @PatchMapping,... cho những HTTP request tương ứng 
-  - Không nên sử dụng @Autowired, nên dùng @RequiredArgsContructor + private final -> Constructor Base Injection
+  - Không nên sử dụng @Autowired -> Field Injection (tham khảo ở đây, [Why using Autowired is not recommend](https://www.baeldung.com/java-spring-field-injection-cons), nên dùng @RequiredArgsContructor + private final -> Constructor Base Injection
 ```java
 package com.lcaohoanq.demo.domain.user;
 
