@@ -259,6 +259,7 @@ spring:
 
 ```
 
-- Both way are the same, just choose one, I prefer yml file because the indentation is more clear, make it easier to read.
+- Mình thích dùng yml hơn vì nó dễ đọc và gọn hơn.
+
 
 ## Swagger
