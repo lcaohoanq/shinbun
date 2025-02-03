@@ -1,4 +1,4 @@
-----------
+---
 title: On Budget Self-Host Spring Boot MySQL  
 published: 2025-02-03  
 description: "A guide on setting up a self-hosted Spring Boot app with MySQL using Docker and Localtunnel without spending on domain names or dedicated servers."  
@@ -7,7 +7,7 @@ tags: [Java, Spring Boot, Self Host, Docker, MySQL]
 category: 'Technology'  
 draft: false  
 lang: "en"
-----------
+---
 
 Setting up your own self-hosted environment for web applications doesn’t need to be expensive or complicated. In this guide, I’ll walk you through how to self-host a **Spring Boot** application connected to a **MySQL** database using **Docker** and **Localtunnel**. The beauty of this setup lies in its simplicity and cost-effectiveness. No need to buy a domain or dedicated server—just your local machine and a few handy tools.
 
