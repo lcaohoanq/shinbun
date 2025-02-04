@@ -1,5 +1,5 @@
 ---
-title: User CRUD đơn giản với Java Spring Boot 3
+title: User CRUD với Java Spring Boot 3
 published: 2025-01-22
 description: ''
 image: "https://cdn.hashnode.com/res/hashnode/image/upload/v1636832404785/mTXlsmro-.png?w=1600&h=840&fit=crop&crop=entropy&auto=compress,format&format=webp"
