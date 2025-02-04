@@ -100,6 +100,7 @@ public interface UserRepository extends JpaRepository<User, Long> {}
 
 - **UserService.java**
 	- Bussiness Logic
+    - @Transactional: hỗ trợ việc quản lý transaction, sử dụng ở class level hoặc method level, ở đây dùng method level 
 
 ```java
 package com.lcaohoanq.demo.domain.user;
@@ -119,8 +120,8 @@ public class UserService {
     @Transactional
     public User create(UserDTO userDTO) {
         User user = User.builder()
-            .username(userDTO.username())
-            .password(userDTO.password())
+            .username(userDTO.username()) //record do not have prefix get like getUsername, be aware at this point
+            .password(userDTO.password()) 
             .build();
         return userRepository.save(user);
     }
@@ -246,7 +247,8 @@ spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
 # JPA / Hibernate configuration   
 spring.jpa.hibernate.ddl-auto=create  
 spring.jpa.show-sql=true  
-  
+
+# Swagger config
 springdoc.swagger-ui.operations-sorter=method  
 springdoc.swagger-ui.tags-sorter=alpha  
 springdoc.api-docs.path=/v3/api-docs  
