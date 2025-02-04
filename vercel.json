@@ -1,1 +1,8 @@
-{}
+{
+  "buildCommand": "pnpm build",
+  "installCommand": "pnpm install",
+  "framework": "astro",
+  "env": {
+    "PROD": "true"
+  }
+}
