@@ -236,14 +236,14 @@ server.port=8080
 # API  
 API_PREFIX=/api/v1  
   
-# MySQL database configuration  
-spring.datasource.url=${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3311/mysql_starter?useSSL=false&serverTimezone=UTC}  
-spring.datasource.username=${DB_USERNAME:root}  
-spring.datasource.password=${MYSQL_ROOT_PASSWORD:Luucaohoang1604^^}  
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver  
+# H2 database configuration
+spring.datasource.url=jdbc:h2:mem:testdb
+spring.datasource.driverClassName=org.h2.Driver
+spring.datasource.username=sa
+spring.datasource.password=password
+spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
   
-# JPA / Hibernate configuration  
-spring.jpa.database-platform=org.hibernate.dialect.MySQLDialect  
+# JPA / Hibernate configuration   
 spring.jpa.hibernate.ddl-auto=create  
 spring.jpa.show-sql=true  
   
@@ -255,3 +255,10 @@ springdoc.swagger-ui.path=/swagger-ui.html
 
 # Test
 - Truy cập: http://localhost:8080/swagger-ui/index.html
+
+![image](https://github.com/user-attachments/assets/68c49594-1adb-4b70-85df-a8a63f29f61c)
+
+![image](https://github.com/user-attachments/assets/6ad3023f-a6c5-4025-8057-c94fd1f4ec63)
+
+![image](https://github.com/user-attachments/assets/4717c300-933b-4e6c-8a2a-63b4531a39b2)
+
