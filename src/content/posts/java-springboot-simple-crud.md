@@ -1,3 +1,4 @@
+
 ---
 title: User CRUD với Java Spring Boot 3
 published: 2025-01-22
@@ -31,10 +32,10 @@ lang: 'vi'
 
 # Coding
 
-- User Entity, User Model,...
-- Đây là một bảng trong DB với tên users
-- Điều kiện để trở thành một Entity là xài 2 annotation: @Entity, @Table
-- Ngoài ra mình còn sử dụng những annotation của Lombok
+- **User.java**
+	- @Table(name =  "users"): một bảng trong DB với tên users
+	- Điều kiện để trở thành một Entity là xài 2 annotation: @Entity, @Table
+	- Sử dụng những annotation của Lombok để giảm Boilerplate Code
 
 ```java
 package com.lcaohoanq.demo.domain.user;
@@ -61,12 +62,32 @@ public class User {
 }
 ```
 
-- UserDTO (Data Transfer Object): record **java 16+**, giống với data class của kotlin, mình có một bài viết về record tại đây [Java Record](https://shinbun.vercel.app/posts/java-record),
+- **UserDTO.java**
+	-  DTO (Data Transfer Object): record **java 16+**, giống với data class của kotlin, mình có một bài viết về record tại đây [Java Record](https://shinbun.vercel.app/posts/java-record),
 
 ```java
-record UserDTO(String username, String password) {}
+package com.lcaohoanq.demo.domain.user;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
+
+public record UserDTO(
+    @JsonProperty("username")
+    @NotEmpty(message = "Username is required")
+    @Size(min = 6, max = 20)
+    String username,
+
+    @JsonProperty("password")
+    @NotEmpty(message = "Password is required")
+    @Size(min = 6, max = 20)
+    String password
+) {}
 ```
-- User Repository: thay vì dùng DAO (Data Access Object) thì ta sử dụng **Repository Pattern** [DAO vs Repository](https://www.baeldung.com/java-dao-vs-repository)
+- **UserRepository.java**
+	- Sử dụng **Repository Pattern** [DAO vs Repository](https://www.baeldung.com/java-dao-vs-repository) thay vì dùng DAO (Data Access Object)
+	- Có thể dùng @Repository hoặc không vì JpaRepository đã dùng @Repository
+	- JpaRepository nhận 2 type là Entity và Data Type của PK của Entity đó (ở đây PK của User là Long userId) nên sẽ dùng Long
 
 ```java
 package com.lcaohoanq.demo.domain.user;
@@ -74,202 +95,163 @@ package com.lcaohoanq.demo.domain.user;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-//@Repository //optional because JpaRepository already annotated with @Repository
-public interface UserRepository extends JpaRepository<User, String> {
-
-}
+public interface UserRepository extends JpaRepository<User, Long> {}
 ```
-- Service là nơi để xử lí Bussiness Logic, tạo song song một interface và một implement class, khi sử dụng trong Controller ta sẽ dùng DI (Dependency Injection) với Interface
 
-- IUserService and UserService
+- **UserService.java**
+	- Bussiness Logic
 
 ```java
 package com.lcaohoanq.demo.domain.user;
 
-public interface IUserService {
-
-    void save(User user);
-    User isExist(String userId);
-
-}
-
-```
-
-```java
-package com.lcaohoanq.demo.domain.user;
-
+import com.lcaohoanq.demo.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-@RequiredArgsConstructor
 @Service
-public class UserService implements IUserService{
+@RequiredArgsConstructor
+public class UserService {
 
     private final UserRepository userRepository;
 
     @Override
-    public void save(User user) {
-        userRepository.save(user);
+    @Transactional
+    public User create(UserDTO userDTO) {
+        User user = User.builder()
+            .username(userDTO.username())
+            .password(userDTO.password())
+            .build();
+        return userRepository.save(user);
     }
 
     @Override
-    public User isExist(String userId) {
-        return userRepository.findById(userId).orElseThrow();
+    @Transactional
+    public User update(Long id, UserDTO userDTO) {
+        User existingUser = findById(id);
+        existingUser.setUsername(userDTO.username());
+        existingUser.setPassword(userDTO.password());
+        return userRepository.save(existingUser);
+    }
+
+    @Override
+    @Transactional
+    public void delete(Long id) {
+        User user = findById(id);
+        userRepository.delete(user);
+    }
+
+    @Override
+    public User findById(Long id) {
+        return userRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
     }
 }
 ```
 
-
-- User Controller:
+- **UserController.java**:
   - @RestController: định nghĩa một REST API Endpoint
   - @RequestMapping: áp dụng prefix cho tất cả endpoint trong class
   - @GetMapping, @PostMapping, @PutMapping, @DeleteMapping, @PatchMapping,... cho những HTTP request tương ứng 
-  - Không nên sử dụng @Autowired -> Field Injection (tham khảo ở đây, [Why using Autowired is not recommend](https://www.baeldung.com/java-spring-field-injection-cons), nên dùng @RequiredArgsContructor + private final -> Constructor Base Injection)
+  - Không khuyến khích sử dụng @Autowired -> Field Injection (tham khảo ở đây, [Why using Autowired is not recommend](https://www.baeldung.com/java-spring-field-injection-cons), nên dùng @RequiredArgsContructor + private final -> Constructor Base Injection)
+  - @Valid sẽ kích hoạt validation trong DTO, chỉ hoạt động với @RequestBody là một Object  
 ```java
 package com.lcaohoanq.demo.domain.user;
 
 import jakarta.validation.Valid;
-import java.util.List;
-import lombok.*;
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.*;
+import lombok.RequiredArgsConstructor;
+import org.springframework.*;
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("${API_PREFIX}/users")
+@RequiredArgsConstructor
 public class UserController {
 
-   private final IUserService userService; //DI
-
+    private final UserService userService;
+    private final UserRepository userRepository;
+    
     @GetMapping("")
-    public String index() {
-        return "Greetings from Spring Boot!";
+    public ResponseEntity<?> findAll(
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "10") int size)
+    {
+        return ResponseEntity.ok(userRepository.findAll(PageRequest.of(page, size)));
     }
-
+    
+    @GetMapping("/{id}")
+    public ResponseEntity<User> getUser(@PathVariable Long id) {
+        User user = userService.findById(id);
+        return ResponseEntity.ok(user);
+    }
+    
     @PostMapping("/register")
-    public ResponseEntity<?> createUser(
-        @Valid @RequestBody UserDTO userDTO,
-        BindingResult result) {
-        try {
-
-            if (result.hasErrors()) {
-                List<FieldError> fieldErrorList = result.getFieldErrors();
-                List<String> errorMessages = fieldErrorList
-                    .stream()
-                    .map(FieldError::getDefaultMessage)
-                    .toList();
-                return ResponseEntity.badRequest().body(errorMessages);
-            }
-
-            User user = new User(1L, "Hoang", "123");
-            return ResponseEntity.ok(user);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error");
-        }
+    public ResponseEntity<User> create(
+        @Valid @RequestBody UserDTO userDTO
+    ) {
+        User createdUser = userService.create(userDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateUser(
-        @Valid @RequestParam Long id,
-        BindingResult result) {
-        try {
-
-            if (result.hasErrors()) {
-                List<FieldError> fieldErrorList = result.getFieldErrors();
-                List<String> errorMessages = fieldErrorList
-                    .stream()
-                    .map(FieldError::getDefaultMessage)
-                    .toList();
-                return ResponseEntity.badRequest().body(errorMessages);
-            }
-            //call UserService to update user
-            User user = new User(id, "Hoang", "123");
-            return ResponseEntity.ok(user);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error");
-        }
+    public ResponseEntity<User> update(
+        @PathVariable Long id,
+        @Valid @RequestBody UserDTO userDTO
+    ) {
+        User updatedUser = userService.update(id, userDTO);
+        return ResponseEntity.ok(updatedUser);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteUser(
-        @Valid @RequestParam Long id,
-        BindingResult result) {
-        try {
-
-            if (result.hasErrors()) {
-                List<FieldError> fieldErrorList = result.getFieldErrors();
-                List<String> errorMessages = fieldErrorList
-                    .stream()
-                    .map(FieldError::getDefaultMessage)
-                    .toList();
-                return ResponseEntity.badRequest().body(errorMessages);
-            }
-            //call UserService to delete user
-            User user = new User(id, "Hoang", "123");
-            return ResponseEntity.ok(user);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error");
-        }
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        userService.delete(id);
+        return ResponseEntity.noContent().build();
     }
-
 }
+```
+
+# Swagger UI
+
+- Add thêm dependency vào **pom.xml**
+```xml
+<dependencies>
+	<dependency>  
+	  <groupId>org.springdoc</groupId>  
+	  <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>  
+	  <version>2.6.0</version>  
+	</dependency>
+<dependencies>
 ```
 
 # Config
 
-- application.properties
+- **application.properties**
 
 ```properties
-spring.application.name=demo-crud-springboot-application
-
-spring.output.ansi.enabled=ALWAYS
-
-server.port=4000 #default port is 8080
-
-# API
-API_PREFIX=/api/v1
-
-# MySQL database configuration
-spring.datasource.url=${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3311/mysql_starter}
-spring.datasource.username=root
-spring.datasource.password=${MYSQL_ROOT_PASSWORD:Luucaohoang1604^^}
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-
-# JPA / Hibernate configuration
-spring.jpa.database-platform=org.hibernate.dialect.MySQLDialect
-spring.jpa.hibernate.ddl-auto=create
-spring.jpa.show-sql=true
-```
-- Hoặc xài application.yml
-
-```yaml
-server:
-  port: 4000
-
-API_PREFIX: /api/v1
-
-spring:
-  application:
-    name: demo-crud-springboot-application
-  output:
-    ansi:
-      enabled: ALWAYS
-  datasource:
-    url: jdbc:mysql://localhost:3311/mysql_starter
-    username: root
-    password: Luucaohoang1604^^
-    driver-class-name: com.mysql.cj.jdbc.Driver
-  jpa:
-    database-platform: org.hibernate.dialect.MySQLDialect
-    hibernate:
-      ddl-auto: create
-    show-sql: true
-
+spring.application.name=demo-crud-springboot-application  
+  
+spring.output.ansi.enabled=ALWAYS  
+  
+server.port=8080   
+  
+# API  
+API_PREFIX=/api/v1  
+  
+# MySQL database configuration  
+spring.datasource.url=${SPRING_DATASOURCE_URL:jdbc:mysql://localhost:3311/mysql_starter?useSSL=false&serverTimezone=UTC}  
+spring.datasource.username=${DB_USERNAME:root}  
+spring.datasource.password=${MYSQL_ROOT_PASSWORD:Luucaohoang1604^^}  
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver  
+  
+# JPA / Hibernate configuration  
+spring.jpa.database-platform=org.hibernate.dialect.MySQLDialect  
+spring.jpa.hibernate.ddl-auto=create  
+spring.jpa.show-sql=true  
+  
+springdoc.swagger-ui.operations-sorter=method  
+springdoc.swagger-ui.tags-sorter=alpha  
+springdoc.api-docs.path=/v3/api-docs  
+springdoc.swagger-ui.path=/swagger-ui.html
 ```
 
-- Mình thích dùng yml hơn vì nó dễ đọc và gọn hơn.
-
-
-## Swagger
+# Test
+- Truy cập: http://localhost:8080/swagger-ui/index.html
