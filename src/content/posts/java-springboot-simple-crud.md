@@ -18,7 +18,7 @@ lang: 'vi'
 
 - Mình sẽ tạo trên Spring Initializr, vì nó đơn giản và nhanh chóng.
 
-![alt text](/resources/java-springboot-simple-crud/image.png)
+![alt text](./image.png)
 
 - Project: Maven
 - Language: Java 17
