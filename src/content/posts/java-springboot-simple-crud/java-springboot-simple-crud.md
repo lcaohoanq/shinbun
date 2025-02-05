@@ -4,7 +4,7 @@ title: User CRUD với Java Spring Boot 3
 published: 2025-01-22
 description: ''
 image: "https://cdn.hashnode.com/res/hashnode/image/upload/v1636832404785/mTXlsmro-.png?w=1600&h=840&fit=crop&crop=entropy&auto=compress,format&format=webp"
-tags: [Java, Spring Boot, CRUD]
+tags: [Java, Spring Boot, CRUD, Swagger, Spring Framework]
 category: 'Công nghệ'
 draft: false
 lang: 'vi'
@@ -100,7 +100,7 @@ public interface UserRepository extends JpaRepository<User, Long> {}
 
 - **UserService.java**
 	- Bussiness Logic
-    - @Transactional: hỗ trợ việc quản lý transaction, sử dụng ở class level hoặc method level, ở đây dùng method level 
+    - @Transactional: hỗ trợ việc quản lý transaction, sử dụng ở class level hoặc method level, ở đây dùng method level
 
 ```java
 package com.lcaohoanq.demo.domain.user;
@@ -121,7 +121,7 @@ public class UserService {
     public User create(UserDTO userDTO) {
         User user = User.builder()
             .username(userDTO.username()) //record do not have prefix get like getUsername, be aware at this point
-            .password(userDTO.password()) 
+            .password(userDTO.password())
             .build();
         return userRepository.save(user);
     }
@@ -153,9 +153,9 @@ public class UserService {
 - **UserController.java**:
   - @RestController: định nghĩa một REST API Endpoint
   - @RequestMapping: áp dụng prefix cho tất cả endpoint trong class
-  - @GetMapping, @PostMapping, @PutMapping, @DeleteMapping, @PatchMapping,... cho những HTTP request tương ứng 
+  - @GetMapping, @PostMapping, @PutMapping, @DeleteMapping, @PatchMapping,... cho những HTTP request tương ứng
   - Không khuyến khích sử dụng @Autowired -> Field Injection (tham khảo ở đây, [Why using Autowired is not recommend](https://www.baeldung.com/java-spring-field-injection-cons), nên dùng @RequiredArgsContructor + private final -> Constructor Base Injection)
-  - @Valid sẽ kích hoạt validation trong DTO, chỉ hoạt động với @RequestBody là một Object  
+  - @Valid sẽ kích hoạt validation trong DTO, chỉ hoạt động với @RequestBody là một Object
 ```java
 package com.lcaohoanq.demo.domain.user;
 
@@ -170,7 +170,7 @@ public class UserController {
 
     private final UserService userService;
     private final UserRepository userRepository;
-    
+
     @GetMapping("")
     public ResponseEntity<?> findAll(
         @RequestParam(defaultValue = "0") int page,
@@ -178,13 +178,13 @@ public class UserController {
     {
         return ResponseEntity.ok(userRepository.findAll(PageRequest.of(page, size)));
     }
-    
+
     @GetMapping("/{id}")
     public ResponseEntity<User> getUser(@PathVariable Long id) {
         User user = userService.findById(id);
         return ResponseEntity.ok(user);
     }
-    
+
     @PostMapping("/register")
     public ResponseEntity<User> create(
         @Valid @RequestBody UserDTO userDTO
@@ -215,10 +215,10 @@ public class UserController {
 - Add thêm dependency vào **pom.xml**
 ```xml
 <dependencies>
-	<dependency>  
-	  <groupId>org.springdoc</groupId>  
-	  <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>  
-	  <version>2.6.0</version>  
+	<dependency>
+	  <groupId>org.springdoc</groupId>
+	  <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+	  <version>2.6.0</version>
 	</dependency>
 <dependencies>
 ```
@@ -228,30 +228,30 @@ public class UserController {
 - **application.properties**
 
 ```properties
-spring.application.name=demo-crud-springboot-application  
-  
-spring.output.ansi.enabled=ALWAYS  
-  
-server.port=8080   
-  
-# API  
-API_PREFIX=/api/v1  
-  
+spring.application.name=demo-crud-springboot-application
+
+spring.output.ansi.enabled=ALWAYS
+
+server.port=8080
+
+# API
+API_PREFIX=/api/v1
+
 # H2 database configuration
 spring.datasource.url=jdbc:h2:mem:testdb
 spring.datasource.driverClassName=org.h2.Driver
 spring.datasource.username=sa
 spring.datasource.password=password
 spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
-  
-# JPA / Hibernate configuration   
-spring.jpa.hibernate.ddl-auto=create  
-spring.jpa.show-sql=true  
+
+# JPA / Hibernate configuration
+spring.jpa.hibernate.ddl-auto=create
+spring.jpa.show-sql=true
 
 # Swagger config
-springdoc.swagger-ui.operations-sorter=method  
-springdoc.swagger-ui.tags-sorter=alpha  
-springdoc.api-docs.path=/v3/api-docs  
+springdoc.swagger-ui.operations-sorter=method
+springdoc.swagger-ui.tags-sorter=alpha
+springdoc.api-docs.path=/v3/api-docs
 springdoc.swagger-ui.path=/swagger-ui.html
 ```
 
