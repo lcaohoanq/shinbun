@@ -1,6 +1,6 @@
 
 ---
-title: User CRUD với Java Spring Boot 3
+title: User CRUD đơn giản với Java Spring Boot 3
 published: 2025-01-22
 description: ''
 image: "https://cdn.hashnode.com/res/hashnode/image/upload/v1636832404785/mTXlsmro-.png?w=1600&h=840&fit=crop&crop=entropy&auto=compress,format&format=webp"
@@ -18,7 +18,7 @@ lang: 'vi'
 
 - Mình sẽ tạo trên Spring Initializr, vì nó đơn giản và nhanh chóng.
 
-![alt text](image.png)
+![alt text](/resources/java-springboot-simple-crud/image.png)
 
 - Project: Maven
 - Language: Java 17
