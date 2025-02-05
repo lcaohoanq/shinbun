@@ -120,3 +120,37 @@ In order to develop and deploy apps for different mobile devices, the Central Pr
 - Layout folder: 
 
 ## Module 3:
+
+### Layouts
+
+Part of setting up the screen of your app in Android Studio involves layouts. Read on to learn more about the function and types of layouts in Android Studio.
+
+What is a layout?
+In Android, layout defines the user interface (UI) for an app or activity and holds the UI elements that will appear to the user.
+
+Related to layouts are View and ViewGroup.
+
+View
+A View is defined as the UI which is used to create interactive UI components such as TextView, ImageView, Label, RadioButton and so on. It is in charge of event handling and drawing. They are generally referred to as "widgets".
+
+ViewGroup
+A ViewGroup serves as a parent class for layouts and layout parameters that hold other Views or ViewGroups and define the layout properties. They are generally referred to as "layouts".
+
+Types of Android Layouts
+LinearLayout
+LinearLayout is a ViewGroup subclass used to render child View elements one after the other either horizontally or vertically based on the orientation property specified.
+
+ConstraintLayout
+ConstraintLayout is a ViewGroup subclass used to specify the position of layout constraints for every child View relative to other views on the screen.
+
+Frame Layout
+FrameLayout is a ViewGroup subclass used to specify the position of View elements it contains on the top of each other to display only a single View inside the FrameLayout.
+
+Table Layout
+TableLayout is a ViewGroup subclass used to display the child View elements in rows and columns.
+
+WebView
+WebView is a browser that is used to display the web pages in your activity layout.
+
+RecyclerView
+You can use RecyclerView with LinearLayoutManager to display scrollable lists of items in a single column. You can also use RecyclerView with GridLayoutManager to display a scrollable list of items in a grid view of rows and columns.
