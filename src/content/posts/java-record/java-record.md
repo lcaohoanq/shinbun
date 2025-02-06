@@ -1,6 +1,6 @@
 ---
 title: Java Record Class
-published: 2025-01-18
+published: 2025-02-06
 description: "A new feature in Java 14"
 image: https://getlearntech.com/wp-content/uploads/2024/06/Java-Record-Big-1024x535.png
 tags: [Java]
@@ -9,28 +9,29 @@ draft: false
 lang: ""
 ---
 
-# Java Record Class
-
-Introduced in **Java 14** as a preview feature, and officially released in **Java 16**, the `record` keyword allows for a simplified, concise way to create **immutable data classes**. A record class in Java implicitly defines:
-
-- **Final fields** for the record components.
-- A **constructor** that initializes the fields.
-- **Getters** (accessor methods) for each field.
-- `equals()`, `hashCode()`, and `toString()` methods.
+Introduced as a **preview feature** in **Java 14** and officially released in **Java 16**, the `record` keyword provides a simplified, concise way to create **immutable data classes**. Records remove much of the boilerplate code required for traditional Java classes by automatically generating several methods, focusing on immutability and data representation.
 
 ## Why Use Records?
 
-Before records, developers had to manually define getters, constructors, and often override methods like `toString()` and `equals()` for simple data holder classes. Records reduce this boilerplate code, focusing on data immutability and reducing the potential for errors.
+Before records, developers had to manually define fields, constructors, getters, and often override methods like `equals()`, `hashCode()`, and `toString()` for simple data classes. This was time-consuming and error-prone, especially for data-centric classes where the main concern is holding and manipulating data.
+
+### Key Features of Records:
+- **Immutability**: Record fields are `final` by default.
+- **Concise Syntax**: Automatic generation of constructors, getters, and core methods.
+- **No inheritance**: Records cannot extend other classes but can implement interfaces.
+- **Serialization**: Records implement `Serializable` by default.
 
 ## Syntax
 
-A simple record declaration looks like this:
+Here's a simple `record` declaration:
 
 ```java
 public record Person(String name, int age) {}
+```
 
-This is equivalent to:
+This is equivalent to the following traditional Java class:
 
+```java
 public class Person {
     private final String name;
     private final int age;
@@ -40,11 +41,11 @@ public class Person {
         this.age = age;
     }
 
-    public String name() {
+    public String getName() {
         return name;
     }
 
-    public int age() {
+    public int getAge() {
         return age;
     }
 
@@ -53,7 +54,7 @@ public class Person {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Person person = (Person) o;
-        return age == person.age && Objects.equals(name, person.name);
+        return age == person.age && name.equals(person.name);
     }
 
     @Override
@@ -63,24 +64,50 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person[name=" + name + ", age=" + age + "]";
+        return "Person{name='" + name + "', age=" + age + "}";
     }
 }
+```
 
-Features of Records
+As you can see, the `record` class dramatically reduces boilerplate code, automatically generating:
+- A constructor,
+- Getter methods (e.g., `name()` and `age()`),
+- `equals()`, `hashCode()`, and `toString()`.
 
-1. Immutability
+## Example with Lombok
 
-Fields in a record are final by default, making record instances immutable. This means once an object is created, its state cannot be modified.
+Before the introduction of `record`, Lombok was a popular way to avoid boilerplate. Lombok provides annotations like `@Data` and `@AllArgsConstructor` to generate similar code automatically.
 
-2. Compact Syntax
+Here's an example using Lombok:
 
-Records eliminate the need for manually writing constructors, getters, and overriding methods. Everything is automatically generated.
+```java
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
-3. Custom Constructors
+@Data
+@AllArgsConstructor
+public class Person {
+    private final String name;
+    private final int age;
+}
+```
 
-You can still define custom constructors for validation or data transformation:
+While Lombok reduces boilerplate, it requires adding external dependencies and annotations to achieve similar results. With `record`, Java natively supports immutability and concise syntax, making it a more natural fit for modern Java applications.
 
+## Advantages of Records over Lombok and Other Approaches
+
+- **Native Support**: Records are built into Java, requiring no external dependencies.
+- **Concise Syntax**: Records are more succinct, reducing code to just the essentials.
+- **Immutability**: Records enforce immutability by default, enhancing data safety.
+- **Cleaner Code**: No need for annotations or external libraries like Lombok for basic data structures.
+
+## Custom Constructors and Methods
+
+While records provide a default constructor and methods, you can define custom behavior when necessary.
+
+### Custom Constructor:
+
+```java
 public record Person(String name, int age) {
     public Person {
         if (age < 0) {
@@ -88,38 +115,41 @@ public record Person(String name, int age) {
         }
     }
 }
+```
 
-4. Custom Methods
+### Custom Method:
 
-Although records are concise, you can add custom methods to enrich their functionality:
-
+```java
 public record Person(String name, int age) {
     public String greeting() {
         return "Hello, my name is " + name;
     }
 }
+```
 
-5. Compatibility with Serialization
+## Example of Record with Interface
 
-Records are inherently compatible with Java’s serialization mechanisms, and they implement the Serializable interface by default.
+Records can implement interfaces, which allows for more flexible data classes:
 
-Limitations
-	•	No inheritance: Records cannot extend other classes, though they can implement interfaces.
-	•	No setters: Records are designed to be immutable, so fields are final and cannot be modified once set.
-	•	Cannot be abstract: Records are concrete data types and cannot be marked as abstract.
-
-Example of Record with Interface
-
-Records can implement interfaces, allowing more complex behavior:
-
+```java
 public record Rectangle(double length, double width) implements Shape {
     @Override
     public double area() {
         return length * width;
     }
 }
+```
 
-Conclusion
+## Limitations of Records
+- **No Inheritance**: Records cannot extend other classes.
+- **No Setters**: Fields in records are `final`, enforcing immutability.
+- **Concrete Class**: Records cannot be abstract.
 
-Java records simplify the creation of immutable data classes by reducing boilerplate code. They provide built-in support for immutability, concise syntax, and automatically generated methods, making them ideal for situations where classes are used primarily for storing data.
+## Conclusion
 
+Java `record` classes provide a clean, concise, and efficient way to define immutable data classes with minimal boilerplate code. For simple data holders, records offer a better alternative to traditional classes and even tools like Lombok by leveraging native Java features. They simplify the development process, ensuring immutability, providing automatic method generation, and helping developers focus on functionality rather than repetitive code.
+
+Records are the future of immutable data structures in Java, offering a more efficient and readable way to work with data-centric objects.
+
+> Ref:
+> - [Baeldung java-record-keyword](https://www.baeldung.com/java-record-keyword)
