@@ -9,7 +9,8 @@ draft: false
 lang: en
 ---
 
-# Course 1: Introduction to Android Mobile Application Development
+# MOOC1:   Introduction to Android Mobile Application Development
+
 ## Module 1:
 
 ### What is an Android OS?
@@ -31,7 +32,7 @@ Custom ROMs
 
 - Four top-level component classes: BroadcastReceiver, ContentProvider, Service and Activity
 
-## Module 2:
+## Module 2:   
 
 ### What is an emulator?
 
@@ -125,32 +126,49 @@ In order to develop and deploy apps for different mobile devices, the Central Pr
 
 Part of setting up the screen of your app in Android Studio involves layouts. Read on to learn more about the function and types of layouts in Android Studio.
 
-What is a layout?
+> - What is a layout?
 In Android, layout defines the user interface (UI) for an app or activity and holds the UI elements that will appear to the user.
 
-Related to layouts are View and ViewGroup.
+- Related to layouts are View and ViewGroup.
 
-View
+	- **View**
 A View is defined as the UI which is used to create interactive UI components such as TextView, ImageView, Label, RadioButton and so on. It is in charge of event handling and drawing. They are generally referred to as "widgets".
 
-ViewGroup
+	- **ViewGroup**
 A ViewGroup serves as a parent class for layouts and layout parameters that hold other Views or ViewGroups and define the layout properties. They are generally referred to as "layouts".
 
-Types of Android Layouts
-LinearLayout
-LinearLayout is a ViewGroup subclass used to render child View elements one after the other either horizontally or vertically based on the orientation property specified.
+- Types of Android Layouts
+	- **LinearLayout**:  is a ViewGroup subclass used to render child View elements one after the other either horizontally or vertically based on the orientation property specified.
 
-ConstraintLayout
-ConstraintLayout is a ViewGroup subclass used to specify the position of layout constraints for every child View relative to other views on the screen.
+	- **ConstraintLayout**: is a ViewGroup subclass used to specify the position of layout constraints for every child View relative to other views on the screen.
 
-Frame Layout
-FrameLayout is a ViewGroup subclass used to specify the position of View elements it contains on the top of each other to display only a single View inside the FrameLayout.
+	- **Frame Layout**: is a ViewGroup subclass used to specify the position of View elements it contains on the top of each other to display only a single View inside the FrameLayout.
 
-Table Layout
-TableLayout is a ViewGroup subclass used to display the child View elements in rows and columns.
+	- **Table Layout**: is a ViewGroup subclass used to display the child View elements in rows and columns.
 
-WebView
-WebView is a browser that is used to display the web pages in your activity layout.
+	- **WebView**: is a browser that is used to display the web pages in your activity layout.
 
-RecyclerView
-You can use RecyclerView with LinearLayoutManager to display scrollable lists of items in a single column. You can also use RecyclerView with GridLayoutManager to display a scrollable list of items in a grid view of rows and columns.
+	- **RecyclerView**: You can use RecyclerView with LinearLayoutManager to display scrollable lists of items in a single column. You can also use RecyclerView with GridLayoutManager to display a scrollable list of items in a grid view of rows and columns.
+
+# MOOC 2: Version Control
+
+# MOOC 3: Programming Fundamentals in Kotlin
+
+# MOOC 4: Principles of UX/UI Design
+
+## Module 1:
+
+> - What is UX/UI: UX (User Experience/User Interface)
+
+- UX:
+	- 5 Principals of Usability: Learnability, Efficiency, Memorability, Errors, Satisfaction
+
+- The 5 Stages in the Design Thinking Process: **Empathize, define, ideate, prototype, test**
+- 
+## Module 2:
+
+## Module 3:
+
+## Module 4:
+
+## Module 5:
