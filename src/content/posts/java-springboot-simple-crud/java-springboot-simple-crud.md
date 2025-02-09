@@ -18,7 +18,7 @@ lang: 'vi'
 
 - Mình sẽ tạo trên Spring Initializr, vì nó đơn giản và nhanh chóng.
 
-![alt text](https://github.com/lcaohoanq/shinbun/blob/main/src/content/posts/java-springboot-simple-crud/image.png)
+![alt text](https://raw.githubusercontent.com/lcaohoanq/shinbun/main/src/content/posts/java-springboot-simple-crud/image.png)
 
 - Project: Maven
 - Language: Java 17
