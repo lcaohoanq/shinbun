@@ -1,31 +1,31 @@
 ---
-
-## title\: User CRUD đơn giản với Java Spring Boot 3
-published\: 2025\-01\-22
-description\: \'\'
-image\: \"[https\:\/\/cdn\.hashnode\.com\/res\/hashnode\/image\/upload\/v1636832404785\/mTXlsmro\-\.png\?w\=1600\&h\=840\&fit\=crop\&crop\=entropy\&auto\=compress\,format\&format\=webp](https://cdn.hashnode.com/res/hashnode/image/upload/v1636832404785/mTXlsmro-.png?w=1600&h=840&fit=crop&crop=entropy&auto=compress,format&format=webp)\"
-tags\: \[Java\, Spring Boot\, CRUD\, Swagger\, Spring Framework\]
-category\: \'Công nghệ\'
-draft\: false
-lang\: \'vi\'
+title: User CRUD đơn giản với Java Spring Boot 3
+published: 2025-01-22
+description: ''
+image: "[https://cdn.hashnode.com/res/hashnode/image/upload/v1636832404785/mTXlsmro-.png?w=1600&h=840&fit=crop&crop=entropy&auto=compress,format&format=webp](https://cdn.hashnode.com/res/hashnode/image/upload/v1636832404785/mTXlsmro-.png?w=1600&h=840&fit=crop&crop=entropy&auto=compress,format&format=webp)"
+tags: [Java, Spring Boot, CRUD, Swagger, Spring Framework]
+category: 'Công nghệ'
+draft: false
+lang: 'vi'
+---
 
 # Tạo project mới
 
-- Có 2 cách tạo project Spring Boot\:
+- Có 2 cách tạo project Spring Boot:
 
     - Sử dụng [Spring Initializr](https://start.spring.io/)
 
-    - Sử dụng Spring Tool Suite \(STS\) hoặc IntelliJ IDEA
+    - Sử dụng Spring Tool Suite (STS) hoặc IntelliJ IDEA
 
-- Mình sẽ tạo trên Spring Initializr\, vì nó đơn giản và nhanh chóng\.
+- Mình sẽ tạo trên Spring Initializr, vì nó đơn giản và nhanh chóng.
 
-![alt text](https://raw.githubusercontent.com/lcaohoanq/shinbun/main/src/content/posts/java-springboot-simple-crud/image.png)- Project\: Maven
+![alt text](https://raw.githubusercontent.com/lcaohoanq/shinbun/main/src/content/posts/java-springboot-simple-crud/image.png)- Project: Maven
 
-- Language\: Java 17
+- Language: Java 17
 
-- Spring Boot\: 3\.4\.1
+- Spring Boot: 3.4.1
 
-- Dependencies\:
+- Dependencies:
 
     - Lombok
 
@@ -33,15 +33,15 @@ lang\: \'vi\'
 
     - Spring Data JPA
 
-- Cần thêm gì thì vô pom\.xml add sau\, 3 cái trên là cơ bản\.
+- Cần thêm gì thì vô pom.xml add sau, 3 cái trên là cơ bản.
 
 # Coding
 
-- **User\.java**
+- **User.java**
 
-    - \@Table\(name \=  \"users\"\)\: một bảng trong DB với tên users
+    - @Table(name =  "users"): một bảng trong DB với tên users
 
-    - Điều kiện để trở thành một Entity là xài 2 annotation\: \@Entity\, \@Table
+    - Điều kiện để trở thành một Entity là xài 2 annotation: @Entity, @Table
 
     - Sử dụng những annotation của Lombok để giảm Boilerplate Code
 
@@ -70,9 +70,9 @@ public class User {
 }
 ```
 
-- **UserDTO\.java**
+- **UserDTO.java**
 
-    - DTO \(Data Transfer Object\)\: record **java 16\+**\, giống với data class của kotlin\, mình có một bài viết về record tại đây [Java Record](https://shinbun.vercel.app/posts/java-record/java-record)\,
+    - DTO (Data Transfer Object): record **java 16+**, giống với data class của kotlin, mình có một bài viết về record tại đây [Java Record](https://shinbun.vercel.app/posts/java-record/java-record),
 
 ```java
 package com.lcaohoanq.demo.domain.user;
@@ -94,13 +94,13 @@ public record UserDTO(
 ) {}
 ```
 
-- **UserRepository\.java**
+- **UserRepository.java**
 
-    - Sử dụng **Repository Pattern** [DAO vs Repository](https://www.baeldung.com/java-dao-vs-repository) thay vì dùng DAO \(Data Access Object\)
+    - Sử dụng **Repository Pattern** [DAO vs Repository](https://www.baeldung.com/java-dao-vs-repository) thay vì dùng DAO (Data Access Object)
 
-    - Có thể dùng \@Repository hoặc không vì JpaRepository đã dùng \@Repository
+    - Có thể dùng @Repository hoặc không vì JpaRepository đã dùng @Repository
 
-    - JpaRepository nhận 2 type là Entity và Data Type của PK của Entity đó \(ở đây PK của User là Long userId\) nên sẽ dùng Long
+    - JpaRepository nhận 2 type là Entity và Data Type của PK của Entity đó (ở đây PK của User là Long userId) nên sẽ dùng Long
 
 ```java
 package com.lcaohoanq.demo.domain.user;
@@ -111,11 +111,11 @@ import org.springframework.stereotype.Repository;
 public interface UserRepository extends JpaRepository<User, Long> {}
 ```
 
-- **UserService\.java**
+- **UserService.java**
 
     - Bussiness Logic
 
-    - \@Transactional\: hỗ trợ việc quản lý transaction\, sử dụng ở class level hoặc method level\, ở đây dùng method level
+    - @Transactional: hỗ trợ việc quản lý transaction, sử dụng ở class level hoặc method level, ở đây dùng method level
 
 ```java
 package com.lcaohoanq.demo.domain.user;
@@ -165,17 +165,17 @@ public class UserService {
 }
 ```
 
-- **UserController\.java**\:
+- **UserController.java**:
 
-    - \@RestController\: định nghĩa một REST API Endpoint
+    - @RestController: định nghĩa một REST API Endpoint
 
-    - \@RequestMapping\: áp dụng prefix cho tất cả endpoint trong class
+    - @RequestMapping: áp dụng prefix cho tất cả endpoint trong class
 
-    - \@GetMapping\, \@PostMapping\, \@PutMapping\, \@DeleteMapping\, \@PatchMapping\,\.\.\. cho những HTTP request tương ứng
+    - @GetMapping, @PostMapping, @PutMapping, @DeleteMapping, @PatchMapping,... cho những HTTP request tương ứng
 
-    - Không khuyến khích sử dụng \@Autowired \-\> Field Injection \(tham khảo ở đây\, [Why using Autowired is not recommend](https://www.baeldung.com/java-spring-field-injection-cons)\, nên dùng \@RequiredArgsContructor \+ private final \-\> Constructor Base Injection\)
+    - Không khuyến khích sử dụng @Autowired -> Field Injection (tham khảo ở đây, [Why using Autowired is not recommend](https://www.baeldung.com/java-spring-field-injection-cons), nên dùng @RequiredArgsContructor + private final -> Constructor Base Injection)
 
-    - \@Valid sẽ kích hoạt validation trong DTO\, chỉ hoạt động với \@RequestBody là một Object
+    - @Valid sẽ kích hoạt validation trong DTO, chỉ hoạt động với @RequestBody là một Object
 
 ```java
 package com.lcaohoanq.demo.domain.user;
@@ -233,7 +233,7 @@ public class UserController {
 
 # Swagger UI
 
-- Add thêm dependency vào **pom\.xml**
+- Add thêm dependency vào **pom.xml**
 
 ```xml
 <dependencies>
@@ -247,7 +247,7 @@ public class UserController {
 
 # Config
 
-- **application\.properties**
+- **application.properties**
 
 ```properties
 spring.application.name=demo-crud-springboot-application
@@ -279,7 +279,7 @@ springdoc.swagger-ui.path=/swagger-ui.html
 
 # Test
 
-- Truy cập\: [http\:\/\/localhost\:8080\/swagger\-ui\/index\.html](http://localhost:8080/swagger-ui/index.html)
+- Truy cập: [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
 
 ![image](https://github.com/user-attachments/assets/68c49594-1adb-4b70-85df-a8a63f29f61c)
 
