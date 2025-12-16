@@ -1,173 +1,177 @@
 ---
-title: Essential Git Commands Every Developer Should Know
+title: Git 101
 published: 2025-02-01
-description: "A comprehensive guide to the most important Git commands for daily development work"
-tags: [Git, Version Control, Development]
-category: 'Technology'
+description: "Học git cho đời dev bớt khổ"
+tags: [Git, Version Control, Branch, Repository, Collaboration]
+category: 'Công nghệ'
 draft: false
 lang: "en"
 ---
 
-# Essential Git Commands Every Developer Should Know
+# Git 101: Các lệnh Git thiết yếu cho mọi developer
 
-As a developer who uses Git daily, I've found that while Git has numerous commands, there's a core set that we use most frequently. In this guide, I'll share the essential Git commands that every developer should master, along with real-world examples and best practices.
+> Trên trường hầu như không dạy về Git, nhưng đây là kĩ năng tối quan trọng mà hầu như tất cả developer bắt buộc đều phải biết sử dụng. Trong bài viết này, mình sẽ chia sẻ những lệnh Git thiết yếu mà mọi developer nên nắm vững để quản lý code hiệu quả và cộng tác mượt mà trong các dự án phát triển phần mềm.
 
-## Getting Started with Git
+## Bắt đầu với Git
 
-### Initial Setup
-Before diving into commands, ensure Git is properly configured:
+### Cấu hình ban đầu
+
+Trước khi lao vào gõ lệnh, hãy đảm bảo Git đã được cấu hình ngon lành:
 
 ```bash
-# Set your identity
+# Đặt thông tin cá nhân
 git config --global user.name "Your Name"
 git config --global user.email "your.email@example.com"
 
-# Set default editor
+# Đặt trình soạn thảo mặc định
 git config --global core.editor "vim"
 ```
 
-### Repository Initialization
-Start a new Git repository or clone an existing one:
+### Khởi tạo repository
+
+Bắt đầu một Git repository mới hoặc clone một repository có sẵn:
 
 ```bash
-# Initialize a new repository
+# Khởi tạo repository mới
 git init
 
-# Clone an existing repository
+# Clone một repository có sẵn
 git clone https://github.com/username/repository.git
 ```
 
-## Daily Workflow Commands
+## Các lệnh Git dùng hằng ngày
 
-### Checking Status and Making Changes
+### Kiểm tra trạng thái và lưu thay đổi
 
 ```bash
-# Check repository status
+# Kiểm tra trạng thái repository
 git status
 
-# Add files to staging area
-git add filename.txt        # Add specific file
-git add .                  # Add all files
-git add *.js              # Add all JavaScript files
+# Thêm file vào khu vực staging
+git add filename.txt        # Thêm một file cụ thể
+git add .                  # Thêm tất cả các file
+git add *.js              # Thêm tất cả file JavaScript
 
-# Commit changes
+# Tạo commit
 git commit -m "Your meaningful commit message"
-git commit -am "Add and commit in one command" # Only works for modified files
+git commit -am "Add and commit in one command" # Chỉ hoạt động với file đã được theo dõi
 ```
 
-### Branching and Navigation
+### Làm việc với branch và di chuyển giữa các nhánh
 
 ```bash
-# List all branches
-git branch                 # Local branches
-git branch -r             # Remote branches
-git branch -a             # All branches
+# Liệt kê các branch
+git branch                 # Branch local
+git branch -r             # Branch remote
+git branch -a             # Tất cả branch
 
-# Create and switch to a new branch
+# Tạo và chuyển sang branch mới
 git checkout -b feature/new-feature
 git switch -c feature/new-feature
 
-# Switch between branches
+# Chuyển giữa các branch
 git checkout main
 git switch main
 
-# Delete a branch
-git branch -d branch-name  # Safe delete
-git branch -D branch-name  # Force delete
+# Xoá branch
+git branch -d branch-name  # Xoá an toàn
+git branch -D branch-name  # Xoá cưỡng bức
 ```
 
-## Working with Remote Repositories
+## Làm việc với remote repository
 
-### Remote Operations
+### Các thao tác với remote
 
 ```bash
-# List remote repositories
+# Liệt kê các remote
 git remote -v
 
-# Add remote repository
+# Thêm remote
 git remote add origin https://github.com/username/repo.git
 
-# Fetch updates from remote
+# Lấy cập nhật mới nhất từ remote
 git fetch origin
 
-# Pull changes from remote
+# Kéo thay đổi từ remote về
 git pull origin main
 
-# Push changes to remote
+# Đẩy thay đổi lên remote
 git push origin feature/new-feature
 ```
 
-## Reviewing Changes
+## Xem lại thay đổi
 
-### Viewing History and Differences
+### Xem lịch sử và so sánh khác biệt
 
 ```bash
-# View commit history
+# Xem lịch sử commit
 git log
-git log --oneline         # Compact view
-git log --graph           # Graphical view
+git log --oneline         # Dạng rút gọn
+git log --graph           # Hiển thị dạng đồ thị
 
-# View changes
-git diff                  # Working directory vs staging
-git diff --staged        # Staging vs last commit
-git diff branch1..branch2 # Between branches
+# Xem thay đổi
+git diff                  # So sánh thư mục làm việc với staging
+git diff --staged        # So sánh staging với commit gần nhất
+git diff branch1..branch2 # So sánh giữa hai branch
 ```
 
-## Advanced Operations
+## Các thao tác nâng cao
 
-### Stashing Changes
+### Tạm cất thay đổi (stash)
 
 ```bash
-# Save changes for later
+# Tạm cất thay đổi để làm việc khác
 git stash
 
-# List stashes
+# Xem danh sách stash
 git stash list
 
-# Apply most recent stash
+# Áp dụng stash gần nhất
 git stash apply
 
-# Apply specific stash
+# Áp dụng một stash cụ thể
 git stash apply stash@{2}
 
-# Remove stash
+# Xoá một stash
 git stash drop stash@{0}
 ```
 
-### Merging and Rebasing
+### Merge và rebase
 
 ```bash
-# Merge a branch
+# Merge một branch
 git merge feature/new-feature
 
-# Rebase current branch
+# Rebase branch hiện tại
 git rebase main
 
 # Interactive rebase
-git rebase -i HEAD~3      # Rebase last 3 commits
+git rebase -i HEAD~3      # Rebase 3 commit gần nhất
 ```
 
-## Recovery and Undoing Changes
+## Khôi phục và hoàn tác thay đổi
 
-### Fixing Mistakes
+### Sửa lỗi và quay ngược
 
 ```bash
-# Undo last commit (keeping changes)
+# Hoàn tác commit gần nhất (nhưng giữ lại thay đổi trong code)
 git reset HEAD~1
 
-# Hard reset to specific commit
+# Reset cứng về một commit cụ thể
 git reset --hard commit-hash
 
-# Revert a commit
+# Tạo commit đảo ngược (revert) một commit
 git revert commit-hash
 ```
 
-## Best Practices
+## Best practices (Thói quen nên có)
 
-### 1. Commit Messages
-Write clear, descriptive commit messages:
+### 1. Commit message
+
+Viết commit message rõ ràng, dễ hiểu và có ý nghĩa:
+
 ```bash
-# Good commit message format
+# Ví dụ commit message “xịn xò”
 git commit -m "feat: add user authentication system
 
 - Implement JWT token generation
@@ -175,20 +179,27 @@ git commit -m "feat: add user authentication system
 - Create user validation middleware"
 ```
 
-### 2. Branch Naming Conventions
-Use descriptive branch names with prefixes:
-- `feature/` for new features
-- `bugfix/` for bug fixes
-- `hotfix/` for urgent fixes
-- `release/` for release preparations
+- Sử dụng prefix như `feat:`, `fix:`, `docs:`, `refactor:` để phân loại commit, tham khảo theo [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/).
 
-Example:
+### 2. Quy ước đặt tên branch
+
+Dùng tên branch mô tả rõ ràng kèm tiền tố:
+
+- `feature/` cho tính năng mới
+- `bugfix/` cho sửa lỗi
+- `hotfix/` cho sửa lỗi gấp trên production
+- `release/` cho chuẩn bị phát hành
+
+Ví dụ:
+
 ```bash
 git checkout -b feature/user-authentication
 ```
 
-### 3. Regular Updates
-Keep your local repository in sync:
+### 3. Cập nhật thường xuyên
+
+Giữ cho repository local luôn cập nhật với branch chính:
+
 ```bash
 git checkout main
 git pull origin main
@@ -196,72 +207,76 @@ git checkout your-branch
 git rebase main
 ```
 
-## Git Workflow Tips
+## Mẹo workflow với Git
 
-### Creating a Feature
+### Tạo một tính năng mới
+
 ```bash
-# Start a new feature
+# Bắt đầu một feature mới
 git checkout main
 git pull origin main
 git checkout -b feature/new-feature
 
-# Work on feature
+# Làm việc trên feature
 git add .
 git commit -m "feat: implement new feature"
 
-# Update with main branch
+# Cập nhật với branch main
 git checkout main
 git pull origin main
 git checkout feature/new-feature
 git rebase main
 
-# Push to remote
+# Đẩy lên remote
 git push origin feature/new-feature
 ```
 
-### Code Review Process
+### Quy trình code review
+
 ```bash
-# Update feature branch before review
+# Cập nhật feature branch trước khi tạo PR / review
 git checkout feature/new-feature
 git fetch origin
 git rebase origin/main
 
-# Address review comments
+# Sửa theo comment review
 git add .
 git commit -m "fix: address review comments"
 git push origin feature/new-feature
 ```
 
-## Troubleshooting Common Issues
+## Xử lý sự cố thường gặp
 
-### Resolving Merge Conflicts
+### Giải quyết xung đột merge
+
 ```bash
-# When conflicts occur
-git status                  # Check conflicting files
-# Edit files to resolve conflicts
+# Khi xảy ra conflict
+git status                  # Xem file đang bị conflict
+# Mở file, sửa conflict cho đúng
 git add resolved-file.txt
 git commit -m "resolve merge conflicts"
 ```
 
-### Recovering Lost Changes
+### Khôi phục thay đổi đã “mất”
+
 ```bash
-# View reflog
+# Xem reflog
 git reflog
 
-# Recover lost commits
+# Khôi phục commit đã mất
 git checkout -b recovery-branch lost-commit-hash
 ```
 
-## Conclusion
+## Kết luận
 
-These Git commands form the foundation of version control in modern development. While there are many more Git commands available, mastering these essentials will handle most of your daily development needs. Remember to:
+Những lệnh Git trên là “bộ công cụ cơ bản” để bạn sinh tồn trong thế giới version control hiện đại. Dù Git còn rất nhiều lệnh và tính năng nâng cao, chỉ cần nắm vững những lệnh thiết yếu này là bạn đã xử lý được hầu hết các tình huống hằng ngày rồi.
 
-- Always write clear commit messages
-- Keep your branches up to date
-- Use meaningful branch names
-- Regularly push your changes
-- Review changes before committing
+Hãy luôn nhớ:
 
-The more you use these commands, the more natural they'll become. Don't be afraid to experiment in a test repository to better understand how each command works.
+- Viết commit message rõ ràng, có ý nghĩa
+- Giữ branch của bạn luôn cập nhật với branch chính
+- Đặt tên branch sao cho nhìn vào là hiểu đang làm gì
+- Thường xuyên push code lên remote để tránh “mất trắng”
+- Luôn xem lại thay đổi (`git diff`, `git status`) trước khi commit
 
-What Git commands do you find most useful in your daily work? Share your experiences and let's learn from each other!
+Càng dùng Git nhiều, bạn sẽ càng thấy nó quen tay và “dễ như ăn kẹo”. Đừng ngại tạo một repository thử nghiệm để thoải mái vọc, reset, rebase, phá rồi sửa – đó là cách nhanh nhất để hiểu sâu Git.

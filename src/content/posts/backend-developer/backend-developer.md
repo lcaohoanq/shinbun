@@ -5,7 +5,7 @@ description: "A comprehensive guide to becoming a back-end developer, with a foc
 image: "https://images.unsplash.com/photo-1685716851721-7e1419f2db18?q=80&w=1332&auto=format&fit=crop"
 tags: [Java, Spring Boot, Backend Development]
 category: 'Technology'
-draft: false
+draft: true
 lang: "en"
 ---
 

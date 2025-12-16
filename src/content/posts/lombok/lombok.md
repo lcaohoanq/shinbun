@@ -1,7 +1,7 @@
 ---
-title: Project Lombok
+title: Lombok 101
 published: 2025-01-18
-description: "Lombok - Best Java Library"
+description: "Lombok is a Java library that helps to reduce boilerplate code."
 image: https://miro.medium.com/v2/resize:fit:1400/0*xei_MJc3VW4mUAKx.jpg
 tags: [Java, Java Libary]
 category: Công nghệ
