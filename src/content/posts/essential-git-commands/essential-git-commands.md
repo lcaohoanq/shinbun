@@ -2,6 +2,7 @@
 title: Git 101
 published: 2025-02-01
 description: "Học git cho đời dev bớt khổ"
+image: "https://images.unsplash.com/photo-1556075798-4825dfaaf498?q=80&w=1176&auto=format&fit=crop"
 tags: [Git, Version Control, Branch, Repository, Collaboration]
 category: 'Công nghệ'
 draft: false
