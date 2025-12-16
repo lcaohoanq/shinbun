@@ -34,18 +34,18 @@ lcaohoanq ALL=(ALL:ALL) ALL
 ```zsh
 ❯ lsblk -o NAME,SIZE,UUID
 NAME          SIZE UUID
-sda         223.6G 
+sda         223.6G
 ├─sda1      212.2G 2c9bf3d9-8c80-4d4d-8632-4b10e65726d3
-├─sda2          1K 
+├─sda2          1K
 └─sda5       11.4G 9eacdd7d-3177-4e92-a812-63e0abaade65
-nvme0n1     238.5G 
+nvme0n1     238.5G
 └─nvme0n1p1 238.5G 26a0de97-0abd-45e1-b610-129d3045f430
 ```
 - Mình muốn mount ổ **/dev/nvme0n1p1** -> /media/data, mình cần 4 thông tin
 	-	UUID của ổ
 	-	destination -> /media/data
 	-	định dạng phân vùng -> ext4
-	-	defaults 0 2 -> 
+	-	defaults 0 2 ->
 		-	0: Liên quan tới tool **`dump`** (backup kiểu cổ)
 			-   `0` = **không backup**
 			-   `1` = có backup
@@ -108,14 +108,14 @@ sudo apt install \
   eza \			 # ls xịn hơn
   fzf \      # file & search
   zoxide \   # cd xịn hơn
-  fastfetch \ 
+  fastfetch \
   htop \
   btop \
   duf \  		# du df xịn hơn
   xclip     # copy paste với clipboard
   ranger    # thao tác file trong terminal
   byobu     # tmux xịn hơn
-  fd-find  
+  fd-find
   ripgrep   # search recursive directories
   pipx
 ```
@@ -134,7 +134,7 @@ fd --version
 - Mình là dev với java nên cần thêm vài tool
 
 ```zsh
-sudo apt install maven default-jdk 
+sudo apt install maven default-jdk
 ```
 - Test lại đã cài được chưa
 ```zsh
@@ -201,7 +201,7 @@ pre-commit install            # cài git hooks
 
 - Cần có 3 file commit trên repo
 	-   `.pre-commit-config.yaml`
-	-   `.secrets.baseline`   
+	-   `.secrets.baseline`
 	-   `.gitignore`
 
 ### **Team Setup**
@@ -212,7 +212,7 @@ pipx ensurepath
 pre-commit install
 ```
 
-**Commit bất kỳ có secrets → sẽ bị chặn.**  
+**Commit bất kỳ có secrets → sẽ bị chặn.**
 Nếu bị false positive:
 
 ```zsh
@@ -237,13 +237,13 @@ export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
 ```
 
 - Install Lazyvim (https://www.lazyvim.org/installation)
-- LazyVim require v10 above to install 
+- LazyVim require v10 above to install
 
 <img width="1134" height="713" alt="image" src="https://github.com/user-attachments/assets/b0959d01-e93c-4348-add1-a5af86f5405f" />
 
 - Cài Thêm Trong LazyExtras để support nhiều ngôn ngữ + tools
 
-# Docker 
+# Docker
 - Theo guide là được, chỉ cài Docker Engine https://docs.docker.com/engine/install/debian/
 - Check cài thành công
 ```zsh
@@ -252,17 +252,17 @@ sudo docker run hello-world
 
 - Nhưng xài lệnh `docker ps` thì không được
 ```yaml
-docker: Got permission denied while trying to connect 
-to the Docker daemon socket at unix:///var/run/docker.sock: 
-Post http://%2Fvar%2Frun%2Fdocker.sock/v1.35/containers/create: 
-dial unix /var/run/docker.sock: connect: permission denied. 
+docker: Got permission denied while trying to connect
+to the Docker daemon socket at unix:///var/run/docker.sock:
+Post http://%2Fvar%2Frun%2Fdocker.sock/v1.35/containers/create:
+dial unix /var/run/docker.sock: connect: permission denied.
 See 'docker run --help'.
 ```
 - 100% mình cài mới là bị, do user hiện tại chưa được add vào group docker, cách fix [Docker: Permission denied](https://stackoverflow.com/questions/48957195/how-to-fix-docker-permission-denied)
 
 - Mình chạy thêm vài container utility nữa [docker-compose](https://github.com/lcaohoanq/boilerplates/tree/lcaohoanq/config/docker-compose)
 	- portainer: rất tiện, mình hay triển khai trên server thực tế
-	- dozzle (8888): check log đẹp hơn, đỡ docker logs -f 
+	- dozzle (8888): check log đẹp hơn, đỡ docker logs -f
 	- postgres
 
 # SSH
@@ -278,7 +278,7 @@ cp .ssh/ /home/lcaohoanq/.ssh/ -r
 ```
 ```bash
 # Ensure ssh-agent is enabled
-sudo pacman -S openssh 
+sudo pacman -S openssh
 ```
 
 ```bash
@@ -314,12 +314,12 @@ ssh -T git@gitlab.com
 ```zsh
 sudo apt install fcitx5 libfcitx5-qt-data fcitx5-config-qt fcitx5-unikey fcitx5-material-color
 ```
-- Add thêm `Unikey` vào nhé (dưới Keyboard - English US) 
+- Add thêm `Unikey` vào nhé (dưới Keyboard - English US)
 - Default chuyển ngôn ngữ `Ctrl + Space`, mình đổi qua `Ctrl + Left Shift`
 
 ## ibus-bamboo
 
-- Dự án đã dừng phát triển ở repo gốc, hiện đang có những dev đang fork maintain 
+- Dự án đã dừng phát triển ở repo gốc, hiện đang có những dev đang fork maintain
 - https://github.com/BambooEngine/ibus-bamboo/issues/590
 
 ```zsh
@@ -334,7 +334,7 @@ im-config -n ibus
 ```
 
 # Shortcut
-- 
+-
 - Kitty: Meta + Return = Super + Enter
 
 # System Settings
@@ -344,7 +344,7 @@ im-config -n ibus
 - Add desktop -> 3 Row 1,2,3
 - Thêm xong thì mở rộng không gian ra 3 cửa sổ, có thể lăn chuột vào để đổi desktop (ở taskbar) hoặc Ctrl + Meta + Left/Right (Arrow)
 
-# Grub 
+# Grub
 - Mình xài qua 2 bộ, mì ăn liền dễ xài là của [Chris Titus Tech](https://www.youtube.com/@ChrisTitusTech)
 - Làm theo hướng dẫn là được, rất dễ: https://christitus.com/bootloader-themes/
 <iframe width="560" height="315" src="https://www.youtube.com/embed/BAyzHP1Cqb0?si=bBD9WmEtvL7mQ8QJ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -375,7 +375,7 @@ sudo apt-get install zsh curl  && sh -c "$(curl -fsSL https://raw.githubusercont
 ```
 
 - Sau khi cài xong thì mình có **`~/.zshrc`** để config, default thì đa số comment lại, mình sẽ overview các nhóm các bạn cần sửa
-	- Theme: oh-my-zsh có built-in theme cũng đẹp rồi nhưng mình thích dùng [powerlevel10k] hơn (https://github.com/romkatv/powerlevel10k) 
+	- Theme: oh-my-zsh có built-in theme cũng đẹp rồi nhưng mình thích dùng [powerlevel10k] hơn (https://github.com/romkatv/powerlevel10k)
 	- Plugins: rất nhiều plugin, tham khảo ở đây https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins
 	- Alias: shortcut lệnh
 
@@ -397,7 +397,7 @@ git clone https://github.com/Aloxaf/fzf-tab ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/p
 
 - Ref: https://github.com/lcaohoanq/dotfiles/tree/stow/kitty
 
-# spotifty 
+# spotifty
 
 - Cài qua snapd, mạng mạnh nhưng lần nào tải đều rất lâu
 
