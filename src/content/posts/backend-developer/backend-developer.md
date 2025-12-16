@@ -2,7 +2,7 @@
 title: How to Become a Back-End Developer
 published: 2025-02-01
 description: "A comprehensive guide to becoming a back-end developer, with a focus on Spring Boot and modern development practices"
-image: ""
+image: "https://images.unsplash.com/photo-1685716851721-7e1419f2db18?q=80&w=1332&auto=format&fit=crop"
 tags: [Java, Spring Boot, Backend Development]
 category: 'Technology'
 draft: false
