@@ -406,3 +406,13 @@ git clone https://github.com/Aloxaf/fzf-tab ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/p
 # cloudflare warp client
 
 - https://developers.cloudflare.com/warp-client/get-started/linux/
+
+# zalo 
+
+- Bản cài port từ .dmg trên macOS (https://github.com/ducseul/zalo-linux-unofficial)
+
+```zsh
+git clone https://github.com/ducseul/zalo-linux-unofficial.git && cd zalo-linux-unofficial && bash install.sh
+```
+
+- Không sync lần đầu đăng nhập được, còn mọi tính năng ngon lành 
