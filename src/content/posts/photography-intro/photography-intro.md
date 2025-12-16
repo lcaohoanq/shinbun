@@ -2,7 +2,7 @@
 title: Những chiếc máy ảnh mình đã sử dụng
 published: 2025-01-22
 description: 'Tám chuyện về nhiếp ảnh'
-image: "https://scontent.fsgn19-1.fna.fbcdn.net/v/t39.30808-6/467780911_1469056393771777_4422649400952456532_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=KA7b-S070NAQ7kNvgEKb4TY&_nc_oc=AdhwFTAYaTHryfEd0-lJddwAr0Scl6IG6sOCJJwffapNPfAxdSix0FmmYSv6-ryp6EU&_nc_zt=23&_nc_ht=scontent.fsgn19-1.fna&_nc_gid=ARsIkduO5nHhZDQQst44c2Q&oh=00_AYBbPOaQdGxYmlq88QRYBjqF-zT2AoejVStPQDYZCLF6Jg&oe=679641E7"
+image: "https://images.unsplash.com/photo-1682956871197-8befa6582448?q=80&w=1170&auto=format&fit=crop"
 tags: [Nhiếp ảnh cơ bản]
 category: 'Nhiếp ảnh'
 draft: false
