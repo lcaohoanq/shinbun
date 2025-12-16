@@ -72,7 +72,7 @@ public class User {
 
 - **UserDTO.java**
 
-    - DTO (Data Transfer Object): record **java 16+**, giống với data class của kotlin, mình có một bài viết về record tại đây [Java Record](https://shinbun.vercel.app/posts/java-record/java-record),
+    - DTO (Data Transfer Object): record **java 16+**, giống với data class của kotlin, mình có một bài viết về record tại đây [Java Record](https://blog.lcaohoanq.works/posts/java-record/java-record),
 
 ```java
 package com.lcaohoanq.demo.domain.user;

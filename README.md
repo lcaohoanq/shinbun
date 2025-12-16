@@ -2,7 +2,7 @@
 
 A static blog template built with [Astro](https://astro.build).
 
-[**🖥️ Live Demo (Vercel)**](https://shinbun.vercel.app)&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+[**🖥️ Live Demo (Vercel)**](https://blog.lcaohoanq.works)&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
 [**🇻🇳 Tiếng Việt**](https://github.com/lcaohoanq/shinbun/blob/main/README.vi-VN.md)&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
 [**🇯🇵 日本語**](https://github.com/lcaohoanq/shinbun/blob/main/README.ja-JP.md)&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
 

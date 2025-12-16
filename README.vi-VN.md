@@ -2,7 +2,7 @@
 
 Một mẫu blog tĩnh được xây dựng với [Astro](https://astro.build).
 
-[**🖥️ Bản Demo Trực Tuyến (Vercel)**](https://shinbun.vercel.app)&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
+[**🖥️ Bản Demo Trực Tuyến (Vercel)**](https://blog.lcaohoanq.works)&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
 [**🇻🇳 Tiếng Việt**](https://github.com/lcaohoanq/shinbun/blob/main/README.vi-VN.md)&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
 [**🇯🇵 日本語**](https://github.com/lcaohoanq/shinbun/blob/main/README.ja-JP.md)&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;
 
