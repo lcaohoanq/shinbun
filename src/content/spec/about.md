@@ -1,6 +1,6 @@
 # Về mình
 
-Xin chào các bạn, mình là Lưu Cao Hoàng. Mình đến từ Việt Nam 🇻🇳 mình hiện đang là siên viên năm 3 tại Đại Học FPT.HCM
+Xin chào các bạn, mình là Lưu Cao Hoàng. Mình đến từ Việt Nam 🇻🇳 mình hiện đang là siên viên năm cuối tại Đại Học FPT.HCM
 
 Mình hiện là một Web Developer chuyên về Java Backend, mình thích đạp xe và chụp ảnh, mình up ở [Unsplash](https://unsplash.com/lcaohoanq).
 
@@ -10,7 +10,7 @@ Mình sử dụng blog này để chia sẻ kiến thức và kinh nghiệm vớ
 
 # About me
 
-Hello, I'm Hoang Cao Luu. I'm from Vietnam 🇻🇳 I'm currently a third-year student at FPT University HCM
+Hello, I'm Hoang Cao Luu. I'm from Vietnam 🇻🇳 I'm currently a final-year student at FPT University HCM
 
 I am currently a Web Developer specializing in Java Backend, I like cycling and taking photos, images are uploaded at [Unsplash](https://unsplash.com/lcaohoanq).
 
@@ -21,7 +21,7 @@ I use this blog to share knowledge and experience with Java and related technolo
 # 自分自身について
 
 
-こんにちは、私はホアン・カオ・ルウです。ベトナム 🇻🇳 出身で、現在FPT大学HCMキャンパスの3年生です。
+こんにちは、私はホアン・カオ・ルウです。ベトナム 🇻🇳 出身で、現在FPT大学HCMキャンパスの4年生です。
 
 現在、Java Backendに特化したJava Backend-DeveloperとしてWeb開発に取り組んでいます。自転車に乗ることや写真を撮ることが好きで、撮った写真は [Unsplash](https://unsplash.com/lcaohoanq) にアップロードしています。
 

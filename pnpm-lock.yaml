@@ -141,6 +141,9 @@ importers:
       '@biomejs/biome':
         specifier: 1.8.3
         version: 1.8.3
+      '@iconify-json/mingcute':
+        specifier: ^1.2.6
+        version: 1.2.6
       '@iconify-json/pajamas':
         specifier: ^1.2.4
         version: 1.2.4
@@ -1221,6 +1224,9 @@ packages:
 
   '@iconify-json/material-symbols@1.2.8':
     resolution: {integrity: sha512-X89QwN5eRMVHEfm5HWMYCZxkUqUPQM2TNv7D8rIPUn2jTzDmgjgiTMomn3DOXWyh1/geHPnTt1bTSFcUXlpGbw==}
+
+  '@iconify-json/mingcute@1.2.6':
+    resolution: {integrity: sha512-mXvLsBgsZz9jiAUKtU+EHsD5/tLzWAHQ0z0Qk255NjUnZqtbmIhSNoUHq59tO776K2Q48A4D+Y3LYce2niY3CQ==}
 
   '@iconify-json/pajamas@1.2.4':
     resolution: {integrity: sha512-W6SmAX+eeVyREO91Ly50DpdG6h+9wk0DVm2PCohZxTmJ9gHfUOenpKnhYbh6+uzBCVcjbZTjBMxxn2YdwAvNOA==}
@@ -6371,6 +6377,10 @@ snapshots:
       '@iconify/types': 2.0.0
 
   '@iconify-json/material-symbols@1.2.8':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify-json/mingcute@1.2.6':
     dependencies:
       '@iconify/types': 2.0.0
 
