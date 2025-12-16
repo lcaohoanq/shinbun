@@ -2,7 +2,7 @@
 title: Java Record Class
 published: 2025-02-06
 description: "A new feature in Java 14"
-image: https://getlearntech.com/wp-content/uploads/2024/06/Java-Record-Big-1024x535.png
+image: "https://images.unsplash.com/photo-1543574494-27ea333caf56?q=80&w=1170&auto=format&fit=crop"
 tags: [Java]
 category: Công nghệ
 draft: false
