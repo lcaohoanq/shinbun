@@ -1,8 +1,8 @@
 ---
-title: Setup Linux của mình
+title: Setup Debian 13 (Trixe) của mình
 published: 2025-12-16
-description: ''
-image: ""
+description: 'Mình cài đi cài lại, đổi os rất nhiều nên giữ các config lúc nào mình cũng xài ở đây'
+image: "https://private-user-images.githubusercontent.com/136492579/344441035-67567ea6-ef1c-4f92-8dd9-98979f1ba4e6.png?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NjU4NTU3NTgsIm5iZiI6MTc2NTg1NTQ1OCwicGF0aCI6Ii8xMzY0OTI1NzkvMzQ0NDQxMDM1LTY3NTY3ZWE2LWVmMWMtNGY5Mi04ZGQ5LTk4OTc5ZjFiYTRlNi5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjUxMjE2JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI1MTIxNlQwMzI0MThaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT0xZTY2Y2I2MmQ4NzU5YzlmYTc1NDcxZTU3ZjViM2M0MmQ0MTViNjA5MzA0OWNiZjBjNjNmZGRhMGNhZjc5NTg2JlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCJ9.HbkAQvUs4YT3M3WzlZGHN816O4YqmBg7OVd4LOmJlRA"
 tags: [Linux, Config, Debian, KDE Plasma]
 category: 'Công nghệ'
 draft: false
