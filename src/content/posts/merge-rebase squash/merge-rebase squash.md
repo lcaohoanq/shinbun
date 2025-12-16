@@ -1,7 +1,8 @@
 ---
-title: Git Merge vs Rebase vs Squash - A Simple Guide
+title: Git Merge vs Rebase vs Squash
 published: 2025-02-01
-description: "Understanding the differences between merging, rebasing, and squashing in Git"
+image: "https://images.unsplash.com/photo-1584786379647-c10852954d2b?q=80&w=1038&auto=format&fit=crop"
+description: "3 cách merge git gây lú"
 tags: [Git, Version Control]
 category: 'Technology'
 draft: false
