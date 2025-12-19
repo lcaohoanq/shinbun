@@ -418,7 +418,20 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 - Cài thêm GCC
 ```zsh
 brew install gcc
-``` 
+```
+
+# AWS CLI
+```zsh
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+```
+
+```zsh
+❯ aws --version
+aws-cli/2.32.20 Python/3.13.11 Linux/6.12.57+deb13-amd64 exe/x86_64.debian.13
+```
+
 # spotifty
 
 - Cài qua snapd, mạng mạnh nhưng lần nào tải đều rất lâu
