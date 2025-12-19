@@ -11,8 +11,9 @@ lang: 'vi'
 
 - Bài viết này được thực hiện trên Debian 13 Trixe KDE Plasma
 
-# sudo nano /etc/sudoesr
-
+# Đưa user hiện tại làm root
+```zsh
+sudo nano /etc/sudoesr
 - Kéo tới dòng này, thêm vào ở dưới root tên user của bạn để cấp full quyền root
 - Nếu không thì user `lcaohoanq` sẽ không thể cài, update package được
 
@@ -399,6 +400,25 @@ git clone https://github.com/Aloxaf/fzf-tab ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/p
 
 - Ref: https://github.com/lcaohoanq/dotfiles/tree/stow/kitty
 
+# Homebrew
+- https://brew.sh/
+
+```zsh
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+```
+
+- Set path
+
+```zsh
+echo >> /home/lcaohoanq/.zshrc
+echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /home/lcaohoanq/.zshrc
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+```
+
+- Cài thêm GCC
+```zsh
+brew install gcc
+``` 
 # spotifty
 
 - Cài qua snapd, mạng mạnh nhưng lần nào tải đều rất lâu
