@@ -1,5 +1,5 @@
 ---
-title: Hoàng ơi" setup con Ubuntu Server mới cài này với ~~
+title: Hoàng ơi setup con Ubuntu Server mới cài này với ~~
 published: 2025-12-26
 description: Tập tành setup server cùng tui nha
 image: "https://images.unsplash.com/photo-1683322499436-f4383dd59f5a?q=80&w=1171&auto=format&fit=crop"
