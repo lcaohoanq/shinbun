@@ -464,3 +464,11 @@ sudo apt install easyeffects
 ```zsh
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/JackHack96/PulseEffects-Presets/master/install.sh)"
 ```
+
+# Thunnar File Manager
+
+- Cài thêm hỗ trợ preview ảnh iphone HEIC
+
+```zsh
+sudo apt install libheif-examples gstreamer1.0-plugins-bad heif-gdk-pixbuf
+```
