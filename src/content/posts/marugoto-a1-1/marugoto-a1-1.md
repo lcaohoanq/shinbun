@@ -5,6 +5,6 @@ description: ''
 image: ''
 tags: [ Japanese ]
 category: 'Japanese'
-draft: false
+draft: true
 lang: 'jp'
 ---
