@@ -311,18 +311,18 @@ ssh -T git@gitlab.com
 ```
 
 
-# Gõ tiếng Việt
+# Bộ gõ 
 
-## fcitx5
+- Mình dùng fcitx5
 ```zsh
-sudo apt install fcitx5 libfcitx5-qt-data fcitx5-config-qt fcitx5-unikey fcitx5-material-color
+sudo apt install fcitx5 libfcitx5-qt-data fcitx5-config-qt fcitx5-unikey fcitx5-material-color fcitx5-anthy
 ```
-- Add thêm `Unikey` vào nhé (dưới Keyboard - English US)
+- Add thêm
+  - `Unikey` vào nhé (dưới Keyboard - English US)
+  - `Anthy` nếu gõ tiếng Nhật
 - Default chuyển ngôn ngữ `Ctrl + Space`, mình đổi qua `Ctrl + Left Shift`
 
-## ibus-bamboo
-
-- Dự án đã dừng phát triển ở repo gốc, hiện đang có những dev đang fork maintain
+- Ngoài ra các bạn có thể tham khảo thêm bộ ibus-bamboo, dự án đã dừng phát triển ở repo gốc, hiện đang có những dev đang fork maintain
 - https://github.com/BambooEngine/ibus-bamboo/issues/590
 
 ```zsh
@@ -448,4 +448,19 @@ aws-cli/2.32.20 Python/3.13.11 Linux/6.12.57+deb13-amd64 exe/x86_64.debian.13
 git clone https://github.com/ducseul/zalo-linux-unofficial.git && cd zalo-linux-unofficial && bash install.sh
 ```
 
-- Không sync lần đầu đăng nhập được, còn mọi tính năng ngon lành 
+- Không sync lần đầu đăng nhập được, còn mọi tính năng ngon lành
+
+# easy effect
+
+- Nghe nhạc hay hơn
+- https://github.com/wwmm/easyeffects
+
+```zsh
+sudo apt install easyeffects
+```
+
+- Áp preset (https://github.com/JackHack96/EasyEffects-Presets)
+
+```zsh
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/JackHack96/PulseEffects-Presets/master/install.sh)"
+```
