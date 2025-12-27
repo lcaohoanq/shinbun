@@ -13,6 +13,7 @@ lang: ''
 >  - Gnome
 >  - KDE
 >  - XFCE
+>  - Arch
 
 - First time trying Gnome with Ubuntu (downloaded ISO from website and install~), it's so pretty and most compatible with my devices, smoothing experience aka Memory waster
 
@@ -30,7 +31,85 @@ lang: ''
 
 > https://github.com/lcaohoanq/hypr-arch-dotfiles/
 
-# [Basic Commands]
+# OSS (Open Source Software)
+- OSS is software with source code that anyone can inspect, modify, and enhance
+- React: https://github.com/facebook/react
+- fzf (fuzzy file finder): https://github.com/junegunn/fzf
+
+Many many many tools are open source now :)
+
+![Alt text](https://images.unsplash.com/photo-1549605659-32d82da3a059?q=80&w=1170&auto=format&fit=crop)
+
+
+# Linux History
+
+![Alt text](https://pbs.twimg.com/media/Dxs4O0DWsAE2MS7.jpg)
+
+- 1984: The GNU Project and the Free Software Foundation
+	- Create open source version of UNIX utilities
+	- Create the General Public License (GPL): Software license enforcing open source principles
+- 1991: Linus Tovarlds
+	- Creates open source, UNIX-like kernel, released under the GPL
+	- Ports some GNU utilities, solicits assistance online
+- Today:
+	- Linux kernel + GNU utilities = complete, open source, UNIX like operating system
+		- Packaged for targeted audiences as distributions
+
+- Linux Kernel Repository: https://github.com/torvalds/linux, i really want to have a chance to contribute to this repo
+
+# Linux Principles
+- Everything is a file (Include Hardware)
+- Small Single purpose Programs
+- Ability to chain programs together for complex operations
+- Avoid Captive User Interface
+- Configuration data stored in a text file
+
+![Alt text](https://i.redd.it/hbms08i9y1i91.jpg)
+
+# Why Linux?
+
+- Opensource
+- Community Support
+- Support Wide Variaty of Hardware
+- Customization
+- Most Servers runs on Linux
+- Automation
+- Security (debatable topic, depend on you)
+
+# Architecture of Linux ![Alt text](https://www.interviewbit.com/blog/wp-content/uploads/2022/06/Linux-Architecture-1024x728.png)
+
+- Linux Kernel read, understand the hardware CPU, RAM, pass signal to Shell (Bash, Zsh, Fish,...) 
+
+# Popular Linux Distributions (distros)
+
+- List of Linux Distributions: https://en.wikipedia.org/wiki/List_of_Linux_distributions
+
+![Alt text](https://i.ytimg.com/vi/QFzXQNZ6zvQ/maxresdefault.jpg)
+
+- Desktop
+	- Ubuntu
+	- Mint
+	- Arch
+	- Fedora
+	- Debian
+	- OpenSUSE
+- Server
+	- RHEL (Red Hat Enterprise Linux): most stable, secured, not open source 
+	- Ubuntu Server
+	- CentOS
+	- SUSE Enterprise Linux
+
+- Most used Linux distros currently in IT industry
+	- **RPM based or .rpm**: RHEL, Centos, Oracle Linux
+		- Example: Google chrome software
+		- Package name: google-chrome-stable-57.0.2987.133-1.x86_64.**rpm**
+		- Installation: rpm -ivh google-chrome-stable_current_amd64.**rpm**
+	- **Debian base or .deb**: Ubuntu server, Kali Linux
+		- Example: Google chrome software
+		- Package name: google-chrome-stable_current_amd64.**deb**
+		- Installation: dpkg -i google-chrome-stable_current_amd64.**deb**
+
+# Commands
 
 - Most used commands:
 
@@ -43,6 +122,8 @@ lang: ''
     - `ls`
     - `ls -l` | `ls -al`
     - `ls -a`
+    - ls -lt : sort time descending
+    - ls -ltr: sort time ascending (r = reverse)
 
   - **pwd** : Print working directory
 
@@ -70,6 +151,9 @@ lang: ''
     - `rm -rf dir1`
 
   - **mkdir** : Make directories
+	  - mkdir /hihi
+	  - mkdir /hihi/hehe/huhu => No such file or directory => mkdir -p /hihi/hehe/huhu ok
+- Because normal mkdir only support one directory, if pass parent/child/... it cause error -> using -p (parent) to fix
 
   - **echo** : Write text to file
     - `echo "Hello World" > file.txt`
@@ -101,6 +185,16 @@ lang: ''
     tree -I "node_modules" -D
     ```
 
+- **history**: Show all previously executed command
+
+- Check CPU:
+	- **nproc**
+	- **lscpu**
+	
+- Check RAM
+	- **free -h**
+	- **cat /proc/meminfo**
+
 - Power Management
 
 ```bash
@@ -128,417 +222,204 @@ sudo shutdown -P +10
     ps aux | grep "obs"
     ```
 
-## [Cool CLI tools]
-- Ref: https://dev.to/lissy93/cli-tools-you-cant-live-without-57f6
-
-> My favorite:
-- neofetch
-- `htop` : System monitor
-![image](https://github.com/lcaohoanq/Linux-Issues/assets/136492579/6e0d930b-4923-40c7-a77c-139ccf462c0a)
-- `btop` : Same as htop but look prettier
-![image](https://github.com/lcaohoanq/Linux-Issues/assets/136492579/b6792e97-f792-412b-9459-757921ba3805)
-- `ranger` : GUI terminal file navigation
-![image](https://github.com/lcaohoanq/Linux-Issues/assets/136492579/55fcb569-c56c-458b-9587-3b85b6f653f7)
-  - config ranger can preview text, image, video
-  ```bash
-  # Debian
-
-  ```
-
-  ```bash
-  # Arch
-  sudo pacman -S w3m mpv ueberzug
-
-  # this command will generate the ranger configuration ~/.config/ranger
-  ranger --copy-config=all
-
-  # edit file rc.conf
-  nano ~/.config/ranger/rc.conf
-  ```
-  ```bash
-  set preview_images_method kitty
-  set preview_images true
-  set show_hidden true
-  ```
-- `duf` : better `du`
-![image](https://github.com/lcaohoanq/Linux-Issues/assets/136492579/b016e577-4caf-4249-ad8d-c19d5b0fc227)
-- `byobu` : more enhancements of tmux
-- `zoxide` : better `cd`
-- `fzf`: cool find file tools
-  ```bash
-    # install
-    sudo apt install fzf
-
-    fzf
-    __________________
-    > index.js
-
-    # preview the file content
-    fzf --preview='cat {}'
-    __________________
-    > index.js
-
-    # preview and open in neovim
-    nvim $(fzf --preview='cat {}')
-  ```
-- `ytfzf`: playing youtube video with terminal
-  - ref: https://www.makeuseof.com/watch-youtube-videos-in-linux-terminal/
- ### Arch
-```bash
-yay -S ytfzf yt-dlp
-```
-
- ### Debian
-  ```bash
-  # Installation
-  sudo apt install jq curl mpv fzf
-
-  # re-install mpv if at the end you can not stream the video
-  sudo apt install snapd
-  sudo snap install mpv
-
-  sudo apt install ueberzug
-
-  # clone the repo
-  git clone git@github.com:pystardust/ytfzf.git
-
-  cd ytfzf
-
-  sudo apt install make
-
-  sudo make install
-  sudo make install doc
-  sudo make addons
-  ```
-
-  - config
-  ```bash
-  sudo mkdir ~/.config/ytfzf
-  cd ~/.config/ytfzf
-  sudo nano conf.sh
-  ```
-  - the content in file
-
-  ```bash
-  video_pref="bestvideo[height<=?720][fps<=?30]"
-  audio_pref='bestaudio/audio'
-  is_detach=yes
-  thumbnail_viewer='kitty'
-  skip_thumb_download=no
-  enable_back_button=yes
-  enable_hist=no
-  enable_submenus=yes
-  ```
-
-  ```bash
-  # choose the first video and stream it
-  ytfzf -a slay! phonk
-
-  # show the list of options to choose
-  ytfzf -t
-  > Linux
-  ```
-
-  - remap the key
-  ```bash
-  echo "alias yt='ytfzf - t'" >> ~/.bashrc
-  source ~/.bashrc
-  ```
-
-## [Useful configuration]
-
-- Mapping mouse with `xbindkeys`
-   - Install `kwin`
-   - https://www.google.com/url?q=https://github.com/Bismuth-Forge/bismuth&sa=D&source=docs&ust=1718093947630257&usg=AOvVaw3K2LQnDy3hmpsLycFWVMUU
-  ```bash
-  sudo apt install kwin-bismuth
-  ```
-  - Enable the below options and do a little adjust from default **Meta + F8** to **Meta + Tab** at Shhow Desktop Grid
-
-![image](https://github.com/lcaohoanq/Linux-Issues/assets/136492579/c19c2d7f-fa1d-43f4-91f5-57590386c3bd)
-
-  - Install `xbindkeys`
-  ```bash
-  sudo apt-get install xbindkeys xautomation
-
-  # identify which number of button / keycode when click into the small square
-  xev
-
-  # create xbindkeysrc file
-  nano ~/.xbindkeysrc
-  ```
-
-  - After detect i know the `forward` and `backward` of my mouse **(VXE R1 SE+)** is `113` and `114`
-  - So i want to map it to the **same as the kwin script above** to iterate the virtual desktop
-
-  ```bash
-  "xte 'keydown Alt_L' 'key Left' 'keyup Alt_L'"
-  c:113
-
-  "xte 'keydown Alt_L' 'key Right' 'keyup Alt_L'"
-  c:114  # Replace with actual keycode for the forward button
-
-  # Middle click
-  # Supper + Tab (Windows + Tab)
-  "xte 'keydown Alt_L' 'key Tab' 'keyup Alt_L'"
-  c:133
-  ```
-
-![image](https://github.com/lcaohoanq/Linux-Issues/assets/136492579/9d219525-1f1e-4f5c-b623-02f3742ea3ef)
+# File System
+- /: root directory
+- /boot
+- /dev
+- /usr
+- 
 
 
-  ```bash
-  # Save and Close
-  # Start the xbindkeys
-  xbindkeys
-  ```
+![Alt text](https://fireship.io/courses/linux/img/linux-file-system.png)
 
-- Change trackpoint sensitivity
-```bash
-# replace your sensitivity at 150
+# Text Editor
 
-echo 150 | sudo tee /sys/devices/platform/i8042/serio1/serio2/sensitivity
-```
+- nano and vim, let's go
 
-# [Input method]
+## nano
 
-- I'm using Ibus with 2 additional language is Vietnamese and Japanese (English is always have there)
+<img width="645" height="339" alt="image" src="https://github.com/user-attachments/assets/2fd45886-f2a2-4d31-8414-ad779d75c683" />
 
-## 1. Gnome
-- https://minhng.info/tips/unikey-ubuntu-2204.html
-- https://askubuntu.com/questions/1407560/switching-language-by-alt-shift-after-update-from-ubuntu-22-04-beta-to-release: switch to next input source -> CTRL + Alt + A (my favorite shortcut)
+- every linux have nano, if not install yet (very rare), usually in distroless docker image or lightweight linux distros
 
-```bash
-sudo apt install ibus-unikey
-```
-
-```bash
-sudo apt install ibus-mozc mozc-utils-gui # Japanese
-```
-
-- Logout to takes effect
-
-## 2. KDE Plasma
-
-```bash
-sudo apt update
-sudo apt install ibus ibus-unikey ibus-anthy
-
-# start ibus-daemon
-ibus-daemon -drx
-
-# set ibus is default input method
-im-config -n ibus
-```
-
-- Reboot your system to apply changes
-
-- After that we will enter to Ibus GUI configuration by command
-
-```bash
-ibus-setup
-```
-
-- In the Input Method tab:
-
-  - Click on the Add button.
-  - Search for and add Vietnamese (Unikey).
-  - Search for and add Japanese (Anthy or Mocz), i`m using Mocz now
-  - Add shortcut for change the input method:
-    > Default is `<Super>space`, I change to `<Control><Alt>A`, it's up to you
-
-- Adjust the Ibus-Preferences auto-start
-
-![image](https://github.com/lcaohoanq/My-Linux-Experience/assets/136492579/c05e7ec4-f37f-4c7d-b525-2962b33001a2)
-
-## 3. Arch
-
-- Fcitx5 work with Japanese, but not Vietnamese
-- Ibus still not work with Arch (continue to find the solution)
-
-# [Mount drive]
-
-## 1. Install G-Parted
-
-- Debian
-
-```bash
-sudo apt install gparted
-```
-
-- Arch
+### Install
 
 ```zsh
-sudo pacman -S gparted
+sudo apt-get install nano
+``` 
+
+### Command
+
+- Create new file without touch
+```zsh
+nano hehe.txt
 ```
 
-## 2. Get the drive's UUID
-
-```bash
-lsblk -o NAME,SIZE,UUID
+-  Create a file name hihi.txt with some text
+```zsh
+echo "first line" > hihi.txt
 ```
 
-![alt text](https://github.com/lcaohoanq/linux/blob/master/05-MountDrive/image.png?raw=true)
-
-- Or more details
-
-```bash
-sudo blkid
+- Append a text to end of file
+```zsh
+# Redirection operator
+echo "first line" >> hihi.txt
 ```
 
-- Each UUID corresponding for each partion of each driver
+- Cut/Delete a line 
 
-## 3. Check your drive's type (NTFS,ext4,...)
-
-- Install `ntfs-3g `, as it is required for mounting `NTFS` partitions with read and write access
-
-```bash
-sudo apt update
-sudo apt install ntfs-3g
+```zsh
+Ctrl + K
 ```
 
-- If ext4, skip to the next step
+- Copy, paste selected line
 
-## 4. Edit /etc/fstab
-
-```bash
-sudo nano /etc/fstab
+```zsh
+Ctrl + 6 #Mark set
+Alt  + 6  #Copy selected
+Ctrl + U #Paste
 ```
 
-![image](https://github.com/lcaohoanq/Linux-Issues/assets/136492579/6dc573f5-a10a-4e00-b97a-22de486ab82a)
+- Moving a line
 
-- This is my current disk
-
-  > /dev/sdc1: UUID="022D-A728" BLOCK_SIZE="512" TYPE="vfat" PARTUUID="10eb9e0a-d35b-4a06-add6-5af9648660de"
-
-  > /dev/sdc2: UUID="61d23e9c-361e-4c0f-9813-ba446759b712" BLOCK_SIZE="4096" TYPE="ext4" PARTUUID="40ff6c17-e76d-4925-8dc8-4730a8ff2996"
-
-  > /dev/sdc3: UUID="0734bbed-9e19-4d56-bd5a-5ed1e81bbaf3" TYPE="swap" PARTUUID="cf63ed80-df79-47fa-bfda-9602602118b5"
-
-- I want to mount as ntfs with read and write partition
-- Replace the UUIDs with those of your NTFS partitions and the mount points with the ones you created
-
-```bash
-# NTFS partition 1
-UUID=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx /mnt/ntfs1 ntfs-3g defaults,rw 0 2
-
-# NTFS partition 2
-UUID=yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy /mnt/ntfs2 ntfs-3g defaults,rw 0 2
+```zsh
+Ctrl + K
+Ctrl + U
 ```
 
-- /mnt/ntfs1, /mnt/ntfs2: mount point (can be create manually or auto with
-- ntfs-3g: type partition
+## vi, vim, nvim
 
-The defaults option is a shorthand that refers to a set of default mount options:
+![Alt text](https://images.viblo.asia/9fc1a38d-7f58-4abe-abaa-8deec07b9435.png)
 
-    rw (read-write)
-    suid (allow set-user-identifier or set-group-identifier bits to take effect)
-    dev (interpret character or block special devices on the filesystem)
-    exec (allow execution of binaries)
-    auto (can be mounted automatically with the mount -a command)
-    nouser (only root can mount)
-    async (all I/O to the filesystem should be done asynchronously)
+- More at here (https://viblo.asia/p/co-ban-ve-vim-cho-nguoi-moi-bat-dau-GrLZDavnlk0)
+- Vim has 3 mode
+	- Normal: **default**, navigate, simple edit 
+	- Insert: as the name, using as insert character
+	- Command Line: saving, exiting,...
 
-rw
+### Command
 
-The rw option explicitly specifies that the filesystem should be mounted with read and write permissions.
-0
-
-This is the dump frequency. It is used by the dump command to determine which filesystems need to be dumped (i.e., backed up). A value of 0 means that the filesystem will not be dumped.
-2
-
-This is the fsck order. It specifies the order in which filesystem checks are done at boot time by the fsck utility:
-
-    0 means the filesystem is not checked.
-    1 is used for the root filesystem.
-    2 means the filesystem will be checked after the root filesystem, with multiple filesystems having the same number being checked in parallel.
-
-![image](https://github.com/lcaohoanq/Linux-Issues/assets/136492579/969fb8db-5ef8-4acf-b2d4-0042d2d77dbb)
-
-## 5. Apply change
-
-```bash
-# apply without rebooting
-sudo mount -a
-# If meet any error about no mount directory found, just need to reboot
-
-# verify mounting
-df -h
+- Copy 1 line (yanking)
+```zsh
+yy
 ```
 
-```bash
-# or (sudo apt install duf) for more colorful ^^
-duf
+- Copy 3 line
+```zsh
+3yy
 ```
 
-![image](https://github.com/lcaohoanq/Linux-Issues/assets/136492579/71e2488b-0f99-49db-9884-723c93bcd221)
+- Paste (as current cursor pointer)
+	- Below: **p**
+	- Above: **P**
 
-# [Nvidia Graphics Card]
-
-```bash
-sudo add-apt-repository contrib
-sudo add-apt-repository non-free
-sudo apt update
-sudo apt install nvidia-detect
-nvidia-detect
-sudo apt install nvidia-driver
+- Undo
+```zsh
+u
 ```
 
-- I will buy AMD GPU next time, Nvidia is not friendly with Linux
-
-# [Terminal Customization]
-
-- Make sure you have install the Nerd Fonts
-- Apply the "randomly" bashshell customize of other guys
-
-- https://www.linuxfordevices.com/tutorials/linux/beautify-bash-shell
-
-```bash
-git clone --recursive https://github.com/andresgongora/synth-shell.git
-
-cd synth-shell
-
-sudo chmod +x setup.sh
-
-./setup.sh
-
-# Yes for all~
-
-# Any edit
-nano ~/.bashrc
+- Delete 1 line (yanking): 
+```zsh
+dd
 ```
 
-> Finnaly, we have such a pretty terminal
-
-# [Github-SSH key]
-
-- https://docs.github.com/fr/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
-
-```bash
-mkdir ~/.ssh
-
-# or i have my own .ssh key, i have created before
-cp .ssh/ /home/lcaohoanq/.ssh/ -r
-```
-```bash
-# Ensure ssh-agent is enabled
-sudo pacman -S openssh
+- Delete 3 line 
+```zsh
+3dd
 ```
 
-```bash
-# The command starts the ssh-agent in the background
-eval "$(ssh-agent -s)"
+- Jump to specific line (Normal mode), type line number with capital G -> Enter
+```zsh
+118796G
 ```
 
-```bash
-ssh-add id_xxxxx
-
-# If meet the key are too open
-sudo chmod 400 /home/lcaohoanq/.ssh/id_xxxxx
-
-# If meet permission denied when ssh-add
-sudo chown lcaohoanq:lcaohoanq ~/.ssh/id_xxxxx
-
-# Verify
-ssh -T git@github.com
+- Search word (Command mode -> **ESC**), / then type the keyword want to search -> Enter
+```zsh
+/Error
 ```
+
+- Home (double g)
+```zsh
+gg
+```
+
+- End (capital G)
+```zsh
+G
+```
+
+- Exit (Command mode -> **ESC**)
+	- q stand for quit
+	- w stand for write
+```zsh
+:q! #force exit without saving
+:wq #save and exit
+```
+
+### LazyVim
+
+- Currently im using LazyVim (https://www.lazyvim.org/), it really easy to setup, and support a lot of LUA plugins there, but before going to something comfortable, make sure you have a basic or good foundation of vim, take time to practice :) 
+
+![Alt text](https://user-images.githubusercontent.com/292349/213447056-92290767-ea16-430c-8727-ce994c93e9cc.png)
+
+
+- Linux with Nvim oh man, we nearly become arch user
+
+![Alt text](https://i.ytimg.com/vi/Ul7JsYAZg5o/hqdefault.jpg)
+
+
+# File Types
+
+- Regular file
+	- **-**: Normal files such as text, data, or executable files
+- Directory
+	- **d**: Files that are lists of others files
+- Link
+	- **l** : A shortcut that points to the location of the actual file
+- Special file
+	- **c**: Mechanism using for input and output, such as file in /dev
+- Socket
+	- **s**: A special file that provides inter-process networking protected by the file system's access control
+- Pipe
+	- **p**: A special file that allows processes to communicate with each other without using network socket semantics
+
+# Symbolic links
+
+- Like desktop shortcut in windows
+```zsh
+ln -s source destination
+
+unlink destination
+```
+
+# Filter & IO redirection command
+
+## Grep
+
+- Find text from any text input
+
+![Alt text](https://www.cyberciti.biz/media/new/faq/2007/08/grep-command-examples-for-Linux-and-Unix-users-1.png)
+
+
+- Usecase 1: We have sample file **0_Run predefined test cases.txt** contain the log from Github Action CI pipeline. Search error logs find the error. Problem is the file are too long (10k ~ line), and we are in server, we not have any IDE to use.
+- Find text contain "Exception"
+```zsh
+grep "Exception" 0_Run predefined test cases.txt
+``` 
+
+- Syntax:
+	- grep "key_word" -param file_name 
+
+- Param
+	- R: search recursively
+	- n: show line number
+
+- Usecase 2: Find the export port of docker container name pgadmin. We can easily use **docker ps** then use eyes to look for the pgadmin container. But when the number of container become 50, 100 or even more. Using **docker ps** and search manually make you look silly :).
+
+- Search with grep + pipe operator **|**
+```zsh
+❯ docker ps | grep pgadmin
+7ed17a84f912   dpage/pgadmin4   "/entrypoint.sh"         12 days ago   Up 39 minutes             443/tcp, 0.0.0.0:5050->80/tcp, [::]:5050->80/tcp   pgadmin
+```
+
+## Sed
