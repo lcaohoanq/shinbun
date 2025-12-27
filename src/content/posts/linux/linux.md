@@ -375,14 +375,24 @@ dd
 /Error
 ```
 
-- Home (double g)
+- Home of file(double g)
 ```zsh
 gg
 ```
 
-- End (capital G)
+- End of file (capital G)
 ```zsh
 G
+```
+
+- Start of line
+```zsh
+0
+```
+
+- End of line
+```zsh
+$
 ```
 
 - Exit (Command mode -> **ESC**)
