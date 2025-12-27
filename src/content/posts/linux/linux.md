@@ -13,7 +13,6 @@ lang: ''
 >  - Gnome
 >  - KDE
 >  - XFCE
->  - Arch
 
 - First time trying Gnome with Ubuntu (downloaded ISO from website and install~), it's so pretty and most compatible with my devices, smoothing experience aka Memory waster
 
@@ -108,6 +107,44 @@ Many many many tools are open source now :)
 		- Example: Google chrome software
 		- Package name: google-chrome-stable_current_amd64.**deb**
 		- Installation: dpkg -i google-chrome-stable_current_amd64.**deb**
+
+# Package manager
+- A  **package manager** in Linux is a tool that automates the entire process of installing, updating, configuring, and removing software. You can think of it as an "app store" or a personal assistant for your operating system's software.
+
+| Operating System | Default Package Manager | Additional Package Managers |
+| ---------------- | ----------------------- | --------------------------- |
+| Debian           | `apt`                   | `snapd`                     |
+| Arch             | `pacman`                | `yay`, `snapd`              |
+| Fedora           | `dnf`                   |                             |
+| OpenSUSE         | `zypper`                |                             |
+| Solus            | `eopkg`                 |                             |
+| Gentoo           | `emerge`                |                             |
+| Void             | `xbps`                  |                             |
+| Alpine           | `apk`                   |                             |
+| NixOS            | `nix`                   |                             |
+| Slackware        | `slackpkg`              |                             |
+| FreeBSD          | `pkg`                   |                             |
+| OpenBSD          | `pkg_add`               |                             |
+| NetBSD           | `pkgin`                 |                             |
+| DragonFly BSD    | `pkg`                   |                             |
+| Haiku            | `pkgman`                |                             |
+| macOS            | `brew`                  |                             |
+| Windows          | `choco`                 |                             |
+| Android          | `f-droid`               |                             |
+| iOS              | `cydia`                 |                             |
+| Termux           | `pkg`                   |                             |
+| Chrome OS        | `crostini`              |                             |
+| Ubuntu           | `apt`                   |                             |
+| CentOS           | `yum`                   |                             |
+| RHEL             | `yum`                   |                             |
+| Manjaro          | `pacman`                |                             |
+
+![](https://cdn-media.sforum.vn/storage/app/media/quynh/apt-la-gi.jpg)
+
+```zsh
+sudo apt-get install ROSÉ
+# when this package release guys?
+```
 
 # Commands
 
