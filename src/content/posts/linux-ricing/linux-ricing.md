@@ -5,7 +5,7 @@ description: 'I used arch btw'
 image: "https://preview.redd.it/hyprland-minimalism-v0-hw4jaul4fh8d1.jpg?width=1080&crop=smart&auto=webp&s=537b4a02ce45c681191c599831e507be7199019f"
 tags: [Linux, Ricing, Customization]
 category: 'Công nghệ'
-draft: false
+draft: true
 lang: ''
 ---
 
