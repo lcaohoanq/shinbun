@@ -472,3 +472,8 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/JackHack96/PulseEffects-
 ```zsh
 sudo apt install libheif-examples gstreamer1.0-plugins-bad heif-gdk-pixbuf
 ```
+
+# Gỡ cài đặt
+
+- Konsole, XTerm
+
