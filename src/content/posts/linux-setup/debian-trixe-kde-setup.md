@@ -477,3 +477,52 @@ sudo apt install libheif-examples gstreamer1.0-plugins-bad heif-gdk-pixbuf
 
 - Konsole, XTerm
 
+# Direnv
+
+- Tự động load .env khi cd vào project, ứng dụng trong lúc mình chạy **mvn spring-boot:run** thì nó inject .env runtime luôn
+
+```zsh
+sudo apt install direnv
+```
+
+- Trong thư mục project thêm **.envrc** với nội dung:
+
+```zsh
+echo 'dotenv' > .envrc
+direnv allow
+
+- Mở ~/.zshrc thêm vào: 
+
+```zsh
+eval "$(direnv hook zsh)"
+```
+
+- Reload
+
+```zsh
+source ~/.zshrc
+```
+
+- Check load được .env chưa
+
+```zsh
+❯ direnv status
+direnv exec path /usr/bin/direnv
+DIRENV_CONFIG /home/lcaohoanq/.config/direnv
+bash_path /usr/bin/bash
+disable_stdin false
+warn_timeout 5s
+whitelist.prefix []
+whitelist.exact map[]
+Loaded RC path /media/data/do-an/bit-learning-be/.envrc
+Loaded watch: ".envrc" - 2025-12-28T15:27:13+07:00
+Loaded watch: "../../../../home/lcaohoanq/.local/share/direnv/allow/ee9b5cabee7b12419963b71760e247b9627d3f25976e39b6eec94126f4a206ec" - 2025-12-28T15:27:13+07:00
+Loaded watch: ".env" - 2025-12-26T08:27:45+07:00
+Loaded RC allowed false
+Loaded RC allowPath 
+Found RC path /media/data/do-an/bit-learning-be/.envrc
+Found watch: ".envrc" - 2025-12-28T15:27:13+07:00
+Found watch: "../../../../home/lcaohoanq/.local/share/direnv/allow/ee9b5cabee7b12419963b71760e247b9627d3f25976e39b6eec94126f4a206ec" - 2025-12-28T15:27:13+07:00
+Found RC allowed true
+Found RC allowPath /home/lcaohoanq/.local/share/direnv/allow/ee9b5cabee7b12419963b71760e247b9627d3f25976e39b6eec94126f4a206ec
+```
