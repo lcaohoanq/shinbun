@@ -83,14 +83,24 @@ ENTRYPOINT ["java","-jar","app.jar"]
 
 # 2. Set add fork remote
 
+- Test thay đổi bằng ```git remote -v```
+
 ```zsh
 git remote -v
 
 # origin	https://github.com/devopshydclub/emartapp.git (fetch)
 # origin	https://github.com/devopshydclub/emartapp.git (push)
+```
 
+- Thêm fork remote
+
+```zsh
 git remote add fork git@github.com:lcaohoanq/emartapp.git
+```
 
+- Test lại remote xem đã thêm thành công chưa
+
+```zsh
 git remote -v
 
 # fork	git@github.com:lcaohoanq/emartapp.git (fetch)
@@ -108,6 +118,7 @@ git checkout -b fix-dockerfile-openjdk-image
 ```
 
 - Push thay đổi
+  - Chú ý là push lên remote là **fork** chứ không phải **origin** nhé
 
 ```zsh
 git commit -am "Fix Dockerfile openjdk image not found issue"
@@ -116,7 +127,7 @@ git push fork fix-dockerfile-openjdk-image
 
 - Cuối cùng thì vào github cá nhân tạo PR từ branch **fix-dockerfile-openjdk-image** lên repo gốc là xong
 
-> Chú ý là set-url dùng ssh thay vì https để khỏi bị hỏi password liên tục nhé, nếu nhầm thì có thể sửa lại set-url với ssh nha:
+>  Dặn dò cuối cùng, set-url dùng ssh thay vì https để khỏi bị hỏi password liên tục nhé, nếu nhầm thì có thể sửa lại set-url với ssh nha:
 
 ```zsh
 git remote set-url fork git@github.com:lcaohoanq/emartapp.git
