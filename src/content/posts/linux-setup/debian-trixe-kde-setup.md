@@ -490,6 +490,7 @@ sudo apt install direnv
 ```zsh
 echo 'dotenv' > .envrc
 direnv allow
+```
 
 - Mở ~/.zshrc thêm vào: 
 
