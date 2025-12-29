@@ -5,7 +5,7 @@ description: 'Source này có bug nè'
 image: "https://images.unsplash.com/photo-1586372291391-4a70098d643e?q=80&w=1170&auto=format&fit=crop"
 tags: [Github, OSS, Contribution, Docker, Microservices, Containerized Application]
 category: 'Công nghệ'
-draft: true
+draft: false
 lang: 'vi'
 ---
 
