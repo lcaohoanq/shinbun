@@ -9,13 +9,18 @@ draft: false
 lang: 'vi'
 ---
 
-- Một ngày đẹp trời rãnh rỗi cài lại em máy cổ W520 của tui, chán ZimaOS rồi, nó đóng quá, siêu bí bách :0 chả cài gì, vọc vạch được. Tui lại tái hòa nhập với cộng đồng xD, Ubuntu Server thẳng tiến. Cài siêu dễ luôn á, blog này chỉ để lưu lại khi tui cần cài gì tôi lên đây lấy về cho nhanh :) đỡ search. Nhớ đâu viết đến đấy (hoặc làm tới đâu nhớ thì viết) nên có thể mọi người vào mỗi thời gian thì sẽ thấy nội dung nó khác nhau.
+- Một ngày đẹp trời rãnh rỗi cài lại em máy cổ W520 của tui, chán ZimaOS rồi, nó đóng quá, siêu bí bách :0 chả cài gì, vọc vạch được. Tui lại tái hòa nhập với cộng đồng xD, Ubuntu Server (24 LTS) thẳng tiến. Cài siêu dễ luôn á, blog này chỉ để lưu lại khi tui cần cài gì tôi lên đây lấy về cho nhanh :) đỡ search. Nhớ đâu viết đến đấy (hoặc làm tới đâu nhớ thì viết) nên có thể mọi người vào mỗi thời gian thì sẽ thấy nội dung nó khác nhau.
 
 ![Alt text](https://www.zimaspace.com/_ipx/w_3072&f_png/image/zimaos/meet-zimaos.png)
 
 - ZimaOS dùng làm NAS server thì đúng bài, đẹp, tiện nhẹ, có bán sẵn Server luôn, tên là ZimaCube, trông vuông vuông gọn gọn nhìn đẹp cực
-- À tại sao tui lại cài Ubuntu Server á, dễ xài nhất rồi :) có gì fix cho khỏe. Hiện giờ daily tui dùng Debian, rất quen với package apt của nhà Debian rồi.
-# Check ip
+- À tại sao tui lại cài Ubuntu Server á, dễ xài nhất rồi :) có gì fix cho khỏe. Hiện giờ daily tui dùng Debian, quen thuộc với package apt của nhà Debian rồi, tại daily tui dùng Debian 
+
+![](https://i.ytimg.com/vi/q5yM4ZYwB_s/maxresdefault.jpg)
+
+# Check ip, SSH Config
+
+![](https://miro.medium.com/0*tgrMTzwM0nO7DDjQ.png)
 
 - Để SSH vào mà cài luôn
 ```zsh
@@ -76,15 +81,19 @@ ssh w520
 
 # VPN: Tailscale
 
-- WireGuard xịn sò hơn mà config lằng nhằng quá, từ bỏ luôn, hiện dùng mỗi Tailscale nhanh, tiện, sướng
+![](https://blog.briancmoses.com/images/2021/tailscale/tailscale-logo-black-800.png)
+
+- **WireGuard** xịn sò hơn mà config lằng nhằng quá, từ bỏ luôn, hiện dùng mỗi Tailscale ```nhanh```, ```tiện```, ```sướng```
 - Ref doc đi: https://tailscale.com/kb/1031/install-linux
-- Nói chung là chạy lệnh này cài
+- Chạy lệnh này cài
 ```zsh
 curl -fsSL https://tailscale.com/install.sh | sh
 ```
-- Cài xong thì **sudo tailscale up** Login vào để nhận device là xong
+- Cài xong thì **sudo tailscale up**, Tailscale trả ra một url auth, copy vào browser rồi Login để nhận device là xong
 
 # Tunnel: Cloudflare
+
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Cloudflare_Logo.svg/1200px-Cloudflare_Logo.svg.png)
 
 - Cài tá lả
 
@@ -106,6 +115,9 @@ sudo cloudflared service install tokentokentokentokentokentoken....
 ```
 
 # Docker
+
+![](https://images.viblo.asia/fad7cf1a-772f-43e4-9042-e96d5d903b2b.png)
+
 - Doc là chân ái, ráng vào Ctrl + C/V đi anh zai
 - Cài xong run được cái container hello-world chưa chắc ngon đâu nha, check **docker ps** phát xem thử có bị bug permission không? Sửa ở đây (https://stackoverflow.com/questions/48957195/how-to-fix-docker-permission-denied), lỗi do user hiện tại chưa được thêm vào  group á mà, 99.9% cài mới docker đều bị :) gặp hoài luôn 
 
