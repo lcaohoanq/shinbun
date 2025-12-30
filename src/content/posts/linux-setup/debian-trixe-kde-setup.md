@@ -147,7 +147,22 @@ fd --version
     echo "alias lzd='lazydocker'" >> ~/.zshrc
     source ~/.zshrc
     ```
-
+- **yazi**: Tương tự ranger, nhưng nhanh hơn (viết bằng Rust)
+  - Repo: https://github.com/sxyazi/yazi
+  - Cài đặt: https://lindevs.com/install-yazi-on-ubuntu, yazi không có package apt chính thức, cách cài dùng binary copy vào ```/usr/local/bin```
+  ```zsh
+  # Download the latest release of Yazi from GitHub:
+  wget -qO yazi.zip https://github.com/sxyazi/yazi/releases/latest/download/yazi-x86_64-unknown-linux-gnu.zip
+  # Extract files to temporary directory:
+  unzip -q yazi.zip -d yazi-temp
+  # Move executables to /usr/local/bin directory: (ya command is used for Yazi plugins management)
+  sudo mv yazi-temp/*/{ya,yazi} /usr/local/bin
+  # Check version
+  yazi --version
+  # Remove temporary directory and downloaded archive:
+  rm -rf yazi-temp yazi.zip
+  ```
+  
 - **maven**
 
 ```zsh
