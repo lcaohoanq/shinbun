@@ -162,7 +162,14 @@ fd --version
   # Remove temporary directory and downloaded archive:
   rm -rf yazi-temp yazi.zip
   ```
-  
+
+- **tldr**: Tương tự man, gọn hơn dễ đọc
+  - Repo: https://github.com/tldr-pages/tldr
+  - Cài đặt
+  ```zsh
+  npm i -g tldr
+  # sử dụng tldr yazi thoi
+  ```
 - **maven**
 
 ```zsh
