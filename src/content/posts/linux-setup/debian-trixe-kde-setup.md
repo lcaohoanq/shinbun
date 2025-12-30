@@ -14,6 +14,7 @@ lang: 'vi'
 # Đưa user hiện tại làm root
 ```zsh
 sudo nano /etc/sudoesr
+```
 - Kéo tới dòng này, thêm vào ở dưới root tên user của bạn để cấp full quyền root
 - Nếu không thì user `lcaohoanq` sẽ không thể cài, update package được
 
@@ -120,21 +121,34 @@ sudo apt install \
   byobu     # tmux xịn hơn
   fd-find
   ripgrep   # search recursive directories
+  tmux      # terminal multiplexer
   pipx
 ```
 
-- Cho zoxide
+- **zoxide**
 ```zsh
 eval "$(zoxide init zsh)"
 ```
-- Symlink cho fd
-```
+- **fd**: rename thành fd để tránh trùng tên với package khác, tạo symlink
+```zsh
 sudo ln -s $(which fdfind) /usr/local/bin/fd
 # fdfind --version
 fd --version
 ```
 
-- Mình là dev với java nên cần thêm vài tool
+- **lazydocker**: Quản lý docker trong terminal
+  - Repo: https://github.com/jesseduffield/lazydocker
+  - Cài đặt:
+    ```zsh
+    curl https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh | bash
+    ```
+  - Config thêm alias trong ~/.zshrc
+    ```zsh
+    echo "alias lzd='lazydocker'" >> ~/.zshrc
+    source ~/.zshrc
+    ```
+
+- **maven**
 
 ```zsh
 sudo apt install maven default-jdk
@@ -311,7 +325,7 @@ ssh -T git@gitlab.com
 ```
 
 
-# Bộ gõ 
+# Bộ gõ
 
 - Mình dùng fcitx5
 ```zsh
@@ -440,7 +454,7 @@ aws-cli/2.32.20 Python/3.13.11 Linux/6.12.57+deb13-amd64 exe/x86_64.debian.13
 
 - https://developers.cloudflare.com/warp-client/get-started/linux/
 
-# zalo 
+# zalo
 
 - Bản cài port từ .dmg trên macOS (https://github.com/ducseul/zalo-linux-unofficial)
 
@@ -492,7 +506,7 @@ echo 'dotenv' > .envrc
 direnv allow
 ```
 
-- Mở ~/.zshrc thêm vào: 
+- Mở ~/.zshrc thêm vào:
 
 ```zsh
 eval "$(direnv hook zsh)"
@@ -520,7 +534,7 @@ Loaded watch: ".envrc" - 2025-12-28T15:27:13+07:00
 Loaded watch: "../../../../home/lcaohoanq/.local/share/direnv/allow/ee9b5cabee7b12419963b71760e247b9627d3f25976e39b6eec94126f4a206ec" - 2025-12-28T15:27:13+07:00
 Loaded watch: ".env" - 2025-12-26T08:27:45+07:00
 Loaded RC allowed false
-Loaded RC allowPath 
+Loaded RC allowPath
 Found RC path /media/data/do-an/bit-learning-be/.envrc
 Found watch: ".envrc" - 2025-12-28T15:27:13+07:00
 Found watch: "../../../../home/lcaohoanq/.local/share/direnv/allow/ee9b5cabee7b12419963b71760e247b9627d3f25976e39b6eec94126f4a206ec" - 2025-12-28T15:27:13+07:00

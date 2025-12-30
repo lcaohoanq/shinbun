@@ -69,6 +69,8 @@ Một tính năng ít người biết nhưng cực hay cho DevOps quản lý c�
 
 - Khi bạn gõ lệnh ```apt-get update``` ở một pane, **cả 3 pane còn lại cũng tự động gõ y hệt lệnh đó**. Giúp thao tác hàng loạt cực nhanh.
 
+---
+
 # Chiến thôi
 
 ## Bước 1: Cài đặt
@@ -143,6 +145,8 @@ tmux attach -t my_work
 
 - Bấm ```q``` để thoát chế độ cuộn.
 
+---
+
 # Cấu hình cho dễ dùng hơn
 Mặc định tmux không hỗ trợ chuột, hơi khó chịu cho người mới. Bạn hãy tạo một file cấu hình để bật chuột lên (có thể click chuyển ô, lăn chuột để cuộn).
 
@@ -157,6 +161,82 @@ echo "set -g mouse on" >> ~/.tmux.conf
 ```zsh
 tmux source-file ~/.tmux.conf
 ```
+
+---
+
+# Cách copy-paste trong tmux
+
+Khi bạn bật ```set -g mouse on``` (như mình hướng dẫn ở trên), bạn sẽ gặp tình huống trớ trêu: **Bạn bôi đen dòng chữ trong terminal, nhưng không thể chuột phải chọn "Copy" hoặc bấm** ```Ctrl+C``` / ```Cmd+C``` **được**.
+
+Lý do: Lúc này ```tmux``` đang chiếm quyền điều khiển con chuột của bạn, chứ không phải ```Kitty``` terminal.
+
+Dưới đây là 3 cách xử lý, từ "mẹo nhanh" đến "chuyên nghiệp":
+
+## Cách 1: "Tuyệt chiêu" phím Shift (Dùng ngay lập tức)
+Đây là cách đơn giản nhất để copy từ ```tmux``` ra ngoài (ví dụ paste vào trình duyệt, Slack, VS Code).
+
+- Thao tác: Nhấn giữ phím ```Shift``` (trên Mac đôi khi là phím ```Option``` hoặc ```Fn``` tùy setting của Kitty), sau đó dùng chuột bôi đen văn bản như bình thường.
+
+- ```Hiện tượng```: Bạn sẽ thấy màu bôi đen thay đổi (thường là màu xám của hệ thống chứ không phải màu vàng/xanh của tmux).
+
+- ```Copy```: Lúc này ```Kitty``` đã giành lại quyền điều khiển chuột. Bạn cứ ```Cmd+C``` (Mac) hoặc ```Ctrl+Shift+C``` (Linux) như bình thường.
+
+- ```Nhược điểm```: Nếu bạn chia màn hình (split pane) theo chiều dọc, cách này sẽ copy luôn cả nội dung của ô bên cạnh (vì nó copy theo dòng ngang của màn hình).
+
+## Cách 2: Copy/Paste nội bộ trong Tmux (Chuẩn DevOps)
+Cách này dùng khi bạn muốn copy một dòng log ở trên và paste vào dòng lệnh ở dưới **ngay trong cùng một server**, mà không cần dùng chuột.
+
+Quy trình hoạt động như sau:
+
+1. **Vào chế độ Copy (Copy Mode)**: Bấm **[Prefix]** + ```[``` (Lúc này bạn sẽ thấy số dòng hiện ra ở góc trên bên phải).
+
+2. **Di chuyển con trỏ**: Dùng các phím mũi tên để di chuyển đến ký tự bắt đầu muốn copy.
+
+3. **Bắt đầu bôi đen**: Bấm ```Space``` (Phím cách). Sau đó di chuyển mũi tên để bôi đen vùng cần chọn. ***(Giống như bạn đang drag chuột vậy)***.
+
+4. **Copy (Lưu vào bộ nhớ đệm của Tmux)**: Bấm ```Enter```. (***Lúc này bạn sẽ tự động thoát khỏi Copy Mode***).
+
+5. **Paste (Dán ra)**: Di chuyển đến nơi cần dán, bấm **[Prefix]** + ```]```
+
+## Cách 3: Cấu hình phím tắt giống Vim (Khuyên dùng)
+Là DevOps, khả năng cao bạn đã quen hoặc sẽ phải dùng Vim. Tại sao không biến thao tác copy trong tmux y hệt như Vim?
+
+Bạn mở file ~/.tmux.conf và thêm dòng này vào:
+
+```zsh
+# Sử dụng phím tắt vi trong chế độ copy
+setw -g mode-keys vi
+```
+Sau đó chạy ```tmux source-file ~/.tmux.conf```.
+
+**Bây giờ quy trình copy sẽ "sướng" hơn nhiều:**
+
+1. **[Prefix]** + ```[``` (Vào chế độ copy).
+
+2. Dùng h, j, k, l để di chuyển (nhanh hơn phím mũi tên).
+
+3. Bấm v để bắt đầu bôi đen (Visual mode).
+
+4. Bấm y để copy (Yank) và thoát.
+
+5. **[Prefix]** + ```]``` để paste.
+
+---
+
+**Tóm tắt sự khác biệt về "Clipboard"**
+Bạn cần phân biệt rõ 2 loại bộ nhớ tạm (Clipboard):
+
+1. **System Clipboard**: Của hệ điều hành (MacOS/Windows). Dùng để paste ra trình duyệt, Slack.
+
+-> Dùng **Cách 1** (giữ Shift).
+
+2. **Tmux Buffer**: Bộ nhớ riêng của Tmux trên server.
+
+-> Dùng **Cách 2** hoặc **Cách 3**.
+
+**Nâng cao**: Có cách để khi bấm ```y``` trong Tmux (Cách 3), nó tự động đẩy vào System Clipboard luôn. Nhưng việc cấu hình này hơi phức tạp (cần cài thêm ```xclip``` trên Linux hoặc ```reattach-to-user-namespace``` trên Mac cũ). Với người mới, mình khuyên bạn chưa nên đụng vào vội để tránh rối. Hãy thuần thục phím **Shift** và phím **Prefix + [ ]** trước.
+
+---
 
 # Phân tích một ví dụ config thực tế
 
