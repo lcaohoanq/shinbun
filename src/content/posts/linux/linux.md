@@ -526,13 +526,13 @@ grep "Exception" 0_Run predefined test cases.txt
 
 # Bash Scripting
 
-![](https://images.viblo.asia/9b6edd8b-83d6-499f-ab57-25502231bf23.png)
+![](https://miro.medium.com/1*6Oyig2ACF-unC3R-CXT8jw.jpeg)
 
 - Instead of doing manually command in Linux enviroment, we use text file to automate day to day regular tasks, that text file tell system run each command we defined. 
 - We have many cool tools outside: Ansible, Puppet, Chef, SaltStack, Terraform why to learn Bash script
 > Many concept derived from bash script concepts
 
-- - `firstscript.sh`
+- Create new `firstscript.sh`:
 ```bash
 #!/bin/bash
 
@@ -634,9 +634,18 @@ rm -rf /tmp/webfiles
 unzip 2098_health.zip -d /var/www/html/
 ```
 
+![](https://images.viblo.asia/9b6edd8b-83d6-499f-ab57-25502231bf23.png)
+
+- There are too many shell nowadays: **bash**, **zsh**, **fish**,.. you can check your current shell using `echo $SHELL` command:
+```zsh
+❯ echo $SHELL
+/usr/bin/zsh
+```
+My favorite shell is **zsh** (sound with z-shell, zsh is **default shell on MacOS**, in Linux need to install manually), im using with **oh-my-zsh**, it's powerful with lot of plugin and really pretty
+
 ## Variables
 
- `websetup.sh`: refactored version
+ - `websetup.sh`: refactored version
 
 ```bash
 #!/bin/bash
@@ -691,7 +700,7 @@ echo "✅ Done!"
 	- Pass arguement : `ZIP_URL=$1 UNZIP_DIR=$2`, run: ```bash ./websetup.sh https://example.com/site.zip mysite```
 	- Array of needed packages: can extend when runtime `PACKAGES+=("curl")`
 
-- More enhnace
+- More enhance version
 
 ```bash
 #!/bin/bash
@@ -793,7 +802,7 @@ echo "===== END DEPLOY: $(date) ====="
 		```
 
 	- Auto detect package manager (`yum | dnf | apt`)
-		- ```zsh
+		```zsh
 		command -v dnf
 		command -v yum
 		command -v apt
@@ -810,5 +819,3 @@ echo "===== END DEPLOY: $(date) ====="
 			- **-e**: if error stop
 			- **-u**: any variable not set -> fail
 			- **pipefail**: pipe fail -> fail
-
-   
