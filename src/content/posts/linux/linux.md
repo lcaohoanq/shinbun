@@ -521,3 +521,115 @@ grep "Exception" 0_Run predefined test cases.txt
 ```
 
 ## Sed
+
+# Bash Scripting
+
+![](https://images.viblo.asia/9b6edd8b-83d6-499f-ab57-25502231bf23.png)
+
+- Instead of doing manually command in Linux enviroment, we use text file to automate day to day regular tasks, that text file tell system run each command we defined. 
+- We have many cool tools outside: Ansible, Puppet, Chef, SaltStack, Terraform why to learn Bash script
+> Many concept derived from bash script concepts
+
+- - `firstscript.sh`
+```bash
+#!/bin/bash
+
+### This script prints system info ###
+
+echo "Welcome to bash script"
+echo
+
+# Checking system uptime
+echo "###############################"
+echo "The uptime of the system is:"
+uptime
+echo
+
+# Memory utilization
+echo "###############################"
+echo "Memory utilization"
+free -m
+echo
+
+# Disk utilization
+echo "###############################"
+echo "Disk utilization"
+df -h
+```
+- Now we execute `firstscript.sh`
+
+```bash
+❯ nvim firstscript.sh
+❯ ./firstscript.sh
+zsh: permission denied: ./firstscript.sh
+❯ chmod +x ./firstscript.sh
+❯ ./firstscript.sh
+Welcome to bash script
+
+###############################
+The uptime of the system is:
+ 08:37:01 up 30 min,  1 user,  load average: 0.33, 0.44, 0.42
+
+###############################
+Memory utilization
+               total        used        free      shared  buff/cache   available
+Mem:           31963        5103       23971         837        4170       26859
+Swap:          11628           0       11628
+
+###############################
+Disk utilization
+Filesystem      Size  Used Avail Use% Mounted on
+udev             16G     0   16G   0% /dev
+tmpfs           3.2G  2.0M  3.2G   1% /run
+/dev/sdb1       208G   82G  116G  42% /
+tmpfs            16G   80M   16G   1% /dev/shm
+tmpfs           5.0M  8.0K  5.0M   1% /run/lock
+tmpfs           1.0M     0  1.0M   0% /run/credentials/systemd-journald.service
+tmpfs            16G   20M   16G   1% /tmp
+/dev/nvme0n1p1  234G  144G   79G  65% /media/data
+tmpfs           3.2G  140K  3.2G   1% /run/user/1000
+``` 
+
+- `websetup.sh`: script for host a website
+```bash
+#!/bin/bash
+
+# Install on CentOS
+# sudo yum install wget unzip httpd -y
+# -y continue to install the relate pakage if not install
+
+# I don't want to see that much infomation about installing package
+sudo yum install wget unzip httpd -y >/dev/null
+# Redirection: error, generate some output, if not error put to /dev/null
+
+sudo systemctl start httpd
+sudo systemctl enable httpd
+
+# Why use -p tag
+# -p: mean parent, without -p, will throw error
+# without -p will create only one level directory
+mkdir -p /tmp/webfiles
+
+cd /tmp/webfiles
+
+# Download this zip using wget, can use curl,...
+wget https://www.tooplate.com/zip-templates/2098_health.zip
+unzip 2098_health.zip
+
+# cp - r: recursive, copy all file, subfiles, folder
+# source: all unzip file inside 2098_health to /var/www/html/
+cp -r 2098_health/* /var/www/html/
+
+systemctl restart httpd
+
+# Clean up resources
+rm -rf /tmp/webfiles
+```
+
+- More optimized, unzip to destination directory
+
+```bash
+unzip 2098_health.zip -d /var/www/html/
+```
+
+
