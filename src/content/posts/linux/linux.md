@@ -522,6 +522,8 @@ grep "Exception" 0_Run predefined test cases.txt
 
 ## Sed
 
+---
+
 # Bash Scripting
 
 ![](https://images.viblo.asia/9b6edd8b-83d6-499f-ab57-25502231bf23.png)
@@ -632,4 +634,181 @@ rm -rf /tmp/webfiles
 unzip 2098_health.zip -d /var/www/html/
 ```
 
+## Variables
 
+ `websetup.sh`: refactored version
+
+```bash
+#!/bin/bash
+set -e
+
+### ====== VARIABLES ======
+PKG_MANAGER="yum"
+PACKAGES=("wget" "unzip" "httpd")
+
+SERVICE_NAME="httpd"
+
+TMP_DIR="/tmp/webfiles"
+ZIP_URL="https://www.tooplate.com/zip-templates/2098_health.zip"
+ZIP_FILE="2098_health.zip"
+UNZIP_DIR="2098_health"
+
+WEB_ROOT="/var/www/html"
+### =======================
+
+echo "▶ Installing packages..."
+sudo $PKG_MANAGER install -y "${PACKAGES[@]}" >/dev/null
+
+echo "▶ Starting & enabling service: $SERVICE_NAME"
+sudo systemctl start $SERVICE_NAME
+sudo systemctl enable $SERVICE_NAME
+
+echo "▶ Preparing temp directory: $TMP_DIR"
+mkdir -p "$TMP_DIR"
+cd "$TMP_DIR"
+
+echo "▶ Downloading template..."
+wget "$ZIP_URL"
+
+echo "▶ Extracting..."
+unzip "$ZIP_FILE"
+
+echo "▶ Deploying to web root: $WEB_ROOT"
+sudo cp -r "$UNZIP_DIR"/* "$WEB_ROOT"
+
+echo "▶ Restarting service..."
+sudo systemctl restart $SERVICE_NAME
+
+echo "▶ Cleaning up..."
+rm -rf "$TMP_DIR"
+
+echo "✅ Done!"
+
+```
+
+- **Advantages**:
+	- `set -e`: fail fast, any command error (exitcode != 0) script stop immediately.
+	- Pass arguement : `ZIP_URL=$1 UNZIP_DIR=$2`, run: ```bash ./websetup.sh https://example.com/site.zip mysite```
+	- Array of needed packages: can extend when runtime `PACKAGES+=("curl")`
+
+- More enhnace
+
+```bash
+#!/bin/bash
+set -euo pipefail
+
+### ========= CONFIG =========
+LOG_FILE="/var/log/web_deploy.log"
+
+TMP_DIR="/tmp/webfiles"
+ZIP_URL="https://www.tooplate.com/zip-templates/2098_health.zip"
+ZIP_FILE="2098_health.zip"
+UNZIP_DIR="2098_health"
+WEB_ROOT="/var/www/html"
+SERVICE_NAME="httpd"
+### ==========================
+
+### ========= LOGGING =========
+exec > >(tee -a "$LOG_FILE") 2>&1
+echo "===== START DEPLOY: $(date) ====="
+### ===============================
+
+### ========= CHECK OS =========
+if [ -f /etc/os-release ]; then
+    . /etc/os-release
+    OS=$ID
+else
+    echo "❌ Cannot detect OS"
+    exit 1
+fi
+
+echo "▶ Detected OS: $OS"
+
+### ========= DETECT PACKAGE MANAGER =========
+if command -v dnf >/dev/null; then
+    PKG_MANAGER="dnf"
+elif command -v yum >/dev/null; then
+    PKG_MANAGER="yum"
+elif command -v apt >/dev/null; then
+    PKG_MANAGER="apt"
+else
+    echo "❌ No supported package manager found"
+    exit 1
+fi
+
+echo "▶ Using package manager: $PKG_MANAGER"
+
+### ========= INSTALL PACKAGES =========
+if [[ "$PKG_MANAGER" == "apt" ]]; then
+    sudo apt update -y
+    sudo apt install -y wget unzip apache2
+    SERVICE_NAME="apache2"
+else
+    sudo $PKG_MANAGER install -y wget unzip httpd
+fi
+
+### ========= SERVICE =========
+sudo systemctl enable "$SERVICE_NAME"
+sudo systemctl start "$SERVICE_NAME"
+
+### ========= DEPLOY =========
+echo "▶ Preparing temp dir"
+rm -rf "$TMP_DIR"
+mkdir -p "$TMP_DIR"
+cd "$TMP_DIR"
+
+echo "▶ Downloading template"
+wget "$ZIP_URL"
+
+echo "▶ Extracting"
+unzip "$ZIP_FILE"
+
+echo "▶ Copying files to web root"
+sudo rm -rf "$WEB_ROOT"/*
+sudo cp -r "$UNZIP_DIR"/* "$WEB_ROOT"
+
+sudo systemctl restart "$SERVICE_NAME"
+
+### ========= CLEAN =========
+rm -rf "$TMP_DIR"
+
+echo "✅ DEPLOY SUCCESS"
+echo "===== END DEPLOY: $(date) ====="
+```
+
+- **Advantages**:
+	- Check OS (CentOS / Rocky / Alma / Ubuntu / Debian)
+		```zsh
+		❯ cat /etc/os-release
+		PRETTY_NAME="Debian GNU/Linux 13 (trixie)"
+		NAME="Debian GNU/Linux"
+		VERSION_ID="13"
+		VERSION="13 (trixie)"
+		VERSION_CODENAME=trixie
+		DEBIAN_VERSION_FULL=13.2
+		ID=debian
+		HOME_URL="https://www.debian.org/"
+		SUPPORT_URL="https://www.debian.org/support"
+		BUG_REPORT_URL="https://bugs.debian.org/"
+		```
+
+	- Auto detect package manager (`yum | dnf | apt`)
+		- ```zsh
+		command -v dnf
+		command -v yum
+		command -v apt
+		```
+	
+	- Log to file -> `/var/log/web_deploy.log`
+		- `exec > >(tee -a "$LOG_FILE") 2>&1`
+			- **stdout**
+			- **stderr**
+			- **console**
+			
+	- Fail fast pro vip
+		- `set -euo pipefail`: 
+			- **-e**: if error stop
+			- **-u**: any variable not set -> fail
+			- **pipefail**: pipe fail -> fail
+
+   
