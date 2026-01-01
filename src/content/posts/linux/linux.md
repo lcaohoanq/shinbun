@@ -6,7 +6,7 @@ image: "https://github.com/lcaohoanq/Linux-Issues/assets/136492579/67567ea6-ef1c
 tags: [Linux, Documentation]
 category: 'Công nghệ'
 draft: false
-lang: ''
+lang: 'en'
 ---
 
 > ### I have tried these three DEs
@@ -30,10 +30,18 @@ lang: ''
 
 > https://github.com/lcaohoanq/hypr-arch-dotfiles/
 
+![](https://images.unsplash.com/photo-1685716851721-7e1419f2db18?q=80&w=1032&auto=format&fit=crop)
+
+> Life seem more tough when learning, using Linux but after a long time, 2 years using, fail, break, reinstall many time...every moments worth it, i really love Linux and it became my daily driver now.
+
 # OSS (Open Source Software)
 - OSS is software with source code that anyone can inspect, modify, and enhance
-- React: https://github.com/facebook/react
-- fzf (fuzzy file finder): https://github.com/junegunn/fzf
+- Many famous internet backbones tools:
+	- [react](https://github.com/facebook/react)
+	- [spring boot](https://github.com/spring-projects/spring-boot)
+	- [fzf (fuzzy file finder)](https://github.com/junegunn/fzf)
+	- [wireguard-easy](https://github.com/wg-easy/wg-easy)
+	- [postgresql](https://wiki.postgresql.org/wiki/Submitting_a_Patch)
 
 Many many many tools are open source now :)
 
@@ -67,7 +75,7 @@ Many many many tools are open source now :)
 
 # Why Linux?
 
-- Opensource
+- Open source
 - Community Support
 - Support Wide Variaty of Hardware
 - Customization
@@ -75,7 +83,7 @@ Many many many tools are open source now :)
 - Automation
 - Security (debatable topic, depend on you)
 
-# Architecture of Linux ![Alt text](https://www.interviewbit.com/blog/wp-content/uploads/2022/06/Linux-Architecture-1024x728.png)
+# Architecture of Linux ![](https://www.interviewbit.com/blog/wp-content/uploads/2022/06/Linux-Architecture-1024x728.png)
 
 - Linux Kernel read, understand the hardware CPU, RAM, pass signal to Shell (Bash, Zsh, Fish,...) 
 
@@ -109,6 +117,9 @@ Many many many tools are open source now :)
 		- Installation: dpkg -i google-chrome-stable_current_amd64.**deb**
 
 # Package manager
+
+![](https://i.redd.it/9h04oradsds51.png)
+
 - A  **package manager** in Linux is a tool that automates the entire process of installing, updating, configuring, and removing software. You can think of it as an "app store" or a personal assistant for your operating system's software.
 
 | Operating System | Default Package Manager | Additional Package Managers |
@@ -148,12 +159,16 @@ sudo apt-get install ROSÉ
 
 # Commands
 
-- Most used commands:
+![](https://i.redd.it/24b7ozlmfz3c1.png)
+
+> This command `:(){ :|:& };:` is called "shell fork bomb", very dangerous when hacker can access then execute this command on our servers.
+> [Read more about fork bomb here](https://www.cyberciti.biz/faq/understanding-bash-fork-bomb/)
 
   - **cd** : Change directory
     - `cd /home/user`
     - `cd ~`
     - `cd ..`
+   > im using [zoxide](https://github.com/ajeetdsouza/zoxide): better cd
 
   - **ls** : List files and directories
     - `ls`
@@ -161,11 +176,13 @@ sudo apt-get install ROSÉ
     - `ls -a`
     - ls -lt : sort time descending
     - ls -ltr: sort time ascending (r = reverse)
+   >  im using [exa](https://github.com/ogham/exa): better ls
 
-  - **pwd** : Print working directory
+  - **pwd** : print **current** working directory
 
   - **cat**
     - `cat file.txt`
+> im using [bat](https://github.com/sharkdp/bat),  notice that after install bat, it use the batcat (not bat) so need to remember or assign alias to .zshrc
 
   - **cp** : Copy files and directories
     - `cp file.txt file2.txt`
@@ -190,7 +207,7 @@ sudo apt-get install ROSÉ
   - **mkdir** : Make directories
 	  - mkdir /hihi
 	  - mkdir /hihi/hehe/huhu => No such file or directory => mkdir -p /hihi/hehe/huhu ok
-- Because normal mkdir only support one directory, if pass parent/child/... it cause error -> using -p (parent) to fix
+>	- Because normal mkdir only support one directory, if pass parent/child/... it cause error -> using -p (parent) to fix
 
   - **echo** : Write text to file
     - `echo "Hello World" > file.txt`
@@ -198,31 +215,40 @@ sudo apt-get install ROSÉ
     - echo "alias 'll=ls -al'" >> ~/.bashrc
     - echo "alias 'showdisk=cd /media/lcaohoanq/ ; ls -al'" >> ~/.bashrc
 
-  - **touch** : Create file
-    - `touch file.txt`
+ - **touch** : Create file
+   - `touch file.txt`
 
-  - **nano** : Text editor
-    - `nano file.txt`
+ - **nano** : Text editor
+   - `nano file.txt`
 
-  - **unzip** : Unzip files
-    - `unzip file.zip`
+ - **unzip** : Unzip files
+   - `unzip file.zip`
 
-  - **tree** : Show the current directory with the tree visualization
-    ```bash
-    # show everything
-    tree
+ - **tree** : Show the current directory with the tree visualization
+   ```bash
+   # show everything
+   tree
 
-    # show directories only
-    tree -D
+   # show directories only
+   tree -D
 
-    # show directories except the pattern
-    tree -I "node_modules"
+   # show directories except the pattern
+   tree -I "node_modules"
 
-    # show except the pattern, directories only
-    tree -I "node_modules" -D
-    ```
+   # show except the pattern, directories only
+   tree -I "node_modules" -D
+   ```
 
 - **history**: Show all previously executed command
+	- im currently using [atuin](https://github.com/atuinsh/atuin): better history, with built in sql lite, can search, navigate to the previous command
+
+- Process:
+  - `ps`: shows only **processes associated with your current terminal session and use**
+  - `ps aux`:  display a **detailed snapshot of all running processes** on the system
+    ```bash
+    # show detailed all running processes and find obs 
+    ps aux | grep "obs"
+    ```
 
 - Check CPU:
 	- **nproc**
@@ -231,6 +257,10 @@ sudo apt-get install ROSÉ
 - Check RAM
 	- **free -h**
 	- **cat /proc/meminfo**
+
+- Process management
+	- Mandatory: top
+> im using [htop](https://github.com/htop-dev/htop), [btop](https://github.com/aristocratos/btop), better UI, more efficient to do process management
 
 - Power Management
 
@@ -248,26 +278,61 @@ sudo shutdown -h now
 sudo shutdown -P +10
 ```
 
-# [Advanced command]
-  - chmod [arguement] : give a file specific permission
-    - +x : can executable
-    - 777 : give all permission (do not recommend to use)
-    - 400 : read only
-
-  - ps: show process id
-    ```bash
-    ps aux | grep "obs"
-    ```
+---
 
 # File System
-- /: root directory
-- /boot
-- /dev
-- /usr
-- 
 
+![](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFYxyZTyjPccvpZmE6pZuybHy_5FTVj_4rrw&s)
+
+```zsh
+/               # Root directory – gốc của mọi thứ
+├── /boot       # File khởi động: kernel, initramfs, grub
+├── /dev        # Device files (ổ cứng, USB, tty, null, random…)
+├── /etc        # Config hệ thống (nghĩ: "editable text configs")
+├── /home       # Thư mục người dùng (home của user)
+│   └── hoang   # Ví dụ home của user hoang
+│   └── duyen   # Ví dụ home của user duyen
+├── /lib        # Thư viện cần cho /bin và /sbin
+├── /lib64      # Thư viện 64-bit
+├── /media      # Nơi auto-mount USB, ổ cứng rời
+├── /mnt        # Mount tạm (mount thủ công)
+├── /opt        # Optional software (app cài ngoài hệ thống)
+├── /proc       # Virtual FS – info kernel & process (runtime)
+├── /root       # Home của user root
+├── /run        # Runtime data (PID, socket, lock file)
+├── /sbin       # System binaries (lệnh cho admin/root)
+├── /srv        # Data cho service (web, ftp…)
+├── /sys        # Virtual FS – kernel, hardware
+├── /tmp        # File tạm (có thể bị xoá khi reboot)
+├── /usr        # Userland programs & libs
+│   ├── /bin    # Binary cho user
+│   ├── /sbin   # Binary cho admin
+│   ├── /lib    # Thư viện
+│   └── /share  # Data dùng chung (icons, fonts, docs)
+└── /var        # Variable data
+    ├── /log    # Log system
+    ├── /cache  # Cache
+    ├── /lib    # State data (db, package info)
+    └── /www    # Web root (Apache/Nginx – tuỳ distro)
+
+```
 
 ![Alt text](https://fireship.io/courses/linux/img/linux-file-system.png)
+--- 
+
+### Tips to remember
+
+-   **/etc** → config
+    
+-   **/var** → always change (log, cache)
+    
+-   **/proc & /sys** → not a real file
+    
+-   **/usr** → app + lib
+    
+-   **/bin vs /sbin** → user vs admin
+    
+-   **/dev** → everything is file 😎 (i want fine also)
 
 # File Permissions
 
@@ -289,6 +354,8 @@ sudo shutdown -P +10
 -  rwx (**user**)    rwx  (**group**)   rwx (**other**)
 
 ## chmod
+
+![](https://i.redd.it/u9zhxbl28pq21.jpg)
 
 > change file permissions
  
@@ -315,9 +382,12 @@ chmod 664 foo.txt
 - Syntax:
 	- **u/g/o**: 6 6 4
 	- read and write: 6, read: 4
+	 - 400 : read only
 
 - Be careful with `chmod 777`, grant full access, convenience but it violate the principle of privilege
 
+![](https://media.tenor.com/iP1Lga2PH3IAAAAe/pc-principal-check-privilege.png)   
+ 
 ---
 
 # Text Editor
@@ -375,6 +445,8 @@ Ctrl + K
 Ctrl + U
 ```
 
+---
+
 ## vi, vim, nvim
 
 ![Alt text](https://images.viblo.asia/9fc1a38d-7f58-4abe-abaa-8deec07b9435.png)
@@ -395,6 +467,12 @@ yy
 - Copy 3 line
 ```zsh
 3yy
+```
+
+- Copy all file content (rather than `32yy`, no this suck)
+	- vim will popup that `32 lines yanked into "+`
+```zsh
+:%y+
 ```
 
 - Paste (as current cursor pointer)
@@ -426,24 +504,24 @@ dd
 /Error
 ```
 
-- Home of file(double g)
+- Home file (double g)
 ```zsh
 gg
 ```
 
-- End of file (capital G)
-```zsh
-G
-```
-
-- Start of line
+- Home line
 ```zsh
 0
 ```
 
-- End of line
+- End file (capital G)
 ```zsh
-$
+G
+```
+
+- End line
+```zsh
+Shift + 0
 ```
 
 - Exit (Command mode -> **ESC**)
@@ -454,12 +532,24 @@ $
 :wq #save and exit
 ```
 
+- **Advanced**
+	- Combine nvim with **fzf**
+		- In terminal type `nvim (space) then Ctrl + T`  => it will open file with nvim immediately
+		-  Search file with `fzf`, preview with `batcat` then open in `nvim`: i use alias **fn** for this very long command `fn='/opt/nvim-linux-x86_64/bin $(fzf --preview="batcat --color=always {}")'`
+
+- Ref the `alias` at my [dotfile](https://github.com/lcaohoanq/dotfiles)
+
 ### LazyVim
 
 - Currently im using LazyVim (https://www.lazyvim.org/), it really easy to setup, and support a lot of LUA plugins there, but before going to something comfortable, make sure you have a basic or good foundation of vim, take time to practice :) 
 
 ![Alt text](https://user-images.githubusercontent.com/292349/213447056-92290767-ea16-430c-8727-ce994c93e9cc.png)
 
+- In the current directory, type `nvim .`, it will open with nvim treesitter (same as sidebar in other IDE)
+
+- Shortcut:
+	- **Space + Space**: find file, like Ctrl + P (VSCode), Ctrl + Shift + N/Shift +  Shift (IntelliJ)
+	- **Ctr + /**: Terminal (enter the Terminal using i mode)
 
 - Linux with Nvim oh man, we nearly become arch user
 
@@ -480,7 +570,7 @@ $
 	- **s**: A special file that provides inter-process networking protected by the file system's access control
 - Pipe
 	- **p**: A special file that allows processes to communicate with each other without using network socket semantics
-
+---
 # Symbolic links
 
 - Like desktop shortcut in windows
@@ -489,12 +579,20 @@ ln -s source destination
 
 unlink destination
 ```
-
+--- 
 # Filter & IO redirection command
 
-## Grep
+## Grep (Global Regular Expression Print)
 
-- Find text from any text input
+- Find text patterns in files
+
+- Syntax: `grep "search_term" [flags] [file_name]`
+	- grep "mom" hello.txt
+	- grep "mom" -n hello.txt (**-n**: line number)
+	- grep "mom" -Rn . (**-R: recursive**, search multiple file all in current directory)
+	- grep "^app" hello.txt (**RegEx**, search line start with `app`)
+	- grep "error$" mvn_error.log (**RegEx**, search line end with `error`)
+	- grep -c NullPointerException SomeErrorLogs.txt (**count how many time** NullPointerException **appear** in SomeErrorLogs.txt)
 
 ![Alt text](https://www.cyberciti.biz/media/new/faq/2007/08/grep-command-examples-for-Linux-and-Unix-users-1.png)
 
@@ -520,7 +618,29 @@ grep "Exception" 0_Run predefined test cases.txt
 7ed17a84f912   dpage/pgadmin4   "/entrypoint.sh"         12 days ago   Up 39 minutes             443/tcp, 0.0.0.0:5050->80/tcp, [::]:5050->80/tcp   pgadmin
 ```
 
-## Sed
+## Sed (non-interactive text editor)
+
+- Mainly use RegEx, play with RegEx here: https://regex101.com/
+- **s**: subtitution
+
+```zsh
+❯ sed 's/mom/dad' main.js
+```
+
+- Above command just print the file with replaced part, not a real change 
+
+- We use redirection operator to take the output of command then input for sed
+
+```zsh
+❯ sed 's/mom/dad' main.js > hihi.js
+```
+
+- Using sed at 2nd half pipe, this mean replace all `q` with `vl`, g for global search  
+
+```zsh
+❯ echo "lcaohoanqqqq" | sed "s/q/vl/g"
+lcaohoanvlvlvlvl
+```
 
 ---
 
