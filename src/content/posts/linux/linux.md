@@ -269,6 +269,57 @@ sudo shutdown -P +10
 
 ![Alt text](https://fireship.io/courses/linux/img/linux-file-system.png)
 
+# File Permissions
+
+- Every directory have permission for owner and group
+	- Owner is who created the file or directory
+	- Groups is the set of users who share the same permission
+
+![](https://z5.kerneltalks.com/wp-content/uploads/2020/06/File-permissions-in-Linux-Unix.png)
+
+> - : executable file
+   r : read
+   w: write
+   x: execute
+- `-rw-r--r--`: 
+	- owner user: can read, write, not execute (for each file the owner is root, oracle9, user3)
+	- group user: can read only
+	- other user: can read only
+
+-  rwx (**user**)    rwx  (**group**)   rwx (**other**)
+
+## chmod
+
+> change file permissions
+ 
+ ```zsh
+chmod [u/g/o][+/-/=][r/w/x][file]
+```
+
+- Syntax:
+	- **u/g/o**: user/group/other
+	- **+/-/=**: add, remove, set
+	- **r/w/x**: read, write, execute
+
+- Change file `data.txt` add groups permission writable
+
+```zsh
+chmod g+w data.txt
+```
+
+- Using octal notation
+	- Easy to figure out what number: https://chmod-calculator.com/
+```zsh
+chmod 664 foo.txt
+```
+- Syntax:
+	- **u/g/o**: 6 6 4
+	- read and write: 6, read: 4
+
+- Be careful with `chmod 777`, grant full access, convenience but it violate the principle of privilege
+
+---
+
 # Text Editor
 
 - nano and vim, let's go
