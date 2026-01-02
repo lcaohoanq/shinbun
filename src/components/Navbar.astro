@@ -9,6 +9,7 @@ import Search from "./Search.svelte";
 import DisplaySettings from "./widget/DisplaySettings.svelte";
 import NavMenuPanel from "./widget/NavMenuPanel.astro";
 
+// biome-ignore lint/suspicious/noExplicitAny: Astro client directives require any cast for Svelte components
 const LightDarkSwitch = LightDarkSwitchRaw as any;
 const className = Astro.props.class;
 
