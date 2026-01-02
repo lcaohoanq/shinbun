@@ -85,7 +85,7 @@ Many many many tools are open source now :)
 
 # Architecture of Linux ![](https://www.interviewbit.com/blog/wp-content/uploads/2022/06/Linux-Architecture-1024x728.png)
 
-- Linux Kernel read, understand the hardware CPU, RAM, pass signal to Shell (Bash, Zsh, Fish,...) 
+- Linux Kernel read, understand the hardware CPU, RAM, pass signal to Shell (Bash, Zsh, Fish,...)
 
 # Popular Linux Distributions (distros)
 
@@ -101,7 +101,7 @@ Many many many tools are open source now :)
 	- Debian
 	- OpenSUSE
 - Server
-	- RHEL (Red Hat Enterprise Linux): most stable, secured, not open source 
+	- RHEL (Red Hat Enterprise Linux): most stable, secured, not open source
 	- Ubuntu Server
 	- CentOS
 	- SUSE Enterprise Linux
@@ -224,12 +224,12 @@ sudo apt-get install ROSÉ
  - **unzip** : Unzip files
    - `unzip file.zip`
 
-- **head**:  Display the **first 10 lines** (*default*) 
+- **head**:  Display the **first 10 lines** (*default*)
 	- `head filename.txt`
 	- `head -5 filename.txt` (**first 5 lines**)
 	- `head -c 45 filename.txt` (**first 45 bytes**)
 
-- **tail**:  Display the **last 10 lines** (*default*) 
+- **tail**:  Display the **last 10 lines** (*default*)
 	- `tail filename.txt`
 	- `tail -20 filename.txt` (**last 20 lines**)
 	- `tail -c 45 filename.txt` (**last 45 bytes**)
@@ -256,14 +256,14 @@ sudo apt-get install ROSÉ
   - `ps`: shows only **processes associated with your current terminal session and use**
   - `ps aux`:  display a **detailed snapshot of all running processes** on the system
     ```bash
-    # show detailed all running processes and find obs 
+    # show detailed all running processes and find obs
     ps aux | grep "obs"
     ```
 
 - Check CPU:
 	- **nproc**
 	- **lscpu**
-	
+
 - Check RAM
 	- **free -h**
 	- **cat /proc/meminfo**
@@ -335,20 +335,20 @@ sudo shutdown -P +10
 ```
 
 ![Alt text](https://fireship.io/courses/linux/img/linux-file-system.png)
---- 
+---
 
 ### Tips to remember
 
 -   **/etc** → config
-    
+
 -   **/var** → always change (log, cache)
-    
+
 -   **/proc & /sys** → not a real file
-    
+
 -   **/usr** → app + lib
-    
+
 -   **/bin vs /sbin** → user vs admin
-    
+
 -   **/dev** → everything is file 😎 (i want fine also)
 
 # File Permissions
@@ -363,7 +363,7 @@ sudo shutdown -P +10
    r : read
    w: write
    x: execute
-- `-rw-r--r--`: 
+- `-rw-r--r--`:
 	- owner user: can read, write, not execute (for each file the owner is root, oracle9, user3)
 	- group user: can read only
 	- other user: can read only
@@ -375,7 +375,7 @@ sudo shutdown -P +10
 ![](https://i.redd.it/u9zhxbl28pq21.jpg)
 
 > change file permissions
- 
+
  ```zsh
 chmod [u/g/o][+/-/=][r/w/x][file]
 ```
@@ -403,8 +403,8 @@ chmod 664 foo.txt
 
 - Be careful with `chmod 777`, grant full access, convenience but it violate the principle of privilege
 
-![](https://media.tenor.com/iP1Lga2PH3IAAAAe/pc-principal-check-privilege.png)   
- 
+![](https://media.tenor.com/iP1Lga2PH3IAAAAe/pc-principal-check-privilege.png)
+
 ---
 
 # Text Editor
@@ -421,7 +421,7 @@ chmod 664 foo.txt
 
 ```zsh
 sudo apt-get install nano
-``` 
+```
 
 ### Command
 
@@ -441,7 +441,7 @@ echo "first line" > hihi.txt
 echo "first line" >> hihi.txt
 ```
 
-- Cut/Delete a line 
+- Cut/Delete a line
 
 ```zsh
 Ctrl + K
@@ -470,7 +470,7 @@ Ctrl + U
 
 - More at here (https://viblo.asia/p/co-ban-ve-vim-cho-nguoi-moi-bat-dau-GrLZDavnlk0)
 - Vim has 3 mode
-	- Normal: **default**, navigate, simple edit 
+	- Normal: **default**, navigate, simple edit
 	- Insert: as the name, using as insert character
 	- Command Line: saving, exiting,...
 
@@ -501,12 +501,12 @@ yy
 u
 ```
 
-- Delete 1 line (yanking): 
+- Delete 1 line (yanking):
 ```zsh
 dd
 ```
 
-- Delete 3 line 
+- Delete 3 line
 ```zsh
 3dd
 ```
@@ -558,7 +558,7 @@ Shift + 0
 
 ### LazyVim
 
-- Currently im using LazyVim (https://www.lazyvim.org/), it really easy to setup, and support a lot of LUA plugins there, but before going to something comfortable, make sure you have a basic or good foundation of vim, take time to practice :) 
+- Currently im using LazyVim (https://www.lazyvim.org/), it really easy to setup, and support a lot of LUA plugins there, but before going to something comfortable, make sure you have a basic or good foundation of vim, take time to practice :)
 
 ![Alt text](https://user-images.githubusercontent.com/292349/213447056-92290767-ea16-430c-8727-ce994c93e9cc.png)
 
@@ -596,7 +596,7 @@ ln -s source destination
 
 unlink destination
 ```
---- 
+---
 # Filter & IO redirection command
 
 ## Grep (Global Regular Expression Print)
@@ -618,10 +618,10 @@ unlink destination
 - Find text contain "Exception"
 ```zsh
 grep "Exception" 0_Run predefined test cases.txt
-``` 
+```
 
 - Syntax:
-	- grep "key_word" -param file_name 
+	- grep "key_word" -param file_name
 
 - Param
 	- R: search recursively
@@ -644,7 +644,7 @@ grep "Exception" 0_Run predefined test cases.txt
 ❯ sed 's/mom/dad' main.js
 ```
 
-- Above command just print the file with replaced part, not a real change 
+- Above command just print the file with replaced part, not a real change
 
 - We use redirection operator to take the output of command then input for sed
 
@@ -652,7 +652,7 @@ grep "Exception" 0_Run predefined test cases.txt
 ❯ sed 's/mom/dad' main.js > hihi.js
 ```
 
-- Using sed at 2nd half pipe, this mean replace all `q` with `vl`, g for global search  
+- Using sed at 2nd half pipe, this mean replace all `q` with `vl`, g for global search
 
 ```zsh
 ❯ echo "lcaohoanqqqq" | sed "s/q/vl/g"
@@ -665,7 +665,7 @@ lcaohoanvlvlvlvl
 
 ![](https://miro.medium.com/1*6Oyig2ACF-unC3R-CXT8jw.jpeg)
 
-- Instead of doing manually command in Linux enviroment, we use text file to automate day to day regular tasks, that text file tell system run each command we defined. 
+- Instead of doing manually command in Linux enviroment, we use text file to automate day to day regular tasks, that text file tell system run each command we defined.
 - We have many cool tools outside: Ansible, Puppet, Chef, SaltStack, Terraform why to learn Bash script
 > Many concept derived from bash script concepts
 
@@ -695,6 +695,9 @@ echo "###############################"
 echo "Disk utilization"
 df -h
 ```
+
+> #! called SHEBANG, tell the script to interpreter the reset of file using /bin/bash interpreter, so if we change to /usr/bin/python  it will use python interpreter to run the script
+
 - Now we execute `firstscript.sh`
 
 ```bash
@@ -727,7 +730,7 @@ tmpfs           1.0M     0  1.0M   0% /run/credentials/systemd-journald.service
 tmpfs            16G   20M   16G   1% /tmp
 /dev/nvme0n1p1  234G  144G   79G  65% /media/data
 tmpfs           3.2G  140K  3.2G   1% /run/user/1000
-``` 
+```
 
 - `websetup.sh`: script for host a website
 ```bash
@@ -944,15 +947,15 @@ echo "===== END DEPLOY: $(date) ====="
 		command -v yum
 		command -v apt
 		```
-	
+
 	- Log to file -> `/var/log/web_deploy.log`
 		- `exec > >(tee -a "$LOG_FILE") 2>&1`
 			- **stdout**
 			- **stderr**
 			- **console**
-			
+
 	- Fail fast pro vip
-		- `set -euo pipefail`: 
+		- `set -euo pipefail`:
 			- **-e**: if error stop
 			- **-u**: any variable not set -> fail
 			- **pipefail**: pipe fail -> fail
@@ -982,23 +985,23 @@ echo $3
 ```zsh
 ❯ ./4_args.sh
 Demo CLI arugments
-Value of 0 is: 
+Value of 0 is:
 ./4_args.sh
-Value of 1 is: 
+Value of 1 is:
 
-Value of 2 is: 
+Value of 2 is:
 
-Value of 3 is: 
+Value of 3 is:
 
 ❯ ./4_args.sh linux hoang hello
 Demo CLI arugments
-Value of 0 is: 
+Value of 0 is:
 ./4_args.sh
-Value of 1 is: 
+Value of 1 is:
 linux
-Value of 2 is: 
+Value of 2 is:
 hoang
-Value of 3 is: 
+Value of 3 is:
 hello
 ```
 
@@ -1224,7 +1227,7 @@ I want to eat some kfc, i go to the mall with $9 invoice
 	- free -m: show current memory using
 	- grep -i mem: find ignore case word "mem"
 	- awk '{print $4}': 4th column, value is **19692 MB**
- 
+
 ```zsh
 ❯ free -m
                total        used        free      shared  buff/cache   available
@@ -1305,5 +1308,5 @@ Available free RAM is 19528 MB
 ################################################
 Current Load Average 0.35,
 ################################################
-Free ROOT partiotion size is 
+Free ROOT partiotion size is
 ```
