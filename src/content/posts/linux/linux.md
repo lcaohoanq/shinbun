@@ -614,6 +614,86 @@ unlink destination
 ![Alt text](https://www.cyberciti.biz/media/new/faq/2007/08/grep-command-examples-for-Linux-and-Unix-users-1.png)
 
 
+- Grep help
+
+```zsh
+❯ grep --help
+Usage: grep [OPTION]... PATTERNS [FILE]...
+Search for PATTERNS in each FILE.
+Example: grep -i 'hello world' menu.h main.c
+PATTERNS can contain multiple patterns separated by newlines.
+
+Pattern selection and interpretation:
+  -E, --extended-regexp     PATTERNS are extended regular expressions
+  -F, --fixed-strings       PATTERNS are strings
+  -G, --basic-regexp        PATTERNS are basic regular expressions
+  -P, --perl-regexp         PATTERNS are Perl regular expressions
+  -e, --regexp=PATTERNS     use PATTERNS for matching
+  -f, --file=FILE           take PATTERNS from FILE
+  -i, --ignore-case         ignore case distinctions in patterns and data
+      --no-ignore-case      do not ignore case distinctions (default)
+  -w, --word-regexp         match only whole words
+  -x, --line-regexp         match only whole lines
+  -z, --null-data           a data line ends in 0 byte, not newline
+
+Miscellaneous:
+  -s, --no-messages         suppress error messages
+  -v, --invert-match        select non-matching lines
+  -V, --version             display version information and exit
+      --help                display this help text and exit
+
+Output control:
+  -m, --max-count=NUM       stop after NUM selected lines
+  -b, --byte-offset         print the byte offset with output lines
+  -n, --line-number         print line number with output lines
+      --line-buffered       flush output on every line
+  -H, --with-filename       print file name with output lines
+  -h, --no-filename         suppress the file name prefix on output
+      --label=LABEL         use LABEL as the standard input file name prefix
+  -o, --only-matching       show only nonempty parts of lines that match
+  -q, --quiet, --silent     suppress all normal output
+      --binary-files=TYPE   assume that binary files are TYPE;
+                            TYPE is 'binary', 'text', or 'without-match'
+  -a, --text                equivalent to --binary-files=text
+  -I                        equivalent to --binary-files=without-match
+  -d, --directories=ACTION  how to handle directories;
+                            ACTION is 'read', 'recurse', or 'skip'
+  -D, --devices=ACTION      how to handle devices, FIFOs and sockets;
+                            ACTION is 'read' or 'skip'
+  -r, --recursive           like --directories=recurse
+  -R, --dereference-recursive  likewise, but follow all symlinks
+      --include=GLOB        search only files that match GLOB (a file pattern)
+      --exclude=GLOB        skip files that match GLOB
+      --exclude-from=FILE   skip files that match any file pattern from FILE
+      --exclude-dir=GLOB    skip directories that match GLOB
+  -L, --files-without-match  print only names of FILEs with no selected lines
+  -l, --files-with-matches  print only names of FILEs with selected lines
+  -c, --count               print only a count of selected lines per FILE
+  -T, --initial-tab         make tabs line up (if needed)
+  -Z, --null                print 0 byte after FILE name
+
+Context control:
+  -B, --before-context=NUM  print NUM lines of leading context
+  -A, --after-context=NUM   print NUM lines of trailing context
+  -C, --context=NUM         print NUM lines of output context
+  -NUM                      same as --context=NUM
+      --group-separator=SEP  print SEP on line between matches with context
+      --no-group-separator  do not print separator for matches with context
+      --color[=WHEN],
+      --colour[=WHEN]       use markers to highlight the matching strings;
+                            WHEN is 'always', 'never', or 'auto'
+  -U, --binary              do not strip CR characters at EOL (MSDOS/Windows)
+
+When FILE is '-', read standard input.  With no FILE, read '.' if
+recursive, '-' otherwise.  With fewer than two FILEs, assume -h.
+Exit status is 0 if any line is selected, 1 otherwise;
+if any error occurs and -q is not given, the exit status is 2.
+
+Report bugs to: bug-grep@gnu.org
+GNU grep home page: <https://www.gnu.org/software/grep/>
+General help using GNU software: <https://www.gnu.org/gethelp/>
+```
+
 - Usecase 1: We have sample file **0_Run predefined test cases.txt** contain the log from Github Action CI pipeline. Search error logs find the error. Problem is the file are too long (10k ~ line), and we are in server, we not have any IDE to use.
 - Find text contain "Exception"
 ```zsh
@@ -1310,3 +1390,396 @@ Current Load Average 0.35,
 ################################################
 Free ROOT partiotion size is
 ```
+
+## Export Variables (Environment Variables)
+### 1. Shell variables vs environment variables
+
+When you define a variable like this:
+
+```zsh
+MY_NAME="hoang"
+```
+
+- This variable exists only in the current shell
+
+- It is not inherited by new shells or programs
+
+Example:
+
+```zsh
+❯ MY_NAME="hoang"
+❯ echo $MY_NAME
+hoang
+
+❯ bash
+❯ echo $MY_NAME
+# no output
+❯ exit
+```
+
+
+The new `bash` shell does not know about `MY_NAME`.
+
+### 2. What does `export` do?
+
+The`export` command turns a shell variable into an environment variable.
+
+- Environment variables are passed from a parent process to its child processes
+
+Example:
+
+```zsh
+❯ export MY_NAME="hoang"
+
+❯ bash
+❯ echo $MY_NAME
+hoang
+❯ exit
+```
+
+Now `MY_NAME` is available in the child shell.
+
+### 3. Parent process vs child process
+
+- **Parent process**: the current shell
+
+- **Child process**: a process started by the parent
+
+Example:
+
+```zsh
+bash
+```
+
+- Current shell → parent process
+
+- New bash shell → child process
+
+> Only **exported variables** are inherited by child processes.
+
+## Export variables permanently
+### 4. Make a variable permanent for the current user
+
+To make a variable available every time you open a terminal, add it to your shell config file:
+
+- Bash: `~/.bashrc`
+
+- Zsh: `~/.zshrc`
+
+Example (Zsh):
+
+```zsh
+❯ nvim ~/.zshrc
+
+# add at the end
+export MY_NAME="hoang"
+```
+
+Reload the file:
+
+```zsh
+❯ source ~/.zshrc
+```
+
+Verify:
+
+```zsh
+❯ echo $MY_NAME
+hoang
+```
+
+### 5. System-wide environment variables
+
+To make a variable available for **all users**, add it to /etc/profile:
+
+```zsh
+sudo vim /etc/profile
+
+# add at the end
+export MY_SYSTEM_VAR="system_var_value"
+```
+
+Reload (or open a new terminal):
+
+```zsh
+❯ source /etc/profile
+```
+
+Check:
+```zsh
+❯ echo $MY_SYSTEM_VAR
+system_var_value
+```
+
+### 6. Why variables are missing after sudo -i
+```zsh
+❯ sudo -i
+root@hoang:~# echo $MY_SYSTEM_VAR
+```
+
+Explanation:
+
+- `sudo -i` starts a **new login shell** for the root user
+
+- sudo resets most environment variables for security
+
+- The root shell loads **root’s own config files**, not yours
+
+This behavior is **expected** and **intentional**.
+
+## User Input
+
+- Read user input using `read` command
+```zsh
+#!/bin/bash
+echo "Enter your name: "
+read NAME
+echo "Hello, $NAME!"
+```
+
+- Run the script
+```zsh
+❯ ./user_input.sh
+Enter your name:
+Hoang
+Hello, Hoang!
+```
+
+- `vim user_input.sh`:
+```zsh
+#!/bin/bash
+
+echo "Enter your skills: "
+read SKILLS
+
+echo "Your $SKILLS skill is in high Demand in the IT Industry!"
+
+read -p 'Username: ' USR
+read -sp 'Password: ' pass
+
+echo
+
+echo "Login successful: Welcome USER $USR,"
+```
+
+- Run the script
+```zsh
+❯ ./user_input.sh
+Enter your skills:
+DevOps
+Your DevOps skill is in high Demand in the IT Industry!
+Username: hoang
+Password:
+Login successful: Welcome USER hoang,
+```
+
+- Explain:
+	- `read -p 'Username: ' USR`: prompt inline
+	- `read -sp 'Password: ' pass`: silent input (no echo)
+
+
+## Decision Making
+
+### if statement 
+
+- Basic if statement
+```zsh
+if [ condition ]; then
+	# commands to execute if condition is true
+fi
+```
+- Example: Check if a number is positive
+```zsh
+#!/bin/bash
+echo "Enter a number: "
+read NUM
+if [ $NUM -gt 0 ]; then
+	echo "$NUM is a positive number."
+fi
+```
+- Run the script
+```zsh
+❯ ./if_example.sh
+Enter a number:
+5
+5 is a positive number.
+```
+
+### if-else statement
+
+```zsh
+#!/bin/bash
+
+read -p "Enter a number: " NUM
+echo
+
+if [ $NUM -gt 100 ]; then
+  echo "$NUM is happy"
+else
+  echo "Very sad momment"
+fi
+```
+
+- Run the script
+
+```zsh
+❯ ./18_decision_making.sh
+Enter a number: 103
+
+103 is happy
+❯ ./18_decision_making.sh
+Enter a number: 5
+
+Very sad momment
+```
+
+- Update a little syntax with more command
+
+```zsh
+#!/bin/bash
+
+read -p "Enter a number: " NUM
+echo
+
+if [ $NUM -gt 100 ]; then
+  echo "$NUM is happy"
+  sleep 3
+  echo "hihihihihi"
+  echo
+  date
+  free -m
+
+else
+  echo "Very sad momment"
+
+fi
+
+echo "Command execute successfully"
+```
+
+- Run the script
+
+```zsh
+❯ ./18_decision_making.sh
+Enter a number: 103
+
+103 is happy
+hihihihihi
+
+Fri Jan  2 11:30:40 PM +07 2026
+               total        used        free      shared  buff/cache   available
+Mem:           31963       15978        6948        1519       11009       15985
+Swap:          11628           0       11628
+Command execute successfully
+❯ cat 18_decision_making.sh | xclip -selection clipboard
+```
+
+- Explanation of additional commands:
+	- `sleep 3`: pauses the script for 3 seconds
+	- `date`: displays the current date and time
+	- `free -m`: shows memory usage in megabytes
+
+
+### if-elif-else statement
+- Update command with elif, we test this chain pipe 
+
+```zsh
+❯ ip a | wc -l
+54
+
+❯ ip a
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host noprefixroute 
+       valid_lft forever preferred_lft forever
+2: enp5s0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc fq_codel state DOWN group default qlen 1000
+    link/ether 3c:7c:3f:16:8e:de brd ff:ff:ff:ff:ff:ff
+    altname enx3c7c3f168ede
+3: wlp1s0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether 00:bb:60:b8:96:3d brd ff:ff:ff:ff:ff:ff
+    altname wlx00bb60b8963d
+    inet 192.168.88.171/24 brd 192.168.88.255 scope global dynamic noprefixroute wlp1s0
+       valid_lft 32372sec preferred_lft 32372sec
+    inet6 fe80::2bb:60ff:feb8:963d/64 scope link noprefixroute 
+       valid_lft forever preferred_lft forever
+4: tailscale0: <POINTOPOINT,MULTICAST,NOARP,UP,LOWER_UP> mtu 1280 qdisc fq_codel state UNKNOWN group default qlen 500
+    link/none 
+    inet 100.101.189.57/32 scope global tailscale0
+       valid_lft forever preferred_lft forever
+    inet6 fd7a:115c:a1e0::7537:bd39/128 scope global 
+       valid_lft forever preferred_lft forever
+    inet6 fe80::ed55:eb39:cb1b:885c/64 scope link stable-privacy proto kernel_ll 
+       valid_lft forever preferred_lft forever
+5: br-2778de006a7e: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN group default 
+    link/ether ba:37:5b:81:6b:42 brd ff:ff:ff:ff:ff:ff
+    inet 172.19.0.1/16 brd 172.19.255.255 scope global br-2778de006a7e
+       valid_lft forever preferred_lft forever
+6: br-9e3f99bdd6f8: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default 
+    link/ether de:bb:a7:b9:66:f8 brd ff:ff:ff:ff:ff:ff
+    inet 172.18.0.1/16 brd 172.18.255.255 scope global br-9e3f99bdd6f8
+       valid_lft forever preferred_lft forever
+    inet6 fe80::dcbb:a7ff:feb9:66f8/64 scope link proto kernel_ll 
+       valid_lft forever preferred_lft forever
+7: docker0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN group default 
+    link/ether 0a:e9:2d:18:84:f4 brd ff:ff:ff:ff:ff:ff
+    inet 172.17.0.1/16 brd 172.17.255.255 scope global docker0
+       valid_lft forever preferred_lft forever
+8: veth4f8b07e@if2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master br-9e3f99bdd6f8 state UP group default 
+    link/ether 4e:fb:2c:cb:67:de brd ff:ff:ff:ff:ff:ff link-netnsid 0
+    inet6 fe80::4cfb:2cff:fecb:67de/64 scope link proto kernel_ll 
+       valid_lft forever preferred_lft forever
+9: veth388b003@if2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master br-9e3f99bdd6f8 state UP group default 
+    link/ether f6:0f:25:03:f8:7b brd ff:ff:ff:ff:ff:ff link-netnsid 1
+    inet6 fe80::f40f:25ff:fe03:f87b/64 scope link proto kernel_ll 
+       valid_lft forever preferred_lft forever
+10: veth3470dee@if2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master br-9e3f99bdd6f8 state UP group default 
+    link/ether fe:8e:48:85:99:1d brd ff:ff:ff:ff:ff:ff link-netnsid 2
+    inet6 fe80::fc8e:48ff:fe85:991d/64 scope link proto kernel_ll 
+       valid_lft forever preferred_lft forever
+11: veth8a12733@if2: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue master br-9e3f99bdd6f8 state UP group default 
+    link/ether 52:f6:b2:7b:fa:75 brd ff:ff:ff:ff:ff:ff link-netnsid 3
+    inet6 fe80::50f6:b2ff:fe7b:fa75/64 scope link proto kernel_ll 
+       valid_lft forever preferred_lft forever
+
+❯ ip a | grep -v LOOPBACK | grep -ic mtu
+10
+```
+	- `ip a | wc -l`: count all line of `ip a` output
+	- `ip a | grep -v LOOPBACK | grep -ic mtu`: count all line without LOOPBACK line, case insensitive with word mtu
+
+
+
+```zsh
+#!/bin/bash
+
+value=$(ip a | grep -v LOOPBACK | grep -ic mtu)
+
+if [ $value -eq 1 ]; then
+  echo "1 Active network found"
+elif [ $value -gt 1 ]; then
+  echo "Found multiple active network"
+else
+  echo "Not found any active network"
+fi
+```
+
+- Run the script
+
+```zsh
+❯ ./18_decision_making.sh
+Found multiple active network
+```
+
+- Explanation of operators:
+	- `elif`: else if
+	- `else`: default case
+	- `fi`: end of if statement
+	- `[]`: test condition
+	- `-gt`: greater than
+	- `-lt`: less than
+	- `-eq`: equal to
+	- `-ne`: not equal to
+	- `-ge`: greater than or equal to
+	- `-le`: less than or equal to
