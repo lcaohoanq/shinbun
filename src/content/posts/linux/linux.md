@@ -4,7 +4,7 @@ published: 2025-01-19
 description: All stuffs about linux with a perspective of Debian KDE Plasma user
 image: "https://github.com/lcaohoanq/Linux-Issues/assets/136492579/67567ea6-ef1c-4f92-8dd9-98979f1ba4e6"
 tags: [Linux, Documentation]
-category: 'Công nghệ'
+category: 'Linux, Công nghệ'
 draft: false
 lang: 'en'
 ---
@@ -224,6 +224,16 @@ sudo apt-get install ROSÉ
  - **unzip** : Unzip files
    - `unzip file.zip`
 
+- **head**:  Display the **first 10 lines** (*default*) 
+	- `head filename.txt`
+	- `head -5 filename.txt` (**first 5 lines**)
+	- `head -c 45 filename.txt` (**first 45 bytes**)
+
+- **tail**:  Display the **last 10 lines** (*default*) 
+	- `tail filename.txt`
+	- `tail -20 filename.txt` (**last 20 lines**)
+	- `tail -c 45 filename.txt` (**last 45 bytes**)
+
  - **tree** : Show the current directory with the tree visualization
    ```bash
    # show everything
@@ -278,6 +288,13 @@ sudo shutdown -h now
 sudo shutdown -P +10
 ```
 
+> Not mandatory command, but im using too many time
+
+- Copy all content of file into clipboard
+	- **xclip** way, make sure you installed [xclip](https://github.com/astrand/xclip) with `sudo apt install xclip`
+		```zsh
+		cat <filename> | xclip -selection clipboard
+		```
 ---
 
 # File System
@@ -939,3 +956,354 @@ echo "===== END DEPLOY: $(date) ====="
 			- **-e**: if error stop
 			- **-u**: any variable not set -> fail
 			- **pipefail**: pipe fail -> fail
+
+## CLI Arguments
+
+- Prepare `4_args.sh`, with content
+```zsh
+#!/bin/bash
+
+echo "Demo CLI arugments"
+echo "Value of 0 is: "
+echo $0
+
+echo "Value of 1 is: "
+echo $1
+
+echo "Value of 2 is: "
+echo $2
+
+echo "Value of 3 is: "
+echo $3
+```
+
+- Let's test
+
+```zsh
+❯ ./4_args.sh
+Demo CLI arugments
+Value of 0 is: 
+./4_args.sh
+Value of 1 is: 
+
+Value of 2 is: 
+
+Value of 3 is: 
+
+❯ ./4_args.sh linux hoang hello
+Demo CLI arugments
+Value of 0 is: 
+./4_args.sh
+Value of 1 is: 
+linux
+Value of 2 is: 
+hoang
+Value of 3 is: 
+hello
+```
+
+- When the variable are not declare, it will be empty, but with **0** is the **name of the scripts**, 1, 2, 3 are nothing
+- Let's give a look to `web_setup.sh`
+	- I will comment out this line ` ZIP_URL="https://www.tooplate.com/zip-templates/2098_health.zip"` and ` ZIP_FILE="2098_health.zip"`, then pass any web size resources i want:
+
+```bash
+#!/bin/bash
+set -euo pipefail
+
+### ========= CONFIG =========
+LOG_FILE="/var/log/web_deploy.log"
+
+TMP_DIR="/tmp/webfiles"
+# ZIP_URL="https://www.tooplate.com/zip-templates/2098_health.zip"
+# ZIP_FILE="2098_health.zip"
+UNZIP_DIR="2098_health"
+WEB_ROOT="/var/www/html"
+SERVICE_NAME="httpd"
+### ==========================
+
+### ========= LOGGING =========
+exec > >(tee -a "$LOG_FILE") 2>&1
+echo "===== START DEPLOY: $(date) ====="
+### ===============================
+
+### ========= CHECK OS =========
+if [ -f /etc/os-release ]; then
+    . /etc/os-release
+    OS=$ID
+else
+    echo "❌ Cannot detect OS"
+    exit 1
+fi
+
+echo "▶ Detected OS: $OS"
+
+### ========= DETECT PACKAGE MANAGER =========
+if command -v dnf >/dev/null; then
+    PKG_MANAGER="dnf"
+elif command -v yum >/dev/null; then
+    PKG_MANAGER="yum"
+elif command -v apt >/dev/null; then
+    PKG_MANAGER="apt"
+else
+    echo "❌ No supported package manager found"
+    exit 1
+fi
+
+echo "▶ Using package manager: $PKG_MANAGER"
+
+### ========= INSTALL PACKAGES =========
+if [[ "$PKG_MANAGER" == "apt" ]]; then
+    sudo apt update -y
+    sudo apt install -y wget unzip apache2
+    SERVICE_NAME="apache2"
+else
+    sudo $PKG_MANAGER install -y wget unzip httpd
+fi
+
+### ========= SERVICE =========
+sudo systemctl enable "$SERVICE_NAME"
+sudo systemctl start "$SERVICE_NAME"
+
+### ========= DEPLOY =========
+echo "▶ Preparing temp dir"
+rm -rf "$TMP_DIR"
+mkdir -p "$TMP_DIR"
+cd "$TMP_DIR"
+
+echo "▶ Downloading template"
+wget $1 #################This line###################
+
+echo "▶ Extracting"
+unzip $2 #################This line###################
+
+echo "▶ Copying files to web root"
+sudo rm -rf "$WEB_ROOT"/*
+sudo cp -r "$UNZIP_DIR"/* "$WEB_ROOT"
+
+sudo systemctl restart "$SERVICE_NAME"
+
+### ========= CLEAN =========
+rm -rf "$TMP_DIR"
+
+echo "✅ DEPLOY SUCCESS"
+echo "===== END DEPLOY: $(date) ====="
+```
+
+- Then using like
+```zsh
+./web_setup.sh https://www.tooplate.com/zip-templates/2150_living_parallax.zip 2150_living_parallax
+```
+
+## System Variables
+
+Some System Variables, there are a few other variables that the system sets for you to use as well.
+
+- $0 - The name of the Bash script.
+
+- $1-$9-The first 9 arguments to the Bash script. (As mentioned above.)
+
+- $# - How many arguments were passed to the Bash script.
+
+- $@ - All the arguments supplied to the Bash script.
+
+- $? - The exit status of the most recently run process.
+
+- $$ - The process ID of the current script.
+
+- $USER - The username of the user running the script.
+
+- $HOSTNAME - The hostname of the machine the script is running on.
+
+- $SECONDS - The number of seconds since the script was started.
+
+- $RANDOM - Returns a different random number each time is it referred to.
+
+- $LINENO - Returns the current line number in the Bash script.
+
+- $SHELL - Return current using shell location  (/bin/bash, /usr/bin/zsh,...)
+
+> `$?`:  Exit code = 0, the last command work
+```zsh
+
+❯ free -m
+               total        used        free      shared  buff/cache   available
+Mem:           31963        5661       20414         840        7182       26302
+Swap:          11628           0       11628
+❯ echo $?
+0
+❯ freeeeeee -m
+zsh: command not found: freeeeeee
+❯ echo $?
+127
+❯ fre -m12312312
+zsh: command not found: fre
+❯ echo $?
+127
+❯ cdd
+zsh: command not found: cdd
+❯ echo $?
+127
+❯ free -masdfasdfas
+free: invalid option -- 'a'
+
+Usage:
+ free [options]
+
+Options:
+ -b, --bytes         show output in bytes
+     --kilo          show output in kilobytes
+     --mega          show output in megabytes
+     --giga          show output in gigabytes
+     --tera          show output in terabytes
+     --peta          show output in petabytes
+ -k, --kibi          show output in kibibytes
+ -m, --mebi          show output in mebibytes
+ -g, --gibi          show output in gibibytes
+     --tebi          show output in tebibytes
+     --pebi          show output in pebibytes
+ -h, --human         show human-readable output
+     --si            use powers of 1000 not 1024
+ -l, --lohi          show detailed low and high memory statistics
+ -L, --line          show output on a single line
+ -t, --total         show total for RAM + swap
+ -v, --committed     show committed memory and commit limit
+ -s N, --seconds N   repeat printing every N seconds
+ -c N, --count N     repeat printing N times, then exit
+ -w, --wide          wide output
+
+     --help     display this help and exit
+ -V, --version  output version information and exit
+
+For more details see free(1).
+❯ echo $?
+1
+```
+
+## Quotes
+
+### Double quotes v.s Single quotes
+- Double quotes same as string in other programming language
+
+- Using **exclude special character** backward slash (`\`) for `$9` to print it directly without let the shell think it is **9th argument**
+
+```zsh
+❯ SKILL="DevOps"
+
+❯ echo $SKILL
+DevOps
+
+❯ SKILL='Devops'
+
+❯ echo $SKILL
+Devops
+
+❯ echo "I have got $SKILL skill"
+I have got Devops skill
+
+❯ echo 'I have got $SKILL skill'
+I have got $SKILL skill
+
+❯ FOOD="kfc"
+
+❯ echo "I want to eat some $FOOD, i go to the mall with $9 invoice"
+
+I want to eat some kfc, i go to the mall with  invoice
+
+❯ echo 'I want to eat some $FOOD, i go to the mall with $9 invoice'
+
+I want to eat some $FOOD, i go to the mall with $9 invoice
+
+❯ echo "I want to eat some $FOOD, i go to the mall with \$9 invoice"
+
+I want to eat some kfc, i go to the mall with $9 invoice
+```
+
+## Command Substitution
+
+- Store the output of command to a variable then using pipe chain
+	- free -m: show current memory using
+	- grep -i mem: find ignore case word "mem"
+	- awk '{print $4}': 4th column, value is **19692 MB**
+ 
+```zsh
+❯ free -m
+               total        used        free      shared  buff/cache   available
+Mem:           31963        6347       19646         995        7417       25615
+Swap:          11628           0       11628
+
+❯ free -m | grep -i mem
+Mem:           31963        6301       19692         972        7395       25661
+
+❯ free -m | grep -i mem | awk `{print $4}`
+Usage: mawk [Options] [Program] [file ...]
+
+Program:
+    The -f option value is the name of a file containing program text.
+    If no -f option is given, a "--" ends option processing; the following
+    parameters are the program text.
+
+Options:
+    -f program-file  Program  text is read from file instead of from the
+                     command-line.  Multiple -f options are accepted.
+    -F value         sets the field separator, FS, to value.
+    -v var=value     assigns value to program variable var.
+    --               unambiguous end of options.
+
+    Implementation-specific options are prefixed with "-W".  They can be
+    abbreviated:
+
+    -W version       show version information and exit.
+    -W dump          show assembler-like listing of program and exit.
+    -W help          show this message and exit.
+    -W interactive   set unbuffered output, line-buffered input.
+    -W exec file     use file as program as well as last option.
+    -W posix         stricter POSIX checking.
+    -W random=number set initial random seed.
+    -W sprintf=number adjust size of sprintf buffer.
+    -W traditional   pre-POSIX 2001.
+    -W usage         show this message and exit.
+
+# Be careful with backtick, or single quotes
+
+❯ free -m | grep -i mem | awk '{print $4}'
+19438
+
+❯ FREE_RAM=`free -m | grep -i mem | awk '{print $4}'`
+
+❯ echo "Free RAM is $FREE_RAM mb"
+Free RAM is 19498 mb
+```
+
+- Create new `6_command_subs.sh`:
+
+```zsh
+#!/bin/bash
+
+echo "Welcome $USER on $HOSTNAME."
+
+echo "################################################"
+
+FREERAM=$(free -m | grep Mem | awk '{print $4}')
+LOAD=$(uptime | awk '{print $9}')
+ROOTFREE=$(df -h | grep '/dev/sdal' | awk '{print $4}')
+
+echo "################################################"
+echo "Available free RAM is $FREERAM MB"
+echo "################################################"
+echo "Current Load Average $LOAD"
+echo "################################################"
+echo "Free ROOT partiotion size is $ROOTFREE"
+```
+- Output
+
+```zsh
+❯ ./6_command_subs.sh
+Welcome lcaohoanq on hoang.
+################################################
+################################################
+Available free RAM is 19528 MB
+################################################
+Current Load Average 0.35,
+################################################
+Free ROOT partiotion size is 
+```
