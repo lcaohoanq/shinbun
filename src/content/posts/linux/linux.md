@@ -228,11 +228,13 @@ sudo apt-get install ROSÉ
 	- `head filename.txt`
 	- `head -5 filename.txt` (**first 5 lines**)
 	- `head -c 45 filename.txt` (**first 45 bytes**)
+  - `head -f filename.txt` (**follow the file**)
 
 - **tail**:  Display the **last 10 lines** (*default*)
 	- `tail filename.txt`
 	- `tail -20 filename.txt` (**last 20 lines**)
 	- `tail -c 45 filename.txt` (**last 45 bytes**)
+  - `tail -f filename.txt` (**follow the file**
 
  - **tree** : Show the current directory with the tree visualization
    ```bash
@@ -1783,3 +1785,455 @@ Found multiple active network
 	- `-ne`: not equal to
 	- `-ge`: greater than or equal to
 	- `-le`: less than or equal to
+
+## Script for Monitoring
+
+- We see that: if docker service running, the pid file `/var/run/docker.pid` exist, and the `echo $?` return 0, else the service `httpd` not running, the `/var/run/httpd.pid` file not exist, and the `echo $?` return value different 0 (4)
+
+```zsh
+❯ sudo systemctl status docker
+[sudo] password for lcaohoanq: 
+● docker.service - Docker Application Container Engine
+     Loaded: loaded (/usr/lib/systemd/system/docker.service; enabled; preset: enabl>
+     Active: active (running) since Sat 2026-01-03 14:17:58 +07; 5min ago
+ Invocation: c51fe347fdc2465ca0a7736979bddd86
+TriggeredBy: ● docker.socket
+       Docs: https://docs.docker.com
+   Main PID: 1441 (dockerd)
+      Tasks: 114
+     Memory: 170.9M (peak: 172.4M)
+        CPU: 1.675s
+     CGroup: /system.slice/docker.service
+             ├─1441 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containe>
+             ├─2030 /usr/bin/docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 90>
+             ├─2039 /usr/bin/docker-proxy -proto tcp -host-ip :: -host-port 9092 -c>
+             ├─2053 /usr/bin/docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 90>
+             ├─2060 /usr/bin/docker-proxy -proto tcp -host-ip :: -host-port 9093 -c>
+             ├─2075 /usr/bin/docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 96>
+             ├─2082 /usr/bin/docker-proxy -proto tcp -host-ip :: -host-port 9644 -c>
+             ├─2104 /usr/bin/docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 63>
+             ├─2111 /usr/bin/docker-proxy -proto tcp -host-ip :: -host-port 6379 -c>
+             ├─2126 /usr/bin/docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 54>
+             ├─2134 /usr/bin/docker-proxy -proto tcp -host-ip :: -host-port 5432 -c>
+             ├─2156 /usr/bin/docker-proxy -proto tcp -host-ip 0.0.0.0 -host-port 50>
+             └─2163 /usr/bin/docker-proxy -proto tcp -host-ip :: -host-port 5050 -c>
+
+Jan 03 14:17:57 hoang dockerd[1441]: time="2026-01-03T14:17:57.161991074+07:00" lev>
+Jan 03 14:17:57 hoang dockerd[1441]: time="2026-01-03T14:17:57.173795135+07:00" lev>
+Jan 03 14:17:57 hoang dockerd[1441]: time="2026-01-03T14:17:57.175525565+07:00" lev>
+Jan 03 14:17:57 hoang dockerd[1441]: time="2026-01-03T14:17:57.522669755+07:00" lev>
+Jan 03 14:17:57 hoang dockerd[1441]: time="2026-01-03T14:17:57.557318565+07:00" lev>
+Jan 03 14:17:57 hoang dockerd[1441]: time="2026-01-03T14:17:57.558896128+07:00" lev>
+Jan 03 14:17:58 hoang dockerd[1441]: time="2026-01-03T14:17:58.109646948+07:00" lev>
+Jan 03 14:17:58 hoang dockerd[1441]: time="2026-01-03T14:17:58.118689141+07:00" lev>
+Jan 03 14:17:58 hoang dockerd[1441]: time="2026-01-03T14:17:58.118722878+07:00" lev>
+Jan 03 14:17:58 hoang systemd[1]: Started docker.service - Docker Application Conta>
+❯ cat /var/run/docker.pid
+1441%                                                                               ❯ echo $?
+0
+❯ sudo systemctl status httpd
+Unit httpd.service could not be found.
+❯ echo $?
+4
+```
+
+- Create `21_script_monitoring.sh` script
+
+```zsh
+❯ nvim 21_script_monitoring.sh
+#!/bin/bash
+
+echo "######################################"
+date
+
+PROCESS_NAME=$1
+PROCESS_DIR="$PROCESS_NAME.pid"
+
+ls /var/run/$PROCESS_NAME/$PROCESS_DIR
+
+if [ $? -eq 0 ]; then
+  echo "$PROCESS_NAME is running"
+else
+  echo "$PROCESS_NAME is not running"
+  echo "Starting the process"
+  systemctl start $PROCESS_NAME
+  if [ $? -eq 0 ]; then
+    echo "$PROCESS_NAME started successfully"
+  else
+    echo "$PROCESS_NAME fail to start, contact the admin."
+  fi
+fi
+
+echo "######################################"
+echo
+❯ ./21_script_monitoring.sh
+######################################
+Sat Jan  3 02:35:25 PM +07 2026
+ls: cannot access '/var/run//.pid': No such file or directory
+ is not running
+Starting the process
+Too few arguments.
+ fail to start, contact the admin.
+######################################
+
+❯ ./21_script_monitoring.sh docker
+######################################
+Sat Jan  3 02:35:38 PM +07 2026
+ls: cannot access '/var/run/docker/docker.pid': Permission denied
+docker is not running
+Starting the process
+docker started successfully
+######################################
+
+❯ ./21_script_monitoring.sh httpd
+######################################
+Sat Jan  3 02:36:18 PM +07 2026
+ls: cannot access '/var/run/httpd/httpd.pid': No such file or directory
+httpd is not running
+Starting the process
+Failed to start httpd.service: Unit httpd.service not found.
+httpd fail to start, contact the admin.
+######################################
+```
+- Explanation:
+  - `$1`: first argument to the script (process name)
+  - `ls /var/run/$PROCESS_NAME/$PROCESS_DIR`: check if pid file exists
+  - `if [ $? -eq 0 ]; then`: check exit status of last command
+  - `systemctl start $PROCESS_NAME`: start the process if not running
+
+- But above script come with a lot of problems:
+  - Depend on path of pid file, not all service have pid file in `/var/run/` directory, so may lead to false negative
+  - Permission denied != not running, so may lead to false positive
+  - Some service may have different name between systemctl and pid file, e.g: `httpd` on `CentOS/RHEL` v.s `apache2` on `Debian/Ubuntu`
+  - Input validation missing
+    - Solution: check if `$1` is empty, if empty exit with error
+  - If any error (exit code != 0), the script continue run, may lead to unwanted behavior
+    - Solution: add `set -euo pipefail` at the top of the script to make it fail fast, or simpler with `set -e`
+
+> Unreliable script, just for demo purpose
+
+- Improve the script to be more reliable: 
+
+```zsh
+#!/bin/bash
+set -e
+
+if [ -z "$1" ]; then
+  echo "Usage: $0 <process_name>"
+  exit 1
+fi
+
+PROCESS_NAME="$1"
+
+echo "######################################"
+date
+
+if systemctl is-active --quiet "$PROCESS_NAME"; then
+  echo "$PROCESS_NAME is running"
+else
+  echo "$PROCESS_NAME is not running"
+  echo "Starting the process..."
+
+  if systemctl start "$PROCESS_NAME"; then
+    echo "$PROCESS_NAME started successfully"
+  else
+    echo "$PROCESS_NAME failed to start, contact the admin."
+    exit 1
+  fi
+fi
+
+echo "######################################"
+echo
+```
+
+### set -e 
+
+- `set -e`: basic fail fast, if any command return exit code different 0, the script stop immediately
+But it cannot catch
+- Variables not set
+  - Solution: use `set -u` (Any variable not set -> fail)
+- Pipeline fail
+  - Solution: use `set -o pipefail` (Pipe fail -> fail)
+  
+  ```zsh
+  # No pipefail
+  set -e
+  false | true
+  echo "still running"
+  # Output: still running
+  ```
+
+  ```zsh
+  # With pipefail
+  set -eo pipefail
+  false | true
+  echo "still running"
+  # No output, script stops
+  ```
+
+
+- So the best practice is to use `set -euo pipefail` at the top of your bash scripts
+
+- If that using `set -euo pipefail` is good, when not need to use
+  - script interactive
+  - script small and simple, no complex logic
+
+### /dev/null
+
+- The **black hole** 🕳 in Linux, anything sent to `/dev/null` will be discarded
+
+- Example: suppress output of a command
+
+```zsh
+❯ ls non_existent_file
+ls: cannot access 'non_existent_file': No such file or directory
+❯ ls non_existent_file > /dev/null 2>&1
+❯ echo $?
+2
+```
+
+- The script fully silent, no output shown, but the exit code still preserved
+
+#### FD (File Descriptor) in Linux:
+
+Every process in Linux has **3 pipe**:
+  - FD 0 - Pipe 0: stdin (keyboard input)
+  - FD 1 - Pipe 1: stdout (output)
+  - FD 2 - Pipe 2: stderr (error output)
+
+More details:
+
+- `0<`: where to read input from (default: keyboard)
+- `>` or `1>`: where to write output to (default: terminal)
+- `2>`: where to write error output to (default: terminal)
+- `2>&1`: redirect stderr (FD 2) to where stdout (FD 1) is going
+
+
+Command: 
+
+```zsh
+command > /dev/null 2>&1
+```
+
+- Redirect both stdout and stderr to `/dev/null`, explanation:
+  - `> /dev/null`: redirect stdout to `/dev/null`
+  - `2>&1`: redirect stderr (file descriptor 2) to where stdout (file descriptor 1) is going (which is `/dev/null`)
+
+Result:
+- Comamnd run normal, no output shown
+- Success or fail, preserved by exit code `$?`
+
+New using
+
+```zsh
+command &> /dev/null
+```
+
+- More concise way to redirect both stdout and stderr to `/dev/null`
+
+### Cron Job
+- How to write a cron schedule expression: https://crontab.guru/
+
+- Example: automate the web deployment script with cron job
+```zsh
+# Edit cron jobs
+crontab -e
+# Add the following line to run the deployment script every day at 2 AM
+0 2 * * * /path/to/web_setup.sh https://www.tooplate.com/zip-templates/2150_living_parallax.zip 2150_living_parallax >> /var/log/web_deploy.log 2>&1
+```
+
+- Explanation:
+  - `0 2 * * *`: schedule to run at 2:00 AM every day
+  - `/path/to/web_setup.sh ...`: command to run the deployment script with arguments
+  - `>> /var/log/web_deploy.log 2>&1`: **append** both stdout and stderr to a log file for monitoring, can use without `2>&1` in new bash version, 
+
+
+## Loops
+
+### For loop
+
+> When to use for loop:
+>  - When the number of iterations is known in advance
+>  - When iterating over a list or array of items
+
+Syntax:
+```zsh
+for VAR in item1 item2 item3; do
+  # commands to execute for each item
+done
+```
+
+- Example: Loop through a list of items
+
+```zsh
+#!/bin/bash
+for ITEM in "apple" "banana" "cherry"; do
+  echo "I like $ITEM"
+done
+```
+
+- Run the script
+```zsh
+❯ ./for_loop.sh
+I like apple
+I like banana
+I like cherry
+```
+
+```zsh
+#!/bin/bash
+
+for VAR1 in java .net python ruby golang javascript; do
+  sleep 1
+  echo "I love $VAR1 programming language"
+  date
+done
+```
+
+- Run the script
+
+```zsh
+❯ ./for_loop.sh
+I love java programming language
+Sat Jan  3 03:10:12 PM +07 2026
+I love .net programming language
+Sat Jan  3 03:10:13 PM +07 2026
+I love python programming language
+Sat Jan  3 03:10:14 PM +07 2026
+I love ruby programming language
+Sat Jan  3 03:10:15 PM +07 2026
+I love golang programming language
+Sat Jan  3 03:10:16 PM +07 2026
+I love javascript programming language
+Sat Jan  3 03:10:17 PM +07 2026
+```
+
+- Bash do not need quote for conduct string, but better to use quote to avoid unexpected behavior with special character
+
+
+
+### While loop
+
+> When to use while loop:
+>  - When the number of iterations is not known in advance
+>  - When you want to repeat a block of code until a specific condition is met
+
+Syntax:
+```zsh
+while [ condition ]; do
+
+  # commands to execute while condition is true
+done
+```
+
+- Example: Loop while a condition is true
+
+```zsh
+#!/bin/bash
+COUNT=1
+while [ $COUNT -le 5 ]; do
+  echo "Count is $COUNT"
+  COUNT=$((COUNT + 1))
+done
+```
+
+- Run the script
+```zsh
+❯ ./while_loop.sh
+Count is 1
+Count is 2
+Count is 3
+Count is 4
+Count is 5
+```
+
+``(( ))``: arithmetic evaluation in bash, 
+  - outside of it, everything is treated as string, use `$` to get value of variable
+  - inside of it, treated as number, no need `$`
+
+## Remote Command Execution (RCE)
+
+Execute command on remote server using `ssh`
+
+```zsh
+ssh user@remote_host 'command_to_execute'
+```
+
+Example: Check disk usage on a remote server
+
+```zsh
+ssh lcaohoanq@123.456.78.102 'df -h'
+```
+
+- Output:
+
+```zsh
+Filesystem      Size  Used Avail Use% Mounted on
+devtmpfs        15G     0   15G   0% /dev
+tmpfs           15G  1.6M   15G   1% /dev/shm
+tmpfs           15G  2.0G   13G  14% /run
+tmpfs           15G     0   15G   0% /sys/fs/cgroup
+/dev/sda1     100G   25G   71G  27% /
+/dev/sda2     200G   50G  140G  27% /home
+tmpfs          3.0G     0  3.0G   0% /run/user/1000
+```
+
+SSH with specific port, after setup our new server, we tend to change default ssh port from `22` to another port for security reason, e.g: `2222`
+
+```zsh
+ssh -p 2222 lcaohoanq@123.456.78.102
+```
+
+Tired to type long command every time
+1. Create alias for it, inside `~/.zshrc` or `~/.bashrc`
+
+```zsh
+echo "alias ssh_myserver='ssh -p 2222 lcaohoanq@123.456.78.102'" >> ~/.zshrc
+# reload to take effect
+source ~/.zshrc
+```
+
+2. Inside `~/.ssh/config` file, create new config
+
+```zsh
+Host myserver
+    HostName 123.456.78.102
+    User lcaohoanq
+    Port 2222
+```
+
+- Now you can connect to your server with simple command
+
+```zsh
+ssh myserver
+```
+
+### SSH without password
+
+We tired to type password every time we SSH to the remote server 🐧, we can setup ssh key based authentication to avoid typing password every time.
+- Technically way, use `ssh-keygen` to generate ssh key pair, then **copy the public key** to **remote server** with `ssh-copy-id`
+
+```zsh
+# Generate ssh key pair
+ssh-keygen
+# Copy public key to remote server
+ssh-copy-id -p 2222 lcaohoanq@123.456.78.102
+```
+
+- Explain: the above command copy the content of `~/.ssh/id_rsa.pub` to remote server's `~/.ssh/authorized_keys` file, this mechanism called public key authentication, server take the public key to verify the private key on client side. We can see that public key on server
+
+```zsh
+ssh lcaohoanq@123.456.78.102 'cat ~/.ssh/authorized_keys'
+# ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCy... user@hostname
+```
+
+- If we have many key here, we can specify which key to use with `-i` option
+  - `~/.ssh/my_special_key`: the private key file
+
+```zsh
+ssh -i ~/.ssh/my_special_key -p 2222 lcaohoanq@123.456.78.102
+```
+
+### OpenSSH Config File
+
+- Locate at `/etc/ssh/ssh_config`
