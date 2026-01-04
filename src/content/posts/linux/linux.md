@@ -30,7 +30,7 @@ lang: 'en'
 
 > https://github.com/lcaohoanq/hypr-arch-dotfiles/
 
-![](https://images.unsplash.com/photo-1685716851721-7e1419f2db18?q=80&w=1032&auto=format&fit=crop)
+![](l-ch-S3jgTJ91pio-unsplash.jpg)
 
 > Life seem more tough when learning, using Linux but after a long time, 2 years using, fail, break, reinstall many time...every moments worth it, i really love Linux and it became my daily driver now.
 
@@ -50,7 +50,7 @@ Many many many tools are open source now :)
 
 # Linux History
 
-![Alt text](https://pbs.twimg.com/media/Dxs4O0DWsAE2MS7.jpg)
+![Alt text](gnu.jpg)
 
 - 1984: The GNU Project and the Free Software Foundation
 	- Create open source version of UNIX utilities
@@ -71,7 +71,7 @@ Many many many tools are open source now :)
 - Avoid Captive User Interface
 - Configuration data stored in a text file
 
-![Alt text](https://i.redd.it/hbms08i9y1i91.jpg)
+![Alt text](linux_gogo.jpg)
 
 # Why Linux?
 
@@ -83,7 +83,9 @@ Many many many tools are open source now :)
 - Automation
 - Security (debatable topic, depend on you)
 
-# Architecture of Linux ![](https://www.interviewbit.com/blog/wp-content/uploads/2022/06/Linux-Architecture-1024x728.png)
+# Architecture of Linux 
+
+![](Linux-Architecture-1024x728.png)
 
 - Linux Kernel read, understand the hardware CPU, RAM, pass signal to Shell (Bash, Zsh, Fish,...)
 
@@ -91,7 +93,7 @@ Many many many tools are open source now :)
 
 - List of Linux Distributions: https://en.wikipedia.org/wiki/List_of_Linux_distributions
 
-![Alt text](https://i.ytimg.com/vi/QFzXQNZ6zvQ/maxresdefault.jpg)
+![Alt text](distros.jpg)
 
 - Desktop
 	- Ubuntu
@@ -118,7 +120,7 @@ Many many many tools are open source now :)
 
 # Package manager
 
-![](https://i.redd.it/9h04oradsds51.png)
+![](package_manager.png)
 
 - A  **package manager** in Linux is a tool that automates the entire process of installing, updating, configuring, and removing software. You can think of it as an "app store" or a personal assistant for your operating system's software.
 
@@ -150,7 +152,7 @@ Many many many tools are open source now :)
 | RHEL             | `yum`                   |                             |
 | Manjaro          | `pacman`                |                             |
 
-![](https://cdn-media.sforum.vn/storage/app/media/quynh/apt-la-gi.jpg)
+![](apt-la-gi.jpg)
 
 ```zsh
 sudo apt-get install ROSÉ
@@ -161,7 +163,7 @@ sudo apt-get install ROSÉ
 
 # Commands
 
-![](https://i.redd.it/24b7ozlmfz3c1.png)
+![](fork_bomb.png)
 
 > This command `:(){ :|:& };:` is called "shell fork bomb", very dangerous when hacker can access then execute this command on our servers.
 > [Read more about fork bomb here](https://www.cyberciti.biz/faq/understanding-bash-fork-bomb/)
@@ -435,7 +437,7 @@ sudo apt-get install ROSÉ
   - **sudo shutdown -h now**: shutdown immediately
   - **sudo shutdown -P +10**: schedule shutdown after 10 mins
 
-![](https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExd3M4MHpzYXoxN3Y1YzF1aWV0dGU0d3FlZmkzb3A1OWJnZmNicno5MyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/LRVnPYqM8DLag/giphy.gif)
+![](gif/Nervous%20Key%20And%20Peele%20GIF.gif)
 
 > Not mandatory command, but im using too many time
 
@@ -448,7 +450,7 @@ sudo apt-get install ROSÉ
 
 # File System
 
-![](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFYxyZTyjPccvpZmE6pZuybHy_5FTVj_4rrw&s)
+![](directory.webp)
 
 ```zsh
 /               # Root directory – gốc của mọi thứ
@@ -483,7 +485,7 @@ sudo apt-get install ROSÉ
 
 ```
 
-![Alt text](https://fireship.io/courses/linux/img/linux-file-system.png)
+![Alt text](linux-file-system.png)
 ---
 
 ### Tips to remember
@@ -508,7 +510,7 @@ sudo apt-get install ROSÉ
 	- Owner is who created the file or directory
 	- Groups is the set of users who share the same permission
 
-![](https://z5.kerneltalks.com/wp-content/uploads/2020/06/File-permissions-in-Linux-Unix.png)
+![](File-permissions-in-Linux-Unix.png)
 
 > - : executable file
    r : read
@@ -523,7 +525,7 @@ sudo apt-get install ROSÉ
 
 ## chmod
 
-![](https://i.redd.it/u9zhxbl28pq21.jpg)
+![](chmod.jpg)
 
 > change file permissions
 
@@ -554,7 +556,7 @@ chmod 664 foo.txt
 
 - Be careful with `chmod 777`, grant full access, convenience but it violate the principle of privilege
 
-![](https://media.tenor.com/iP1Lga2PH3IAAAAe/pc-principal-check-privilege.png)
+![](pc-principal-check-privilege.png)
 
 ---
 
@@ -564,7 +566,7 @@ chmod 664 foo.txt
 
 ## nano
 
-<img width="645" height="339" alt="image" src="https://github.com/user-attachments/assets/2fd45886-f2a2-4d31-8414-ad779d75c683" />
+![](nano.png)
 
 - every linux have nano, if not install yet (very rare), usually in distroless docker image or lightweight linux distros
 
@@ -617,7 +619,7 @@ Ctrl + U
 
 ## vi, vim, nvim
 
-![Alt text](https://images.viblo.asia/9fc1a38d-7f58-4abe-abaa-8deec07b9435.png)
+![Alt text](vim.webp)
 
 - More at here (https://viblo.asia/p/co-ban-ve-vim-cho-nguoi-moi-bat-dau-GrLZDavnlk0)
 - Vim has 3 mode
@@ -627,7 +629,7 @@ Ctrl + U
 
 ### Command
 
-![](https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNTJvendtNHV0ZW84cXUzbjY0Zndvd2V6cjA0ZGVicWoxaGhzemVqZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/13GIgrGdslD9oQ/giphy.gif)
+![](gif/JimCarreyReactionGIF.gif)
 
 - Copy 1 line (yanking)
 ```zsh
@@ -713,7 +715,7 @@ Shift + 0
 
 - Currently im using LazyVim (https://www.lazyvim.org/), it really easy to setup, and support a lot of LUA plugins there, but before going to something comfortable, make sure you have a basic or good foundation of vim, take time to practice :)
 
-![Alt text](https://user-images.githubusercontent.com/292349/213447056-92290767-ea16-430c-8727-ce994c93e9cc.png)
+![Alt text](lazyvim.png)
 
 - In the current directory, type `nvim .`, it will open with nvim treesitter (same as sidebar in other IDE)
 
@@ -723,7 +725,7 @@ Shift + 0
 
 - Linux with Nvim oh man, we nearly become arch user
 
-![Alt text](https://i.ytimg.com/vi/Ul7JsYAZg5o/hqdefault.jpg)
+![Alt text](arch_btw.jpg)
 
 ---
 
@@ -731,7 +733,7 @@ Shift + 0
 
 - In linux, everything is file, even hardware device also considered as file
 
-![](https://media.licdn.com/dms/image/v2/D5622AQFXr0VusxTugQ/feedshare-shrink_2048_1536/feedshare-shrink_2048_1536/0/1720570895653?e=2147483647&v=beta&t=XdVp2QO4it-8P0py0WhMq-wgSHBFKYTTUTzR3klZe80)
+![](rm_rf.jpeg)
 
 ## The 7 standard Linux file types:
 
@@ -789,7 +791,7 @@ lrwxrwxrwx     - lcaohoanq 16 Dec  2025   '002 #2. Tài liệu khóa học (P
 ---
 # Symbolic links
 
-![](https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExeGY1bzkyaWRhamR0cWozY3lsZTkwcmJuODZkdTBiajd6c243YW53YSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/fl0B5TLMTYLPvNervP/giphy.gif)
+![](gif/BrainToBrainGIF.gif)
 
 - Like desktop shortcut in windows
 ```zsh
@@ -823,7 +825,7 @@ lrwxrwxrwx     - lcaohoanq 16 Dec  2025   '002 #2. Tài liệu khóa học (P
 	- grep "error$" mvn_error.log (**RegEx**, search line end with `error`)
 	- grep -c NullPointerException SomeErrorLogs.txt (**count how many time** NullPointerException **appear** in SomeErrorLogs.txt)
 
-![Alt text](https://www.cyberciti.biz/media/new/faq/2007/08/grep-command-examples-for-Linux-and-Unix-users-1.png)
+![Alt text](grep.webp)
 
 
 - Grep help
@@ -930,6 +932,9 @@ grep "Exception" 0_Run predefined test cases.txt
 ## Sed (non-interactive text editor)
 
 - Mainly use RegEx, play with RegEx here: https://regex101.com/
+
+![](regex.webp)
+
 - **s**: subtitution
 
 ```zsh
@@ -955,7 +960,7 @@ lcaohoanvlvlvlvl
 
 # Bash Scripting
 
-![](https://miro.medium.com/1*6Oyig2ACF-unC3R-CXT8jw.jpeg)
+![](automated.jpg)
 
 - Instead of doing manually command in Linux enviroment, we use text file to automate day to day regular tasks, that text file tell system run each command we defined.
 - We have many cool tools outside: Ansible, Puppet, Chef, SaltStack, Terraform why to learn Bash script
@@ -990,6 +995,8 @@ df -h
 
 > #! called SHEBANG, tell the script to interpreter the reset of file using /bin/bash interpreter, so if we change to /usr/bin/python  it will use python interpreter to run the script
 
+![](bash_meme_2.webp)
+
 - Now we execute `firstscript.sh`
 
 ```bash
@@ -1023,6 +1030,8 @@ tmpfs            16G   20M   16G   1% /tmp
 /dev/nvme0n1p1  234G  144G   79G  65% /media/data
 tmpfs           3.2G  140K  3.2G   1% /run/user/1000
 ```
+
+![](bash_meme_1.jpg)
 
 - `websetup.sh`: script for host a website
 ```bash
@@ -1066,7 +1075,7 @@ rm -rf /tmp/webfiles
 unzip 2098_health.zip -d /var/www/html/
 ```
 
-![](https://images.viblo.asia/9b6edd8b-83d6-499f-ab57-25502231bf23.png)
+![](macos_shell.webp)
 
 - There are too many shell nowadays: **bash**, **zsh**, **fish**,.. you can check your current shell using `echo $SHELL` command:
 ```zsh
@@ -1079,7 +1088,7 @@ My favorite shell is **zsh** (sound with z-shell, zsh is **default shell on MacO
 
 ## Variables
 
-![](https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExOG9kMnc2eHl5bGd0ajFzeGE0bXlvanozMTc1b3FvcHZ2eGVld2d3dSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/EZr27ZbJwmjE9PGyLN/giphy.gif)
+![](gif/WorkingLockedInGIFbyChesterAbstract.gif)
 
  - `websetup.sh`: refactored version
 
@@ -1524,7 +1533,7 @@ I want to eat some kfc, i go to the mall with $9 invoice
 
 ## Command Substitution
 
-![](https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExYXlndWNmNXJ2ZG50dm0wNTlseXFxbWkwZjR6cWVoOGw3eHRvb2ViOCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/NacsLUv7Rz6iHQVjvC/giphy.gif)
+![](chad_bash.png)
 
 - Example with `free -m` command to get free memory then store to variable
 
@@ -1622,7 +1631,7 @@ Free ROOT partiotion size is
 
 ## Export Variables (Environment Variables)
 
-![](https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExYzN1ZTNpb3JvYjVuMm91aXIzZnZ6MmhucXZybHF4N3d3NjU5MWd0YSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Ta3v3I4GI1gH7Rqek6/giphy.gif)
+![](variable.jpg)
 
 > Too much env variables make you dizzy :D
 
@@ -1765,7 +1774,7 @@ This behavior is **expected** and **intentional**.
 
 ## User Input
 
-![](https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExdW01dWh2eDczc2E5YjZ5YXp2azB2MnVjZDNiM3dlams1OXhmbWoybyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ule4vhcY1xEKQ/giphy.gif)
+![](gif/CodingSoftwareEngineerGIFbyHyperRPG.gif)
 
 - Read user input using `read` command
 ```zsh
@@ -1819,7 +1828,7 @@ Login successful: Welcome USER hoang,
 
 ## Decision Making
 
-![](https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExYnlubnJ4bTZwZGZqbjllcnQ3NXl6dTM5Z2JuaTBpY3FvOGh3MnI4ZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/KYdR9Uno6et3LQcEDU/giphy.gif)
+![](if_else_hell.webp)
 
 ### if statement 
 
@@ -1923,7 +1932,7 @@ Command execute successfully
 
 ### if-elif-else statement
 
-![](https://cdn.community.kodular.io/original/3X/2/9/299d85b97d5c37a343d1e5ddc6b10f8752de3be7.jpeg)
+![](if_elseif.jpeg)
 
 - Update command with elif, we test this chain pipe 
 
@@ -2397,7 +2406,9 @@ Count is 5
 
 ## Remote Command Execution (RCE)
 
-Execute command on remote server using `ssh`
+Execute command on remote server using `ssh` (Secure Shell) protocol.
+
+![](ssh_1.png)
 
 ```zsh
 ssh user@remote_host 'command_to_execute'
@@ -2451,6 +2462,8 @@ Host myserver
 ```zsh
 ssh myserver
 ```
+
+![](ssh_2.png)
 
 ### SSH without password
 
