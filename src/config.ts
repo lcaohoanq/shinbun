@@ -58,7 +58,7 @@ export const navBarConfig: NavBarConfig = {
 };
 
 export const profileConfig: ProfileConfig = {
-	avatar: "assets/images/avatar.jpg", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
+	avatar: "assets/images/avatar_gemini.png", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
 	name: "Lưu Cao Hoàng | ホアン・カオ・ルウ | Hoang Cao Luu",
 	bio: "Software Engineer | Backend Developer | Spring Boot Enthusiastic | ITエンジニア | Java開発エンジニア | バックエンデベロッパ",
 	/*
