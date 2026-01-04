@@ -157,6 +157,8 @@ sudo apt-get install ROSÉ
 # when this package release guys?
 ```
 
+---
+
 # Commands
 
 ![](https://i.redd.it/24b7ozlmfz3c1.png)
@@ -164,65 +166,65 @@ sudo apt-get install ROSÉ
 > This command `:(){ :|:& };:` is called "shell fork bomb", very dangerous when hacker can access then execute this command on our servers.
 > [Read more about fork bomb here](https://www.cyberciti.biz/faq/understanding-bash-fork-bomb/)
 
-  - **cd** : Change directory
-    - `cd /home/user`
-    - `cd ~`
-    - `cd ..`
-   > im using [zoxide](https://github.com/ajeetdsouza/zoxide): better cd
+- **cd** : Change directory
+  - `cd /home/user`
+  - `cd ~`
+  - `cd ..`
+  > im using [zoxide](https://github.com/ajeetdsouza/zoxide): better cd
 
-  - **ls** : List files and directories
-    - `ls`
-    - `ls -l` | `ls -al`
-    - `ls -a`
-    - ls -lt : sort time descending
-    - ls -ltr: sort time ascending (r = reverse)
-   >  im using [exa](https://github.com/ogham/exa): better ls
+- **ls** : List files and directories
+  - `ls`
+  - `ls -l` | `ls -al`
+  - `ls -a`
+  - ls -lt : sort time descending
+  - ls -ltr: sort time ascending (r = reverse)
+>  im using [exa](https://github.com/ogham/exa): better ls
 
-  - **pwd** : print **current** working directory
+- **pwd** : print **current** working directory
 
-  - **cat**
-    - `cat file.txt`
+- **cat**
+  - `cat file.txt`
 > im using [bat](https://github.com/sharkdp/bat),  notice that after install bat, it use the batcat (not bat) so need to remember or assign alias to .zshrc
 
-  - **cp** : Copy files and directories
-    - `cp file.txt file2.txt`
-    - `cp -r dir1 dir2`
-    - `cp * /usr/share/.fonts`
+- **cp** : Copy files and directories
+  - `cp file.txt file2.txt`
+  - `cp -r dir1 dir2`
+  - `cp * /usr/share/.fonts`
 
-  - **mv** : Move files and directories
-    - `mv file.txt /usr/share/.fonts`
-    - `mv file.txt file2.txt`
-    - `mv * /usr/share/.fonts`
-    - we can perform the rename file or directory by mv command: if i want to rename the file demo.txt to test.txt
-    ```bash
-    mv demo.txt test.txt
-    # same as directory
-    ```
+- **mv** : Move files and directories
+  - `mv file.txt /usr/share/.fonts`
+  - `mv file.txt file2.txt`
+  - `mv * /usr/share/.fonts`
+  - we can perform the rename file or directory by mv command: if i want to rename the file demo.txt to test.txt
+  ```bash
+  mv demo.txt test.txt
+  # same as directory
+  ```
 
-  - **rm** : Remove files and directories
-    - `rm file.txt`
-    - `rm -r dir1`
-    - `rm -rf dir1`
+- **rm** : Remove files and directories
+  - `rm file.txt`
+  - `rm -r dir1`
+  - `rm -rf dir1`
 
-  - **mkdir** : Make directories
-	  - mkdir /hihi
-	  - mkdir /hihi/hehe/huhu => No such file or directory => mkdir -p /hihi/hehe/huhu ok
+- **mkdir** : Make directories
+  - mkdir /hihi
+  - mkdir /hihi/hehe/huhu => No such file or directory => mkdir -p /hihi/hehe/huhu ok
 >	- Because normal mkdir only support one directory, if pass parent/child/... it cause error -> using -p (parent) to fix
 
-  - **echo** : Write text to file
-    - `echo "Hello World" > file.txt`
-    - echo "alias 'yt=ytfzf -t'" >> ~/.bashrc
-    - echo "alias 'll=ls -al'" >> ~/.bashrc
-    - echo "alias 'showdisk=cd /media/lcaohoanq/ ; ls -al'" >> ~/.bashrc
+- **echo** : Write text to file
+  - `echo "Hello World" > file.txt`
+  - echo "alias 'yt=ytfzf -t'" >> ~/.bashrc
+  - echo "alias 'll=ls -al'" >> ~/.bashrc
+  - echo "alias 'showdisk=cd /media/lcaohoanq/ ; ls -al'" >> ~/.bashrc
 
- - **touch** : Create file
-   - `touch file.txt`
+- **touch** : Create file
+  - `touch file.txt`
 
- - **nano** : Text editor
-   - `nano file.txt`
+- **nano** : Text editor
+  - `nano file.txt`
 
- - **unzip** : Unzip files
-   - `unzip file.zip`
+- **unzip** : Unzip files
+  - `unzip file.zip`
 
 - **head**:  Display the **first 10 lines** (*default*)
 	- `head filename.txt`
@@ -262,6 +264,7 @@ sudo apt-get install ROSÉ
     ps aux | grep "obs"
     ```
 
+  ## System Information
 - Check CPU:
 	- **nproc**
 	- **lscpu**
@@ -270,25 +273,169 @@ sudo apt-get install ROSÉ
 	- **free -h**
 	- **cat /proc/meminfo**
 
+- Check Disk:
+  - **df -h**: disk free
+  ```zsh
+  ❯ df -h
+  Filesystem      Size  Used Avail Use% Mounted on
+  udev             16G     0   16G   0% /dev
+  tmpfs           3.2G  2.1M  3.2G   1% /run
+  /dev/sdb1       208G   88G  111G  45% /
+  tmpfs            16G   91M   16G   1% /dev/shm
+  tmpfs           5.0M  8.0K  5.0M   1% /run/lock
+  tmpfs           1.0M     0  1.0M   0% /run/credentials/systemd-journald.service
+  tmpfs            16G   15M   16G   1% /tmp
+  /dev/nvme0n1p1  234G  155G   68G  70% /media/data
+  tmpfs           3.2G  148K  3.2G   1% /run/user/1000
+  ```
+
+  - **lsblk**: list block devices
+  ```zsh
+  ❯ lsblk
+  NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+  sda           8:0    0 931.5G  0 disk 
+  ├─sda1        8:1    0 496.7G  0 part 
+  └─sda2        8:2    0 434.9G  0 part 
+  sdb           8:16   0 223.6G  0 disk 
+  ├─sdb1        8:17   0 212.2G  0 part /
+  ├─sdb2        8:18   0     1K  0 part 
+  └─sdb5        8:21   0  11.4G  0 part [SWAP]
+  nvme0n1     259:0    0 238.5G  0 disk 
+  └─nvme0n1p1 259:1    0 238.5G  0 part /media/data
+  ```
+
+  - `-a`: all devices
+  ```zsh
+  ❯ lsblk -a
+  NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+  sda           8:0    0 931.5G  0 disk 
+  ├─sda1        8:1    0 496.7G  0 part 
+  └─sda2        8:2    0 434.9G  0 part 
+  sdb           8:16   0 223.6G  0 disk 
+  ├─sdb1        8:17   0 212.2G  0 part /
+  ├─sdb2        8:18   0     1K  0 part 
+  └─sdb5        8:21   0  11.4G  0 part [SWAP]
+  nvme0n1     259:0    0 238.5G  0 disk 
+  └─nvme0n1p1 259:1    0 238.5G  0 part /media/data
+  ```
+
+  - `-o`: specify output columns (check all column `lsblk --list-columns`)
+  ```zsh
+  ❯ lsblk -a -o NAME,SIZE,FSTYPE,UUID,MOUNTPOINT
+  NAME          SIZE FSTYPE UUID                                 MOUNTPOINT
+  sda         931.5G                                             
+  ├─sda1      496.7G ntfs   01D819C87037D350                     
+  └─sda2      434.9G ntfs   01D819C871BA0680                     
+  sdb         223.6G                                             
+  ├─sdb1      212.2G ext4   2c9bf3d9-8c80-4d4d-8632-4b10e65726d3 /
+  ├─sdb2          1K                                             
+  └─sdb5       11.4G swap   9eacdd7d-3177-4e92-a812-63e0abaade65 [SWAP]
+  nvme0n1     238.5G                                             
+  └─nvme0n1p1 238.5G ext4   26a0de97-0abd-45e1-b610-129d3045f430 /media/data
+  ```
+
+  - **fdisk**: older systems or simple MBR tasks
+  ```zsh
+  ❯ sudo fdisk -l
+  Disk /dev/nvme0n1: 238.47 GiB, 256060514304 bytes, 500118192 sectors
+  Disk model: INTEL SSDPEKKF256G8L                    
+  Units: sectors of 1 * 512 = 512 bytes
+  Sector size (logical/physical): 512 bytes / 512 bytes
+  I/O size (minimum/optimal): 512 bytes / 512 bytes
+  Disklabel type: gpt
+  Disk identifier: 677D2B55-C4FB-4DB8-BEC3-AAADCE78C24A
+
+  Device         Start       End   Sectors   Size Type
+  /dev/nvme0n1p1  2048 500117503 500115456 238.5G Linux filesystem
+
+
+  Disk /dev/sdb: 223.57 GiB, 240057409536 bytes, 468862128 sectors
+  Disk model: KINGSTON SA400S3
+  Units: sectors of 1 * 512 = 512 bytes
+  Sector size (logical/physical): 512 bytes / 512 bytes
+  I/O size (minimum/optimal): 512 bytes / 512 bytes
+  Disklabel type: dos
+  Disk identifier: 0xf6b8904f
+
+  Device     Boot     Start       End   Sectors   Size Id Type
+  /dev/sdb1  *         2048 445042687 445040640 212.2G 83 Linux
+  /dev/sdb2       445044734 468860927  23816194  11.4G  f W95 Ext'd (LBA)
+  /dev/sdb5       445044736 468860927  23816192  11.4G 82 Linux swap / Solaris
+
+
+  Disk /dev/sda: 931.51 GiB, 1000204886016 bytes, 1953525168 sectors
+  Disk model: TOSHIBA MQ04ABF1
+  Units: sectors of 1 * 512 = 512 bytes
+  Sector size (logical/physical): 512 bytes / 4096 bytes
+  I/O size (minimum/optimal): 4096 bytes / 4096 bytes
+  Disklabel type: gpt
+  Disk identifier: FEDF6762-A8BC-4D15-9D71-AFB6E5CDEA90
+
+  Device          Start        End    Sectors   Size Type
+  /dev/sda1        2048 1041569791 1041567744 496.7G Microsoft basic data
+  /dev/sda2  1041569792 1953523119  911953328 434.9G Microsoft basic data
+  ```
+    
+  - **parted**: newer systems or GPT tasks (or `gdisk`)
+  ```zsh
+  ❯ sudo parted -l
+  Model: ATA TOSHIBA MQ04ABF1 (scsi)
+  Disk /dev/sda: 1000GB
+  Sector size (logical/physical): 512B/4096B
+  Partition Table: gpt
+  Disk Flags: 
+
+  Number  Start   End     Size   File system  Name                  Flags
+  1      1049kB  533GB   533GB  ntfs         Basic data partition  msftdata
+  2      533GB   1000GB  467GB  ntfs         Basic data partition  msftdata
+
+
+  Model: ATA KINGSTON SA400S3 (scsi)
+  Disk /dev/sdb: 240GB
+  Sector size (logical/physical): 512B/512B
+  Partition Table: msdos
+  Disk Flags: 
+
+  Number  Start   End    Size    Type      File system     Flags
+  1      1049kB  228GB  228GB   primary   ext4            boot
+  2      228GB   240GB  12.2GB  extended                  lba
+  5      228GB   240GB  12.2GB  logical   linux-swap(v1)  swap
+
+
+  Model: INTEL SSDPEKKF256G8L (nvme)
+  Disk /dev/nvme0n1: 256GB
+  Sector size (logical/physical): 512B/512B
+  Partition Table: gpt
+  Disk Flags: 
+
+  Number  Start   End    Size   File system  Name                  Flags
+  1      1049kB  256GB  256GB  ext4         Basic data partition
+  ```
+
+- Disk usage:
+  - **du -h --max-depth=1**: check current directory disk usage
+  - **du -sh /**: check root directory disk usage summary
+  - **dust**: better way to check disk usage than `du`, extremely fast
+    ```bash
+    # check root directory
+    dust /
+    ```
+  - **ncdu**: TUI using ncurses, find exactly what's taking space and want to clean up interactively
+    ```bash
+    ncdu /
+    ```
+
 - Process management
-	- Mandatory: top
+	- **top**: mandatory tool
 > im using [htop](https://github.com/htop-dev/htop), [btop](https://github.com/aristocratos/btop), better UI, more efficient to do process management
 
 - Power Management
+  - **sudo reboot**: reboot system immediately
+  - **sudo shutdown -h**: shutdown after 1 min
+  - **sudo shutdown -h now**: shutdown immediately
+  - **sudo shutdown -P +10**: schedule shutdown after 10 mins
 
-```bash
-# reboot
-sudo reboot
-
-# shutdown after 1 min
-sudo shutdown -h
-
-# shutdown immediately
-sudo shutdown -h now
-
-# schedule shutdown after 10 mins
-sudo shutdown -P +10
-```
+![](https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExd3M4MHpzYXoxN3Y1YzF1aWV0dGU0d3FlZmkzb3A1OWJnZmNicno5MyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/LRVnPYqM8DLag/giphy.gif)
 
 > Not mandatory command, but im using too many time
 
@@ -352,6 +499,8 @@ sudo shutdown -P +10
 -   **/bin vs /sbin** → user vs admin
 
 -   **/dev** → everything is file 😎 (i want fine also)
+
+---
 
 # File Permissions
 
@@ -478,6 +627,8 @@ Ctrl + U
 
 ### Command
 
+![](https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNTJvendtNHV0ZW84cXUzbjY0Zndvd2V6cjA0ZGVicWoxaGhzemVqZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/13GIgrGdslD9oQ/giphy.gif)
+
 - Copy 1 line (yanking)
 ```zsh
 yy
@@ -574,23 +725,71 @@ Shift + 0
 
 ![Alt text](https://i.ytimg.com/vi/Ul7JsYAZg5o/hqdefault.jpg)
 
+---
 
 # File Types
+
+- In linux, everything is file, even hardware device also considered as file
+
+![](https://media.licdn.com/dms/image/v2/D5622AQFXr0VusxTugQ/feedshare-shrink_2048_1536/feedshare-shrink_2048_1536/0/1720570895653?e=2147483647&v=beta&t=XdVp2QO4it-8P0py0WhMq-wgSHBFKYTTUTzR3klZe80)
+
+## The 7 standard Linux file types:
 
 - Regular file
 	- **-**: Normal files such as text, data, or executable files
 - Directory
 	- **d**: Files that are lists of others files
-- Link
+- Symbolic Link
 	- **l** : A shortcut that points to the location of the actual file
 - Special file
 	- **c**: Mechanism using for input and output, such as file in /dev
 - Socket
 	- **s**: A special file that provides inter-process networking protected by the file system's access control
 - Pipe
-	- **p**: A special file that allows processes to communicate with each other without using network socket semantics
+	- **p**: A special file that allows processes to communicate with each other without using network socket semantics, FIFO (first in, first out)
+- Block Device
+  - **b**: A special file that provides buffered access to hardware devices, such as hard drives
+
+- Example of `ls -l` output:
+
+```zsh
+❯ ls -l
+Permissions Size User      Date Modified Name
+drwxrwxr-x     - lcaohoanq 27 Dec  2025   Debian-Hyprland
+lrwxrwxrwx     - lcaohoanq 16 Dec  2025   hoidanit-java-springboot -> /media/data/courses/hoidanit-java-springboot
+drwxr-xr-x     - lcaohoanq 26 Dec  2025   logs_53046524065
+drwxrwxr-x     - lcaohoanq  2 Jan 16:55   meme
+drwxrwxr-x     - lcaohoanq 19 Dec  2025   vagrant-vms
+.rw-r--r--    50 lcaohoanq 14 Dec  2025   .directory
+.rw-rw-r--  1.8k lcaohoanq 24 Dec  2025   .env
+lrwxrwxrwx     - lcaohoanq 16 Dec  2025   '002 #2. Tài liệu khóa học (Project Y).pdf' -> '/media/data/courses/hoidanit-java-springboot/9 - Y - Chapter 1 Bắt buộc xem'/'002 #2. Tài liệu khóa học (Project Y).pdf'
+.rwxrwxr-x   166 lcaohoanq  2 Jan 15:49   4_args.sh
+.rwxrwxr-x   535 lcaohoanq  2 Jan 16:40   6_command_subs.sh
+.rwxrwxr-x   226 lcaohoanq  2 Jan 23:30   18_decision_making.sh
+.rwxrwxr-x   511 lcaohoanq  3 Jan 14:34   21_script_monitoring.sh
+.rw-rw-r--  335k lcaohoanq  2 Jan 21:08   377151058_780890013834619_992292982055176227_n.jpg
+.rwxrwxr-x   390 lcaohoanq  1 Jan 08:36   firstscript.sh
+.rw-rw-r--     5 lcaohoanq 29 Dec  2025   hoang.txt
+.rw-rw-r--  2.1k lcaohoanq  1 Jan 23:46   ig.txt
+.rw-rw-r--  852k lcaohoanq 26 Dec  2025   logs_53046524065.zip
+.rw-rw-r--    81 lcaohoanq 17 Dec  2025   mail.txt
+.rw-rw-r--   151 lcaohoanq 25 Dec  2025   server.txt
+.rw-rw-r--    14 lcaohoanq 25 Dec  2025   test.txt
+.rw-rw-r--  229k lcaohoanq  2 Jan 17:06   ThanhToan_SE181513_LuuCaoHoang_F-Trip2026.jpg
+.rwxr-xr-x  2.1M lcaohoanq 18 Jun  2024   wallhaven-zyggly.jpg
+.rw-rw-r--   885 lcaohoanq  1 Jan 08:49   websetup.sh
+```
+
+- Check the `permissions` column, first character indicate the file type
+  - `d`: directory
+  - `l`: symbolic link
+  - `-`: regular file
+  - `.`: special file
+
 ---
 # Symbolic links
+
+![](https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExeGY1bzkyaWRhamR0cWozY3lsZTkwcmJuODZkdTBiajd6c243YW53YSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/fl0B5TLMTYLPvNervP/giphy.gif)
 
 - Like desktop shortcut in windows
 ```zsh
@@ -598,6 +797,17 @@ ln -s source destination
 
 unlink destination
 ```
+
+- Example:
+
+```zsh
+❯ ls -l
+Permissions Size User      Date Modified Name
+lrwxrwxrwx     - lcaohoanq 16 Dec  2025   hoidanit-java-springboot -> /media/data/courses/hoidanit-java-springboot
+lrwxrwxrwx     - lcaohoanq 16 Dec  2025   '002 #2. Tài liệu khóa học (Project Y).pdf' -> '/media/data/courses/hoidanit-java-springboot/9 - Y - Chapter 1 Bắt buộc xem'/'002 #2. Tài liệu khóa học (Project Y).pdf'
+```
+
+
 ---
 # Filter & IO redirection command
 
@@ -865,7 +1075,11 @@ unzip 2098_health.zip -d /var/www/html/
 ```
 My favorite shell is **zsh** (sound with z-shell, zsh is **default shell on MacOS**, in Linux need to install manually), im using with **oh-my-zsh**, it's powerful with lot of plugin and really pretty
 
+---
+
 ## Variables
+
+![](https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExOG9kMnc2eHl5bGd0ajFzeGE0bXlvanozMTc1b3FvcHZ2eGVld2d3dSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/EZr27ZbJwmjE9PGyLN/giphy.gif)
 
  - `websetup.sh`: refactored version
 
@@ -1179,6 +1393,8 @@ echo "===== END DEPLOY: $(date) ====="
 ./web_setup.sh https://www.tooplate.com/zip-templates/2150_living_parallax.zip 2150_living_parallax
 ```
 
+---
+
 ## System Variables
 
 Some System Variables, there are a few other variables that the system sets for you to use as well.
@@ -1263,6 +1479,7 @@ For more details see free(1).
 ❯ echo $?
 1
 ```
+---
 
 ## Quotes
 
@@ -1303,12 +1520,20 @@ I want to eat some $FOOD, i go to the mall with $9 invoice
 I want to eat some kfc, i go to the mall with $9 invoice
 ```
 
+---
+
 ## Command Substitution
 
-- Store the output of command to a variable then using pipe chain
-	- free -m: show current memory using
-	- grep -i mem: find ignore case word "mem"
-	- awk '{print $4}': 4th column, value is **19692 MB**
+![](https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExYXlndWNmNXJ2ZG50dm0wNTlseXFxbWkwZjR6cWVoOGw3eHRvb2ViOCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/NacsLUv7Rz6iHQVjvC/giphy.gif)
+
+- Example with `free -m` command to get free memory then store to variable
+
+- Idea: store the output of command to a variable then using pipe chain
+	- `free -m`: show current memory using
+	- `grep -i mem`: find ignore case word "mem"
+	- `awk '{print $4}'`: 4th column, value is **19692 MB**
+
+Connect them using pipe `|`, let's see step by step
 
 ```zsh
 ❯ free -m
@@ -1393,7 +1618,14 @@ Current Load Average 0.35,
 Free ROOT partiotion size is
 ```
 
+---
+
 ## Export Variables (Environment Variables)
+
+![](https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExYzN1ZTNpb3JvYjVuMm91aXIzZnZ6MmhucXZybHF4N3d3NjU5MWd0YSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Ta3v3I4GI1gH7Rqek6/giphy.gif)
+
+> Too much env variables make you dizzy :D
+
 ### 1. Shell variables vs environment variables
 
 When you define a variable like this:
@@ -1529,7 +1761,11 @@ Explanation:
 
 This behavior is **expected** and **intentional**.
 
+---
+
 ## User Input
+
+![](https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExdW01dWh2eDczc2E5YjZ5YXp2azB2MnVjZDNiM3dlams1OXhmbWoybyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ule4vhcY1xEKQ/giphy.gif)
 
 - Read user input using `read` command
 ```zsh
@@ -1579,8 +1815,11 @@ Login successful: Welcome USER hoang,
 	- `read -p 'Username: ' USR`: prompt inline
 	- `read -sp 'Password: ' pass`: silent input (no echo)
 
+---
 
 ## Decision Making
+
+![](https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExYnlubnJ4bTZwZGZqbjllcnQ3NXl6dTM5Z2JuaTBpY3FvOGh3MnI4ZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/KYdR9Uno6et3LQcEDU/giphy.gif)
 
 ### if statement 
 
@@ -1683,6 +1922,9 @@ Command execute successfully
 
 
 ### if-elif-else statement
+
+![](https://cdn.community.kodular.io/original/3X/2/9/299d85b97d5c37a343d1e5ddc6b10f8752de3be7.jpeg)
+
 - Update command with elif, we test this chain pipe 
 
 ```zsh
@@ -1785,6 +2027,8 @@ Found multiple active network
 	- `-ne`: not equal to
 	- `-ge`: greater than or equal to
 	- `-le`: less than or equal to
+
+---
 
 ## Script for Monitoring
 
