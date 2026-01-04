@@ -2463,7 +2463,7 @@ Host myserver
 ssh myserver
 ```
 
-![](ssh_2.png)
+![](ssh_2.jpeg)
 
 ### SSH without password
 
