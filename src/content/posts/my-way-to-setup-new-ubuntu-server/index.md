@@ -14,7 +14,7 @@ lang: 'vi'
 ![Alt text](https://www.zimaspace.com/_ipx/w_3072&f_png/image/zimaos/meet-zimaos.png)
 
 - ZimaOS dùng làm NAS server thì đúng bài, đẹp, tiện nhẹ, có bán sẵn Server luôn, tên là ZimaCube, trông vuông vuông gọn gọn nhìn đẹp cực
-- À tại sao tui lại cài Ubuntu Server á, dễ xài nhất rồi :) có gì fix cho khỏe. Hiện giờ daily tui dùng Debian, quen thuộc với package apt của nhà Debian rồi, tại daily tui dùng Debian 
+- À tại sao tui lại cài Ubuntu Server á, dễ xài nhất rồi :) có gì fix cho khỏe. Hiện giờ daily tui dùng Debian, quen thuộc với package apt của nhà Debian rồi, tại daily tui dùng Debian
 
 ![](https://i.ytimg.com/vi/q5yM4ZYwB_s/maxresdefault.jpg)
 
@@ -23,20 +23,25 @@ lang: 'vi'
 ![](https://miro.medium.com/0*tgrMTzwM0nO7DDjQ.png)
 
 - Để SSH vào mà cài luôn
+
 ```zsh
 ip a | grep 192.168
 ```
+
 - Lười, list ip ra rồi pick thằng 192.168 luôn, của mình là **192.168.88.155**, quá ngon ta đã có địa chỉ của nhà người yêu rồi. Giờ ta sẽ nhắn tin, alo rủ ẻm đi chơi => SSH
 
 ```zsh
 ssh hihi@192.168.88.155
 ```
 
--  Nếu lười nhập pass mỗi lần SSH thì làm cách này, ở máy local, tạo một file **~/.ssh/config**
+- Nếu lười nhập pass mỗi lần SSH thì làm cách này, ở máy local, tạo một file **~/.ssh/config**
+
 ```zsh
 nano ~/.ssh/config
 ```
+
 - Với nội dung
+
 ```zsh
 Host xyz
     HostName xxx.yyy.zz.aaa
@@ -48,7 +53,9 @@ Host w520
     User lcaohoanq
     IdentityFile ~/.ssh/id_ed25519
 ```
-- Chú ý ref tới các IdentityFile cho đúng nha, check lại xem có không 
+
+- Chú ý ref tới các IdentityFile cho đúng nha, check lại xem có không
+
 ```zsh
 ❯ ls -al ~/.ssh
 .rw-rw-r--  188 lcaohoanq 26 Dec 22:51  config
@@ -73,6 +80,7 @@ ssh -i /home/lcaohoanq/.ssh/id_ed25519 'lcaohoanq@192.168.88.155'
 ```
 
 - Test phát cuối
+
 ```zsh
 ssh w520
 ```
@@ -84,11 +92,13 @@ ssh w520
 ![](https://blog.briancmoses.com/images/2021/tailscale/tailscale-logo-black-800.png)
 
 - **WireGuard** xịn sò hơn mà config lằng nhằng quá, từ bỏ luôn, hiện dùng mỗi Tailscale ```nhanh```, ```tiện```, ```sướng```
-- Ref doc đi: https://tailscale.com/kb/1031/install-linux
+- Ref doc đi: <https://tailscale.com/kb/1031/install-linux>
 - Chạy lệnh này cài
+
 ```zsh
 curl -fsSL https://tailscale.com/install.sh | sh
 ```
+
 - Cài xong thì **sudo tailscale up**, Tailscale trả ra một url auth, copy vào browser rồi Login để nhận device là xong
 
 # Tunnel: Cloudflare
@@ -108,6 +118,7 @@ echo 'deb [signed-by=/usr/share/keyrings/cloudflare-public-v2.gpg] https://pkg.c
 # install cloudflared
 sudo apt-get update && sudo apt-get install cloudflared
 ```
+
 - Sau khi cài xong rồi thì chạy tiếp lệnh này để nó nhận tunnel trên dashboard của mình, tự lắp **token** nhóe
 
 ```zsh
@@ -119,5 +130,73 @@ sudo cloudflared service install tokentokentokentokentokentoken....
 ![](https://images.viblo.asia/fad7cf1a-772f-43e4-9042-e96d5d903b2b.png)
 
 - Doc là chân ái, ráng vào Ctrl + C/V đi anh zai
-- Cài xong run được cái container hello-world chưa chắc ngon đâu nha, check **docker ps** phát xem thử có bị bug permission không? Sửa ở đây (https://stackoverflow.com/questions/48957195/how-to-fix-docker-permission-denied), lỗi do user hiện tại chưa được thêm vào  group á mà, 99.9% cài mới docker đều bị :) gặp hoài luôn 
+- Cài xong run được cái container hello-world chưa chắc ngon đâu nha, check **docker ps** phát xem thử có bị bug permission không? Sửa ở đây (<https://stackoverflow.com/questions/48957195/how-to-fix-docker-permission-denied>), lỗi do user hiện tại chưa được thêm vào  group á mà, 99.9% cài mới docker đều bị :) gặp hoài luôn
 
+# Netdata
+
+- Giám sát server, container, app,... siêu ngon, nhẹ, đẹp, dễ xài
+- Có 2 cách cài:
+
+1. Cài bằng script: [Script install](https://learn.netdata.cloud/docs/netdata-agent/installation/linux)
+
+`wget`
+
+```zsh
+wget -O /tmp/netdata-kickstart.sh https://get.netdata.cloud/kickstart.sh && sh /tmp/netdata-kickstart.sh
+```
+
+1. Cài bằng Docker (ưu tiên cách này): [Docker install](https://learn.netdata.cloud/docs/netdata-agent/installation/docker)
+
+`docker run`
+
+```zsh
+docker run -d --name=netdata \
+  --pid=host \
+  --network=host \
+  -v netdataconfig:/etc/netdata \
+  -v netdatalib:/var/lib/netdata \
+  -v netdatacache:/var/cache/netdata \
+  -v /:/host/root:ro,rslave \
+  -v /etc/passwd:/host/etc/passwd:ro \
+  -v /etc/group:/host/etc/group:ro \
+  -v /etc/localtime:/etc/localtime:ro \
+  -v /proc:/host/proc:ro \
+  -v /sys:/host/sys:ro \
+  -v /etc/os-release:/host/etc/os-release:ro \
+  -v /var/log:/host/var/log:ro \
+  -v /var/run/docker.sock:/var/run/docker.sock:ro \
+  -v /run/dbus:/run/dbus:ro \
+  --restart unless-stopped \
+  --cap-add SYS_PTRACE \
+  --cap-add SYS_ADMIN \
+  --security-opt apparmor=unconfined \
+  netdata/netdata
+```
+
+- Xong rồi truy cập **<http://server-ip:19999>** để xem dashboard thôi
+
+> Trường hợp nếu xoay xoay mãi không vào được, hãy kiểm tra xem
+
+- Port `19999` có đang listen không
+
+```zsh
+sudo ss -tulpn | grep 19999
+```
+
+```zsh
+tcp   LISTEN 0      4096      0.0.0.0:19999      0.0.0.0:*    users:(("netdata",pid=136540,fd=6))       
+tcp   LISTEN 0      4096         [::]:19999         [::]:*    users:(("netdata",pid=136540,fd=8)) 
+```
+
+- Firewall có chặn port 19999 không
+
+```zsh
+sudo ufw status
+```
+
+- Nếu có chặn thì mở port 19999 lên
+
+```zsh
+sudo ufw allow 19999/tcp
+sudo ufw reload
+```
