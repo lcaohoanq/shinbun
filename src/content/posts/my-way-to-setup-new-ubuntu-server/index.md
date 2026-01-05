@@ -200,3 +200,110 @@ sudo ufw status
 sudo ufw allow 19999/tcp
 sudo ufw reload
 ```
+
+# Dozzle
+
+- Xem log container realtime trên web, nhanh, nhẹ
+- Cài bằng Docker
+
+```zsh
+#Default: https://dozzle.dev/guide/getting-started
+
+# I adjust port mapping to avoid conflict with Spring Boot app
+docker run -d -v /var/run/docker.sock:/var/run/docker.sock -p 8888:8080 amir20/dozzle:latest
+```
+
+- Thường mình sẽ map ra port **8888:8080** để khỏi trùng container Spring Boot (8080)
+
+# Set IP Tĩnh, Tắt DHCP
+
+Thỉnh thoảng sẽ cần cho homelab server IP tĩnh, không đổi, để dễ quản lý, có 2 cách:
+    - **Cấu hình trên Router** (nếu router có hỗ trợ)
+    - **Cấu hình trực tiếp trên server** (cách này mình hay dùng), mình sẽ hướng dẫn cách này nha
+
+- Kiểm tra cấu hình ở `/etc/netplan/`
+
+```zsh
+ls /etc/netplan/
+```
+
+Thường file sẽ có tên dạng 01-netcfg.yaml, 50-cloud-init.yaml hoặc 00-installer-config.yaml
+
+- Sửa file với quyền sudo
+
+Mình là `50-cloud-init.yaml`
+
+```zsh
+sudo vi /etc/netplan/50-cloud-init.yaml
+```
+
+- Nếu chưa chỉnh gì thì **dhcp4: true**, chú ý các khoảng trắng, indent đúng nha
+
+```yaml
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    eth0:  # Thay bằng tên card mạng của bạn, kiểm tra bằng ip a | grep 192.168
+      dhcp4: no
+      addresses:
+        - 192.168.88.155/24 # Địa chỉ IP tĩnh bạn muốn đặt cho server, mình lấy luôn cái IP mà router cấp hiện tại
+      routes:
+        - to: default
+          via: 192.168.88.1  # Địa chỉ IP của Router  (Gateway), mình xài router VNPT
+      nameservers:
+        addresses: [8.8.8.8, 1.1.1.1] # DNS của Google và Cloudflare
+```
+
+Lưu file lại, rồi chạy lệnh này để áp dụng cấu hình mới
+
+```zsh
+sudo netplan try # Thử cấu hình mới trước
+```
+
+> Nếu không có lỗi gì, **bấm Enter để áp dụng**, nếu có lỗi gì nó sẽ tự rollback lại cấu hình cũ sau 120s
+
+Chắc chắn đúng thì hãy dùng
+
+```zsh
+sudo netplan apply
+```
+
+Kiểm tra lại IP thực tế
+
+```zsh
+hostname -I
+```
+
+- Nếu IP đúng như cấu hình thì okie, xong rồi đó :)
+
+## Trường hợp oái ăm (mới gặp phải)
+
+- Xong hết các bước trên nhưng ssh vào server không được, báo lỗi timeout, không kết nối được. Kì cục vãi
+
+- Confirm rằng
+  - Hostname đã đúng
+  - `/etc/netplan/xxx.yaml` đã đúng syntax
+  - Đúng tên card mạng
+  - Firewall có chặn không
+  - Check SSH đang listen không
+
+```zsh
+sudo ss -tulpn | grep ssh
+# Hoặc grep port 22 luôn cũng được
+```
+
+- Nếu ra kết quả, oke vậy là đã listen port 1604 rồi, bước cuối check ssh service đang chạy không
+
+```zsh
+sudo systemctl status ssh
+```
+
+- Nếu không chạy thì start nó lên
+
+```zsh
+sudo systemctl enable ssh
+sudo systemctl start ssh
+```
+
+- Oke xong rồi thử ssh lại xem được chưa nha :)
