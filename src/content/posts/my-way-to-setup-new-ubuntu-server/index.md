@@ -218,8 +218,8 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock -p 8888:8080 amir20/d
 # Set IP Tĩnh, Tắt DHCP
 
 Thỉnh thoảng sẽ cần cho homelab server IP tĩnh, không đổi, để dễ quản lý, có 2 cách:
-    - **Cấu hình trên Router** (nếu router có hỗ trợ)
-    - **Cấu hình trực tiếp trên server** (cách này mình hay dùng), mình sẽ hướng dẫn cách này nha
+  - **Cấu hình trên Router** (nếu router có hỗ trợ)
+  - **Cấu hình trực tiếp trên server** (cách này mình hay dùng), mình sẽ hướng dẫn cách này nha
 
 - Kiểm tra cấu hình ở `/etc/netplan/`
 
