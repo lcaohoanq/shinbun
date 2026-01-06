@@ -115,14 +115,14 @@ sudo apt install \
   fastfetch \
   htop \
   btop \
-  duf \  		# du df xịn hơn
-  xclip     # copy paste với clipboard
-  ranger    # thao tác file trong terminal
-  byobu     # tmux xịn hơn
-  fd-find
-  ripgrep   # search recursive directories
-  tmux      # terminal multiplexer
-  pipx
+  duf \  	  # du df xịn hơn
+  xclip \     # copy paste với clipboard
+  ranger \    # thao tác file trong terminal
+  byobu \     # tmux xịn hơn
+  fd-find \
+  ripgrep \   # search recursive directories
+  tmux \      # terminal multiplexer
+  pipx \
 ```
 
 - **zoxide**
