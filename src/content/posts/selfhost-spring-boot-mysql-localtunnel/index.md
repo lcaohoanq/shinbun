@@ -2,7 +2,7 @@
 title: On Budget Self-Host Spring Boot MySQL  
 published: 2025-02-03  
 description: "A guide on setting up a self-hosted Spring Boot app with MySQL using Docker and Localtunnel without spending on domain names or dedicated servers."  
-image: "https://user-images.githubusercontent.com/45159366/152699307-1c4ebfcd-a2b0-456c-9a84-01ac255e3782.png"  
+image: "P1070074.JPG"  
 tags: [Java, Spring Boot, Self Host, Docker, MySQL]  
 category: 'Technology'  
 draft: false  
@@ -17,10 +17,10 @@ With **Localtunnel**, you can easily expose your local development environment t
 
 ## Prerequisites
 
--   **Docker**: Ensure Docker is installed on your machine. If not, follow the official [Docker installation guide](https://docs.docker.com/get-docker/).
--   **Spring Boot Application**: This guide assumes you already have a Spring Boot application ready to go. If not, you can easily create one using Spring Initializr.
--   **MySQL Database**: We will use MySQL for this example, but you can easily swap it out for any other database if needed.
--   **Localtunnel**: This tool is used to expose your local server to the internet. You can install it via npm (`npm install -g localtunnel`).
+- **Docker**: Ensure Docker is installed on your machine. If not, follow the official [Docker installation guide](https://docs.docker.com/get-docker/).
+- **Spring Boot Application**: This guide assumes you already have a Spring Boot application ready to go. If not, you can easily create one using Spring Initializr.
+- **MySQL Database**: We will use MySQL for this example, but you can easily swap it out for any other database if needed.
+- **Localtunnel**: This tool is used to expose your local server to the internet. You can install it via npm (`npm install -g localtunnel`).
 
 ### The Project Setup
 
@@ -28,9 +28,9 @@ In this setup, we’ll create a simple Dockerized environment for your Spring Bo
 
 Here’s how we structure it:
 
-1.  **MySQL Database** – Running inside a Docker container.
-2.  **Spring Boot Application** – Running in a Docker container connected to the MySQL database.
-3.  **Localtunnel** – Exposes the Spring Boot app to the internet using a public URL.
+1. **MySQL Database** – Running inside a Docker container.
+2. **Spring Boot Application** – Running in a Docker container connected to the MySQL database.
+3. **Localtunnel** – Exposes the Spring Boot app to the internet using a public URL.
 
 ### Docker Compose Configuration
 
@@ -118,58 +118,60 @@ volumes:
 
 ### How It Works
 
-1.  **MySQL Database Service** (`db`):
-    
-    -   Runs MySQL in a container with persistent data stored in a Docker volume.
-    -   Exposes port `3306` internally and maps it to port `3311` on the host.
-2.  **Spring Boot Application Service** (`springboot-app`):
-    
-    -   Your Spring Boot app runs in a Docker container connected to the MySQL container.
-    -   The application listens on port `8080`.
-3.  **Optional** (`portainer`): Help Docker management more ease
+1. **MySQL Database Service** (`db`):
+
+    - Runs MySQL in a container with persistent data stored in a Docker volume.
+    - Exposes port `3306` internally and maps it to port `3311` on the host.
+2. **Spring Boot Application Service** (`springboot-app`):
+
+    - Your Spring Boot app runs in a Docker container connected to the MySQL container.
+    - The application listens on port `8080`.
+3. **Optional** (`portainer`): Help Docker management more ease
 
 ### Setting Up Localtunnel
 
 Now comes the fun part! To expose your Spring Boot app to the public internet, we’ll use **Localtunnel**. This will create a publicly accessible URL that tunnels to your local machine.
 
-1.  **Start the Docker containers**:
-    
+1. **Start the Docker containers**:
+
     First, make sure your containers are up and running with:
-    
+
     ```bash
     docker-compose up -d
     ```
+
 	   - Or this, if you need to integrate with CI-CD pipeline
+
     ```bash
-	docker compose -f docker-compose.yml up -d --build --remove-orphans
+ docker compose -f docker-compose.yml up -d --build --remove-orphans
     ```
-    
-2.  **Install Localtunnel**:
-    
+
+2. **Install Localtunnel**:
+
     If you haven't installed Localtunnel yet, you can do so globally using npm: [Document here](https://theboroer.github.io/localtunnel-www/)
-    
+
     ```bash
     npm install -g localtunnel
     ```
-    
-3.  **Expose the Spring Boot application**:
-    
+
+3. **Expose the Spring Boot application**:
+
     Use Localtunnel to expose your app running on `localhost:8080`:
-    
+
     ```bash
     lt --port 8080
     ```
-    
+
     This will give you a URL like `https://example.loca.lt`, which is publicly accessible from anywhere.
-    
-  4. **Provide Password to access**: 
- 
- - Usually the password is the server's public IP address
+
+4. **Provide Password to access**:
+
+- Usually the password is the server's public IP address
 
 ### Accessing the App
 
--   To access your Spring Boot app locally, visit `http://localhost:8080`.
--   To access it externally, use the **Localtunnel URL** (e.g., `https://example.loca.lt`), and your Spring Boot app will be accessible from anywhere.
+- To access your Spring Boot app locally, visit `http://localhost:8080`.
+- To access it externally, use the **Localtunnel URL** (e.g., `https://example.loca.lt`), and your Spring Boot app will be accessible from anywhere.
 
 ### Setting Up Environment Variables
 

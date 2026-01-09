@@ -2,7 +2,7 @@
 title: Cloudflare 101
 published: 2026-01-06
 description: ''
-image: "Cloudflare_Logo.svg.png"
+image: "cloudflare.png"
 tags: [Networking, Linux, Server, Bash, yml, Automation, DNS, DevOps, Cloudflare]
 category: 'Công nghệ'
 draft: true

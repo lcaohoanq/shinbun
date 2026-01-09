@@ -2,7 +2,7 @@
 title: Cách mà mình áp dụng Spotless để code clean hơn
 published: 2025-12-19
 description: 'Format code sớm đi, code sạch thì mát, conflict tránh xa'
-image: "https://www.jetbrains.com/resharper/features/screenshots/20171/configure_format.png"
+image: "configure_format.webp"
 tags: [Java, Spotless, SpringBoot, Code Format]
 category: 'Công nghệ'
 draft: false
@@ -10,24 +10,28 @@ lang: 'vi'
 ---
 
 > Anh em làm việc với hệ sinh thái Nodejs thì sẽ nghe tới Prettier, Eslint là combo Formatter, Linter phổ biến nhất hầu như dự án nào mình cũng thấy xài
->  **Formatter** là tool giúp anh em xóa khoảng trắng thừa, sắp xếp lại thứ tự import, tab 2 cách hay 4 cách... về format của code
->  **Linter** là tool đánh giá chất lượng code theo chuẩn nào đó, hoặc tự define, ví dụ function không trả gì thì không ghi gì hay ghi void? Cho phép, cảnh báo, hoặc cấm dùng type any trong Typescript
+> **Formatter** là tool giúp anh em xóa khoảng trắng thừa, sắp xếp lại thứ tự import, tab 2 cách hay 4 cách... về format của code
+> **Linter** là tool đánh giá chất lượng code theo chuẩn nào đó, hoặc tự define, ví dụ function không trả gì thì không ghi gì hay ghi void? Cho phép, cảnh báo, hoặc cấm dùng type any trong Typescript
 
-- Vấn đề mình hay gặp khi code chung với team là, mỗi người một kiểu setup IDE, format code, khi xảy ra conflict rất "nhảm" giữa việc một thằng tab 2 dấu cách và tab 4 dấu cách. Ít file còn đỡ, nhiều file conflict, mà toàn bị lỗi format thì ối dồi ôi lắm. Không chỉ code mỗi Intelliji vì nó không có tính năng Ctrl+Save (visual), có người sẽ mở code trong vscode -> Hỏi AI, AI Response -> Ctrl + Save -> Là xong luôn ăn hết format của VScode, tiến thoái lưỡng nan, giờ mình thêm có vài dòng mà Save file lại ăn hết changes của mình? Rồi push đống này lên, teammate pull về lại xào xáo ủa sao code nhìn lạ vậy :) Đó là lí do code lộn xộn, cần phải xử lí. 
+- Vấn đề mình hay gặp khi code chung với team là, mỗi người một kiểu setup IDE, format code, khi xảy ra conflict rất "nhảm" giữa việc một thằng tab 2 dấu cách và tab 4 dấu cách. Ít file còn đỡ, nhiều file conflict, mà toàn bị lỗi format thì ối dồi ôi lắm. Không chỉ code mỗi Intelliji vì nó không có tính năng Ctrl+Save (visual), có người sẽ mở code trong vscode -> Hỏi AI, AI Response -> Ctrl + Save -> Là xong luôn ăn hết format của VScode, tiến thoái lưỡng nan, giờ mình thêm có vài dòng mà Save file lại ăn hết changes của mình? Rồi push đống này lên, teammate pull về lại xào xáo ủa sao code nhìn lạ vậy :) Đó là lí do code lộn xộn, cần phải xử lí.
 - Có 2 hướng để giải quyết, một là từ đầu họp, setup convention code rõ ràng, Setup IDE chuẩn. Anh em chỉ code theo thôi. Trường hợp 1 mình hiếm thấy quá, vì mình chỉ trong dự án học tập, sinh viên nên mọi người không quan trọng lắm vấn đề này, khi mình đặt vấn đề thì sẽ có ý kiến "mệt thế, rườm rà thế". Trường hợp 2 thì sẽ không ép, bắt team align từ đầu nhưng dần dần code sẽ đẹp hơn *hehehe, đối với những codebase đã có sẵn rồi, ta cần từ từ dọn dẹp nó. Có thể kiểm tra liên tục nhờ gắn CI flow với format check, lint check nhằm phát hiện sớm hơn các lỗi, nhằm viết code đẹp hơn.
-> Hôm nay mình ở bên hệ sinh thái Java, có 1 tool siêu ngon là **Spotless**
-- Anh em tham khảo ở đây: https://github.com/diffplug/spotless
 
-- Cái hay của spotless là nó gộp lại Formatter và Linter, rất dễ sử dụng, config. Khi bên Prettier, Eslint setup tối thiểu cần 5 file, 
-	- .prettierrc.json
-	- .prettierignore
-	- eslintrc.json
-	- .eslintignore
-	- .editorconfig
+> Hôm nay mình ở bên hệ sinh thái Java, có 1 tool siêu ngon là **Spotless**
+
+- Anh em tham khảo ở đây: <https://github.com/diffplug/spotless>
+
+- Cái hay của spotless là nó gộp lại Formatter và Linter, rất dễ sử dụng, config. Khi bên Prettier, Eslint setup tối thiểu cần 5 file,
+ 	- .prettierrc.json
+ 	- .prettierignore
+ 	- eslintrc.json
+ 	- .eslintignore
+ 	- .editorconfig
 - Thì bên spotless chỉ cần bỏ thêm plugin vào **pom.xml** nếu làm dự án bạn làm với Maven hoặc **build.gradle.kts** nếu làm với Gradle, sau đây mình sẽ chia sẻ đoạn code copy plug-play luôn nhé.
 
 ## pom.xml
-- Trong phần <build></build> thêm giúp mình  **spotless-maven-plugin** 
+
+- Trong phần <build></build> thêm giúp mình  **spotless-maven-plugin**
+
 ```xml
 <groupId>com.diffplug.spotless</groupId>  
 <artifactId>spotless-maven-plugin</artifactId>
@@ -137,18 +141,18 @@ lang: 'vi'
 ```
 
 - Chạy bằng terminal
-	- **mvn spotless:apply** (format hết tất cả các file bị sai định dạng, cẩn thận chạy lệnh này vì nó sẽ sửa tất cả những file, trường hợp mình chạy lệnh này nó sẽ ảnh hưởng đến code của các thành viên khác, nếu không align format từ đầu, sẽ gây conflict rất nặng. Best practice nên checkout nhánh khác và merge vào, đồng thời bảo mọi người pull về và resolve conflict sớm nhất có thể nha. Lỗi format sửa conflict rất chán)
-	- **mvn spotless:check** (check file nào bị sai format)
+ 	- **mvn spotless:apply** (format hết tất cả các file bị sai định dạng, cẩn thận chạy lệnh này vì nó sẽ sửa tất cả những file, trường hợp mình chạy lệnh này nó sẽ ảnh hưởng đến code của các thành viên khác, nếu không align format từ đầu, sẽ gây conflict rất nặng. Best practice nên checkout nhánh khác và merge vào, đồng thời bảo mọi người pull về và resolve conflict sớm nhất có thể nha. Lỗi format sửa conflict rất chán)
+ 	- **mvn spotless:check** (check file nào bị sai format)
 
 - Các option khác mọi người tham khảo thêm ở doc chính thức nhé
-	- https://github.com/diffplug/spotless/tree/main/plugin-maven#java
+ 	- <https://github.com/diffplug/spotless/tree/main/plugin-maven#java>
 
 ## build.gradle.kts
 
 - Thêm: id("com.diffplug.spotless") version "8.1.0"
 - subprojects {} liên quan đến config sâu hơn của gradle, khi build tự động chạy format hoàn toàn source code
 - Chú ý giúp mình scope của **spotless {}**, tại sao mình có thể viết được như vậy, đọc doc đê
-	- https://github.com/diffplug/spotless/tree/main/plugin-gradle#java
+ 	- <https://github.com/diffplug/spotless/tree/main/plugin-gradle#java>
 
 ```kts
 plugins {
@@ -246,10 +250,12 @@ tasks.withType<Test> { useJUnitPlatform() }
 ```
 
 ## license-header
+
 - Với pom.xml mình có dùng license-header.txt và build.gradle.kts mình dùng license-header.kt, file gì cũng được nha, text là được, mình ngựa á.
 - File này dùng để nối thêm bản quyền vào đầu tất cả các file trong source code, có thể custom include exclude được
 
 - license-header.txt
+
 ```txt
 /**
  * Copyright (c) 2025 lcaohoanq. All rights reserved.
@@ -260,6 +266,7 @@ tasks.withType<Test> { useJUnitPlatform() }
 ```  
 
 - license-header.kt
+
 ```kt
 /**
  * Copyright (c) 2025 lcaohoanq. All rights reserved.
@@ -268,4 +275,5 @@ tasks.withType<Test> { useJUnitPlatform() }
  * accordance with the terms of the license agreement you entered into with hcmurs.
  */
 ```
+
 - Bản chất file này định dạng nào cũng chỉ là text chứa comment thôi

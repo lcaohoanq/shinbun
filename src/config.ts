@@ -21,7 +21,7 @@ export const siteConfig: SiteConfig = {
 		position: "center", // Equivalent to object-position, only supports 'top', 'center', 'bottom'. 'center' by default
 		credit: {
 			enable: true, // Display the credit text of the banner image
-			text: "lcaohoanq/tech gear", // Credit text to be displayed
+			text: "lcaohoanq", // Credit text to be displayed
 			url: "https://unsplash.com/@lcaohoanq", // (Optional) URL link to the original artwork or artist's page
 		},
 	},
@@ -59,8 +59,8 @@ export const navBarConfig: NavBarConfig = {
 
 export const profileConfig: ProfileConfig = {
 	avatar: "assets/images/avatar_gemini.png", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
-	name: "Lưu Cao Hoàng | ホアン・カオ・ルウ | Hoang Cao Luu",
-	bio: "Software Engineer | Backend Developer | Spring Boot Enthusiastic | ITエンジニア | Java開発エンジニア | バックエンデベロッパ",
+	name: "Thợ Dev",
+	bio: "Software developer",
 	/*
     Visit https://icones.js.org/ for icon codes
     You will need to install the corresponding icon set if it's not already included
@@ -72,11 +72,11 @@ export const profileConfig: ProfileConfig = {
 			icon: "fa6-brands:github",
 			url: "https://github.com/lcaohoanq",
 		},
-		{
-			name: "GitLab",
-			icon: "pajamas:tanuki",
-			url: "https://gitlab.com/lcaohoanq",
-		},
+		// {
+		// 	name: "GitLab",
+		// 	icon: "pajamas:tanuki",
+		// 	url: "https://gitlab.com/lcaohoanq",
+		// },
 		{
 			name: "LinkedIn",
 			icon: "pajamas:linkedin",

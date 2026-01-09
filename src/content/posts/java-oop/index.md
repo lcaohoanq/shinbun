@@ -1,8 +1,8 @@
 ---
 title: OOP trong Java
 published: 2025-01-21
-description: 'Một ngôn ngữ mang tính OOP cao nhất'
-image: "https://media2.dev.to/dynamic/image/width=1600,height=900,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fjnjgfl10cn4tm9qlztv1.png"
+description: 'Nhớ giúp mình 4 tính chất thôi, chỉ 4 thôi nha ^^'
+image: "oop.webp"
 tags: [Java]
 category: 'Công nghệ'
 draft: false
@@ -14,6 +14,7 @@ lang: 'vi'
 > - OOP (Object-Oriented Programming) là một phương pháp lập trình dựa trên các đối tượng, hướng về đối tượng.
 
 ### Khoan đã, vậy đối tượng gì?
+>
 > - Đối tượng là một thực thể, một thứ gì đó có thể nhìn thấy, chạm vào, cảm nhận được. Ví dụ: một con mèo, một chiếc xe, một người, Đối tượng có 2 đặc điểm chính là thuộc tính (property|attribute) và hành vi, phương thức (behaviour| method | function).
 
 - Ví dụ: Một đối tượng `User` có các thuộc tính như `userID`, `fullName`, `roleID`, `password`. Các hành vi như `login()`.
@@ -108,6 +109,7 @@ public record UserDTO(
 ```
 
 # 4 tính chất của OOP
+
 - **Tính kế thừa (Inheritance)**: Là khả năng một lớp con kế thừa tất cả các thuộc tính và phương thức từ lớp cha.
 - **Tính đóng gói (Encapsulation)**: Là khả năng che giấu thông tin, chỉ cho phép truy cập thông qua các phương thức.
 - **Tính đa hình (Polymorphism)**: Là khả năng một phương thức có thể thực thi nhiều hành vi khác nhau.
@@ -209,6 +211,7 @@ public class Calculator {
 ### 3.2. Runtime Polymorphism (Overriding)
 
 - Overriding là việc một lớp con thay đổi cách thức hoạt động của một phương thức đã được định nghĩa trong lớp cha nhưng **không thay đổi**:
+>
 > - access modifier
 > - tên phương thức
 > - kiểu trả về

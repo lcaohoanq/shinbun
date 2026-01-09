@@ -1,9 +1,9 @@
-
 ---
+
 title: "Meta Android Developer Professional Certificate"
 published: 2025-02-05
 description: ''
-image: "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/HeroHomepage_2880x1200.width-1200.format-webp.webp"
+image: "android.png"
 tags: ["Certificate", "Meta", "Android", "Kotlin", "Java", "React Native"]
 category: "Tech"
 draft: false
@@ -12,9 +12,10 @@ lang: en
 
 # MOOC1:   Introduction to Android Mobile Application Development
 
-## Module 1:
+## Module 1
 
 ### What is an Android OS?
+
 Android is a Linux-based OS primarily designed for touch screen mobile devices such as smartphones and tablets. However, the operating system has evolved in recent years into a complete set of operating systems for various other devices, such as wearables, Chromebook laptops and smart TVs.
 
 Some of the unique features and characteristics of the Android OS include:
@@ -33,25 +34,29 @@ Custom ROMs
 
 - Four top-level component classes: BroadcastReceiver, ContentProvider, Service and Activity
 
-## Module 2:   
+## Module 2
 
 ### What is an emulator?
 
-- An Emulator is a computer Program that imitates another device, replicate the experience of hardware or software 
+- An Emulator is a computer Program that imitates another device, replicate the experience of hardware or software
 - High computing Resources
 - BlueStacks,...
 
 ### Android Virtual Device Manager (AVD Manager)
+
 - Feature of Android Studio
 - It lets you define the various features of a virtual device.
 
 ### Mobile CPU architecture
+
 In order to develop and deploy apps for different mobile devices, the Central Processing Unit (CPU) architecture must be considered.
 
-#### What is a CPU? 
+#### What is a CPU?
+
 - A CPU is like a translator between the software and the hardware of a device. It can take high-level software instructions and translate them into native machine language that a mobile phone can understand and use to perform specific operations. Ideally, you want a CPU that combines efficiency and power, without requiring excess resources, something that will be determined by its architecture. A CPU with great architecture provides mobile users with a seamless user experience without consuming significant battery resources.
 
 #### What’s ARM, ARM64 and x86?
+
 - As of now, there are three main CPU architectures used in most smartphones – ARM, ARM64 and x86. CPU types include:
 
 - ARM: ARMv7 or armeabi
@@ -60,9 +65,9 @@ In order to develop and deploy apps for different mobile devices, the Central Pr
 
 - x86: x86 or x86abi
 
-- Of these three, ARM is the most common as it is properly optimized for battery use. 
+- Of these three, ARM is the most common as it is properly optimized for battery use.
 
-- ARM64 is an evolution of the original ARM architecture that supports 64-bit processing for more powerful computing and it’s quickly becoming the standard in newer devices. 
+- ARM64 is an evolution of the original ARM architecture that supports 64-bit processing for more powerful computing and it’s quickly becoming the standard in newer devices.
 
 - Then there’s x86, which is a bit more powerful than the ARM CPUs, but not quite as battery-friendly, so it’s the least commonly used of the three.
 
@@ -70,58 +75,57 @@ In order to develop and deploy apps for different mobile devices, the Central Pr
 
 ### Project Structure
 
-- Activity: 
+- Activity:
   - Entry point for interacting with the user, the Android app is form of multiple Activity or Screen
-  - On 
-- Layout: 
+  - On
+- Layout:
 - Gradle: manage Android Project with a set of build configuration files
-  - ./gradle clean 
+  - ./gradle clean
   - ./grable build
   - ./gradle run
 - Android Manifest: .xml file contain activity data
 - Resouces folder:
-  - Image, Color 
-
+  - Image, Color
 
 - Project file type: The most important project files and their contents include:
 
-	- build/
-		Contains files generated after a project build occurs
+  - build/
+  Contains files generated after a project build occurs
 
-	- libs/
-		Contains private and 3rd party libraries used within the app
+  - libs/
+  Contains private and 3rd party libraries used within the app
 
-	- src/
-		Contains all code and resource files for the module in its subdirectories
+  - src/
+  Contains all code and resource files for the module in its subdirectories
 
-	- androidTest/
-		Contains code for testing features of the app that runs on an emulator or a physical device
+  - androidTest/
+  Contains code for testing features of the app that runs on an emulator or a physical device
 
-	- test/
-		Contains code used for unit testing code, with unit tests executed on the computer
+  - test/
+  Contains code used for unit testing code, with unit tests executed on the computer
 
-	- main/
-		Contains the Android code and resources shared by all build variants for testing and production deployments
+  - main/
+  Contains the Android code and resources shared by all build variants for testing and production deployments
 
-	- AndroidManifest.xml
-		Describes specific information about your app and each of its components such as Activity
+  - AndroidManifest.xml
+  Describes specific information about your app and each of its components such as Activity
 
-	- java/
-		Contains Java and Kotlin-related code files
+  - java/
+  Contains Java and Kotlin-related code files
 
-	- gen/
-		Contains the Java files generated by Android Studio, which are required for the app to build successfully (not displayed in the image above)
+  - gen/
+  Contains the Java files generated by Android Studio, which are required for the app to build successfully (not displayed in the image above)
 
-	- res/
-		Contains application resources, such as image files, layout files for user interface designs, color files, dimension files and UI string for managing texts used across the app
+  - res/
+  Contains application resources, such as image files, layout files for user interface designs, color files, dimension files and UI string for managing texts used across the app
 
-	- assets/
-		Contains files that should be compiled into an .apk file as-is (not displayed in the image above)
+  - assets/
+  Contains files that should be compiled into an .apk file as-is (not displayed in the image above)
 
-- Mipmap: ensures that your app renders high-quality images across different devices. 
-- Layout folder: 
+- Mipmap: ensures that your app renders high-quality images across different devices.
+- Layout folder:
 
-## Module 3:
+## Module 3
 
 ### Layouts
 
@@ -132,24 +136,24 @@ In Android, layout defines the user interface (UI) for an app or activity and ho
 
 - Related to layouts are View and ViewGroup.
 
-	- **View**
+  - **View**
 A View is defined as the UI which is used to create interactive UI components such as TextView, ImageView, Label, RadioButton and so on. It is in charge of event handling and drawing. They are generally referred to as "widgets".
 
-	- **ViewGroup**
+  - **ViewGroup**
 A ViewGroup serves as a parent class for layouts and layout parameters that hold other Views or ViewGroups and define the layout properties. They are generally referred to as "layouts".
 
 - Types of Android Layouts
-	- **LinearLayout**:  is a ViewGroup subclass used to render child View elements one after the other either horizontally or vertically based on the orientation property specified.
+  - **LinearLayout**:  is a ViewGroup subclass used to render child View elements one after the other either horizontally or vertically based on the orientation property specified.
 
-	- **ConstraintLayout**: is a ViewGroup subclass used to specify the position of layout constraints for every child View relative to other views on the screen.
+  - **ConstraintLayout**: is a ViewGroup subclass used to specify the position of layout constraints for every child View relative to other views on the screen.
 
-	- **Frame Layout**: is a ViewGroup subclass used to specify the position of View elements it contains on the top of each other to display only a single View inside the FrameLayout.
+  - **Frame Layout**: is a ViewGroup subclass used to specify the position of View elements it contains on the top of each other to display only a single View inside the FrameLayout.
 
-	- **Table Layout**: is a ViewGroup subclass used to display the child View elements in rows and columns.
+  - **Table Layout**: is a ViewGroup subclass used to display the child View elements in rows and columns.
 
-	- **WebView**: is a browser that is used to display the web pages in your activity layout.
+  - **WebView**: is a browser that is used to display the web pages in your activity layout.
 
-	- **RecyclerView**: You can use RecyclerView with LinearLayoutManager to display scrollable lists of items in a single column. You can also use RecyclerView with GridLayoutManager to display a scrollable list of items in a grid view of rows and columns.
+  - **RecyclerView**: You can use RecyclerView with LinearLayoutManager to display scrollable lists of items in a single column. You can also use RecyclerView with GridLayoutManager to display a scrollable list of items in a grid view of rows and columns.
 
 # MOOC 2: Version Control
 
@@ -157,16 +161,17 @@ A ViewGroup serves as a parent class for layouts and layout parameters that hold
 
 # MOOC 4: Principles of UX/UI Design
 
-## Module 1:
+## Module 1
 
 > - What is UX/UI: UX (User Experience/User Interface)
 
 - UX:
-	- 5 Principals of Usability: Learnability, Efficiency, Memorability, Errors, Satisfaction
+  - 5 Principals of Usability: Learnability, Efficiency, Memorability, Errors, Satisfaction
 
 - The 5 Stages in the Design Thinking Process: **Empathize, define, ideate, prototype, test**
 
 ### Empathize
+
 - The first step is to relate to the problem you are attempting to solve. It enables us to delve deeper into understanding the user and develop solutions that not only meet a need but also significantly improve our users' lives by removing unnecessary discomfort or strife. For example, a user might be thinking: "This is taking too long to figure out."
 
 ### Define
@@ -185,10 +190,10 @@ A ViewGroup serves as a parent class for layouts and layout parameters that hold
 
 - After you create a prototype based on the information you gathered from the previous steps, you can now test it. Testing frequently entails getting a prototype into the hands of a real user. You see them completing a series of tasks or attempting to achieve a specific goal. You observe their actions and try to comprehend and empathize with their choices, and the design cycle continues.
 
-## Module 2:
+## Module 2
 
-## Module 3:
+## Module 3
 
-## Module 4:
+## Module 4
 
-## Module 5:
+## Module 5

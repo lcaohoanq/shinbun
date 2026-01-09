@@ -2,7 +2,7 @@
 title: Cùng mình học Tmux - Công cụ quản lý terminal tuyệt vời
 published: 2025-12-29
 description: 'Terminal Multiplexer (Tmux) là một công cụ mạnh mẽ giúp quản lý nhiều phiên terminal trong một cửa sổ duy nhất.'
-image: "https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=1169&auto=format&fit=crop"
+image: "christina-wocintechchat-com-m-glRqyWJgUeY-unsplash.jpg"
 tags: [Terminal, CLI tools, Server, Devops]
 category: 'Công nghệ'
 draft: false
@@ -11,9 +11,10 @@ lang: 'vi'
 
 # Tại sao nên dùng Tmux?
 
-- Repo: https://github.com/tmux/tmux
+- Repo: <https://github.com/tmux/tmux>
 
 ## 1. "Bất tử hóa" các Session (Persistence)
+
 Đây là tính năng "ăn tiền" nhất của tmux đối với DevOps.
 
 - **Vấn đề**: Khi bạn đang chạy một script quan trọng (ví dụ: database migration, backup, hay build app) mất hàng tiếng đồng hồ, rủi ro lớn nhất là **mất kết nối mạng** hoặc lỡ tay tắt cửa sổ terminal. Khi đó, process đang chạy sẽ bị kill ngay lập tức -> Hậu quả khôn lường.
@@ -23,6 +24,7 @@ lang: 'vi'
 - **Thực tế**: Bạn có thể SSH vào server, gõ lệnh chạy update, tắt máy đi ngủ. Sáng mai mở máy lên, SSH lại, dùng lệnh ```tmux attach``` và thấy mọi thứ vẫn đang chạy hoặc đã hoàn thành trọn vẹn.
 
 ## 2. Quản lý đa nhiệm trên một kết nối SSH duy nhất
+
 Thay vì phải mở 5-6 cửa sổ iTerm hay PuTTY để kết nối vào cùng một server (mỗi cửa sổ làm một việc), tmux cho phép bạn làm tất cả trong một.
 
 - Panes (Chia ô): Bạn có thể chia màn hình thành nhiều ô nhỏ (ngang/dọc).
@@ -38,6 +40,7 @@ Thay vì phải mở 5-6 cửa sổ iTerm hay PuTTY để kết nối vào cùng
   - Window 3: Htop monitoring.
 
 ## 3. Pair Programming & Debugging từ xa
+
 Tmux cho phép nhiều người dùng cùng truy cập vào một session (Shared Session).
 
 - **Kịch bản**: Server đang gặp lỗi nghiêm trọng. Bạn (ở Sài Gòn) và đồng nghiệp (ở Hà Nội) cùng SSH vào server và attach vào cùng một tmux session.
@@ -45,6 +48,7 @@ Tmux cho phép nhiều người dùng cùng truy cập vào một session (Share
 - **Lợi ích**: Cả hai sẽ nhìn thấy chung một màn hình, chung con trỏ chuột. Bạn gõ lệnh, đồng nghiệp nhìn thấy ngay lập tức. Đây là cách cực kỳ hiệu quả để hướng dẫn người mới hoặc debug tập thể (War room).
 
 ## 4. Lưu giữ Context (Ngữ cảnh làm việc)
+
 DevOps thường phải quản lý nhiều dự án hoặc nhiều cụm server (cluster) khác nhau.
 
 - Bạn có thể tạo các session đặt tên riêng biệt: ```tmux new -s production```, ```tmux new -s staging```.
@@ -52,6 +56,7 @@ DevOps thường phải quản lý nhiều dự án hoặc nhiều cụm server 
 - Khi cần chuyển ngữ cảnh, bạn chỉ cần detach khỏi ```staging``` và attach vào ```production```. Mọi thứ (thư mục đang đứng, lịch sử lệnh, các file đang mở) vẫn y nguyên như lúc bạn rời đi. Không cần phải ```cd``` hay ```zoxide``` lại từ đầu.
 
 ## 5. Khả năng tùy biến mạnh mẽ (Scriptable)
+
 Tmux cực kỳ linh hoạt nhờ file cấu hình ```.tmux.conf.```
 
 - Bạn có thể tạo các phím tắt (keybindings) riêng để thao tác nhanh hơn.
@@ -61,6 +66,7 @@ Tmux cực kỳ linh hoạt nhờ file cấu hình ```.tmux.conf.```
 - Hệ sinh thái plugin phong phú (như ```tmux-resurrect``` để lưu lại session ngay cả khi reboot server).
 
 ## 6. Đồng bộ hóa thao tác (Synchronize Panes)
+
 Một tính năng ít người biết nhưng cực hay cho DevOps quản lý cụm server.
 
 - Bạn có thể mở 4 pane, SSH vào 4 server khác nhau trong mỗi pane.
@@ -75,7 +81,7 @@ Một tính năng ít người biết nhưng cực hay cho DevOps quản lý c�
 
 ## Bước 1: Cài đặt
 
-- Cài đặt ```tmux``` trên server (https://github.com/tmux/tmux/wiki/Installing)
+- Cài đặt ```tmux``` trên server (<https://github.com/tmux/tmux/wiki/Installing>)
 
 ```bash
 sudo apt install tmux        # Ubuntu/Debian
@@ -101,6 +107,7 @@ Mặc định, chìa khóa đó là: ```Ctrl``` + ```b``` (giữ Ctrl bấm b, r
 tmux new -s my_work
 # "my_work" là tên session, đặt sao cũng được
 ```
+
 **2. Chia màn hình (Panes):**
 
 - Chia đôi theo chiều dọc: Bấm **[Prefix]** rồi bấm % (Shift + 5).
@@ -148,6 +155,7 @@ tmux attach -t my_work
 ---
 
 # Cấu hình cho dễ dùng hơn
+
 Mặc định tmux không hỗ trợ chuột, hơi khó chịu cho người mới. Bạn hãy tạo một file cấu hình để bật chuột lên (có thể click chuyển ô, lăn chuột để cuộn).
 
   1. Tạo file config ở thư mục home: nano ~/.tmux.conf với nội dung:
@@ -156,7 +164,7 @@ Mặc định tmux không hỗ trợ chuột, hơi khó chịu cho người mớ
 echo "set -g mouse on" >> ~/.tmux.conf
 ```
 
-  2. Để áp dụng ngay lập tức mà không cần restart tmux, chạy lệnh (trong terminal):
+  1. Để áp dụng ngay lập tức mà không cần restart tmux, chạy lệnh (trong terminal):
 
 ```zsh
 tmux source-file ~/.tmux.conf
@@ -173,6 +181,7 @@ Lý do: Lúc này ```tmux``` đang chiếm quyền điều khiển con chuột c
 Dưới đây là 3 cách xử lý, từ "mẹo nhanh" đến "chuyên nghiệp":
 
 ## Cách 1: "Tuyệt chiêu" phím Shift (Dùng ngay lập tức)
+
 Đây là cách đơn giản nhất để copy từ ```tmux``` ra ngoài (ví dụ paste vào trình duyệt, Slack, VS Code).
 
 - Thao tác: Nhấn giữ phím ```Shift``` (trên Mac đôi khi là phím ```Option``` hoặc ```Fn``` tùy setting của Kitty), sau đó dùng chuột bôi đen văn bản như bình thường.
@@ -184,6 +193,7 @@ Dưới đây là 3 cách xử lý, từ "mẹo nhanh" đến "chuyên nghiệp"
 - ```Nhược điểm```: Nếu bạn chia màn hình (split pane) theo chiều dọc, cách này sẽ copy luôn cả nội dung của ô bên cạnh (vì nó copy theo dòng ngang của màn hình).
 
 ## Cách 2: Copy/Paste nội bộ trong Tmux (Chuẩn DevOps)
+
 Cách này dùng khi bạn muốn copy một dòng log ở trên và paste vào dòng lệnh ở dưới **ngay trong cùng một server**, mà không cần dùng chuột.
 
 Quy trình hoạt động như sau:
@@ -199,6 +209,7 @@ Quy trình hoạt động như sau:
 5. **Paste (Dán ra)**: Di chuyển đến nơi cần dán, bấm **[Prefix]** + ```]```
 
 ## Cách 3: Cấu hình phím tắt giống Vim (Khuyên dùng)
+
 Là DevOps, khả năng cao bạn đã quen hoặc sẽ phải dùng Vim. Tại sao không biến thao tác copy trong tmux y hệt như Vim?
 
 Bạn mở file ~/.tmux.conf và thêm dòng này vào:
@@ -207,6 +218,7 @@ Bạn mở file ~/.tmux.conf và thêm dòng này vào:
 # Sử dụng phím tắt vi trong chế độ copy
 setw -g mode-keys vi
 ```
+
 Sau đó chạy ```tmux source-file ~/.tmux.conf```.
 
 **Bây giờ quy trình copy sẽ "sướng" hơn nhiều:**
@@ -230,7 +242,7 @@ Bạn cần phân biệt rõ 2 loại bộ nhớ tạm (Clipboard):
 
 -> Dùng **Cách 1** (giữ Shift).
 
-2. **Tmux Buffer**: Bộ nhớ riêng của Tmux trên server.
+1. **Tmux Buffer**: Bộ nhớ riêng của Tmux trên server.
 
 -> Dùng **Cách 2** hoặc **Cách 3**.
 
@@ -240,7 +252,7 @@ Bạn cần phân biệt rõ 2 loại bộ nhớ tạm (Clipboard):
 
 # Phân tích một ví dụ config thực tế
 
-- Nguồn: https://hamvocke.com/blog/a-guide-to-customizing-your-tmux-conf/
+- Nguồn: <https://hamvocke.com/blog/a-guide-to-customizing-your-tmux-conf/>
 
 - .tmux.conf
 
@@ -347,6 +359,7 @@ set -g message-style 'fg=yellow bg=terminal bold'
 - Họ đã làm gì? Cùng phân tích nhé!
 
 ## 1. Thay đổi thói quen cơ bản (Key Mapping)
+
 Đây là những dòng thay đổi cách bạn tương tác với bàn phím để đỡ mỏi tay hơn.
 
 ```zsh
@@ -355,6 +368,7 @@ unbind C-b
 set -g prefix C-a
 bind C-a send-prefix
 ```
+
 - **Giải thích**: Mặc định phím gọi lệnh là ```Ctrl + b```. Tác giả đổi thành ```Ctrl + a```.
 
 - **Tại sao**: Phím a nằm ngay ngón út tay trái, dễ bấm hơn nhiều so với việc vươn tay ra bấm ```b```. (Lưu ý: Nếu bạn dùng ```Ctrl+a``` trong terminal để về đầu dòng lệnh, bạn sẽ cần bấm ```Ctrl+a``` hai lần để gửi lệnh đó đi).
@@ -364,11 +378,13 @@ bind C-a send-prefix
 set -g base-index 1
 set -g pane-base-index 1
 ```
+
 - **Giải thích**: Mặc định tmux đánh số cửa sổ từ 0. Tác giả đổi thành bắt đầu từ 1.
 
 - **Tại sao**: Trên bàn phím, phím số ```1``` nằm sát bên trái, gần phím ```Ctrl+a```. Phím số ```0``` nằm tít bên phải. Khi muốn chuyển nhanh sang cửa sổ đầu tiên (```Prefix + 1```), tay bạn không cần di chuyển nhiều.
 
 ## 2. Tối ưu hóa thao tác chia màn hình (Splitting)
+
 Đây là phần "đắt giá" nhất cho DevOps.
 
 ```zsh
@@ -376,6 +392,7 @@ set -g pane-base-index 1
 bind | split-window -h -c "#{pane_current_path}"
 bind - split-window -v -c "#{pane_current_path}"
 ```
+
 - **Giải thích**:
 
   - Thay vì dùng phím ```%``` và ```"``` (khó nhớ) để chia màn hình, tác giả dùng:
@@ -389,6 +406,7 @@ bind - split-window -v -c "#{pane_current_path}"
 - **Tại sao**: Giả sử bạn đang đứng ở thư mục sâu thẳm ```/var/log/nginx/error/``` để debug. Khi bạn chia màn hình mới, **nó sẽ tự động mở ngay tại thư mục đó**, thay vì nhảy về thư mục ```home``` (```~```). Tiết kiệm thời gian ```cd``` lại.
 
 ## 3. Tăng tốc độ điều hướng (Navigation)
+
 ```zsh
 # Use Alt-arrow keys without prefix key to switch panes
 bind -n M-Left select-pane -L
@@ -396,15 +414,18 @@ bind -n M-Right select-pane -R
 bind -n M-Up select-pane -U
 bind -n M-Down select-pane -D
 ```
+
 - **Giải thích**: bind -n nghĩa là không cần bấm Prefix. M là phím Meta (thường là phím Alt hoặc Option trên Mac).
 
 - **Tác dụng**: Thay vì phải bấm ```Ctrl+a``` rồi thả ra rồi bấm mũi tên để chuyển ô. Bây giờ bạn chỉ cần giữ ```Alt``` + ```Phím mũi tên``` là bay nhảy qua lại giữa các ô. **Cực kỳ nhanh**
 
 ## 4. Tinh chỉnh hệ thống (System Tweaks)
+
 ```zsh
 # shorten command delay
 set -sg escape-time 1
 ```
+
 - **Giải thích**: Giảm độ trễ khi bấm phím Esc.
 
 - **Tại sao**: Nếu bạn dùng ```Vim``` hoặc ```NeoVim``` bên trong tmux, mặc định tmux sẽ đợi một chút sau khi bạn bấm ```Esc```. Điều này làm Vim cảm giác bị lag. Dòng này sửa lỗi đó.
@@ -413,9 +434,11 @@ set -sg escape-time 1
 # reload config file
 bind r source-file ~/.tmux.conf
 ```
+
 - **- Tác dụng**: Khi bạn sửa file config xong, chỉ cần bấm ``Prefix + r`` là nó cập nhật ngay. Không cần tắt bật lại tmux.
 
 ## 5. Giao diện & Thẩm mỹ (The Eye Candy)
+
 Phần lớn nửa dưới của file config (```# Design Tweaks```) là để làm đẹp thanh trạng thái (Status bar).
 
 - **Màu sắc**: Tác giả chọn tông màu chủ đạo là **Đỏ** và **Vàng**.
@@ -429,6 +452,7 @@ Phần lớn nửa dưới của file config (```# Design Tweaks```) là để l
 ```zsh
 set -g status-left '#{?client_prefix,#[fg=green],#[fg=red]} '
 ```
+
 Dòng này rất hay: Bình thường cái cục bên trái màu **Đỏ**. Nhưng khi bạn bấm ```Ctrl+a``` (Prefix), nó sẽ chuyển sang màu **Xanh lá. -> Tác dụng**: Giúp bạn biết rõ mình đã bấm phím Prefix hay chưa, tránh việc gõ nhầm lệnh.
 
 **Tổng kết: cần lưu ý khi sử dụng**:

@@ -2,8 +2,8 @@
 title: Promox 101
 published: 2026-09-01
 description: 'Tạo nhiều máy ảo thì làm sao? Dùng Proxmox VE để quản lý máy ảo và container một cách dễ dàng'
-image: "https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=1169&auto=format&fit=crop"
-tags: [Terminal, CLI tools, Server, Devops, Promox, Virtualization, Linux, HomeLab, LXC, KVM, Networking]
+image: "proxmox_Logo.png"
+tags: [Server, Devops, Promox, Linux, HomeLab, LXC, KVM, Networking]
 category: 'Công nghệ'
 draft: false
 lang: 'vi'

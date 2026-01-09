@@ -1,15 +1,16 @@
 ---
-title: Java Bean - What is it?
+title: Java Bean
 published: 2025-01-19
-description: ''
-image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtw0bJN_peKfK9VqGLSAZ_PGTkDM4HAGjokg&s"
+description: 'A bean named Java ^^'
+image: "beans-blog.jpg"
 tags: [Java]
 category: 'Công nghệ'
 draft: false
 lang: ''
 ---
 
-> ###  A JavaBean is just a standard. It is a regular Java class, except it follows certain conventions:
+> ### A JavaBean is just a standard. It is a regular Java class, except it follows certain conventions
+>
 > - All properties are private
 > - Public getters/setters
 > - A public no-argument constructor (public all-argument constructor, optional)

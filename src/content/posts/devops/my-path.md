@@ -467,7 +467,7 @@ lcaohoanq@kebiansv:~$ sudo ufw status
 
 - Đã vào được giờ bắt nhập mật khẩu lúc cài đặt jenkins
 
-```zshzsh
+```zsh
 lcaohoanq@kebiansv:~$ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 ```
 

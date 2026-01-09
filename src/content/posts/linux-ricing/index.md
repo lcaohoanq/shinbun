@@ -2,15 +2,16 @@
 title: My Linux Ricing
 published: 2025-01-19
 description: 'I used arch btw'
-image: "https://preview.redd.it/hyprland-minimalism-v0-hw4jaul4fh8d1.jpg?width=1080&crop=smart&auto=webp&s=537b4a02ce45c681191c599831e507be7199019f"
+image: "hyprland-minimalism-v0-hw4jaul4fh8d1.webp"
 tags: [Linux, Ricing, Customization]
 category: 'Công nghệ'
 draft: true
 lang: ''
 ---
 
-> ### dotfiles:
-> - https://github.com/lcaohoanq/dotfiles
+> ### dotfiles
+>
+> - <https://github.com/lcaohoanq/dotfiles>
 
 # zsh auto suggesstion
 
@@ -22,6 +23,7 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 # zsh-256color
 cd $ZSH_CUSTOM/plugins && git clone https://github.com/chrissicool/zsh-256color
 ```
+
 - In the plugins
 
 ```
@@ -32,6 +34,7 @@ plugins=(
   zsh-autosuggestions
 )
 ```
+
 - Config shortcut to accept the suggestion
 
 ```bash
@@ -47,7 +50,7 @@ bindkey "^I^I" autosuggest-accept     # tab + tab for accept the suggestion
 
 # xclip
 
-- https://linuxconfig.org/how-to-use-xclip-on-linux
+- <https://linuxconfig.org/how-to-use-xclip-on-linux>
 
 ```bash
 # xclip

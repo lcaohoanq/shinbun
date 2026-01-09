@@ -1,7 +1,7 @@
 ---
-title: Pojo (Plain Old Java Object) - What is it?
+title: Java Pojo
 published: 2025-01-19
-description: ''
+description: 'Plain Old Java Object - What is it?'
 image: "https://www.boardinfinity.com/blog/content/images/2023/05/Pojo-class-in-java.png"
 tags: [Java]
 category: 'Công nghệ'
@@ -12,6 +12,7 @@ lang: ''
 # POJO
 
 > ### What is POJO?
+>
 > - Can't Extend anything
 > - Can't Implement anything
 > - No outside annotaion

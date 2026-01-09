@@ -1,5 +1,5 @@
 ---
-title: How to Become a Back-End Developer
+title: Trở thành một Backend Developer
 published: 2025-02-01
 description: "A comprehensive guide to becoming a back-end developer, with a focus on Spring Boot and modern development practices"
 image: "https://images.unsplash.com/photo-1685716851721-7e1419f2db18?q=80&w=1332&auto=format&fit=crop"
@@ -21,6 +21,7 @@ While there are many paths to becoming a back-end developer, choosing the right 
 
 **Java (Spring Framework)**
 My personal choice has been Java with Spring Boot, and for good reasons. The Spring ecosystem offers:
+
 - Enterprise-grade capabilities
 - Excellent dependency injection
 - Robust security features
@@ -32,6 +33,7 @@ Django is fantastic for rapid development and data science applications. It foll
 
 **JavaScript (Node.js)**
 Perfect for full-stack JavaScript developers, Node.js offers:
+
 - Fast execution
 - Shared code between frontend and backend
 - Rich package ecosystem (npm)
@@ -45,12 +47,14 @@ Growing in popularity for its performance and simplicity, especially in microser
 # 3. Version Control
 
 Version control is non-negotiable in modern development. As a Spring Boot developer, I use Git daily for:
+
 - Tracking code changes
 - Collaborating with team members
 - Managing different versions of the application
 - Implementing CI/CD pipelines
 
 Essential Git practices I follow:
+
 - Creating meaningful commit messages
 - Using feature branches
 - Understanding merge strategies
@@ -61,16 +65,19 @@ Essential Git practices I follow:
 Database knowledge is crucial for any back-end developer. In my Spring Boot applications, I commonly work with:
 
 **Relational Databases**
+
 - PostgreSQL for complex applications
 - MySQL for traditional web applications
 - H2 for development and testing
 
 **NoSQL Databases**
+
 - MongoDB for document storage
 - Redis for caching
 - Elasticsearch for search functionality
 
 Key concepts to master:
+
 - Database design and normalization
 - SQL query optimization
 - Transaction management
@@ -82,18 +89,21 @@ Key concepts to master:
 Spring Boot has revolutionized Java development. Here's what makes it special:
 
 **Core Features**
+
 - Auto-configuration
 - Standalone applications
 - Embedded servers
 - Production-ready features
 
 **Essential Components**
+
 - Spring Data JPA
 - Spring Security
 - Spring Cloud
 - Spring WebFlux for reactive programming
 
 **Best Practices I Follow**
+
 - Using proper project structure
 - Implementing dependency injection
 - Writing clean, testable code
@@ -105,6 +115,7 @@ Spring Boot has revolutionized Java development. Here's what makes it special:
 As a back-end developer, API development is a core skill. I focus on:
 
 **RESTful APIs**
+
 - Proper resource naming
 - HTTP methods usage
 - Status codes
@@ -112,6 +123,7 @@ As a back-end developer, API development is a core skill. I focus on:
 - API documentation (Swagger/OpenAPI)
 
 **API Security**
+
 - JWT implementation
 - OAuth 2.0
 - Rate limiting
@@ -123,12 +135,14 @@ As a back-end developer, API development is a core skill. I focus on:
 While I specialize in back-end development, understanding full-stack concepts has made me a better developer:
 
 **Frontend Basics**
+
 - HTML/CSS fundamentals
 - Basic JavaScript
 - REST client implementation
 - API consumption patterns
 
 **DevOps Knowledge**
+
 - Docker containerization
 - Basic Kubernetes concepts
 - CI/CD pipelines
@@ -136,6 +150,7 @@ While I specialize in back-end development, understanding full-stack concepts ha
 - Monitoring and logging
 
 **Soft Skills**
+
 - Communication with frontend developers
 - Understanding business requirements
 - Project estimation

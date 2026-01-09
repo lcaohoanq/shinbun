@@ -1,7 +1,7 @@
 ---
 title: Git Merge vs Rebase vs Squash
 published: 2025-02-01
-image: "https://images.unsplash.com/photo-1584786379647-c10852954d2b?q=80&w=1038&auto=format&fit=crop"
+image: "_cover.D2kcx8Ae_Z27Btg0.webp"
 description: "3 cách merge git gây lú"
 tags: [Git, Version Control]
 category: 'Technology'
@@ -24,6 +24,7 @@ git merge feature-branch
 ```
 
 **What happens:**
+
 ```
 Before merge:
 main:     A---B---C
@@ -37,6 +38,7 @@ feature:      \     /
 ```
 
 **When to use merge:**
+
 - When you want to preserve the branch history
 - For feature branches that represent complete, logical units of work
 - When working on long-running branches
@@ -52,6 +54,7 @@ git rebase main
 ```
 
 **What happens:**
+
 ```
 Before rebase:
 main:     A---B---C
@@ -65,6 +68,7 @@ main:     A---B---C
 ```
 
 **When to use rebase:**
+
 - When you want a clean, linear project history
 - Before merging your feature branch into main
 - When updating your feature branch with latest changes from main
@@ -79,6 +83,7 @@ git rebase -i HEAD~3
 ```
 
 **What happens:**
+
 ```
 Before squash:
 A---B---C---D---E
@@ -116,16 +121,19 @@ squash ghi789 Fix typos
 ## Quick Decision Guide
 
 **Choose Merge when:**
+
 - You want to preserve complete history
 - Working with shared branches
 - Need to maintain branch context
 
 **Choose Rebase when:**
+
 - You want a clean, linear history
 - Working on a personal feature branch
 - Need to integrate latest changes from main
 
 **Use Squash when:**
+
 - You have multiple small, related commits
 - Want to clean up before merging
 - Need to simplify history
