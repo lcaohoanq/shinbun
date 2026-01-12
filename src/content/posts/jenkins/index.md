@@ -5,7 +5,7 @@ description: ''
 image: "jenkins_muscle.png"
 tags: [Networking, Linux, Server, Bash, yml, Automation]
 category: 'Công nghệ'
-draft: true
+draft: false
 lang: 'vi'
 ---
 

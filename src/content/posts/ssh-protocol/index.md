@@ -51,6 +51,19 @@ Fail ở bước 1 → khỏi bàn bước 2, 3.
 
 ![SSH Protocol](What-is-SSH-in-Networking.jpeg)
 
+- Sử dụng **giao thức TCP**, mặc định **cổng 22**
+- Phương pháp mã hóa đối xứng và bất đối xứng
+  - Mã hóa bất đối xứng (Asymmetric Encryption): Dùng để khởi tạo phiên kết nối. (**Thuật toán**: Public key cryptography, phổ biến nhất là **RSA**, DSA, ECDSA, Ed25519)
+  - Mã hóa đối xứng (Symmetric Encryption): Dùng để truyền dữ liệu trong phiên kết nối. (**Thuật toán**: phổ biến nhất là **AES**, Blowfish, Twofish, ChaCha20/Salsa20. Mặc định là AES-256)
+
+## Public key và Private key
+
+- Private key:
+  - Header: `BEGIN RSA PRIVATE KEY` / `BEGIN OPENSSH PRIVATE KEY`
+
+- Public key:
+  - Header: `ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAI... user@host`
+
 ## Lần đầu SSH: “Mày có tin server này không?”
 
 Ai dùng SSH lần đầu cũng từng thấy:
@@ -313,6 +326,52 @@ Nếu:
 ```zsh
 chmod 400 ~/.ssh/id_rsa.pub
 ```
+
+## File `.pem` của AWS
+
+File `.pem` là **private key** mà AWS cung cấp khi bạn tạo EC2 instance.
+
+Khi bạn tạo EC2:
+
+1. AWS bảo bạn tạo **key pair***
+2. AWS
+   - Giữ public key
+   - Gửi private key về bạn (file `.pem`)
+
+Khi EC2 boot lần đầu:
+
+- AWS chép public key vào:
+
+```zsh
+/home/ec2-user/.ssh/authorized_keys
+```
+
+> AWS tự làm ssh-copy-id cho bạn
+
+### Vì sao dùng `.pem` để login mà không cần password?
+
+```ini
+PasswordAuthentication no
+PermitRootLogin prohibit-password
+```
+
+AWS AMI mặc định:
+
+- Không password
+- Không root SSH
+- Chỉ cho phép SSH key
+
+### `.pem` khác gì `id_ed25519`?
+
+|Tiêu chí         |.pem AWS       | id_ed25519          |
+|-----------------|---------------|----------------     |
+|Bản chất         | Private key   | Private key         |
+|Format           | PEM (RSA)     | OpenSSH (ED25519)   |
+|Ai tạo           | AWS           | Bạn                 |
+|Bảo mật          | RSA 2048      | ED25519 (mạnh hơn)  |
+|Có password      | ❌            | có thể có           |
+
+- Khác **format** & **thuật toán** nhưng không khác vai trò
 
 ## Kết luận
 
