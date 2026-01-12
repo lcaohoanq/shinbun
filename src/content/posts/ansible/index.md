@@ -785,7 +785,13 @@ Thực hành ssh và ping tất cả các host từ máy local.
 
 Chiến thôi:
 
-Trong thư mục hiện tại tạo file `inventory` với nội dung như sau:
+Trong thư mục hiện tại tạo file `inventory` bằng lệnh:
+
+```zsh
+nvim ./inventory
+```
+
+- Nội dung file `inventory` như sau:
 
 ```yml
 all:
@@ -878,7 +884,7 @@ fpt | SUCCESS => {
 }
 ```
 
-> Dòng [WARNING] là  cảnh báo về việc Ansible tự động phát hiện phiên bản Python trên host từ xa, không ảnh hưởng gì đến kết quả, tắt cảnh báo bằng cách thêm một dòng `ansible_python_interpreter: /usr/bin/python3.12` vào host `fpt`
+> Dòng **[WARNING]** là cảnh báo về việc Ansible tự động phát hiện phiên bản Python trên host từ xa, không ảnh hưởng gì đến kết quả, tắt cảnh báo bằng cách thêm một dòng `ansible_python_interpreter: /usr/bin/python3.12` vào host `fpt`
 
 ```yml
     fpt:
@@ -898,7 +904,6 @@ ansible all -i ./inventory -m ping
 - Kết quả trả về sẽ như sau:
 
 ```json
-[WARNING]: Host 'fpt' is using the discovered Python interpreter at '/usr/bin/python3.12', but future installation of another Python interpreter could cause a different interpreter to be discovered. See https://docs.ansible.com/ansible-core/2.19/reference_appendices/interpreter_discovery.html for more information.
 fpt | SUCCESS => {
     "ansible_facts": {
         "discovered_interpreter_python": "/usr/bin/python3.12"
@@ -938,12 +943,18 @@ centos | UNREACHABLE! => {
 }
 ```
 
-Trường hợp lỗi, do các host khác chưa bật
-Tất cả các host trả về SUCCESS là ok nhé.
+- Trường hợp lỗi, do các host khác chưa bật, tất cả các host trả về SUCCESS là ok nhé.
 
 ## Group các host trong Inventory
 
-- Tiếp tục với file `inventory2`, thêm các group host như sau:
+- Tiếp tục với file `inventory2`:
+
+```zsh
+cp ./inventory ./inventory2
+nvim ./inventory2
+```
+
+- Thêm các group host như sau:
 
 ```yml
 all:
