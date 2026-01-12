@@ -1,7 +1,7 @@
 ---
 title: Cloudflare 101
 published: 2026-01-06
-description: ''
+description: 'Cloudflare bảo mật đến nỗi không cho mình vào Web của trường luôn mà, tìm hiểu một trong những dịch vụ DNS lớn nhất thế giới này nào!'
 image: "cloudflare.png"
 tags: [Networking, Linux, Server, Bash, yml, Automation, DNS, DevOps, Cloudflare]
 category: 'Công nghệ'

@@ -1,7 +1,7 @@
 ---
 title: Cùng mình thành thạo Jenkins 
 published: 2026-01-11
-description: ''
+description: 'Xài Github Actions đủ lâu, bắt đầu tìm cảm giác lạ, khổ râm hơn với Jenkins thôi!'
 image: "jenkins_muscle.png"
 tags: [Networking, Linux, Server, Bash, yml, Automation]
 category: 'Công nghệ'

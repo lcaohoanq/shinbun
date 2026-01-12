@@ -1,7 +1,7 @@
 ---
-title: Ansible 101
+title: Ansible 101 - Công cụ tự động hóa quản lý server
 published: 2026-01-02
-description: ''
+description: 'Hoàng ơi mới launch 50 con server Linux, em cài Docker giúp anh với, gấp nha. Làm tay sao nổi, dùng Ansible thôi!'
 image: "ansible.png"
 tags: [Linux, Server, Bash, yml, Automation, DevOps]
 category: 'Công nghệ'
