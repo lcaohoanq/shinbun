@@ -5,7 +5,7 @@ description: ''
 image: "cloudflare.png"
 tags: [Networking, Linux, Server, Bash, yml, Automation, DNS, DevOps, Cloudflare]
 category: 'Công nghệ'
-draft: true
+draft: false
 lang: 'vi'
 ---
 

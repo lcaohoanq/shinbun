@@ -5,7 +5,7 @@ description: ''
 image: "https://shalb.com/wp-content/uploads/2019/11/Devops1.jpeg"
 tags: [Networking, Linux, Server, Bash, yml, Automation]
 category: 'Công nghệ'
-draft: true
+draft: false
 lang: 'vi'
 ---
 
