@@ -1,7 +1,7 @@
 ---
-title: Promox 101
+title: Promox - Quản lý máy ảo và container dễ dàng với Proxmox VE
 published: 2026-09-01
-description: 'Tạo nhiều máy ảo thì làm sao? Dùng Proxmox VE để quản lý máy ảo và container một cách dễ dàng'
+description: 'Các dịch vụ cung cấp VPS, Server như Vietnix, Digital Ocean, AWS,... đều sử dụng công nghệ ảo hóa để tối ưu tài nguyên phần cứng. Hôm nay mình sẽ giới thiệu về Proxmox VE, một nền tảng ảo hóa mã nguồn mở dựa trên Debian, cung cấp giao diện web để quản lý máy ảo và container một cách dễ dàng.'
 image: "proxmox_Logo.png"
 tags: [Server, Devops, Promox, Linux, HomeLab, LXC, KVM, Networking]
 category: 'Công nghệ'

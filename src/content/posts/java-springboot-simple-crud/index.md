@@ -1,8 +1,8 @@
 ---
 title: User CRUD đơn giản với Java Spring Boot 3
 published: 2025-01-22
-description: ''
-image: "https://cdn.hashnode.com/res/hashnode/image/upload/v1636832404785/mTXlsmro-.png?w=1600&h=840&fit=crop&crop=entropy&auto=compress,format&format=webp"
+description: 'Ai mới học Spring Boot mại dô, mại dô'
+image: "spring_logo.png"
 tags: [Java, Spring Boot, CRUD, Swagger, Spring Framework]
 category: 'Công nghệ'
 draft: false
@@ -13,9 +13,9 @@ lang: 'vi'
 
 - Có 2 cách tạo project Spring Boot:
 
-    - Sử dụng [Spring Initializr](https://start.spring.io/)
+  - Sử dụng [Spring Initializr](https://start.spring.io/)
 
-    - Sử dụng Spring Tool Suite (STS) hoặc IntelliJ IDEA
+  - Sử dụng Spring Tool Suite (STS) hoặc IntelliJ IDEA
 
 - Mình sẽ tạo trên Spring Initializr, vì nó đơn giản và nhanh chóng.
 
@@ -27,11 +27,11 @@ lang: 'vi'
 
 - Dependencies:
 
-    - Lombok
+  - Lombok
 
-    - H2 Database
+  - H2 Database
 
-    - Spring Data JPA
+  - Spring Data JPA
 
 - Cần thêm gì thì vô pom.xml add sau, 3 cái trên là cơ bản.
 
@@ -39,11 +39,11 @@ lang: 'vi'
 
 - **User.java**
 
-    - @Table(name =  "users"): một bảng trong DB với tên users
+  - @Table(name =  "users"): một bảng trong DB với tên users
 
-    - Điều kiện để trở thành một Entity là xài 2 annotation: @Entity, @Table
+  - Điều kiện để trở thành một Entity là xài 2 annotation: @Entity, @Table
 
-    - Sử dụng những annotation của Lombok để giảm Boilerplate Code
+  - Sử dụng những annotation của Lombok để giảm Boilerplate Code
 
 ```java
 package com.lcaohoanq.demo.domain.user;
@@ -72,7 +72,7 @@ public class User {
 
 - **UserDTO.java**
 
-    - DTO (Data Transfer Object): record **java 16+**, giống với data class của kotlin, mình có một bài viết về record tại đây [Java Record](https://blog.lcaohoanq.works/posts/java-record/java-record),
+  - DTO (Data Transfer Object): record **java 16+**, giống với data class của kotlin, mình có một bài viết về record tại đây [Java Record](https://blog.lcaohoanq.works/posts/java-record/java-record),
 
 ```java
 package com.lcaohoanq.demo.domain.user;
@@ -96,11 +96,11 @@ public record UserDTO(
 
 - **UserRepository.java**
 
-    - Sử dụng **Repository Pattern** [DAO vs Repository](https://www.baeldung.com/java-dao-vs-repository) thay vì dùng DAO (Data Access Object)
+  - Sử dụng **Repository Pattern** [DAO vs Repository](https://www.baeldung.com/java-dao-vs-repository) thay vì dùng DAO (Data Access Object)
 
-    - Có thể dùng @Repository hoặc không vì JpaRepository đã dùng @Repository
+  - Có thể dùng @Repository hoặc không vì JpaRepository đã dùng @Repository
 
-    - JpaRepository nhận 2 type là Entity và Data Type của PK của Entity đó (ở đây PK của User là Long userId) nên sẽ dùng Long
+  - JpaRepository nhận 2 type là Entity và Data Type của PK của Entity đó (ở đây PK của User là Long userId) nên sẽ dùng Long
 
 ```java
 package com.lcaohoanq.demo.domain.user;
@@ -113,9 +113,9 @@ public interface UserRepository extends JpaRepository<User, Long> {}
 
 - **UserService.java**
 
-    - Bussiness Logic
+  - Bussiness Logic
 
-    - @Transactional: hỗ trợ việc quản lý transaction, sử dụng ở class level hoặc method level, ở đây dùng method level
+  - @Transactional: hỗ trợ việc quản lý transaction, sử dụng ở class level hoặc method level, ở đây dùng method level
 
 ```java
 package com.lcaohoanq.demo.domain.user;
@@ -167,15 +167,15 @@ public class UserService {
 
 - **UserController.java**:
 
-    - @RestController: định nghĩa một REST API Endpoint
+  - @RestController: định nghĩa một REST API Endpoint
 
-    - @RequestMapping: áp dụng prefix cho tất cả endpoint trong class
+  - @RequestMapping: áp dụng prefix cho tất cả endpoint trong class
 
-    - @GetMapping, @PostMapping, @PutMapping, @DeleteMapping, @PatchMapping,... cho những HTTP request tương ứng
+  - @GetMapping, @PostMapping, @PutMapping, @DeleteMapping, @PatchMapping,... cho những HTTP request tương ứng
 
-    - Không khuyến khích sử dụng @Autowired -> Field Injection (tham khảo ở đây, [Why using Autowired is not recommend](https://www.baeldung.com/java-spring-field-injection-cons), nên dùng @RequiredArgsContructor + private final -> Constructor Base Injection)
+  - Không khuyến khích sử dụng @Autowired -> Field Injection (tham khảo ở đây, [Why using Autowired is not recommend](https://www.baeldung.com/java-spring-field-injection-cons), nên dùng @RequiredArgsContructor + private final -> Constructor Base Injection)
 
-    - @Valid sẽ kích hoạt validation trong DTO, chỉ hoạt động với @RequestBody là một Object
+  - @Valid sẽ kích hoạt validation trong DTO, chỉ hoạt động với @RequestBody là một Object
 
 ```java
 package com.lcaohoanq.demo.domain.user;
@@ -237,11 +237,11 @@ public class UserController {
 
 ```xml
 <dependencies>
-	<dependency>
-	  <groupId>org.springdoc</groupId>
-	  <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-	  <version>2.6.0</version>
-	</dependency>
+ <dependency>
+   <groupId>org.springdoc</groupId>
+   <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+   <version>2.6.0</version>
+ </dependency>
 <dependencies>
 ```
 

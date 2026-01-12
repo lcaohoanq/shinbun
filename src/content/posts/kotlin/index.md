@@ -1,7 +1,7 @@
 ---
-title: Kotlin 101
+title: Cùng mình học Kotlin 
 published: 2025-01-19
-description: ''
+description: 'Mình chuyển sang học Kotlin khi đụng vào code Android dùng Jet Pack Compose, sau đó thì dùng Kotlin để viết backend với Ktor và Spring Boot. Kotlin là ngôn ngữ lập trình hiện đại, thân thiện với người dùng và có thể giúp bạn tăng năng suất lập trình lên rất nhiều. Hãy cùng mình khám phá Kotlin nhé!'
 image: https://images.prismic.io/qovery/c952e642-7c8c-4e2f-854e-b14a14868b3e_kotlin.png?ixlib=gatsbyFP&auto=compress%2Cformat&fit=max
 tags: [Kotlin]
 category: 'Công nghệ'
@@ -10,8 +10,9 @@ lang: ''
 ---
 
 > ### Documentation
-> - https://github.com/lcaohoanq/kotlin
-> - https://kotlinlang.org/docs/kotlin-reference.pdf
+>
+> - <https://github.com/lcaohoanq/kotlin>
+> - <https://kotlinlang.org/docs/kotlin-reference.pdf>
 
 # Variables and data types
 
@@ -86,6 +87,7 @@ fun process(value: Int?) {
 ```
 
 ## var and val
+
 - `var` is used to declare a mutable variable (a variable that can be reassigned after it's been initialized).
 - `val` is used to declare an immutable variable (a variable that cannot be reassigned after it's been initialized).
 
@@ -201,6 +203,7 @@ enum class RequestError(val message: String) {
 ```
 
 # Static
+
 ```kotlin
 class Calculation {
     //companion object = static in Java
@@ -468,6 +471,7 @@ fun main() {
 ```
 
 # List
+
 ```kotlin
 package collections/*
     Immutable List: list of elements that cannot be modified
@@ -548,7 +552,7 @@ fun immutableList() {
         at ListsKt.immutableList(lists.kt:51)
         at MainKt.main(main.kt:160)
         at MainKt.main(main.kt)
-	*/
+ */
 }
 
 fun mutableList() {
@@ -737,6 +741,7 @@ fun convertListType() {
 ```
 
 # Array List
+
 ```kotlin
 import Student
 
@@ -758,6 +763,7 @@ fun main(){
 ```
 
 # Map
+
 ```kotlin
 package collections
 
@@ -809,6 +815,7 @@ fun main() {
 ```
 
 # Set
+
 ```kotlin
 package collections
 
@@ -1334,6 +1341,7 @@ fun loops(){
 ```
 
 # Nullable
+
 ```kotlin
 import com.sun.source.doctree.AttributeTree.ValueKind
 
