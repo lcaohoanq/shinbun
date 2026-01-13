@@ -68,3 +68,54 @@ root@pve:~# pct passwd 100
 Enter new password:
 Retype new password:
 ```
+
+# Tạo một Alpine Proxy Server dùng Cloudflare Tunnel
+
+- Chuyện là khi muốn vào dashboard của Proxmox từ bên ngoài mạng nhà mình, thì có 2 cách:
+  - Mở port 8006 của router
+  - Tunnel: mình hay dùng thằng Cloudflare Tunnel vì nó miễn phí, dễ dùng, bảo mật tốt, tận dụng tối đã hệ sinh thái của Cloudflare luôn.
+
+- Tại sao lại chọn Alpine để làm proxy server?
+  - Nhẹ, nhanh, ít tốn tài nguyên (đây là điều quan trọng nhất với mình)
+  - Alpine musl nhanh nhẹ gọn
+
+- Các bước cần làm sau:
+
+1. Tạo LXC container Alpine trên Proxmox (alpine-3.22-default_20250617_amd64.tar.xz)
+
+- CPU: 1 core
+- RAM: 512MB
+- Disk: 5GB
+- Network:
+  - IPv4: DHCP
+  - IPv6: Disable
+
+1. Cài đặt docker, docker-compose-cli trong container
+
+- Theo doc: <https://wiki.alpinelinux.org/wiki/Docker>
+
+```bash
+apk update
+apk add docker
+
+rc-update add docker default
+service docker start
+
+apk add docker-cli-compose
+```
+
+1. Tạo file docker-compose.yml để chạy Cloudflare Tunnel
+
+```zsh
+touch docker-compose.yml
+```
+
+- Copy nội dung này vào, nhớ thay `<YOUR_TUNNEL_TOKEN>` bằng token của bạn nha
+
+```yaml
+services:
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    restart: unless-stopped
+    command: tunnel --no-autoupdate run --token <YOUR_TUNNEL_TOKEN>
+```
