@@ -10,9 +10,10 @@ lang: 'en'
 ---
 
 > ### I have tried these three DEs
->  - Gnome
->  - KDE
->  - XFCE
+>
+> - Gnome
+> - KDE
+> - XFCE
 
 - First time trying Gnome with Ubuntu (downloaded ISO from website and install~), it's so pretty and most compatible with my devices, smoothing experience aka Memory waster
 
@@ -24,47 +25,48 @@ lang: 'en'
 
 **[Update: 24 June 24]**: Back to using Gnome Debian (there some issue with my KDE + bspwm), but another session still bspwm xD
 
-> https://github.com/lcaohoanq/dotfiles
+> <https://github.com/lcaohoanq/dotfiles>
 
 **[Update 30 June 24]**: I have moved to Arch with Hyprland, my first time using Arch, and it's so fun to rice my system xD
 
-> https://github.com/lcaohoanq/hypr-arch-dotfiles/
+> <https://github.com/lcaohoanq/hypr-arch-dotfiles/>
 
 ![](l-ch-S3jgTJ91pio-unsplash.jpg)
 
 > Life seem more tough when learning, using Linux but after a long time, 2 years using, fail, break, reinstall many time...every moments worth it, i really love Linux and it became my daily driver now.
 
 # OSS (Open Source Software)
+
 - OSS is software with source code that anyone can inspect, modify, and enhance
 - Many famous internet backbones tools:
-	- [react](https://github.com/facebook/react)
-	- [spring boot](https://github.com/spring-projects/spring-boot)
-	- [fzf (fuzzy file finder)](https://github.com/junegunn/fzf)
-	- [wireguard-easy](https://github.com/wg-easy/wg-easy)
-	- [postgresql](https://wiki.postgresql.org/wiki/Submitting_a_Patch)
+  - [react](https://github.com/facebook/react)
+  - [spring boot](https://github.com/spring-projects/spring-boot)
+  - [fzf (fuzzy file finder)](https://github.com/junegunn/fzf)
+  - [wireguard-easy](https://github.com/wg-easy/wg-easy)
+  - [postgresql](https://wiki.postgresql.org/wiki/Submitting_a_Patch)
 
 Many many many tools are open source now :)
 
 ![Alt text](https://images.unsplash.com/photo-1549605659-32d82da3a059?q=80&w=1170&auto=format&fit=crop)
-
 
 # Linux History
 
 ![Alt text](gnu.jpg)
 
 - 1984: The GNU Project and the Free Software Foundation
-	- Create open source version of UNIX utilities
-	- Create the General Public License (GPL): Software license enforcing open source principles
+  - Create open source version of UNIX utilities
+  - Create the General Public License (GPL): Software license enforcing open source principles
 - 1991: Linus Tovarlds
-	- Creates open source, UNIX-like kernel, released under the GPL
-	- Ports some GNU utilities, solicits assistance online
+  - Creates open source, UNIX-like kernel, released under the GPL
+  - Ports some GNU utilities, solicits assistance online
 - Today:
-	- Linux kernel + GNU utilities = complete, open source, UNIX like operating system
-		- Packaged for targeted audiences as distributions
+  - Linux kernel + GNU utilities = complete, open source, UNIX like operating system
+    - Packaged for targeted audiences as distributions
 
-- Linux Kernel Repository: https://github.com/torvalds/linux, i really want to have a chance to contribute to this repo
+- Linux Kernel Repository: <https://github.com/torvalds/linux>, i really want to have a chance to contribute to this repo
 
 # Linux Principles
+
 - Everything is a file (Include Hardware)
 - Small Single purpose Programs
 - Ability to chain programs together for complex operations
@@ -83,7 +85,7 @@ Many many many tools are open source now :)
 - Automation
 - Security (debatable topic, depend on you)
 
-# Architecture of Linux 
+# Architecture of Linux
 
 ![](Linux-Architecture-1024x728.png)
 
@@ -91,32 +93,332 @@ Many many many tools are open source now :)
 
 # Popular Linux Distributions (distros)
 
-- List of Linux Distributions: https://en.wikipedia.org/wiki/List_of_Linux_distributions
+- List of Linux Distributions: <https://en.wikipedia.org/wiki/List_of_Linux_distributions>
 
 ![Alt text](distros.jpg)
 
 - Desktop
-	- Ubuntu
-	- Mint
-	- Arch
-	- Fedora
-	- Debian
-	- OpenSUSE
+  - Ubuntu
+  - Mint
+  - Arch
+  - Fedora
+  - Debian
+  - OpenSUSE
 - Server
-	- RHEL (Red Hat Enterprise Linux): most stable, secured, not open source
-	- Ubuntu Server
-	- CentOS
-	- SUSE Enterprise Linux
+  - RHEL (Red Hat Enterprise Linux): most stable, secured, not open source
+  - Ubuntu Server
+  - CentOS
+  - SUSE Enterprise Linux
 
 - Most used Linux distros currently in IT industry
-	- **RPM based or .rpm**: RHEL, Centos, Oracle Linux
-		- Example: Google chrome software
-		- Package name: google-chrome-stable-57.0.2987.133-1.x86_64.**rpm**
-		- Installation: rpm -ivh google-chrome-stable_current_amd64.**rpm**
-	- **Debian base or .deb**: Ubuntu server, Kali Linux
-		- Example: Google chrome software
-		- Package name: google-chrome-stable_current_amd64.**deb**
-		- Installation: dpkg -i google-chrome-stable_current_amd64.**deb**
+  - **RPM based or .rpm**: RHEL, Centos, Oracle Linux
+    - Example: Google chrome software
+    - Package name: google-chrome-stable-57.0.2987.133-1.x86_64.**rpm**
+    - Installation: rpm -ivh google-chrome-stable_current_amd64.**rpm**
+  - **Debian base or .deb**: Ubuntu server, Kali Linux
+    - Example: Google chrome software
+    - Package name: google-chrome-stable_current_amd64.**deb**
+    - Installation: dpkg -i google-chrome-stable_current_amd64.**deb**
+
+---
+
+# So sánh các distro phổ biến, Release model
+
+![Distro](distro.webp)
+
+## So sánh
+
+<style>
+/* ===== Distro Table – clean & readable ===== */
+.distro-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.distro-table thead th {
+  background: #0f172a;        /* slate-900 */
+  color: #e5e7eb;             /* gray-200 */
+  text-align: left;
+  padding: 10px 12px;
+  font-weight: 600;
+  border-bottom: 2px solid #334155;
+}
+
+.distro-table tbody td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #e5e7eb;
+  vertical-align: top;
+}
+
+.distro-table tbody tr:nth-child(even) {
+  background: #f8fafc;        /* slate-50 */
+}
+
+.distro-table tbody tr:hover {
+  background: #e0f2fe;        /* sky-100 */
+}
+
+.distro-table td:nth-child(1) {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.distro-table td:nth-child(7) {
+  white-space: nowrap;
+}
+
+/* Dark mode (nếu markdown site có prefers-color-scheme) */
+@media (prefers-color-scheme: dark) {
+  .distro-table thead th {
+    background: #020617;
+    border-bottom-color: #1e293b;
+  }
+
+  .distro-table tbody td {
+    border-bottom-color: #1e293b;
+  }
+
+  .distro-table tbody tr:nth-child(even) {
+    background: #020617;
+  }
+
+  .distro-table tbody tr:hover {
+    background: #082f49;
+  }
+}
+</style>
+
+<table class="distro-table">
+  <thead>
+    <tr>
+      <th>Distro</th>
+      <th>Base / libc</th>
+      <th>Release model</th>
+      <th>Điểm mạnh</th>
+      <th>Đánh đổi</th>
+      <th>Hợp dùng cho</th>
+      <th>Đánh giá nhanh</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Debian 12 (Bookworm)</td>
+      <td>glibc</td>
+      <td>Fixed</td>
+      <td>Ổn định, ít drama, LXC mượt, doc mạnh</td>
+      <td>Tool không quá mới</td>
+      <td>Infra lâu dài, DB, Jenkins, SonarQube. Service “chạy là chạy mãi”</td>
+      <td>Default số 1</td>
+    </tr>
+    <tr>
+      <td>Ubuntu 22.04 (Jammy)</td>
+      <td>glibc</td>
+      <td>LTS</td>
+      <td>Tool mới hơn Debian, guide nhiều, Canonical support tốt</td>
+      <td>Hơi “nặng tay”</td>
+      <td>App layer, CI/CD, dev</td>
+      <td>Rất an toàn</td>
+    </tr>
+    <tr>
+      <td>Ubuntu 24.04 (Noble)</td>
+      <td>glibc</td>
+      <td>LTS (mới)</td>
+      <td>Kernel &amp; tool rất mới</td>
+      <td>Chưa đủ thời gian kiểm chứng độ lì</td>
+      <td>Lab, non-critical</td>
+      <td>Dùng thận trọng</td>
+    </tr>
+    <tr>
+      <td>Debian 13 (Trixie)</td>
+      <td>glibc</td>
+      <td>Testing branch</td>
+      <td>Cân bằng mới &amp; ổn</td>
+      <td>Package mới hơn Debian 12, behavior có thể đổi</td>
+      <td>Test upgrade, lab</td>
+      <td>Không prod lâu dài</td>
+    </tr>
+    <tr>
+      <td>Alpine 3.22</td>
+      <td>musl</td>
+      <td>Rolling nhẹ, siêu minimal (~4mb)</td>
+      <td>Siêu nhẹ, RAM thấp, boot nhanh</td>
+      <td>Debug khó, binary compatibility thấp, không hợp với các app phức tạp</td>
+      <td>Proxy, sidecar, agent</td>
+      <td>Nhẹ, gắt, cực đoan</td>
+    </tr>
+    <tr>
+      <td>Rocky Linux 9/10</td>
+      <td>glibc</td>
+      <td>Clone RHEL, fixed lâu, update chậm nhưng chắc</td>
+      <td>Chuẩn enterprise, rất lì</td>
+      <td>Tool cũ, dev chậm</td>
+      <td>DB, middleware, prod kiểu corp</td>
+      <td>Enterprise vibe</td>
+    </tr>
+    <tr>
+      <td>AlmaLinux 9/10</td>
+      <td>glibc</td>
+      <td>Fixed lâu</td>
+      <td>Như Rocky nhưng mềm hơn</td>
+      <td>Gần như giống Rocky</td>
+      <td>Enterprise / prod</td>
+      <td>Gu cá nhân</td>
+    </tr>
+    <tr>
+      <td>CentOS Stream 9</td>
+      <td>glibc</td>
+      <td>Ở giữa trời đất (Fedora - RHEL), Rolling nhẹ</td>
+      <td>Thấy trước tương lai RHEL</td>
+      <td>Không hợp hệ thống cần predictability</td>
+      <td>Lab, học enterprise</td>
+      <td>Không prod</td>
+    </tr>
+    <tr>
+      <td>Fedora 42</td>
+      <td>glibc</td>
+      <td>Rolling nhanh</td>
+      <td>Công nghệ mới nhất</td>
+      <td>Lifecycle ngắn, dễ gãy</td>
+      <td>Test infra, học tech mới</td>
+      <td>Không lâu dài</td>
+    </tr>
+    <tr>
+      <td>openSUSE Leap 15.6</td>
+      <td>glibc</td>
+      <td>Fixed</td>
+      <td>Rất kỷ luật, sạch</td>
+      <td>Ít guide, ít cộng đồng</td>
+      <td>Người thích hệ chuẩn</td>
+      <td>Kén người</td>
+    </tr>
+    <tr>
+      <td>Gentoo (OpenRC)</td>
+      <td>glibc</td>
+      <td>Rolling (source)</td>
+      <td>Compile từ source, Control tuyệt đối</td>
+      <td>Tốn thời gian, mệt</td>
+      <td>Hiểu Linux rất sâu, tối ưu theo CPU</td>
+      <td>Hành xác, mất thời gian, vận hành server khổ</td>
+    </tr>
+    <tr>
+      <td>Devuan 5</td>
+      <td>glibc</td>
+      <td>Fixed</td>
+      <td>Debian Không systemd, sysvinit / openrc</td>
+      <td>Ít lý do dùng</td>
+      <td>Anti-systemd, nhẹ hơn chút</td>
+      <td>Có lý do rõ</td>
+    </tr>
+    <tr>
+      <td>Arch Linux</td>
+      <td>glibc</td>
+      <td>Rolling (fast)</td>
+      <td>Mới nhất, AUR</td>
+      <td>Dễ gãy, tốn công</td>
+      <td>Học Linux sâu, power user</td>
+      <td>Không ổn định</td>
+    </tr>
+  </tbody>
+</table>
+
+## Release model: Rolling releases và Fixed release
+
+Khi chọn distro Linux, một trong những khác biệt **quan trọng nhất** là *mô hình phát hành* (release model).  
+Nó quyết định việc **update có “sướng” hay “đau”**, và hệ thống **ổn định đến mức nào**.
+
+![Release Model](rolling_fixed.jpg)
+
+### Rolling release là gì?
+
+**Rolling release** cập nhật liên tục.  
+Không có “phiên bản lớn” theo năm — chỉ có **update đều đều, không ngừng nghỉ**.
+
+**Ưu điểm**
+
+- Luôn có **phiên bản mới nhất** của kernel, tool, library
+- Trải nghiệm công nghệ mới rất nhanh
+
+**Đánh đổi**
+
+- Update có thể **làm gãy hệ thống**
+- Dễ gặp lỗi **incompatible**, đổi config, đổi ABI
+
+Ví dụ điển hình: **Arch Linux**, một ngày đẹp trời bạn chạy:
+
+```bash
+pacman -Syu
+```
+
+Ngày hôm sau có thể gặp:
+
+- nginx báo config deprecated
+
+- openssl bump version
+
+- Service fail vì **lib đổi ABI (Application Binary Interface)**
+
+> Arch **không hứa hẹn stability dài hạn.**
+> Arch buộc user phải **hiểu hệ thống và tự sửa khi gãy.**
+> Update mà **không đọc Arch Linux News** → xác định ăn hành.
+
+### Fixed release là gì?
+
+**Fixed release** phát hành theo chu kỳ rõ ràng (ví dụ 2 năm / 5 năm).
+Trong suốt vòng đời đó, hệ thống ưu tiên **ổn định hơn là mới.**
+
+**Ưu điểm**
+
+- Ít gãy, ít drama
+
+- Rất phù hợp cho **server & production**
+
+**Đánh đổi**
+
+- Package không mới bằng rolling
+
+Ví dụ tiêu biểu: **Ubuntu LTS**
+
+- Không có chuyện hôm nay update, ngày mai service chết
+
+- Canonical test kỹ trước khi release
+
+- Update chủ yếu là **security & bugfix**
+
+Vì vậy **Ubuntu LTS** rất hợp cho **production server**,
+còn **Arch Linux** hợp cho người dùng cá nhân hoặc lab thích công nghệ mới.
+
+#### Góc nhìn cá nhân: chia Rolling release thành 3 mức
+
+Theo trải nghiệm thực tế, mình chia rolling release thành 3 nhóm:
+
+##### Rolling nhanh
+
+- Package cập nhật liên tục
+
+- Rất dễ gãy nếu không theo dõi changelog
+
+Ví dụ: Arch Linux, Fedora
+
+##### Rolling vừa
+
+- Có update thường xuyên nhưng **đã qua một lớp kiểm soát**
+
+- Phù hợp để test trước khi lên prod
+
+Ví dụ: Debian Testing
+
+###### Rolling chậm / Fixed lâu
+
+- Update rất chậm
+
+- Ưu tiên ổn định và predictability
+
+Ví dụ: Rocky Linux, AlmaLinux
+
+---
 
 # Package manager
 
@@ -180,12 +482,14 @@ sudo apt-get install ROSÉ
   - `ls -a`
   - ls -lt : sort time descending
   - ls -ltr: sort time ascending (r = reverse)
->  im using [exa](https://github.com/ogham/exa): better ls
+
+> im using [exa](https://github.com/ogham/exa): better ls
 
 - **pwd** : print **current** working directory
 
 - **cat**
   - `cat file.txt`
+
 > im using [bat](https://github.com/sharkdp/bat),  notice that after install bat, it use the batcat (not bat) so need to remember or assign alias to .zshrc
 
 - **cp** : Copy files and directories
@@ -198,6 +502,7 @@ sudo apt-get install ROSÉ
   - `mv file.txt file2.txt`
   - `mv * /usr/share/.fonts`
   - we can perform the rename file or directory by mv command: if i want to rename the file demo.txt to test.txt
+
   ```bash
   mv demo.txt test.txt
   # same as directory
@@ -211,7 +516,8 @@ sudo apt-get install ROSÉ
 - **mkdir** : Make directories
   - mkdir /hihi
   - mkdir /hihi/hehe/huhu => No such file or directory => mkdir -p /hihi/hehe/huhu ok
->	- Because normal mkdir only support one directory, if pass parent/child/... it cause error -> using -p (parent) to fix
+>
+> - Because normal mkdir only support one directory, if pass parent/child/... it cause error -> using -p (parent) to fix
 
 - **echo** : Write text to file
   - `echo "Hello World" > file.txt`
@@ -229,18 +535,19 @@ sudo apt-get install ROSÉ
   - `unzip file.zip`
 
 - **head**:  Display the **first 10 lines** (*default*)
-	- `head filename.txt`
-	- `head -5 filename.txt` (**first 5 lines**)
-	- `head -c 45 filename.txt` (**first 45 bytes**)
+  - `head filename.txt`
+  - `head -5 filename.txt` (**first 5 lines**)
+  - `head -c 45 filename.txt` (**first 45 bytes**)
   - `head -f filename.txt` (**follow the file**)
 
 - **tail**:  Display the **last 10 lines** (*default*)
-	- `tail filename.txt`
-	- `tail -20 filename.txt` (**last 20 lines**)
-	- `tail -c 45 filename.txt` (**last 45 bytes**)
+  - `tail filename.txt`
+  - `tail -20 filename.txt` (**last 20 lines**)
+  - `tail -c 45 filename.txt` (**last 45 bytes**)
   - `tail -f filename.txt` (**follow the file**
 
- - **tree** : Show the current directory with the tree visualization
+- **tree** : Show the current directory with the tree visualization
+
    ```bash
    # show everything
    tree
@@ -256,27 +563,30 @@ sudo apt-get install ROSÉ
    ```
 
 - **history**: Show all previously executed command
-	- im currently using [atuin](https://github.com/atuinsh/atuin): better history, with built in sql lite, can search, navigate to the previous command
+  - im currently using [atuin](https://github.com/atuinsh/atuin): better history, with built in sql lite, can search, navigate to the previous command
 
 - Process:
   - `ps`: shows only **processes associated with your current terminal session and use**
   - `ps aux`:  display a **detailed snapshot of all running processes** on the system
+
     ```bash
     # show detailed all running processes and find obs
     ps aux | grep "obs"
     ```
 
   ## System Information
+
 - Check CPU:
-	- **nproc**
-	- **lscpu**
+  - **nproc**
+  - **lscpu**
 
 - Check RAM
-	- **free -h**
-	- **cat /proc/meminfo**
+  - **free -h**
+  - **cat /proc/meminfo**
 
 - Check Disk:
   - **df -h**: disk free
+
   ```zsh
   ❯ df -h
   Filesystem      Size  Used Avail Use% Mounted on
@@ -292,6 +602,7 @@ sudo apt-get install ROSÉ
   ```
 
   - **lsblk**: list block devices
+
   ```zsh
   ❯ lsblk
   NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
@@ -307,6 +618,7 @@ sudo apt-get install ROSÉ
   ```
 
   - `-a`: all devices
+
   ```zsh
   ❯ lsblk -a
   NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
@@ -322,6 +634,7 @@ sudo apt-get install ROSÉ
   ```
 
   - `-o`: specify output columns (check all column `lsblk --list-columns`)
+
   ```zsh
   ❯ lsblk -a -o NAME,SIZE,FSTYPE,UUID,MOUNTPOINT
   NAME          SIZE FSTYPE UUID                                 MOUNTPOINT
@@ -337,6 +650,7 @@ sudo apt-get install ROSÉ
   ```
 
   - **fdisk**: older systems or simple MBR tasks
+
   ```zsh
   ❯ sudo fdisk -l
   Disk /dev/nvme0n1: 238.47 GiB, 256060514304 bytes, 500118192 sectors
@@ -377,8 +691,9 @@ sudo apt-get install ROSÉ
   /dev/sda1        2048 1041569791 1041567744 496.7G Microsoft basic data
   /dev/sda2  1041569792 1953523119  911953328 434.9G Microsoft basic data
   ```
-    
+
   - **parted**: newer systems or GPT tasks (or `gdisk`)
+
   ```zsh
   ❯ sudo parted -l
   Model: ATA TOSHIBA MQ04ABF1 (scsi)
@@ -418,17 +733,21 @@ sudo apt-get install ROSÉ
   - **du -h --max-depth=1**: check current directory disk usage
   - **du -sh /**: check root directory disk usage summary
   - **dust**: better way to check disk usage than `du`, extremely fast
+
     ```bash
     # check root directory
     dust /
     ```
+
   - **ncdu**: TUI using ncurses, find exactly what's taking space and want to clean up interactively
+
     ```bash
     ncdu /
     ```
 
 - Process management
-	- **top**: mandatory tool
+  - **top**: mandatory tool
+
 > im using [htop](https://github.com/htop-dev/htop), [btop](https://github.com/aristocratos/btop), better UI, more efficient to do process management
 
 - Power Management
@@ -442,10 +761,12 @@ sudo apt-get install ROSÉ
 > Not mandatory command, but im using too many time
 
 - Copy all content of file into clipboard
-	- **xclip** way, make sure you installed [xclip](https://github.com/astrand/xclip) with `sudo apt install xclip`
-		```zsh
-		cat <filename> | xclip -selection clipboard
-		```
+  - **xclip** way, make sure you installed [xclip](https://github.com/astrand/xclip) with `sudo apt install xclip`
+
+  ```zsh
+  cat <filename> | xclip -selection clipboard
+  ```
+
 ---
 
 # File System
@@ -490,25 +811,25 @@ sudo apt-get install ROSÉ
 
 ### Tips to remember
 
--   **/etc** → config
+- **/etc** → config
 
--   **/var** → always change (log, cache)
+- **/var** → always change (log, cache)
 
--   **/proc & /sys** → not a real file
+- **/proc & /sys** → not a real file
 
--   **/usr** → app + lib
+- **/usr** → app + lib
 
--   **/bin vs /sbin** → user vs admin
+- **/bin vs /sbin** → user vs admin
 
--   **/dev** → everything is file 😎 (i want fine also)
+- **/dev** → everything is file 😎 (i want fine also)
 
 ---
 
 # File Permissions
 
 - Every directory have permission for owner and group
-	- Owner is who created the file or directory
-	- Groups is the set of users who share the same permission
+  - Owner is who created the file or directory
+  - Groups is the set of users who share the same permission
 
 ![](File-permissions-in-Linux-Unix.png)
 
@@ -516,12 +837,13 @@ sudo apt-get install ROSÉ
    r : read
    w: write
    x: execute
-- `-rw-r--r--`:
-	- owner user: can read, write, not execute (for each file the owner is root, oracle9, user3)
-	- group user: can read only
-	- other user: can read only
 
--  rwx (**user**)    rwx  (**group**)   rwx (**other**)
+- `-rw-r--r--`:
+  - owner user: can read, write, not execute (for each file the owner is root, oracle9, user3)
+  - group user: can read only
+  - other user: can read only
+
+- rwx (**user**)    rwx  (**group**)   rwx (**other**)
 
 ## chmod
 
@@ -534,9 +856,9 @@ chmod [u/g/o][+/-/=][r/w/x][file]
 ```
 
 - Syntax:
-	- **u/g/o**: user/group/other
-	- **+/-/=**: add, remove, set
-	- **r/w/x**: read, write, execute
+  - **u/g/o**: user/group/other
+  - **+/-/=**: add, remove, set
+  - **r/w/x**: read, write, execute
 
 - Change file `data.txt` add groups permission writable
 
@@ -545,14 +867,16 @@ chmod g+w data.txt
 ```
 
 - Using octal notation
-	- Easy to figure out what number: https://chmod-calculator.com/
+  - Easy to figure out what number: <https://chmod-calculator.com/>
+
 ```zsh
 chmod 664 foo.txt
 ```
+
 - Syntax:
-	- **u/g/o**: 6 6 4
-	- read and write: 6, read: 4
-	 - 400 : read only
+  - **u/g/o**: 6 6 4
+  - read and write: 6, read: 4
+  - 400 : read only
 
 - Be careful with `chmod 777`, grant full access, convenience but it violate the principle of privilege
 
@@ -579,16 +903,19 @@ sudo apt-get install nano
 ### Command
 
 - Create new file without touch
+
 ```zsh
 nano hehe.txt
 ```
 
--  Create a file name hihi.txt with some text
+- Create a file name hihi.txt with some text
+
 ```zsh
 echo "first line" > hihi.txt
 ```
 
 - Append a text to end of file
+
 ```zsh
 # Redirection operator
 echo "first line" >> hihi.txt
@@ -621,107 +948,120 @@ Ctrl + U
 
 ![Alt text](vim.webp)
 
-- More at here (https://viblo.asia/p/co-ban-ve-vim-cho-nguoi-moi-bat-dau-GrLZDavnlk0)
+- More at here (<https://viblo.asia/p/co-ban-ve-vim-cho-nguoi-moi-bat-dau-GrLZDavnlk0>)
 - Vim has 3 mode
-	- Normal: **default**, navigate, simple edit
-	- Insert: as the name, using as insert character
-	- Command Line: saving, exiting,...
+  - Normal: **default**, navigate, simple edit
+  - Insert: as the name, using as insert character
+  - Command Line: saving, exiting,...
 
 ### Command
 
 ![](gif/JimCarreyReactionGIF.gif)
 
 - Copy 1 line (yanking)
+
 ```zsh
 yy
 ```
 
 - Copy 3 line
+
 ```zsh
 3yy
 ```
 
 - Copy all file content (rather than `32yy`, no this suck)
-	- vim will popup that `32 lines yanked into "+`
+  - vim will popup that `32 lines yanked into "+`
+
 ```zsh
 :%y+
 ```
 
 - Paste (as current cursor pointer)
-	- Below: **p**
-	- Above: **P**
+  - Below: **p**
+  - Above: **P**
 
 - Undo
+
 ```zsh
 u
 ```
 
 - Delete 1 line (yanking):
+
 ```zsh
 dd
 ```
 
 - Delete 3 line
+
 ```zsh
 3dd
 ```
 
 - Jump to specific line (Normal mode), type line number with capital G -> Enter
+
 ```zsh
 118796G
 ```
 
 - Search word (Command mode -> **ESC**), / then type the keyword want to search -> Enter
+
 ```zsh
 /Error
 ```
 
 - Home file (double g)
+
 ```zsh
 gg
 ```
 
 - Home line
+
 ```zsh
 0
 ```
 
 - End file (capital G)
+
 ```zsh
 G
 ```
 
 - End line
+
 ```zsh
 Shift + 0
 ```
 
 - Exit (Command mode -> **ESC**)
-	- q stand for quit
-	- w stand for write
+  - q stand for quit
+  - w stand for write
+
 ```zsh
 :q! #force exit without saving
 :wq #save and exit
 ```
 
 - **Advanced**
-	- Combine nvim with **fzf**
-		- In terminal type `nvim (space) then Ctrl + T`  => it will open file with nvim immediately
-		-  Search file with `fzf`, preview with `batcat` then open in `nvim`: i use alias **fn** for this very long command `fn='/opt/nvim-linux-x86_64/bin $(fzf --preview="batcat --color=always {}")'`
+  - Combine nvim with **fzf**
+    - In terminal type `nvim (space) then Ctrl + T`  => it will open file with nvim immediately
+    - Search file with `fzf`, preview with `batcat` then open in `nvim`: i use alias **fn** for this very long command `fn='/opt/nvim-linux-x86_64/bin $(fzf --preview="batcat --color=always {}")'`
 
 - Ref the `alias` at my [dotfile](https://github.com/lcaohoanq/dotfiles)
 
 ### LazyVim
 
-- Currently im using LazyVim (https://www.lazyvim.org/), it really easy to setup, and support a lot of LUA plugins there, but before going to something comfortable, make sure you have a basic or good foundation of vim, take time to practice :)
+- Currently im using LazyVim (<https://www.lazyvim.org/>), it really easy to setup, and support a lot of LUA plugins there, but before going to something comfortable, make sure you have a basic or good foundation of vim, take time to practice :)
 
 ![Alt text](lazyvim.png)
 
 - In the current directory, type `nvim .`, it will open with nvim treesitter (same as sidebar in other IDE)
 
 - Shortcut:
-	- **Space + Space**: find file, like Ctrl + P (VSCode), Ctrl + Shift + N/Shift +  Shift (IntelliJ)
-	- **Ctr + /**: Terminal (enter the Terminal using i mode)
+  - **Space + Space**: find file, like Ctrl + P (VSCode), Ctrl + Shift + N/Shift +  Shift (IntelliJ)
+  - **Ctr + /**: Terminal (enter the Terminal using i mode)
 
 - Linux with Nvim oh man, we nearly become arch user
 
@@ -735,20 +1075,20 @@ Shift + 0
 
 ![](rm_rf.jpeg)
 
-## The 7 standard Linux file types:
+## The 7 standard Linux file types
 
 - Regular file
-	- **-**: Normal files such as text, data, or executable files
+  - **-**: Normal files such as text, data, or executable files
 - Directory
-	- **d**: Files that are lists of others files
+  - **d**: Files that are lists of others files
 - Symbolic Link
-	- **l** : A shortcut that points to the location of the actual file
+  - **l** : A shortcut that points to the location of the actual file
 - Special file
-	- **c**: Mechanism using for input and output, such as file in /dev
+  - **c**: Mechanism using for input and output, such as file in /dev
 - Socket
-	- **s**: A special file that provides inter-process networking protected by the file system's access control
+  - **s**: A special file that provides inter-process networking protected by the file system's access control
 - Pipe
-	- **p**: A special file that allows processes to communicate with each other without using network socket semantics, FIFO (first in, first out)
+  - **p**: A special file that allows processes to communicate with each other without using network socket semantics, FIFO (first in, first out)
 - Block Device
   - **b**: A special file that provides buffered access to hardware devices, such as hard drives
 
@@ -789,11 +1129,13 @@ lrwxrwxrwx     - lcaohoanq 16 Dec  2025   '002 #2. Tài liệu khóa học (P
   - `.`: special file
 
 ---
+
 # Symbolic links
 
 ![](gif/BrainToBrainGIF.gif)
 
 - Like desktop shortcut in windows
+
 ```zsh
 ln -s source destination
 
@@ -809,8 +1151,8 @@ lrwxrwxrwx     - lcaohoanq 16 Dec  2025   hoidanit-java-springboot -> /media/
 lrwxrwxrwx     - lcaohoanq 16 Dec  2025   '002 #2. Tài liệu khóa học (Project Y).pdf' -> '/media/data/courses/hoidanit-java-springboot/9 - Y - Chapter 1 Bắt buộc xem'/'002 #2. Tài liệu khóa học (Project Y).pdf'
 ```
 
-
 ---
+
 # Filter & IO redirection command
 
 ## Grep (Global Regular Expression Print)
@@ -818,15 +1160,14 @@ lrwxrwxrwx     - lcaohoanq 16 Dec  2025   '002 #2. Tài liệu khóa học (P
 - Find text patterns in files
 
 - Syntax: `grep "search_term" [flags] [file_name]`
-	- grep "mom" hello.txt
-	- grep "mom" -n hello.txt (**-n**: line number)
-	- grep "mom" -Rn . (**-R: recursive**, search multiple file all in current directory)
-	- grep "^app" hello.txt (**RegEx**, search line start with `app`)
-	- grep "error$" mvn_error.log (**RegEx**, search line end with `error`)
-	- grep -c NullPointerException SomeErrorLogs.txt (**count how many time** NullPointerException **appear** in SomeErrorLogs.txt)
+  - grep "mom" hello.txt
+  - grep "mom" -n hello.txt (**-n**: line number)
+  - grep "mom" -Rn . (**-R: recursive**, search multiple file all in current directory)
+  - grep "^app" hello.txt (**RegEx**, search line start with `app`)
+  - grep "error$" mvn_error.log (**RegEx**, search line end with `error`)
+  - grep -c NullPointerException SomeErrorLogs.txt (**count how many time** NullPointerException **appear** in SomeErrorLogs.txt)
 
 ![Alt text](grep.webp)
-
 
 - Grep help
 
@@ -910,20 +1251,22 @@ General help using GNU software: <https://www.gnu.org/gethelp/>
 
 - Usecase 1: We have sample file **0_Run predefined test cases.txt** contain the log from Github Action CI pipeline. Search error logs find the error. Problem is the file are too long (10k ~ line), and we are in server, we not have any IDE to use.
 - Find text contain "Exception"
+
 ```zsh
 grep "Exception" 0_Run predefined test cases.txt
 ```
 
 - Syntax:
-	- grep "key_word" -param file_name
+  - grep "key_word" -param file_name
 
 - Param
-	- R: search recursively
-	- n: show line number
+  - R: search recursively
+  - n: show line number
 
 - Usecase 2: Find the export port of docker container name pgadmin. We can easily use **docker ps** then use eyes to look for the pgadmin container. But when the number of container become 50, 100 or even more. Using **docker ps** and search manually make you look silly :).
 
 - Search with grep + pipe operator **|**
+
 ```zsh
 ❯ docker ps | grep pgadmin
 7ed17a84f912   dpage/pgadmin4   "/entrypoint.sh"         12 days ago   Up 39 minutes             443/tcp, 0.0.0.0:5050->80/tcp, [::]:5050->80/tcp   pgadmin
@@ -931,7 +1274,7 @@ grep "Exception" 0_Run predefined test cases.txt
 
 ## Sed (non-interactive text editor)
 
-- Mainly use RegEx, play with RegEx here: https://regex101.com/
+- Mainly use RegEx, play with RegEx here: <https://regex101.com/>
 
 ![](regex.webp)
 
@@ -964,9 +1307,11 @@ lcaohoanvlvlvlvl
 
 - Instead of doing manually command in Linux enviroment, we use text file to automate day to day regular tasks, that text file tell system run each command we defined.
 - We have many cool tools outside: Ansible, Puppet, Chef, SaltStack, Terraform why to learn Bash script
+
 > Many concept derived from bash script concepts
 
 - Create new `firstscript.sh`:
+
 ```bash
 #!/bin/bash
 
@@ -1034,6 +1379,7 @@ tmpfs           3.2G  140K  3.2G   1% /run/user/1000
 ![](bash_meme_1.jpg)
 
 - `websetup.sh`: script for host a website
+
 ```bash
 #!/bin/bash
 
@@ -1078,10 +1424,12 @@ unzip 2098_health.zip -d /var/www/html/
 ![](macos_shell.webp)
 
 - There are too many shell nowadays: **bash**, **zsh**, **fish**,.. you can check your current shell using `echo $SHELL` command:
+
 ```zsh
 ❯ echo $SHELL
 /usr/bin/zsh
 ```
+
 My favorite shell is **zsh** (sound with z-shell, zsh is **default shell on MacOS**, in Linux need to install manually), im using with **oh-my-zsh**, it's powerful with lot of plugin and really pretty
 
 ---
@@ -1090,7 +1438,7 @@ My favorite shell is **zsh** (sound with z-shell, zsh is **default shell on MacO
 
 ![](gif/WorkingLockedInGIFbyChesterAbstract.gif)
 
- - `websetup.sh`: refactored version
+- `websetup.sh`: refactored version
 
 ```bash
 #!/bin/bash
@@ -1141,9 +1489,9 @@ echo "✅ Done!"
 ```
 
 - **Advantages**:
-	- `set -e`: fail fast, any command error (exitcode != 0) script stop immediately.
-	- Pass arguement : `ZIP_URL=$1 UNZIP_DIR=$2`, run: ```bash ./websetup.sh https://example.com/site.zip mysite```
-	- Array of needed packages: can extend when runtime `PACKAGES+=("curl")`
+  - `set -e`: fail fast, any command error (exitcode != 0) script stop immediately.
+  - Pass arguement : `ZIP_URL=$1 UNZIP_DIR=$2`, run: ```bash ./websetup.sh https://example.com/site.zip mysite```
+  - Array of needed packages: can extend when runtime `PACKAGES+=("curl")`
 
 - More enhance version
 
@@ -1231,43 +1579,46 @@ echo "===== END DEPLOY: $(date) ====="
 ```
 
 - **Advantages**:
-	- Check OS (CentOS / Rocky / Alma / Ubuntu / Debian)
-		```zsh
-		❯ cat /etc/os-release
-		PRETTY_NAME="Debian GNU/Linux 13 (trixie)"
-		NAME="Debian GNU/Linux"
-		VERSION_ID="13"
-		VERSION="13 (trixie)"
-		VERSION_CODENAME=trixie
-		DEBIAN_VERSION_FULL=13.2
-		ID=debian
-		HOME_URL="https://www.debian.org/"
-		SUPPORT_URL="https://www.debian.org/support"
-		BUG_REPORT_URL="https://bugs.debian.org/"
-		```
+  - Check OS (CentOS / Rocky / Alma / Ubuntu / Debian)
 
-	- Auto detect package manager (`yum | dnf | apt`)
-		```zsh
-		command -v dnf
-		command -v yum
-		command -v apt
-		```
+  ```zsh
+  ❯ cat /etc/os-release
+  PRETTY_NAME="Debian GNU/Linux 13 (trixie)"
+  NAME="Debian GNU/Linux"
+  VERSION_ID="13"
+  VERSION="13 (trixie)"
+  VERSION_CODENAME=trixie
+  DEBIAN_VERSION_FULL=13.2
+  ID=debian
+  HOME_URL="https://www.debian.org/"
+  SUPPORT_URL="https://www.debian.org/support"
+  BUG_REPORT_URL="https://bugs.debian.org/"
+  ```
 
-	- Log to file -> `/var/log/web_deploy.log`
-		- `exec > >(tee -a "$LOG_FILE") 2>&1`
-			- **stdout**
-			- **stderr**
-			- **console**
+  - Auto detect package manager (`yum | dnf | apt`)
 
-	- Fail fast pro vip
-		- `set -euo pipefail`:
-			- **-e**: if error stop
-			- **-u**: any variable not set -> fail
-			- **pipefail**: pipe fail -> fail
+  ```zsh
+  command -v dnf
+  command -v yum
+  command -v apt
+  ```
+
+  - Log to file -> `/var/log/web_deploy.log`
+    - `exec > >(tee -a "$LOG_FILE") 2>&1`
+      - **stdout**
+      - **stderr**
+      - **console**
+
+  - Fail fast pro vip
+    - `set -euo pipefail`:
+      - **-e**: if error stop
+      - **-u**: any variable not set -> fail
+      - **pipefail**: pipe fail -> fail
 
 ## CLI Arguments
 
 - Prepare `4_args.sh`, with content
+
 ```zsh
 #!/bin/bash
 
@@ -1312,7 +1663,7 @@ hello
 
 - When the variable are not declare, it will be empty, but with **0** is the **name of the scripts**, 1, 2, 3 are nothing
 - Let's give a look to `web_setup.sh`
-	- I will comment out this line ` ZIP_URL="https://www.tooplate.com/zip-templates/2098_health.zip"` and ` ZIP_FILE="2098_health.zip"`, then pass any web size resources i want:
+  - I will comment out this line `ZIP_URL="https://www.tooplate.com/zip-templates/2098_health.zip"` and `ZIP_FILE="2098_health.zip"`, then pass any web size resources i want:
 
 ```bash
 #!/bin/bash
@@ -1398,6 +1749,7 @@ echo "===== END DEPLOY: $(date) ====="
 ```
 
 - Then using like
+
 ```zsh
 ./web_setup.sh https://www.tooplate.com/zip-templates/2150_living_parallax.zip 2150_living_parallax
 ```
@@ -1433,6 +1785,7 @@ Some System Variables, there are a few other variables that the system sets for 
 - $SHELL - Return current using shell location  (/bin/bash, /usr/bin/zsh,...)
 
 > `$?`:  Exit code = 0, the last command work
+
 ```zsh
 
 ❯ free -m
@@ -1488,11 +1841,13 @@ For more details see free(1).
 ❯ echo $?
 1
 ```
+
 ---
 
 ## Quotes
 
 ### Double quotes v.s Single quotes
+
 - Double quotes same as string in other programming language
 
 - Using **exclude special character** backward slash (`\`) for `$9` to print it directly without let the shell think it is **9th argument**
@@ -1538,9 +1893,9 @@ I want to eat some kfc, i go to the mall with $9 invoice
 - Example with `free -m` command to get free memory then store to variable
 
 - Idea: store the output of command to a variable then using pipe chain
-	- `free -m`: show current memory using
-	- `grep -i mem`: find ignore case word "mem"
-	- `awk '{print $4}'`: 4th column, value is **19692 MB**
+  - `free -m`: show current memory using
+  - `grep -i mem`: find ignore case word "mem"
+  - `awk '{print $4}'`: 4th column, value is **19692 MB**
 
 Connect them using pipe `|`, let's see step by step
 
@@ -1613,6 +1968,7 @@ echo "Current Load Average $LOAD"
 echo "################################################"
 echo "Free ROOT partiotion size is $ROOTFREE"
 ```
+
 - Output
 
 ```zsh
@@ -1660,7 +2016,6 @@ hoang
 ❯ exit
 ```
 
-
 The new `bash` shell does not know about `MY_NAME`.
 
 ### 2. What does `export` do?
@@ -1701,6 +2056,7 @@ bash
 > Only **exported variables** are inherited by child processes.
 
 ## Export variables permanently
+
 ### 4. Make a variable permanent for the current user
 
 To make a variable available every time you open a terminal, add it to your shell config file:
@@ -1749,12 +2105,14 @@ Reload (or open a new terminal):
 ```
 
 Check:
+
 ```zsh
 ❯ echo $MY_SYSTEM_VAR
 system_var_value
 ```
 
 ### 6. Why variables are missing after sudo -i
+
 ```zsh
 ❯ sudo -i
 root@hoang:~# echo $MY_SYSTEM_VAR
@@ -1777,6 +2135,7 @@ This behavior is **expected** and **intentional**.
 ![](gif/CodingSoftwareEngineerGIFbyHyperRPG.gif)
 
 - Read user input using `read` command
+
 ```zsh
 #!/bin/bash
 echo "Enter your name: "
@@ -1785,6 +2144,7 @@ echo "Hello, $NAME!"
 ```
 
 - Run the script
+
 ```zsh
 ❯ ./user_input.sh
 Enter your name:
@@ -1793,6 +2153,7 @@ Hello, Hoang!
 ```
 
 - `vim user_input.sh`:
+
 ```zsh
 #!/bin/bash
 
@@ -1810,6 +2171,7 @@ echo "Login successful: Welcome USER $USR,"
 ```
 
 - Run the script
+
 ```zsh
 ❯ ./user_input.sh
 Enter your skills:
@@ -1821,8 +2183,8 @@ Login successful: Welcome USER hoang,
 ```
 
 - Explain:
-	- `read -p 'Username: ' USR`: prompt inline
-	- `read -sp 'Password: ' pass`: silent input (no echo)
+  - `read -p 'Username: ' USR`: prompt inline
+  - `read -sp 'Password: ' pass`: silent input (no echo)
 
 ---
 
@@ -1830,24 +2192,29 @@ Login successful: Welcome USER hoang,
 
 ![](if_else_hell.webp)
 
-### if statement 
+### if statement
 
 - Basic if statement
+
 ```zsh
 if [ condition ]; then
-	# commands to execute if condition is true
+ # commands to execute if condition is true
 fi
 ```
+
 - Example: Check if a number is positive
+
 ```zsh
 #!/bin/bash
 echo "Enter a number: "
 read NUM
 if [ $NUM -gt 0 ]; then
-	echo "$NUM is a positive number."
+ echo "$NUM is a positive number."
 fi
 ```
+
 - Run the script
+
 ```zsh
 ❯ ./if_example.sh
 Enter a number:
@@ -1925,16 +2292,15 @@ Command execute successfully
 ```
 
 - Explanation of additional commands:
-	- `sleep 3`: pauses the script for 3 seconds
-	- `date`: displays the current date and time
-	- `free -m`: shows memory usage in megabytes
-
+  - `sleep 3`: pauses the script for 3 seconds
+  - `date`: displays the current date and time
+  - `free -m`: shows memory usage in megabytes
 
 ### if-elif-else statement
 
 ![](if_elseif.jpeg)
 
-- Update command with elif, we test this chain pipe 
+- Update command with elif, we test this chain pipe
 
 ```zsh
 ❯ ip a | wc -l
@@ -1999,10 +2365,10 @@ Command execute successfully
 ❯ ip a | grep -v LOOPBACK | grep -ic mtu
 10
 ```
-	- `ip a | wc -l`: count all line of `ip a` output
-	- `ip a | grep -v LOOPBACK | grep -ic mtu`: count all line without LOOPBACK line, case insensitive with word mtu
 
+- `ip a | wc -l`: count all line of `ip a` output
 
+- `ip a | grep -v LOOPBACK | grep -ic mtu`: count all line without LOOPBACK line, case insensitive with word mtu
 
 ```zsh
 #!/bin/bash
@@ -2026,16 +2392,16 @@ Found multiple active network
 ```
 
 - Explanation of operators:
-	- `elif`: else if
-	- `else`: default case
-	- `fi`: end of if statement
-	- `[]`: test condition
-	- `-gt`: greater than
-	- `-lt`: less than
-	- `-eq`: equal to
-	- `-ne`: not equal to
-	- `-ge`: greater than or equal to
-	- `-le`: less than or equal to
+  - `elif`: else if
+  - `else`: default case
+  - `fi`: end of if statement
+  - `[]`: test condition
+  - `-gt`: greater than
+  - `-lt`: less than
+  - `-eq`: equal to
+  - `-ne`: not equal to
+  - `-ge`: greater than or equal to
+  - `-le`: less than or equal to
 
 ---
 
@@ -2148,6 +2514,7 @@ Failed to start httpd.service: Unit httpd.service not found.
 httpd fail to start, contact the admin.
 ######################################
 ```
+
 - Explanation:
   - `$1`: first argument to the script (process name)
   - `ls /var/run/$PROCESS_NAME/$PROCESS_DIR`: check if pid file exists
@@ -2165,7 +2532,7 @@ httpd fail to start, contact the admin.
 
 > Unreliable script, just for demo purpose
 
-- Improve the script to be more reliable: 
+- Improve the script to be more reliable:
 
 ```zsh
 #!/bin/bash
@@ -2199,7 +2566,7 @@ echo "######################################"
 echo
 ```
 
-### set -e 
+### set -e
 
 - `set -e`: basic fail fast, if any command return exit code different 0, the script stop immediately
 But it cannot catch
@@ -2224,7 +2591,6 @@ But it cannot catch
   # No output, script stops
   ```
 
-
 - So the best practice is to use `set -euo pipefail` at the top of your bash scripts
 
 - If that using `set -euo pipefail` is good, when not need to use
@@ -2247,12 +2613,13 @@ ls: cannot access 'non_existent_file': No such file or directory
 
 - The script fully silent, no output shown, but the exit code still preserved
 
-#### FD (File Descriptor) in Linux:
+#### FD (File Descriptor) in Linux
 
 Every process in Linux has **3 pipe**:
-  - FD 0 - Pipe 0: stdin (keyboard input)
-  - FD 1 - Pipe 1: stdout (output)
-  - FD 2 - Pipe 2: stderr (error output)
+
+- FD 0 - Pipe 0: stdin (keyboard input)
+- FD 1 - Pipe 1: stdout (output)
+- FD 2 - Pipe 2: stderr (error output)
 
 More details:
 
@@ -2261,8 +2628,7 @@ More details:
 - `2>`: where to write error output to (default: terminal)
 - `2>&1`: redirect stderr (FD 2) to where stdout (FD 1) is going
 
-
-Command: 
+Command:
 
 ```zsh
 command > /dev/null 2>&1
@@ -2273,6 +2639,7 @@ command > /dev/null 2>&1
   - `2>&1`: redirect stderr (file descriptor 2) to where stdout (file descriptor 1) is going (which is `/dev/null`)
 
 Result:
+
 - Comamnd run normal, no output shown
 - Success or fail, preserved by exit code `$?`
 
@@ -2285,9 +2652,11 @@ command &> /dev/null
 - More concise way to redirect both stdout and stderr to `/dev/null`
 
 ### Cron Job
-- How to write a cron schedule expression: https://crontab.guru/
+
+- How to write a cron schedule expression: <https://crontab.guru/>
 
 - Example: automate the web deployment script with cron job
+
 ```zsh
 # Edit cron jobs
 crontab -e
@@ -2298,18 +2667,19 @@ crontab -e
 - Explanation:
   - `0 2 * * *`: schedule to run at 2:00 AM every day
   - `/path/to/web_setup.sh ...`: command to run the deployment script with arguments
-  - `>> /var/log/web_deploy.log 2>&1`: **append** both stdout and stderr to a log file for monitoring, can use without `2>&1` in new bash version, 
-
+  - `>> /var/log/web_deploy.log 2>&1`: **append** both stdout and stderr to a log file for monitoring, can use without `2>&1` in new bash version,
 
 ## Loops
 
 ### For loop
 
 > When to use for loop:
->  - When the number of iterations is known in advance
->  - When iterating over a list or array of items
+>
+> - When the number of iterations is known in advance
+> - When iterating over a list or array of items
 
 Syntax:
+
 ```zsh
 for VAR in item1 item2 item3; do
   # commands to execute for each item
@@ -2326,6 +2696,7 @@ done
 ```
 
 - Run the script
+
 ```zsh
 ❯ ./for_loop.sh
 I like apple
@@ -2363,15 +2734,15 @@ Sat Jan  3 03:10:17 PM +07 2026
 
 - Bash do not need quote for conduct string, but better to use quote to avoid unexpected behavior with special character
 
-
-
 ### While loop
 
 > When to use while loop:
->  - When the number of iterations is not known in advance
->  - When you want to repeat a block of code until a specific condition is met
+>
+> - When the number of iterations is not known in advance
+> - When you want to repeat a block of code until a specific condition is met
 
 Syntax:
+
 ```zsh
 while [ condition ]; do
 
@@ -2391,6 +2762,7 @@ done
 ```
 
 - Run the script
+
 ```zsh
 ❯ ./while_loop.sh
 Count is 1
@@ -2400,9 +2772,10 @@ Count is 4
 Count is 5
 ```
 
-``(( ))``: arithmetic evaluation in bash, 
-  - outside of it, everything is treated as string, use `$` to get value of variable
-  - inside of it, treated as number, no need `$`
+``(( ))``: arithmetic evaluation in bash,
+
+- outside of it, everything is treated as string, use `$` to get value of variable
+- inside of it, treated as number, no need `$`
 
 ## Remote Command Execution (RCE)
 
@@ -2440,6 +2813,7 @@ ssh -p 2222 lcaohoanq@123.456.78.102
 ```
 
 Tired to type long command every time
+
 1. Create alias for it, inside `~/.zshrc` or `~/.bashrc`
 
 ```zsh
@@ -2448,7 +2822,7 @@ echo "alias ssh_myserver='ssh -p 2222 lcaohoanq@123.456.78.102'" >> ~/.zshrc
 source ~/.zshrc
 ```
 
-2. Inside `~/.ssh/config` file, create new config
+1. Inside `~/.ssh/config` file, create new config
 
 ```zsh
 Host myserver
@@ -2468,6 +2842,7 @@ ssh myserver
 ### SSH without password
 
 We tired to type password every time we SSH to the remote server 🐧, we can setup ssh key based authentication to avoid typing password every time.
+
 - Technically way, use `ssh-keygen` to generate ssh key pair, then **copy the public key** to **remote server** with `ssh-copy-id`
 
 ```zsh

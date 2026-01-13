@@ -18,7 +18,9 @@ lang: 'vi'
 - Nghĩ ngay đến tạo thêm máy ảo, mà khổ cái Ubuntu Server không có GUI, mà tương tác sâu xuống như KVM + libvirt, Terraform thì hơi quá sức với mình. Mình tìm đến Proxmox VE, một nền tảng ảo hóa mã nguồn mở dựa trên Debian, cung cấp giao diện web để quản lý máy ảo và container một cách dễ dàng.
 
 - Proxmox trở thành một cloud mini
-- Cao cấp hơn sẽ là OpenStack: Xây dựng cloud riêng kiểu AWS, GCP, Azure -> Siêu siêu khó
+- Cao cấp hơn sẽ là OpenStack: Xây dựng cloud riêng kiểu AWS, GCP, Azure -> Siêu siêu khó,
+
+---
 
 # Cài đặt
 
@@ -26,13 +28,46 @@ lang: 'vi'
 
 <iframe width="100%" height="468" src="https://www.youtube.com/embed/cXIJ-pd1ZVs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-- Mình đã cài thành công
+- Sau khi cài xong sẽ như thế này:
 
 ![Proxmox Installed](w520_install_proxmox.jpeg)
 
-- Vào bằng trình duyệt với địa chỉ `https://<IP-ADDRESS>:8006`, `<IP-ADDRESS>` check bằng lệnh `ip a` trên terminal của Proxmox host hoặc nó sẽ hiển thị sau khi cài đặt xong, boot lên là thấy.
+- Vào bằng trình duyệt với địa chỉ `https://<IP-ADDRESS>:8006`, `<IP-ADDRESS>`, ip sẽ hiển thị sau khi cài đặt xong, boot lên là thấy
+
+![Dashboard](home_dashboard.png)
+
+- Trong lúc cài mình set static ip luôn, tiện quản lý, `192.168.88.164/24`
+
+![Network](pve_network.png)
+
+---
+
+# Vmbr0
+
+> Mặc định Proxmox tạo sẵn 1 bridge tên vmbr0, gán với card mạng vật lý (ví dụ: eth0)
+
+Check `ip a`:
+
+```zsh
+4: vmbr0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether 3c:97:0e:11:a4:86 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.88.164/24 scope global vmbr0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::3e97:eff:fe11:a486/64 scope link proto kernel_ll 
+       valid_lft forever preferred_lft forever
+```
+
+Vmbr0 là bridge network, kết nối giữa các máy ảo/container với mạng vật lý bên ngoài. Các máy ảo/container khi tạo sẽ được gán vào bridge này, có thể cấu hình static IP, DHCP
+
+- Vmbr0 hoạt động như một switch ảo, chuyển tiếp gói tin giữa máy ảo/container và mạng vật lý
+- Có thể tạo thêm bridge khác (vmbr1, vmbr2,...) để phân tách mạng cho các mục đích khác nhau
+- Quản lý bridge network qua giao diện web hoặc dòng lệnh, tham khảo thêm: <https://pve.proxmox.com/wiki/Network_Configuration>
+
+---
 
 # VM vs LXC
+
+![VM vs LXC](vm_lxc.webp)
 
 - Proxmox hỗ trợ 2 loại ảo hóa chính: KVM (Kernel-based Virtual Machine) và LXC (Linux Containers).
 - KVM là ảo hóa toàn phần, mỗi máy ảo có hệ điều hành riêng biệt, phù hợp cho các hệ điều hành khác nhau.
@@ -43,11 +78,14 @@ lang: 'vi'
   - Nhược điểm: Hạn chế về hệ điều hành, không cô lập hoàn toàn.
 - Tùy vào nhu cầu sử dụng mà chọn loại ảo hóa phù hợp.
 
+> Tham khảo thêm: <https://www.youtube.com/watch?v=CDBGQWsdRbY>
+---
+
 # Đổi mật khẩu LXC container
 
 - Khi tạo LXC thì mình tự set password, nhưng nếu quên thì làm sao đổi lại?
 
-## Cac bước thực hiện
+## Các bước thực hiện
 
 - SSH vào shell của Proxmox host
 - Liệt kê các container hiện có
@@ -69,19 +107,36 @@ Enter new password:
 Retype new password:
 ```
 
+---
+
 # Tạo một Alpine Proxy Server dùng Cloudflare Tunnel
 
-- Chuyện là khi muốn vào dashboard của Proxmox từ bên ngoài mạng nhà mình, thì có 2 cách:
-  - Mở port 8006 của router
-  - Tunnel: mình hay dùng thằng Cloudflare Tunnel vì nó miễn phí, dễ dùng, bảo mật tốt, tận dụng tối đã hệ sinh thái của Cloudflare luôn.
+Chuyện là khi muốn vào dashboard của Proxmox từ bên ngoài mạng nhà mình, thì có vài cách:
 
-- Tại sao lại chọn Alpine để làm proxy server?
-  - Nhẹ, nhanh, ít tốn tài nguyên (đây là điều quan trọng nhất với mình)
-  - Alpine musl nhanh nhẹ gọn
+- Mở port 8006 của router, để traffic từ bên ngoài vào thẳng Promox host
+  - Cách này không an toàn, dễ bị tấn công brute-force
+- Dùng VPN: tự cài OpenVPN, Wireguard, Tailscale (dễ config nhất) trên một server khác, kết nối VPN vào rồi mới truy cập Proxmox
+  - Cách này khá ổn, nhưng cũng phức tạp, config lằng nhằng phết đấy
+- Tunnel: mình hay dùng thằng Cloudflare Tunnel vì nó miễn phí, dễ dùng, bảo mật tốt, tận dụng tối đã hệ sinh thái của Cloudflare luôn.
+  - Yêu cầu đã có domain riêng, trỏ về Cloudflare
+
+> Tại sao lại chọn Alpine để làm proxy server?
+>
+> 1. Proxy không cần nhiều tool, thường chỉ forward traffic, không xử lí bussiness logic, không cần native lib phức tạp
+> 2. Security tốt
+> 3. Nhẹ, tốn ít tài nguyên
+
+> Tại sao không cài luôn docker, cloudflare tunnel trên Proxmox host?
+>
+> 1. Proxmox host nên giữ nguyên trạng thái càng sạch càng tốt, tránh cài thêm phần mềm không cần thiết làm ảnh hưởng đến hiệu năng và độ ổn định của Proxmox
+> 2. Dễ quản lý, backup, di chuyển khi dùng container
+> 3. Keep the hypervisor clean and simple
 
 - Các bước cần làm sau:
 
-1. Tạo LXC container Alpine trên Proxmox (alpine-3.22-default_20250617_amd64.tar.xz)
+## Bước 1. Tạo LXC container Alpine trên Proxmox
+
+- CT templates: **alpine-3.22-default_20250617_amd64.tar.xz** (siêu nhẹ chỉ **3.27MB**)
 
 - CPU: 1 core
 - RAM: 512MB
@@ -90,7 +145,7 @@ Retype new password:
   - IPv4: DHCP
   - IPv6: Disable
 
-1. Cài đặt docker, docker-compose-cli trong container
+## Bước 2: Cài đặt docker, docker-compose-cli trong container
 
 - Theo doc: <https://wiki.alpinelinux.org/wiki/Docker>
 
@@ -104,7 +159,7 @@ service docker start
 apk add docker-cli-compose
 ```
 
-1. Tạo file docker-compose.yml để chạy Cloudflare Tunnel
+## Bước 3: Tạo file docker-compose.yml để chạy Cloudflare Tunnel
 
 ```zsh
 touch docker-compose.yml
@@ -119,3 +174,7 @@ services:
     restart: unless-stopped
     command: tunnel --no-autoupdate run --token <YOUR_TUNNEL_TOKEN>
 ```
+
+- Lên dashboard của cloudflare kiểm tra **Healthy** là ok rồi đó
+
+![Cloudflare Tunnel Healthy](tunnel_health.png)
