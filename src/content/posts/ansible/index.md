@@ -1065,6 +1065,23 @@ all:
   - Tất cả các host trong group `proxmox_lxc` sẽ dùng chung file key `/home/lcaohoanq/.ssh/id_ed25519`
   - Host `fpt` trong group `bitlearning_server` sẽ dùng file key `/home/lcaohoanq/.ssh/key.pem`, config sẵn trong tương lai nếu thêm host mới vào group này sẽ không cần khai báo file key nữa.
 
+---
+
+## Verbose Logging
+
+Sử dụng option `-v`, `-vv`, `-vvv`, `-vvvv` để bật chế độ verbose logging, giúp debug khi gặp lỗi khi dùng `ansible` hoặc `ansible-playbook`.
+
+- **v**: Hiển thị thêm thông tin về kết nối hơn mặc định
+- **vv**: Chi tiết về biến và các module
+- **vvv**: Chi tiết, bao gồm full json tasks, modules thường dùng cho debug
+- **vvvv (or more)**: Chi tiết hơn nữa dùng để debug sâu,chi tiết low-level của các lệnh chạy trên managed nodes
+
+```zsh
+ansible-playbook your_playbook.yml -vvv
+```
+
+---
+
 ## Ad hoc
 
 - Doc: <https://docs.ansible.com/projects/ansible/latest/command_guide/intro_adhoc.html>
@@ -1520,3 +1537,83 @@ Kết quả trả về:
 ```json
     "ActiveState": "inactive",
 ```
+
+---
+
+## Playbook & Module
+
+## Ansible Configuration File
+
+Độ ưu tiên config
+
+1. ANSIBLE_CONFIG (environment variable if set)
+2. ansble.cfg (in the current directory)
+3. ~/.ansible.cfg (in the home directory)
+4. /etc/ansible/ansible.cfg (global config)
+
+- Doc: <https://docs.ansible.com/ansible/latest/installation_guide/intro_configuration.html>
+
+Lệnh dùng để generate file config mẫu:
+
+```zsh
+ansible-config init --disabled > ansible.cfg
+```
+
+## Ansible Variables
+
+### PLAYBOOK
+
+```yml
+- host: websrvgrp
+  vars:
+    http_port: 80
+    max_clients: 200
+    sqluser: admin
+  tasks:
+    - name: ensure apache is at the latest version
+      ansible.builtin.yum:
+        name: httpd
+        state: latest
+
+    - name: write the apache config file
+      ansible.builtin.template:
+        src: /srv/httpd.j2
+        dest: /etc/httpd.conf
+      notify:
+        - restart apache
+
+    - name: ensure apache is running
+      ansible.builtin.service:
+        name: httpd
+        state: started
+```
+
+### Inventory Based
+
+- Trong **inventory** file
+- Thư mục **group_vars**
+  - group_vars/all
+  - group_vars/groupname
+- Thư mục **host_vars**
+  - host_vars/hostname
+
+### Roles
+
+- Doc: <https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html>
+
+Bao gồm variable từ các file trong playbook
+
+> 2 run time variable: Fact và Registered variable
+
+### Fact Variables: setup module
+
+- Doc: <https://docs.ansible.com/ansible/latest/collections/ansible/builtin/setup_module.html>
+
+- ansible_os_family: RedHat, Debian, Suse, Archlinux, etc.
+- ansible_processor_cores: Số lõi CPU
+- ansible_kernel: Phiên bản kernel
+- ansible_devices: Thông tin các thiết bị
+- ansible_default_ipv4: Thông tin địa chỉ IPv4 mặc định
+- ansible_architecture: Kiến trúc hệ thống (x86_64, aarch64, etc.)
+
+### Store Output: register module
