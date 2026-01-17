@@ -1,7 +1,7 @@
 ---
 title: Linux 101
 published: 2025-01-19
-description: All stuffs about linux with a perspective of Debian KDE Plasma user
+description: "Tất cả kiến thức của mình về Linux, từ cơ bản đến nâng cao"
 image: "arch_hyprland.png"
 tags: [Linux, Documentation]
 category: 'Linux, Công nghệ'
