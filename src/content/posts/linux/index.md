@@ -126,7 +126,7 @@ Many many many tools are open source now :)
 
 ![Distro](distro.webp)
 
-## So sánh
+## Comparison table of popular Linux distributions
 
 <style>
 /* ===== Distro Table – clean & readable ===== */
@@ -901,6 +901,8 @@ Removing a directory is done with rmdir. The directory must be empty or the comm
 
 ![](directory.webp)
 
+Description of the standard Linux file system structure:
+
 ```zsh
 /               # Root directory – gốc của mọi thứ
 ├── /boot       # File khởi động: kernel, initramfs, grub
@@ -937,7 +939,7 @@ Removing a directory is done with rmdir. The directory must be empty or the comm
 ![Alt text](linux-file-system.png)
 ---
 
-### Tips to remember
+## Tips to remember
 
 - **/etc** → config
 
