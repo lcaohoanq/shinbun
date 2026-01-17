@@ -1,7 +1,7 @@
 ---
 title: Benchmark một ứng dụng web
 published: 2026-01-16
-description: ""
+description: "Làm con game nhỏ nhỏ để thuyết trình, không biết server chịu tải như thế nào nhỉ? Mình đã thử qua 3 công cụ benchmark phổ biến: ab, wrk và k6. Cùng xem ai mới là trùm cuối nhé!"
 image: "benchmark.jpg"
 tags: [Benchmark, Performance Testing, Web Applications]
 category: 'Công nghệ'
