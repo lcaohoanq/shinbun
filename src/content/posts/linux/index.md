@@ -324,6 +324,17 @@ Many many many tools are open source now :)
   </tbody>
 </table>
 
+## Some questions worth thinking about before deciding on a distribution include
+
+- What is the main function of the system (server or desktop)?
+- What types of packages are important to the organization? For example, web server, word processing, etc.
+- How much storage space is required, and how much is available? For example, when installing Linux on an embedded device, space is usually constrained.
+- How often are packages updated?
+- How long is the support cycle for each release? For example, LTS releases have long-term support.
+- Do you need kernel customization from the vendor or a third party?
+- What hardware are you running on? For example, it might be X86, RISC-V, ARM, PPC, etc.
+- Do you need long-term stability? Or can you accept (or need) a more volatile cutting-edge system running the latest software versions?
+
 ## Release model: Rolling releases và Fixed release
 
 Khi chọn distro Linux, một trong những khác biệt **quan trọng nhất** là *mô hình phát hành* (release model).  
@@ -461,6 +472,55 @@ sudo apt-get install ROSÉ
 # when this package release guys?
 ```
 
+## Package Management Systems on Linux
+
+There are two broad families of package managers widely deployed: those based on Debian and those which use RPM as their low-level package manager. The two systems are incompatible but, broadly speaking, provide the same essential features and satisfy the same needs. In addition, there are some other systems used by more specialized Linux distributions.
+
+Both package management systems operate on two distinct levels: a low-level tool (such as **dpkg** or **rpm**) takes care of the details of unpacking individual packages, running scripts, getting the software installed correctly, while a high-level tool (such as **apt**, **dnf**, or **zypper**) works with groups of packages, downloads packages from the vendor, and figures out dependencies.
+
+Most of the time users need to work only with the high-level tool, which will take care of calling the low-level tool as needed. Dependency resolution is a particularly important feature of the high-level tool, as it handles the details of finding and installing each dependency for you. Be careful, however, as installing a single package could result in many dozens or even hundreds of dependent packages being installed.
+
+![Package Managers System](syrcqp8yrwo8-asset-v1_LinuxFoundationXLFS101x1T2023typeassetblockLFS101x_2023_CourseImages_6-9-08.png)
+
+<br>
+
+> Cre: The Linux Foundation - [Linux Foundation X LFS101: Introduction to Linux](https://www.edx.org/course/introduction-to-linux)
+
+---
+
+## Working With Different Package Management Systems
+
+The Advanced Packaging Tool (**apt**) is the underlying package management system that manages software on Debian-based systems. While it forms the backend for graphical package managers, such as the Ubuntu Software Center and synaptic, its native user interface is at the command line, with programs that include **apt** (or **apt-get**) and **apt-cache**.
+
+**dnf** is the open source command-line package-management utility for the RPM-compatible Linux systems that belong to the Red Hat family.
+
+![Working with Different Package Management Systems](kmxu4aiinamg-LFS101x_2023_CourseImages_6-9-09.png)
+
+**zypper** is the package management system for the SUSE/openSUSE family and is also based on RPM. **zypper** also allows you to manage repositories from the command line. **zypper** is fairly straightforward to use and closely resembles **dnf**.
+
+<br>
+
+- Table: Basic Packaging Commands
+
+| Operation | rpm | deb |
+|-----------|-----|-----|
+| Install package | `rpm -i foo.rpm` | `dpkg --install foo.deb` |
+| Install package, dependencies | `dnf install foo` | `apt install foo` |
+| Remove package | `rpm -e foo.rpm` | `dpkg --remove foo.deb` |
+| Remove package, dependencies | `dnf remove foo` | `apt autoremove foo` |
+| Update package | `rpm -U foo.rpm` | `dpkg --install foo.deb` |
+| Update package, dependencies | `dnf update foo` | `apt install foo` |
+| Update entire system | `dnf update` | `apt dist-upgrade` |
+| Show all installed packages | `rpm -qa` or `dnf list installed` | `dpkg --list` |
+| Get information on package | `rpm -qil foo` | `dpkg --listfiles foo` |
+| Show packages named foo | `dnf list "foo"` | `apt-cache search foo` |
+| Show all available packages | `dnf list` | `apt-cache dumpavail foo` |
+| What package is file part of? | `rpm -qf file` | `dpkg --search file` |
+
+<br>
+
+> Cre: The Linux Foundation - [Linux Foundation X LFS101: Introduction to Linux](https://www.edx.org/course/introduction-to-linux)
+
 ---
 
 # Commands
@@ -470,75 +530,76 @@ sudo apt-get install ROSÉ
 > This command `:(){ :|:& };:` is called "shell fork bomb", very dangerous when hacker can access then execute this command on our servers.
 > [Read more about fork bomb here](https://www.cyberciti.biz/faq/understanding-bash-fork-bomb/)
 
-- **cd** : Change directory
-  - `cd /home/user`
-  - `cd ~`
-  - `cd ..`
+## Navigating the File System
+
+> Relative path vs Absolute path
+
+- Relative path: path from current directory
+
+  - `./file.txt` : current directory
+
+  - `../file.txt` : parent directory
+
+- Absolute path: full path from root directory
+
+  - `/home/user/file.txt`
+  - `//var/log/syslog`: even with double slash at the beginning, it's still absolute path
+
+`cd`: Change directory
+
+- `cd /home/user`
+- `cd ~`
+- `cd ..`
+
   > im using [zoxide](https://github.com/ajeetdsouza/zoxide): better cd
 
-- **ls** : List files and directories
-  - `ls`
-  - `ls -l` | `ls -al`
-  - `ls -a`
-  - ls -lt : sort time descending
-  - ls -ltr: sort time ascending (r = reverse)
+`ls`: List files and directories
+
+- `ls`
+- `ls -l` | `ls -al`
+- `ls -a`
+- ls -lt : sort time descending
+- ls -ltr: sort time ascending (r = reverse)
 
 > im using [exa](https://github.com/ogham/exa): better ls
 
-- **pwd** : print **current** working directory
+`pw` : print **current** working directory
 
-- **cat**
+## Viewing Files
+
+| Command | Usage |
+|---------|-------|
+| cat     | Used for viewing files that are not very long; it does not provide any scroll-back functionality. |
+| less    | A pager program that allows you to view (but not change) the contents of a file one screen at a time. It provides scroll-back functionality.|
+| tail    | Used to print the last 10 lines of a file by default. You can change the number of lines by doing -n 15 or just -15 if you wanted to look at the last 15 lines instead of the default.|
+| head    | The opposite of tail; by default, it prints the first 10 lines of a file.|
+| tac   | Similar to cat, but it displays the contents of a file in reverse order, starting from the last line.|
+
+### Examples
+
+- **cat** : View file content
   - `cat file.txt`
-
+  - `cat -n file.txt` : view line number
+  - `cat file1.txt file2.txt` : concatenate files and display
+  - `cat file.txt | less` : view long file with less
+  
 > im using [bat](https://github.com/sharkdp/bat),  notice that after install bat, it use the batcat (not bat) so need to remember or assign alias to .zshrc
 
-- **cp** : Copy files and directories
-  - `cp file.txt file2.txt`
-  - `cp -r dir1 dir2`
-  - `cp * /usr/share/.fonts`
-
-- **mv** : Move files and directories
-  - `mv file.txt /usr/share/.fonts`
-  - `mv file.txt file2.txt`
-  - `mv * /usr/share/.fonts`
-  - we can perform the rename file or directory by mv command: if i want to rename the file demo.txt to test.txt
-
-  ```bash
-  mv demo.txt test.txt
-  # same as directory
-  ```
-
-- **rm** : Remove files and directories
-  - `rm file.txt`
-  - `rm -r dir1`
-  - `rm -rf dir1`
-
-- **mkdir** : Make directories
-  - mkdir /hihi
-  - mkdir /hihi/hehe/huhu => No such file or directory => mkdir -p /hihi/hehe/huhu ok
->
-> - Because normal mkdir only support one directory, if pass parent/child/... it cause error -> using -p (parent) to fix
-
-- **echo** : Write text to file
-  - `echo "Hello World" > file.txt`
-  - echo "alias 'yt=ytfzf -t'" >> ~/.bashrc
-  - echo "alias 'll=ls -al'" >> ~/.bashrc
-  - echo "alias 'showdisk=cd /media/lcaohoanq/ ; ls -al'" >> ~/.bashrc
-
-- **touch** : Create file
-  - `touch file.txt`
-
-- **nano** : Text editor
-  - `nano file.txt`
-
-- **unzip** : Unzip files
-  - `unzip file.zip`
+- **less** : View file content page by page
+  - `less file.txt`
+  - `less +F file.txt` : follow the file (like tail -f)
+  - Press `q` to quit less
+  - Use arrow keys or `j`/`k` to navigate up/down
+  - Use `Space` to go to next page, `b` to go back one page
+  - `/search_term` to search forward, `?search_term` to search backward
+  - `n` to go to next search result, `N` to go to previous search result
 
 - **head**:  Display the **first 10 lines** (*default*)
   - `head filename.txt`
   - `head -5 filename.txt` (**first 5 lines**)
   - `head -c 45 filename.txt` (**first 45 bytes**)
   - `head -f filename.txt` (**follow the file**)
+  - `cat -n filename.txt | head -20` (**first 20 lines with line numbers**)
 
 - **tail**:  Display the **last 10 lines** (*default*)
   - `tail filename.txt`
@@ -546,7 +607,74 @@ sudo apt-get install ROSÉ
   - `tail -c 45 filename.txt` (**last 45 bytes**)
   - `tail -f filename.txt` (**follow the file**
 
-- **tree** : Show the current directory with the tree visualization
+- **tac** : View file content in reverse order
+  - `tac file.txt`
+
+## touch
+
+`$ touch <filename>`
+This is normally done to create an empty file as a placeholder for a later purpose.
+
+**touch** provides several useful options. For example, the **-t** option allows you to set the date and timestamp of the file to a specific value, as in:
+
+`$ touch -t 202201011200.00 newfile.txt`
+
+This command creates a new file named newfile.txt with a timestamp of January 1, 2022, at 12:00 PM.
+
+## Moving, Copying, Deleting Files and Directories
+
+`mkdir` : Create a directories
+
+- `mkdir hihi`: create directory hihi in current directory
+- `mkdir /usr/share/hihi`: create directory hihi in /usr/share
+- `mkdir /hihi/hehe/huhu` => No such file or directory => mkdir -p /hihi/hehe/huhu ok
+>
+> - Because normal mkdir only support one directory, if pass parent/child/... it cause error -> using -p (parent) to fix
+
+`rmdir`
+
+Removing a directory is done with rmdir. The directory must be empty or the command will fail. To remove a directory and all of its contents you have to do rm -rf.
+
+`rm` : Remove files and directories
+
+- `rm file.txt`
+- `rm -r dir1`: Remove directory recursively
+- `rm -rf dir1`: Remove directory with force and recursively
+
+`cp` : Copy files and directories
+
+- `cp file.txt file2.txt`
+- `cp -r dir1 dir2`
+- `cp * /usr/share/.fonts`
+
+`mv` : Move files and directories
+
+- `mv file.txt /usr/share/.fonts`
+- `mv file.txt file2.txt`
+- `mv * /usr/share/.fonts`
+- we can perform the rename file or directory by mv command: if i want to rename the file demo.txt to test.txt
+
+  ```bash
+  mv demo.txt test.txt
+  # same as directory
+  ```
+
+`echo` : Write text to file
+
+- `echo "Hello World" > file.txt`
+- echo "alias 'yt=ytfzf -t'" >> ~/.bashrc
+- echo "alias 'll=ls -al'" >> ~/.bashrc
+- echo "alias 'showdisk=cd /media/lcaohoanq/ ; ls -al'" >> ~/.bashrc
+
+`nano` : Text editor
+
+- `nano file.txt`
+
+`unzip` : Unzip files
+
+- `unzip file.zip`
+
+`tree` : Show the current directory with the tree visualization
 
    ```bash
    # show everything
