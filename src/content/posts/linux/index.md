@@ -577,38 +577,54 @@ The Advanced Packaging Tool (**apt**) is the underlying package management syste
 
 ### Examples
 
-- **cat** : View file content
-  - `cat file.txt`
-  - `cat -n file.txt` : view line number
-  - `cat file1.txt file2.txt` : concatenate files and display
-  - `cat file.txt | less` : view long file with less
-  
+**cat** : View file content
+
+- `cat file.txt`
+- `cat -n file.txt` : view line number
+- `cat file1.txt file2.txt` : concatenate files and display
+- `cat file.txt | less` : view long file with less
+
 > im using [bat](https://github.com/sharkdp/bat),  notice that after install bat, it use the batcat (not bat) so need to remember or assign alias to .zshrc
 
-- **less** : View file content page by page
-  - `less file.txt`
-  - `less +F file.txt` : follow the file (like tail -f)
-  - Press `q` to quit less
-  - Use arrow keys or `j`/`k` to navigate up/down
-  - Use `Space` to go to next page, `b` to go back one page
-  - `/search_term` to search forward, `?search_term` to search backward
-  - `n` to go to next search result, `N` to go to previous search result
+- Another way using cat with redirection to create multiple lines file:
 
-- **head**:  Display the **first 10 lines** (*default*)
-  - `head filename.txt`
-  - `head -5 filename.txt` (**first 5 lines**)
-  - `head -c 45 filename.txt` (**first 45 bytes**)
-  - `head -f filename.txt` (**follow the file**)
-  - `cat -n filename.txt | head -20` (**first 20 lines with line numbers**)
+```bash
+$ cat << EOF > myfile
+> line one
+> line two
+> line three
+> EOF
+$
+```
 
-- **tail**:  Display the **last 10 lines** (*default*)
-  - `tail filename.txt`
-  - `tail -20 filename.txt` (**last 20 lines**)
-  - `tail -c 45 filename.txt` (**last 45 bytes**)
-  - `tail -f filename.txt` (**follow the file**
+**less** : View file content page by page
 
-- **tac** : View file content in reverse order
-  - `tac file.txt`
+- `less file.txt`
+- `less +F file.txt` : follow the file (like tail -f)
+- Press `q` to quit less
+- Use arrow keys or `j`/`k` to navigate up/down
+- Use `Space` to go to next page, `b` to go back one page
+- `/search_term` to search forward, `?search_term` to search backward
+- `n` to go to next search result, `N` to go to previous search result
+
+**head**:  Display the **first 10 lines** (*default*)
+
+- `head filename.txt`
+- `head -5 filename.txt` (**first 5 lines**)
+- `head -c 45 filename.txt` (**first 45 bytes**)
+- `head -f filename.txt` (**follow the file**)
+- `cat -n filename.txt | head -20` (**first 20 lines with line numbers**)
+
+**tail**:  Display the **last 10 lines** (*default*)
+
+- `tail filename.txt`
+- `tail -20 filename.txt` (**last 20 lines**)
+- `tail -c 45 filename.txt` (**last 45 bytes**)
+- `tail -f filename.txt` (**follow the file**
+
+**tac** : View file content in reverse order
+
+- `tac file.txt`
 
 ## touch
 
@@ -702,7 +718,55 @@ Removing a directory is done with rmdir. The directory must be empty or the comm
     ps aux | grep "obs"
     ```
 
-  ## System Information
+## find : Search for files and directories
+
+**find** is an extremely useful and often-used utility program in the daily life of a Linux system administrator. It recurses down the filesystem tree from any particular directory (or set of directories) and locates files that match specified conditions. The default pathname is always the present working directory.
+
+**-name**: list files with certain pattern in their name
+**-iname**: case insensitive version of -name
+**-type**: search by file type (f: regular file, d: directory, l: symbolic link, c: character device, b: block device)
+**-size**: search by file size (+: greater than, -: less than, no sign: exactly)
+**-ctime**: search by change time (in days, +: more than, -: less than, no sign: exactly)
+**-atime**: search by access time (in days, +: more than, -: less than, no sign: exactly)
+**-mtime**: search by modification time (in days, +: more than, -: less than, no sign: exactly)
+
+### Examples
+
+Searching for files and directories
+
+`$ find /path/to/search -name "filename"`
+
+Find all txt files in current directory and subdirectories
+
+`$ find . -name "*.txt"`
+
+Find directory named dirname from root
+
+`$ find / -type d -name "dirname"`
+
+Search only for regular file named **gcc**
+
+`$ find /usr -type f -name gcc`
+
+Find files larger than 10MB in /path
+
+`$ find /path -type f -size +10M`
+
+Find files modified in last 7 days in /path
+
+`$ find /path -type f -mtime -7`
+
+Advanced Usage:
+
+- Limit search depth to 3 levels and show first 40 results
+
+`$ find . -maxdepth 3 -type f -o -type d | head -40`
+
+- Find and run command on the files that match (Delete all swap files in current directory and subdirectories)
+
+`$ find -name "*.swp" -exec rm {} ';'`
+
+## System Information
 
 - Check CPU:
   - **nproc**
@@ -897,6 +961,21 @@ Removing a directory is done with rmdir. The directory must be empty or the comm
 
 ---
 
+## Documentation and Manual Pages
+
+The man pages are the most often-used source of Linux documentation. They provide in-depth documentation about many programs and utilities, as well as other topics, including configuration files and programming APIs for system calls, library routines, and the kernel. They are present on all Linux distributions and are always at your fingertips.
+
+- `$ man <command>`  
+  Open the **official manual page** for a command, including its description, options, and usage examples.
+
+- `$ man -f <command>`  
+  Display a **short list of manual pages** related to the keyword (same as `whatis`), with brief descriptions.
+
+- `$ man -a <command>`  
+  Show **all available manual pages** matching the command name, going through every section instead of just the first one.
+
+---
+
 # File System
 
 ![](directory.webp)
@@ -952,6 +1031,124 @@ Description of the standard Linux file system structure:
 - **/bin vs /sbin** → user vs admin
 
 - **/dev** → everything is file 😎 (i want fine also)
+
+---
+
+# FD (File Descriptor) in Linux
+
+When commands are executed, by default there are three standard file streams (or descriptors) always open for use: standard input (standard in or **stdin**), standard output (standard out or **stdout**) and standard error (or **stderr**).
+
+Also can called as **pipe** in Linux.
+
+|Name|Symbolic Name|Value|Example|
+|-|-|-|-|
+|Standard Input|stdin|0|keyboard|
+|Standard Output|stdout|1|terminal|
+|Standard Error|stderr|2|error log file|
+
+Usually, **stdin** is your keyboard, and **stdout** and **stderr** are printed on your terminal. **stderr** is often redirected to an error logging file, while **stdin** is supplied by directing input to come from a file or from the output of a previous command through a pipe. **stdout** is also often redirected into a file. Since **stderr** is where error messages (and warning) are written, usually nothing will go there.
+
+In Linux, all open files are represented internally by what are called file descriptors. Simply put, these are represented by numbers starting at zero. **stdin** is file descriptor 0, **stdout** is file descriptor 1, and **stderr** is file descriptor 2. Typically, if other files are opened in addition to these three, which are opened by default, they will start at file descriptor 3 and increase from there.
+
+> Cre: The Linux Foundation - [Linux Foundation X LFS101: Introduction to Linux](https://www.edx.org/course/introduction-to-linux)
+
+---
+
+# I/O Redirection
+
+Through the command shell, we can redirect the three standard file streams so that we can get input from either a file or another command, instead of from our keyboard, and we can write output and errors to files or use them to provide input for subsequent commands.
+
+For example, if we have a program called **do_something** that reads from **stdin** and writes to **stdout** and **stderr**, we can change its input source by using the less-than sign (<) followed by the name of the file to be consumed for input data:
+
+`$ do_something < input-file`
+Funny that bash not require the same order
+
+`$ < input-file do_something`
+It's work too
+
+`$ do_something 0< input-file`
+This is the fully specified version, using the file descriptor number for **stdin** (0).
+
+If you want to send the output to a file, use the greater-than sign (>) as in:
+
+`$ do_something > output-file`
+
+Also can be written as:
+
+`$ do_something 1> output-file`
+
+In fact, you can do both at the same time as in:
+
+`$ do_something < input-file > output-file`
+
+Error will be seen in terminal, because this is **stdout**, if you want to redirect **stderr** to a separate file, use `2> output-file` instead like
+
+`$ do_something 2> output-file`
+
+How about i want to both file descriptor 2 (**FD-2**) and **FD-1** to the same place as **FD-1**
+
+`$ do_something > all-output-file 2>&1`
+
+Bash permits an easier syntax
+
+`$ do_something >& all-output-file`
+
+Summary:
+
+- `0<`: where to read input from (default: keyboard)
+- `>` or `1>`: where to write output to (default: terminal)
+- `2>`: where to write error output to (default: terminal)
+- `2>&1`: redirect stderr (FD 2) to where stdout (FD 1) is going
+
+---
+Play with **/dev/null**: [about /dev/null](#dev-null)
+
+```bash
+# Old
+command > /dev/null 2>&1
+```
+
+```bash
+# New
+command &> /dev/null
+```
+
+Redirect both **stdout** and **stderr** to `/dev/null`, explanation:
+
+- `> /dev/null`: redirect stdout to `/dev/null`
+- `2>&1`: redirect **FD-2** to where **FD-1** is going (which is `/dev/null`)
+
+**Result**:
+
+- Comamnd run normal, no output shown
+- Success or fail, preserved by exit code `$?`
+
+---
+
+# Pipes
+
+The UNIX/Linux philosophy is to have many simple and short programs (or commands) cooperate together to produce quite complex results, rather than have one complex program with many possible options and modes of operation. In order to accomplish this, extensive use of pipes is made. You can pipe the output of one command or program into another as its input.
+
+![pipe](pipe.png)
+
+In order to do this, we use the vertical-bar, pipe symbol (**|**), between commands as in:
+
+`$ command1 | command2 | command3`
+
+![pipeline](pipeline.png)
+
+**Example**: Kill process interactively with `fzf`
+
+```bash
+ps aux | fzf | awk '{print $2}' | xargs kill -9
+```
+
+This command sequence does the following:
+
+1. `ps aux` lists all running processes.
+2. The output is piped (`|`) to `fzf`, an interactive command-line fuzzy finder, allowing you to select a specific process from the list.
+3. The selected line is then piped to `awk '{print $2}'`, which extracts the second field from the selected line, typically the process ID (PID).
+4. Finally, the PID is piped to `xargs kill -9`, which forcefully terminates the process with the specified PID.
 
 ---
 
@@ -1016,7 +1213,15 @@ chmod 664 foo.txt
 
 # Text Editor
 
-- nano and vim, let's go
+Basic editors:
+
+- nano
+- gedit
+
+Advanced editors:
+
+- vi, vim, nvim
+- emacs
 
 ## nano
 
@@ -2727,6 +2932,8 @@ But it cannot catch
   - script interactive
   - script small and simple, no complex logic
 
+<a id="dev-null"></a>
+
 ### /dev/null
 
 - The **black hole** 🕳 in Linux, anything sent to `/dev/null` will be discarded
@@ -2742,44 +2949,6 @@ ls: cannot access 'non_existent_file': No such file or directory
 ```
 
 - The script fully silent, no output shown, but the exit code still preserved
-
-#### FD (File Descriptor) in Linux
-
-Every process in Linux has **3 pipe**:
-
-- FD 0 - Pipe 0: stdin (keyboard input)
-- FD 1 - Pipe 1: stdout (output)
-- FD 2 - Pipe 2: stderr (error output)
-
-More details:
-
-- `0<`: where to read input from (default: keyboard)
-- `>` or `1>`: where to write output to (default: terminal)
-- `2>`: where to write error output to (default: terminal)
-- `2>&1`: redirect stderr (FD 2) to where stdout (FD 1) is going
-
-Command:
-
-```zsh
-command > /dev/null 2>&1
-```
-
-- Redirect both stdout and stderr to `/dev/null`, explanation:
-  - `> /dev/null`: redirect stdout to `/dev/null`
-  - `2>&1`: redirect stderr (file descriptor 2) to where stdout (file descriptor 1) is going (which is `/dev/null`)
-
-Result:
-
-- Comamnd run normal, no output shown
-- Success or fail, preserved by exit code `$?`
-
-New using
-
-```zsh
-command &> /dev/null
-```
-
-- More concise way to redirect both stdout and stderr to `/dev/null`
 
 ### Cron Job
 
