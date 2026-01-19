@@ -148,3 +148,8 @@ lcaohoanq@kebiansv:~$ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 # Authentication và Authorization
 
 # Tinh chỉnh, cài đặt
+
+> Cre:
+>
+> - <https://trainingportal.linuxfoundation.org/courses/introduction-to-jenkins-lfs167>
+> - Self study và làm việc thực tế với Jenkins
