@@ -2952,14 +2952,39 @@ ls: cannot access 'non_existent_file': No such file or directory
 
 ### Cron Job
 
-- How to write a cron schedule expression: <https://crontab.guru/>
+How to write a cron schedule expression: <https://crontab.guru/>
 
-- Example: automate the web deployment script with cron job
+Syntax
 
 ```zsh
-# Edit cron jobs
+❯ crontab --help
+crontab: invalid option -- '-'
+crontab: usage error: unrecognized option
+usage: crontab [-u user] [-n] file
+ crontab [ -u user ] [ -i ] { -e | -l | -r }
+
+ -h (displays this help message)
+
+ file (default operation is replace, per 1003.2)
+ -n (dry run: checks the syntax, then bails out)
+ -u user (choose the user whose crontab is touched)
+
+ -e (edit user's crontab)
+ -l (list user's crontab)
+ -r (delete user's crontab)
+
+ -i (prompt before deleting user's crontab)
+```
+
+Example: automate the web deployment script with cron job
+
+```zsh
 crontab -e
-# Add the following line to run the deployment script every day at 2 AM
+```
+
+Add the following line to run the **deployment script every day at 2 AM**
+
+```zsh
 0 2 * * * /path/to/web_setup.sh https://www.tooplate.com/zip-templates/2150_living_parallax.zip 2150_living_parallax >> /var/log/web_deploy.log 2>&1
 ```
 
