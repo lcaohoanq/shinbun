@@ -1211,6 +1211,247 @@ chmod 664 foo.txt
 
 ---
 
+# Account, Users and Groups
+
+## Identifying the Current User
+
+As you know, Linux is a multi-user operating system, meaning more than one user can log on at the same time.
+
+- To identify the current user, type **whoami**.
+- To list the currently logged-on users, type **who**.
+
+Giving **who** the **-a** option will give more detailed information.
+
+```bash
+hoang@fptu-thitkho-cbbz:~$ whoami
+hoang
+hoang@fptu-thitkho-cbbz:~$ who
+hoang    pts/0        2026-01-22 21:49 (14.187.108.34)
+hoang    pts/1        2026-01-21 15:52 (tmux(36912).%0)
+minh     pts/2        2026-01-22 21:49 (14.187.108.34)
+hoang@fptu-thitkho-cbbz:~$ who -a
+           system boot  2026-01-21 11:09
+           run-level 5  2026-01-21 11:09
+LOGIN      ttyS0        2026-01-21 11:09               653 id=tyS0
+LOGIN      tty1         2026-01-21 11:09               652 id=tty1
+hoang    + pts/0        2026-01-22 21:49   .         37921 (14.187.108.34)
+hoang    + pts/1        2026-01-21 15:52  old        36912 (tmux(36912).%0)
+minh     + pts/2        2026-01-22 21:49 00:07       37993 (14.187.108.34)
+hoang@fptu-thitkho-cbbz:~$ 
+```
+
+---
+
+## Users and Groups
+
+All Linux users are assigned a unique user ID (uid), which is just an integer; normal users start with a uid of 1000 or greater. System users (like `root`, `daemon`, `bin`, etc.) have uids below 1000.
+
+```bash
+hoang@fptu-thitkho-cbbz:~$ id
+uid=1000(hoang) gid=1000(hoang) groups=1000(hoang),27(sudo)
+minh@fptu-thitkho-cbbz:~$ id minh
+uid=1001(minh) gid=1001(minh) groups=1001(minh),27(sudo),100(users)
+minh@fptu-thitkho-cbbz:~$ id root 
+uid=0(root) gid=0(root) groups=0(root)
+```
+
+- hoang: normal user with uid 1000
+- minh: normal user with uid 1001
+- root: superuser with uid 0
+
+Linux uses **groups** for organizing users. Groups are collections of accounts with certain shared permissions; they are used to establish a set of users who have common interests for the purposes of access rights, privileges, and security considerations. Access rights to files (and devices) are granted on the basis of the user and the group they belong to.
+
+One user can belong to multiple groups. Each user has a primary group (usually the same name as the user) and can be a member of additional groups.
+
+```bash
+hoang@fptu-thitkho-cbbz:~$ groups
+hoang sudo
+minh@fptu-thitkho-cbbz:~$ groups minh
+minh sudo users
+```
+
+- hoang belongs to groups: hoang, sudo
+- minh belongs to groups: minh, sudo, users
+
+Check all groups in the system:
+
+- `/etc/group`: Contains all groups, their GIDs, and the users who belong to them as secondary members.
+- `/etc/passwd`: Contains all users, their UIDs, primary GIDs, home directories, and login shells.
+
+```ruby
+/etc/passwd
+hoang:x:1000:1000::/home/hoang:/bin/bash
+
+/etc/group
+hoang:x:1000:
+docker:x:999:hoang
+sudo:x:27:hoang
+```
+
+User `hoang` have:
+
+- Primary group: hoang (GID 1000)
+- Additional groups: docker, sudo
+
+> User → /etc/passwd (UID + primary GID)
+> Group → /etc/group (GID + secondary members)
+
+## Adding and Removing Users
+
+Only the superuser (root) or a user with sudo privileges can add or remove users.
+
+- Adding -> `useradd` or `adduser` (more user-friendly)
+
+```bash
+sudo adduser mnhw0612
+```
+
+which, by default, sets the home directory to /home/mnhw0612, populates it with some basic files (copied from /etc/skel) and adds a line to /etc/passwd such as:
+
+**mnhw0612:x:1002:1002::/home/mnhw0612:/bin/bash**
+
+and sets the default shell to **/bin/bash**
+
+Check with `getent passwd mnhw0612`
+
+```ruby
+mnhw0612:x:1002:1002:,,,:/home/mnhw0612:/bin/bash
+```
+
+- Removing -> `userdel`
+
+```bash
+sudo userdel mnhw0612
+```
+
+However, this command does not remove the user's home directory and mail spool unless the `-r` option is used, remove user without `-r` option is useful when you want **temporary inactivate** an account but preserve the user's files.
+
+```bash
+sudo userdel -r mnhw0612
+```
+
+## Adding and Removing Groups
+
+Only the superuser (root) or a user with sudo privileges can add or remove groups.
+
+Primary group vs Secondary group:
+
+```bash
+rjsquirrel : rjsquirrel
+```
+
+- User `rjsquirrel` only have primary group `rjsquirrel`
+
+```bash
+minh@fptu-thitkho-cbbz:~$ groups minh
+minh : minh sudo users
+```
+
+- User `minh` have primary group `minh` and secondary groups `sudo`, `users`
+
+### Adding groups
+
+```bash
+# sudo /usr/sbin/groupadd anewgroup
+sudo groupadd developers
+```
+
+Adding user to already existing group: `-a` (append), `-G` (set secondary groups), please note that without `-a` option, it will remove user from other groups and only add to the specified group.
+
+```bash
+sudo usermod -aG groupname username
+```
+
+Add user `hoang` to group `sudo`
+
+```bash
+sudo usermod -aG sudo hoang
+```
+
+### Remove groups
+
+```bash
+sudo groupdel developers
+```
+
+For remove using from group
+
+- Group will be remove from `/etc/group` file
+- **Not remove user**
+- If group is **primary group** of user, not able to remove
+
+### Remove user from group
+
+Linux do not have direct command to do
+
+```bash
+remove-user-from-group
+```
+
+It can be done in two ways:
+
+1. Using `usermod -G` to set new list of secondary groups (excluding the group to be removed) -> **Not recommended**
+
+```bash
+rjsquirrel : rjsquirrel anewgroup sudo docker
+```
+
+To remove `anewgroup` from user `rjsquirrel`
+
+```bash
+sudo usermod -G sudo,docker rjsquirrel
+```
+
+Result
+
+```bash
+rjsquirrel : rjsquirrel sudo docker
+```
+
+1. More safer using `gpasswd -d` command (**recommended**)
+
+```bash
+sudo gpasswd -d rjsquirrel anewgroup
+```
+
+---
+
+# Startup Files
+
+When a user logs in, several files are read and executed to configure the user's environment. These files are known as startup files or shell initialization files. The specific files that are read depend on the shell being used (e.g., bash, zsh) and whether the session is a **login shell** or a **non-login shell**.
+
+The startup files can do anything the user would like to do in every command shell, such as:
+
+- Customizing the prompt
+- Defining command line shortcuts and aliases
+- Setting the default text editor
+- Setting the path for where to find executable programs
+
+> Login shell: A shell session that starts when a user logs in to the system, either through a terminal or remotely via SSH.
+> Non-login shell: A shell session that starts when a user opens a new terminal window or tab within an existing session.
+
+## Order of the Startup Files
+
+The order in which the startup files are read and executed depends on whether the shell is a login shell or a non-login shell.
+
+### For Login Shells
+
+1. `/etc/profile`: System-wide configuration file for login shells.
+2. `~/.bash_profile`, `~/.bash_login`, or `~/.profile`: User-specific configuration files. The shell reads the **first one** it finds in this order.
+
+### For Non-Login Shells
+
+1. `/etc/bash.bashrc`: System-wide configuration file for non-login shells.
+2. `~/.bashrc`: User-specific configuration file for non-login shells.
+
+Some distro may not have `.bash_profile`, in this case, `.profile` will be used instead. It do one thing is to source `.bashrc` file, so the settings in `.bashrc` are also applied to login shells.
+
+```bash
+source ~/.bashrc
+```
+
+---
+
 # Text Editor
 
 Basic editors:

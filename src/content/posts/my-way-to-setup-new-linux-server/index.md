@@ -18,7 +18,9 @@ lang: 'vi'
 
 ![](https://i.ytimg.com/vi/q5yM4ZYwB_s/maxresdefault.jpg)
 
-# Check ip, SSH Config
+# Config cơ bản
+
+## Check ip, SSH Config
 
 ![](https://miro.medium.com/0*tgrMTzwM0nO7DDjQ.png)
 
@@ -87,7 +89,7 @@ ssh w520
 
 - Nếu vào được thì ngon lành cành đào
 
-# VPN: Tailscale
+## VPN: Tailscale
 
 ![](https://blog.briancmoses.com/images/2021/tailscale/tailscale-logo-black-800.png)
 
@@ -101,7 +103,7 @@ curl -fsSL https://tailscale.com/install.sh | sh
 
 - Cài xong thì **sudo tailscale up**, Tailscale trả ra một url auth, copy vào browser rồi Login để nhận device là xong
 
-# Tunnel: Cloudflare
+## Tunnel: Cloudflare
 
 ![](https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Cloudflare_Logo.svg/1200px-Cloudflare_Logo.svg.png)
 
@@ -125,14 +127,14 @@ sudo apt-get update && sudo apt-get install cloudflared
 sudo cloudflared service install tokentokentokentokentokentoken....
 ```
 
-# Docker
+## Docker
 
 ![](https://images.viblo.asia/fad7cf1a-772f-43e4-9042-e96d5d903b2b.png)
 
 - Doc là chân ái, ráng vào Ctrl + C/V đi anh zai
 - Cài xong run được cái container hello-world chưa chắc ngon đâu nha, check **docker ps** phát xem thử có bị bug permission không? Sửa ở đây (<https://stackoverflow.com/questions/48957195/how-to-fix-docker-permission-denied>), lỗi do user hiện tại chưa được thêm vào  group á mà, 99.9% cài mới docker đều bị :) gặp hoài luôn
 
-# Netdata
+## Netdata
 
 - Giám sát server, container, app,... siêu ngon, nhẹ, đẹp, dễ xài
 - Có 2 cách cài:
@@ -201,7 +203,7 @@ sudo ufw allow 19999/tcp
 sudo ufw reload
 ```
 
-# Dozzle
+## Dozzle
 
 - Xem log container realtime trên web, nhanh, nhẹ
 - Cài bằng Docker
@@ -215,11 +217,12 @@ docker run -d -v /var/run/docker.sock:/var/run/docker.sock -p 8888:8080 amir20/d
 
 - Thường mình sẽ map ra port **8888:8080** để khỏi trùng container Spring Boot (8080)
 
-# Set IP Tĩnh, Tắt DHCP
+## Set IP Tĩnh, Tắt DHCP
 
 Thỉnh thoảng sẽ cần cho homelab server IP tĩnh, không đổi, để dễ quản lý, có 2 cách:
-  - **Cấu hình trên Router** (nếu router có hỗ trợ)
-  - **Cấu hình trực tiếp trên server** (cách này mình hay dùng), mình sẽ hướng dẫn cách này nha
+
+- **Cấu hình trên Router** (nếu router có hỗ trợ)
+- **Cấu hình trực tiếp trên server** (cách này mình hay dùng), mình sẽ hướng dẫn cách này nha
 
 - Kiểm tra cấu hình ở `/etc/netplan/`
 
@@ -277,7 +280,7 @@ hostname -I
 
 - Nếu IP đúng như cấu hình thì okie, xong rồi đó :)
 
-## Trường hợp oái ăm (mới gặp phải)
+### Trường hợp oái ăm (mới gặp phải)
 
 - Xong hết các bước trên nhưng ssh vào server không được, báo lỗi timeout, không kết nối được. Kì cục vãi
 
@@ -307,3 +310,50 @@ sudo systemctl start ssh
 ```
 
 - Oke xong rồi thử ssh lại xem được chưa nha :)
+
+> Cập nhật thêm, giờ post này như nhà kho vậy, bắt đầu từ Ubuntu nhưng sau này có khi tui sẽ thêm các distro khác vào, ví dụ như Alpine Linux, CentOS, Debian... nào đặc biệt hay gặp thì sẽ note vào
+
+## Alpine Linux
+
+Do launch một LXC Alpine Linux trên Proxmox, nên tui sẽ note lại cách setup cơ bản Alpine Linux luôn
+
+Check SSH đang chạy không
+
+```bash
+sudo rc-service sshd status
+```
+
+Có 2 trường hợp, thường thì launch một instance mới sẽ chưa cài sshd
+
+```bash
+alpine3-experiment:~# rc-service sshd status
+ * rc-service: service `sshd' does not exist
+```
+
+- Nếu chưa cài sshd thì chạy lệnh này để cài
+
+```bash
+sudo apk update
+sudo apk add openssh
+```
+
+- Check lại status
+
+```bash
+alpine3-experiment:~# rc-service sshd status
+ * status: stopped
+```
+
+- Start sshd
+
+```bash
+sudo rc-update add sshd
+sudo rc-service sshd start
+sudo rc-service sshd status
+```
+
+Cần Python, để kết nối từ Ansible
+
+```bash
+sudo apk add python3
+```
