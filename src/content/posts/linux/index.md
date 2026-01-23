@@ -577,12 +577,26 @@ The Advanced Packaging Tool (**apt**) is the underlying package management syste
 
 ### Examples
 
-**cat** : View file content
+**cat**
 
-- `cat file.txt`
+cat is short for **concatenate** and is one of the most frequently used Linux command line utilities. It is often used to read and print files, as well as for simply viewing file contents. To view a file, use the following command:
+
+```bash
+cat <filename>
+```
+
+`cat file.txt`: view file content
+
+Commonly used options with cat:
+
+- `cat file1 file2`: concatenate files and display, file2 content follow file1
 - `cat -n file.txt` : view line number
 - `cat file1.txt file2.txt` : concatenate files and display
 - `cat file.txt | less` : view long file with less
+- `cat file1 file2 > newfile`: concatenate file1 and file2 into newfile
+- `cat file >> existingfile`: append file content to existingfile
+- `cat > file`: create file and input content from terminal, press `Ctrl + D` to save and exit
+- `cat >> file`: append content to existing file from terminal, press `Ctrl + D` to save and exit
 
 > im using [bat](https://github.com/sharkdp/bat),  notice that after install bat, it use the batcat (not bat) so need to remember or assign alias to .zshrc
 
@@ -706,8 +720,14 @@ Removing a directory is done with rmdir. The directory must be empty or the comm
    tree -I "node_modules" -D
    ```
 
-- **history**: Show all previously executed command
-  - im currently using [atuin](https://github.com/atuinsh/atuin): better history, with built in sql lite, can search, navigate to the previous command
+`history`: Show all previously executed command
+
+- `!!`: execute the last command again (bang bang)
+- `!n`: execute the nth command in history
+- `!string`: execute the last command that starts with string
+- `Ctrl + r`: reverse search in history
+
+im currently using [atuin](https://github.com/atuinsh/atuin): better history, with built in sql lite, can search, navigate to the previous command
 
 - Process:
   - `ps`: shows only **processes associated with your current terminal session and use**
@@ -717,6 +737,23 @@ Removing a directory is done with rmdir. The directory must be empty or the comm
     # show detailed all running processes and find obs
     ps aux | grep "obs"
     ```
+
+## Terminal Shortcuts
+
+| Shortcut | Description |
+|----------|------------|
+| CTRL + L | Clears the screen |
+| CTRL + S | Temporarily halt output to the terminal |
+| CTRL + Q | Resume output to the terminal |
+| CTRL + D | Exit the current shell |
+| CTRL + Z | Suspend the current process and return to prompt |
+| CTRL + C | Kill the current process |
+| CTRL + H | Same as Backspace |
+| CTRL + A | Move cursor to the beginning of the line |
+| CTRL + W | Delete the word before the cursor |
+| CTRL + U | Delete from start of line to cursor |
+| CTRL + E | Move cursor to the end of the line |
+| Tab | Auto-complete files, directories, and commands |
 
 ## find : Search for files and directories
 
@@ -1154,25 +1191,40 @@ This command sequence does the following:
 
 # File Permissions
 
-- Every directory have permission for owner and group
-  - Owner is who created the file or directory
-  - Groups is the set of users who share the same permission
+## File Ownership
+
+In Linux and other UNIX-based operating systems, every file is associated with a user who is the owner. Every file is also associated with a group (a subset of all users) which has an interest in the file and certain rights, or permissions: read, write, and execute.
+
+|Command|Usage|
+|-------|-----|
+|chown|Used to change user ownership of a file or directory|
+|chgrp|Used to change group ownership|
+|chmod|Used to change the permissions on the file, which can be done separately for **owner**, **group** and the rest of the world (often named as **other**)|
+
+## File Permission Mods and chmod
+
+Every **file** have permission for owner and group (I tell file here but same for directory, link, socket,...)
+
+- **Owner** is who created the file or directory
+- **Groups** is the set of users who share the same permission
 
 ![](File-permissions-in-Linux-Unix.png)
 
-> - : executable file
-   r : read
-   w: write
-   x: execute
+Files have three kinds of permissions: read (**r**), write (**w**), execute (**x**).
+These are generally represented as in **rwx**. These permissions affect three groups of owners: user/owner (**u**), group (**g**), and others (**o**)
 
-- `-rw-r--r--`:
-  - owner user: can read, write, not execute (for each file the owner is root, oracle9, user3)
-  - group user: can read only
-  - other user: can read only
+```bash
+rwx: rwx: rwx
+ u:   g:   o
+```
 
-- rwx (**user**)    rwx  (**group**)   rwx (**other**)
+Example:
 
-## chmod
+`-rw-r--r--`:
+
+- owner user: can read, write, not execute (for each file the owner is root, oracle9, user3)
+- group user: can read only
+- other user: can read only
 
 ![](chmod.jpg)
 
@@ -1182,10 +1234,13 @@ This command sequence does the following:
 chmod [u/g/o][+/-/=][r/w/x][file]
 ```
 
-- Syntax:
-  - **u/g/o**: user/group/other
-  - **+/-/=**: add, remove, set
-  - **r/w/x**: read, write, execute
+Syntax:
+
+- **u/g/o**: user/group/other
+- **+/-/=**: add, remove, set
+- **r/w/x**: read, write, execute
+
+Examples:
 
 - Change file `data.txt` add groups permission writable
 
@@ -1193,21 +1248,143 @@ chmod [u/g/o][+/-/=][r/w/x][file]
 chmod g+w data.txt
 ```
 
-- Using octal notation
-  - Easy to figure out what number: <https://chmod-calculator.com/>
+- Give the owner and others **execute** permission and remove the group **write** permission
+
+```bash
+$ ls -l somefile
+-rw-rw-r-- 1 student student 1601 Mar 9 15:04 somefile
+$ chmod uo+x,g-w somefile
+$ ls -l somefile
+-rwxr--r-x 1 student student 1601 Mar 9 15:04 somefile
+```
+
+### Using octal notation
+
+This kind of syntax can be difficult to type and remember, so one often uses a shorthand which lets you set all the permissions in one step. This is done with a simple algorithm, and a single digit suffices to specify all three permission bits for each entity
+
+- Easy to figure out what number: <https://chmod-calculator.com/>
+
+- **4** if read permission is desired
+- **2** if write permission is desired
+- **1** if execute permission is desired
+Thus
+- **7** means read/write/execute
+- **6** means read/write
+- **5** means read/execute
+- **0** means no permission
+- 400 : read only
+Example:
 
 ```zsh
 chmod 664 foo.txt
+# user/owner: read, group: read/write, other: read
+# =>>>>>> rw-rw-r--
+chmod 755 script.sh
+# user/owner: read/write/execute, group: read/execute, other: read/execute
+# =>>>>>> rwxr-xr-x
 ```
 
-- Syntax:
-  - **u/g/o**: 6 6 4
-  - read and write: 6, read: 4
-  - 400 : read only
-
-- Be careful with `chmod 777`, grant full access, convenience but it violate the principle of privilege
+Be careful with `chmod 777`, grant full access, convenience but it violate the principle of privilege
 
 ![](pc-principal-check-privilege.png)
+
+## Chown command
+
+`chown` can change owner, group or both of a file or directory.
+
+![chown](chown.png)
+
+Touch 2 file `file1` and `file2` as owner is `coop`, group is `coop`, Change `file2` owner to `root` remain group `coop`, after that change both owner and group of `file?` mean both to `root`  
+Finally, only the superuser can remove the files.
+
+Syntax:
+
+```bash
+chown x:y file.txt
+```
+
+- x: user (owner)
+- y: group
+
+Some cases:
+
+```bash
+chown hoang:dev file.txt
+```
+
+- Change owner to `hoang`, group to `dev`
+
+```bash
+chown hoang file.txt
+```
+
+- Change owner to `hoang`, remain group
+
+```bash
+chown :dev file.txt
+```
+
+- Change group to `dev`, remain owner
+
+```bash
+chown -R hoang:dev /var/www
+```
+
+- Change owner to `hoang`, group to `dev` **recursively** for all files and directories in `/var/www`
+
+Why change recursively? Because `/var/www` usually contain many files and directories, if we don't use `-R` option, only `/var/www` change owner and group, all files and directories inside remain the same. Linux do this because it protect us from making mistakes. Ensure we really want to apply changes to all files and directories inside.
+
+So always be careful:
+
+```bash
+chown -R user:group /
+```
+
+=> **Disaster**, because it change all files and directories in the system to `user:group`, system break down, need to reinstall
+
+## Chgrp command
+
+`chgrp` is used to change the group ownership of a file or directory.
+
+```bash
+chgrp dev file.txt
+```
+
+- Change group of `file.txt` to `dev`, remain owner
+- Only the superuser or the owner of the file can change the group ownership.
+
+---
+
+# su vs sudo
+
+`su` (substitute user) and `sudo` (superuser do) are both commands that allow a user to execute commands with elevated privileges, but they work in different ways and have different use cases.
+
+|Aspect|su|sudo|
+|-|-|-|
+|Functionality|Switches the current user to another user (default is root) and starts a new shell session.|Allows a permitted user to execute a specific command as the superuser or another user without switching users.|
+|Authentication|Requires the password of the target user (e.g., root) to switch users.|Requires the password of the current user to execute a command with elevated privileges.|
+|Session|Starts a new shell session as the target user.|Executes a single command with elevated privileges and returns to the original user session.|
+|Use Case|Useful for performing multiple administrative tasks in a single session.|Ideal for executing individual commands that require elevated privileges without switching users.|
+|Security|Less secure as it requires sharing the root password and can lead to prolonged elevated privileges.|More secure as it allows for granular control over which users can execute specific commands with elevated privileges.|
+
+- `/etc/sudoers` file is used to configure `sudo` permissions, allowing administrators to specify which users can execute which commands as root or other users.
+
+In short:
+
+- using `su` default switch to `root` user. But i want to login as another user, use `su - username`.
+- While `sudo` execute a single command with elevated privileges without switching users. And the privileges will granted only for that command.
+
+```bash
+❯ su
+Password: 
+root@hoang:/home/lcaohoanq# nano /etc/host
+bash: nano: command not found
+root@hoang:/home/lcaohoanq# vim /etc/host
+root@hoang:/home/lcaohoanq# vim /etc/hosts
+root@hoang:/home/lcaohoanq# exit^C
+root@hoang:/home/lcaohoanq# ls -l /etc/hosts
+-rw-r--r-- 1 root root 350 Jan 21 23:58 /etc/hosts
+```
 
 ---
 
