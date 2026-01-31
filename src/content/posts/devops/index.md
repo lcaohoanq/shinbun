@@ -390,79 +390,20 @@ ip a
 
 - Mình viết riêng một bài về Jenkins CI [ở đây](https://blog.lcaohoanq.works/posts/jenkins)
 
-## Debian 12 Bookworm
-
-- Debian 12 are not have openjdk-21 in default repo, so we change to use temurin-openjdk-21 instead, the way install are harder than ubuntu
-
-- Check out the available versions: [Termurin OpenJDK page](https://adoptium.net/temurin/releases)
-
-```zsh
-apt update -y
-# Install some dependencies
-apt install -y wget tar maven git
-
-# Download
-sudo wget https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.6%2B7/OpenJDK21U-jdk_x64_linux_hotspot_21.0.6_7.tar.gz
-
-# Extract
-tar xzf OpenJDK21U-jdk_x64_linux_hotspot_21.0.6_7.tar.gz
-
-# Move to /opt
-mv jdk-21.0.6+7 /opt/
-echo "export JAVA_HOME=/opt/jdk-21.0.6+7" >> /etc/profile
-echo "export PATH=$JAVA_HOME/bin:$PATH" >> /etc/profile
-source /etc/profile
-
-# Setting default java version
-update-alternatives --install /usr/bin/java java /opt/jdk-21.0.6+7/bin/java 1
-update-alternatives --config java
-```
-
-- Verfify java version
-
-```zsh
-java -version
-```
-
-- Test with simple pgogram
-
-```java
-cat > hello_world.java <<EOF
-public class helloworld {
-  public static void main(String[] args) {
-    System.out.println("Hello World! Temurin is powerful");
-  }
-}
-EOF
-```
-
-```zsh
-$ java hello_world.java
-Hello World! Temurin is powerful
-```
-
-- Create a symlink to default location where jenkins find java
-
-```zsh
-ln -sf /opt/jdk-21.0.6+7/bin/java /usr/bin/java
-```
-
-- Restart jenkins
-
-```zsh
-systemctl reset-failed jenkins
-systemctl daemon-reload
-systemctl restart jenkins
-systemctl status jenkins
-```
-
 ---
 
 # Python
 
 ---
 
-# Ansible
+# IaC - Infrastructure as Code
+
+## IaC là gì?
+
+## Các công cụ phổ biến
+
+- Ansible
+- Terraform
 
 ---
 
@@ -475,10 +416,6 @@ systemctl status jenkins
 ---
 
 # Kubernates
-
----
-
-# Terraform
 
 ---
 

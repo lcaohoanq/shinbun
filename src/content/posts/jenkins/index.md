@@ -160,6 +160,71 @@ Jan 19 07:55:36 fptu-thitkho-cbbz jenkins[187022]: 2026-01-19 00:55:36.536+0000 
 Jan 19 11:05:20 fptu-thitkho-cbbz jenkins[187022]: 2026-01-19 04:05:20.983+0000 [id=4770]        INFO        o.j.p.g.ApiRateLimitChecker$RateLimitCheckerAdapter#checkRateL
 ```
 
+## Debian 12 Bookworm Java Temurin OpenJDK 21
+
+- Debian 12 không có openjdk-21 trong repo mặc định, nên ta chuyển sang dùng temurin-openjdk-21, cách cài phức tạp hơn ubuntu một chút
+- Kiểm tra version: [Termurin OpenJDK page](https://adoptium.net/temurin/releases)
+
+```zsh
+apt update -y
+# Install some dependencies
+apt install -y wget tar maven git
+
+# Download
+sudo wget https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.6%2B7/OpenJDK21U-jdk_x64_linux_hotspot_21.0.6_7.tar.gz
+
+# Extract
+tar xzf OpenJDK21U-jdk_x64_linux_hotspot_21.0.6_7.tar.gz
+
+# Move to /opt
+mv jdk-21.0.6+7 /opt/
+echo "export JAVA_HOME=/opt/jdk-21.0.6+7" >> /etc/profile
+echo "export PATH=$JAVA_HOME/bin:$PATH" >> /etc/profile
+source /etc/profile
+
+# Setting default java version
+update-alternatives --install /usr/bin/java java /opt/jdk-21.0.6+7/bin/java 1
+update-alternatives --config java
+```
+
+- Verfify java version
+
+```zsh
+java -version
+```
+
+- Test with simple pgogram
+
+```java
+cat > hello_world.java <<EOF
+public class helloworld {
+  public static void main(String[] args) {
+    System.out.println("Hello World! Temurin is powerful");
+  }
+}
+EOF
+```
+
+```zsh
+$ java hello_world.java
+Hello World! Temurin is powerful
+```
+
+- Create a symlink to default location where jenkins find java
+
+```zsh
+ln -sf /opt/jdk-21.0.6+7/bin/java /usr/bin/java
+```
+
+- Restart jenkins
+
+```zsh
+systemctl reset-failed jenkins
+systemctl daemon-reload
+systemctl restart jenkins
+systemctl status jenkins
+```
+
 # Freestyle và Pipeline As Code
 
 ![Job](jobs.png)

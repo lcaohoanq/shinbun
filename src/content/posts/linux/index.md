@@ -31,9 +31,13 @@ lang: 'en'
 
 > <https://github.com/lcaohoanq/hypr-arch-dotfiles/>
 
-![](l-ch-S3jgTJ91pio-unsplash.jpg)
+**[Update 31 Jan 26]**: New to Omarchy Linux, a Arch based distro with Hyprland pre-installed, so convenient :), i love the stable of Debian but Arch is so fun and nostalgic with the ricing process, using WM is so fun :)
+
+![](omarchy/screenshot-2026-01-31_23-42-28.png)
 
 > Life seem more tough when learning, using Linux but after a long time, 2 years using, fail, break, reinstall many time...every moments worth it, i really love Linux and it became my daily driver now.
+>
+> ![](l-ch-S3jgTJ91pio-unsplash.jpg)
 
 # OSS (Open Source Software)
 
@@ -122,76 +126,13 @@ Many many many tools are open source now :)
 
 ---
 
-# So sánh các distro phổ biến, Release model
+# Choosing a Linux Distribution
 
 ![Distro](distro.webp)
 
 ## Comparison table of popular Linux distributions
 
-<style>
-/* ===== Distro Table – clean & readable ===== */
-.distro-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 1.5rem 0;
-  font-size: 0.95rem;
-  line-height: 1.5;
-}
-
-.distro-table thead th {
-  background: #0f172a;        /* slate-900 */
-  color: #e5e7eb;             /* gray-200 */
-  text-align: left;
-  padding: 10px 12px;
-  font-weight: 600;
-  border-bottom: 2px solid #334155;
-}
-
-.distro-table tbody td {
-  padding: 10px 12px;
-  border-bottom: 1px solid #e5e7eb;
-  vertical-align: top;
-}
-
-.distro-table tbody tr:nth-child(even) {
-  background: #f8fafc;        /* slate-50 */
-}
-
-.distro-table tbody tr:hover {
-  background: #e0f2fe;        /* sky-100 */
-}
-
-.distro-table td:nth-child(1) {
-  font-weight: 600;
-  white-space: nowrap;
-}
-
-.distro-table td:nth-child(7) {
-  white-space: nowrap;
-}
-
-/* Dark mode (nếu markdown site có prefers-color-scheme) */
-@media (prefers-color-scheme: dark) {
-  .distro-table thead th {
-    background: #020617;
-    border-bottom-color: #1e293b;
-  }
-
-  .distro-table tbody td {
-    border-bottom-color: #1e293b;
-  }
-
-  .distro-table tbody tr:nth-child(even) {
-    background: #020617;
-  }
-
-  .distro-table tbody tr:hover {
-    background: #082f49;
-  }
-}
-</style>
-
-<table class="distro-table">
+<table>
   <thead>
     <tr>
       <th>Distro</th>
@@ -474,7 +415,7 @@ sudo apt-get install ROSÉ
 
 ## Package Management Systems on Linux
 
-There are two broad families of package managers widely deployed: those based on Debian and those which use RPM as their low-level package manager. The two systems are incompatible but, broadly speaking, provide the same essential features and satisfy the same needs. In addition, there are some other systems used by more specialized Linux distributions.
+There are two broad families of package managers widely deployed: those based on Debian and those which use RPM as their **low-level package manager**. The two systems are incompatible but, broadly speaking, provide the same essential features and satisfy the same needs. In addition, there are some other systems used by more specialized Linux distributions.
 
 Both package management systems operate on two distinct levels: a low-level tool (such as **dpkg** or **rpm**) takes care of the details of unpacking individual packages, running scripts, getting the software installed correctly, while a high-level tool (such as **apt**, **dnf**, or **zypper**) works with groups of packages, downloads packages from the vendor, and figures out dependencies.
 
@@ -1020,35 +961,39 @@ The man pages are the most often-used source of Linux documentation. They provid
 Description of the standard Linux file system structure:
 
 ```zsh
-/               # Root directory – gốc của mọi thứ
-├── /boot       # File khởi động: kernel, initramfs, grub
-├── /dev        # Device files (ổ cứng, USB, tty, null, random…)
-├── /etc        # Config hệ thống (nghĩ: "editable text configs")
-├── /home       # Thư mục người dùng (home của user)
-│   └── hoang   # Ví dụ home của user hoang
-│   └── duyen   # Ví dụ home của user duyen
-├── /lib        # Thư viện cần cho /bin và /sbin
-├── /lib64      # Thư viện 64-bit
-├── /media      # Nơi auto-mount USB, ổ cứng rời
-├── /mnt        # Mount tạm (mount thủ công)
-├── /opt        # Optional software (app cài ngoài hệ thống)
+/               # Root directory – the top of the file system hierarchy
+├── /boot       # Startup file: kernel, initramfs, grub
+├── /dev        # Device files (hard-drive, USB, tty, null, random…)
+├── /etc        # Configuration files
+│   ├── /nginx  # nginx config
+│   ├── /ssh    # ssh config
+│   └── /systemd # systemd config
+├── /bin        # Essential command binaries (ls, cp, mv, cat…)
+├── /home       # User home directories
+│   └── hoang   # Example home of user hoang
+│   └── duyen   # Example home of user duyen
+├── /lib        # Essential shared libraries for /bin & /sbin
+├── /lib64      # 64-bit essential shared libraries
+├── /media      # Mount point for removable media (CD, USB), hard-drive
+├── /mnt        # Temporary mount point (manual mount)
+├── /opt        # Optional software (third-party apps)
 ├── /proc       # Virtual FS – info kernel & process (runtime)
-├── /root       # Home của user root
+├── /root       # Home directory of root user
 ├── /run        # Runtime data (PID, socket, lock file)
-├── /sbin       # System binaries (lệnh cho admin/root)
-├── /srv        # Data cho service (web, ftp…)
+├── /sbin       # System binaries (admin/root)
+├── /srv        # Data for service (web, ftp…)
 ├── /sys        # Virtual FS – kernel, hardware
-├── /tmp        # File tạm (có thể bị xoá khi reboot)
+├── /tmp        # Temporary files (might be cleared on reboot)
 ├── /usr        # Userland programs & libs
-│   ├── /bin    # Binary cho user
-│   ├── /sbin   # Binary cho admin
-│   ├── /lib    # Thư viện
-│   └── /share  # Data dùng chung (icons, fonts, docs)
+│   ├── /bin    # Binary for user
+│   ├── /sbin   # Binary for admin
+│   ├── /lib    # Shared libraries for /usr/bin & /usr/sbin
+│   └── /share  # Shared data (icons, fonts, docs)
 └── /var        # Variable data
     ├── /log    # Log system
     ├── /cache  # Cache
     ├── /lib    # State data (db, package info)
-    └── /www    # Web root (Apache/Nginx – tuỳ distro)
+    └── /www    # Web root (Apache/Nginx – different on each distro)
 
 ```
 
@@ -1203,7 +1148,7 @@ In Linux and other UNIX-based operating systems, every file is associated with a
 
 ## File Permission Mods and chmod
 
-Every **file** have permission for owner and group (I tell file here but same for directory, link, socket,...)
+Every **file** have permission for **owner** and **group** (I tell file here but same for directory, link, socket,...)
 
 - **Owner** is who created the file or directory
 - **Groups** is the set of users who share the same permission
@@ -1272,16 +1217,33 @@ Thus
 - **6** means read/write
 - **5** means read/execute
 - **0** means no permission
+
+So a three-digit octal number can specify all permissions for user, group, and others. The first digit is for the user, the second for the group, and the third for others.
+
 - 400 : read only
-Example:
+- 200 : write only
+- 100 : execute only
+- 121 : execute for owner, write for others, execute for group
+  
+A default permission
+
+- **new file** is usually `rw-r--r--` (664)
+- **new directory** is usually `rwxr-xr-x` (755)
+
+**Example**:
 
 ```zsh
 chmod 664 foo.txt
 # user/owner: read, group: read/write, other: read
 # =>>>>>> rw-rw-r--
+
 chmod 755 script.sh
 # user/owner: read/write/execute, group: read/execute, other: read/execute
 # =>>>>>> rwxr-xr-x
+
+chmod 121 myfile
+# user/owner: execute, group: write, other: execute
+# =>>>>>> --x-w--x
 ```
 
 Be careful with `chmod 777`, grant full access, convenience but it violate the principle of privilege
@@ -1740,6 +1702,32 @@ yy
 u
 ```
 
+- Delete 1 character
+
+```zsh
+x
+```
+
+Same for Delete n character
+
+```zsh
+3x
+```
+
+- Delete 1 word
+
+```zsh
+dw
+```
+
+- Delete to the end of line
+
+```zsh
+D
+# or
+d$
+```
+
 - Delete 1 line (yanking):
 
 ```zsh
@@ -1756,6 +1744,12 @@ dd
 
 ```zsh
 118796G
+```
+
+- 1 new line below current line (Insert mode)
+
+```bash
+o
 ```
 
 - Search word (Command mode -> **ESC**), / then type the keyword want to search -> Enter
