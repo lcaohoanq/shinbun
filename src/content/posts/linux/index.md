@@ -3405,6 +3405,37 @@ Add the following line to run the **deployment script every day at 2 AM**
   - `/path/to/web_setup.sh ...`: command to run the deployment script with arguments
   - `>> /var/log/web_deploy.log 2>&1`: **append** both stdout and stderr to a log file for monitoring, can use without `2>&1` in new bash version,
 
+In **Arch Linux**, the cron service is `cronie`, and it not installed by default, so we need to install and enable it first
+
+```zsh
+sudo pacman -S cronie
+sudo systemctl enable cronie
+sudo systemctl start cronie
+```
+
+Check status:
+
+```bash
+bit-learning-be-develop develop ❯ systemctl status cronie.service
+● cronie.service - Command Scheduler
+     Loaded: loaded (/usr/lib/systemd/system/cronie.service; enabled; preset: disabled)
+     Active: active (running) since Sun 2026-02-01 10:50:26 +07; 2s ago
+ Invocation: 370e983e6e1345cdbfb2551afc1bd128
+   Main PID: 50280 (crond)
+      Tasks: 1 (limit: 38302)
+     Memory: 888K (peak: 1.7M)
+        CPU: 5ms
+     CGroup: /system.slice/cronie.service
+             └─50280 /usr/sbin/crond -n
+
+Feb 01 10:50:26 omarchy systemd[1]: Started Command Scheduler.
+Feb 01 10:50:26 omarchy crond[50280]: (CRON) STARTUP (1.7.2)
+Feb 01 10:50:26 omarchy crond[50280]: (CRON) INFO (RANDOM_DELAY will be scaled with factor 87% if used.)
+Feb 01 10:50:26 omarchy crond[50280]: (CRON) INFO (running with inotify support)
+```
+
+After that we can use `crontab -e` to edit cron jobs
+
 ## Loops
 
 ### For loop

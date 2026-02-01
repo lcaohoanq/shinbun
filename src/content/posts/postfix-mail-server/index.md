@@ -1,7 +1,7 @@
 ---
-title: Dựng Postfix Local Mail Server trên Debian 13
+title: Dựng Postfix Local Mail Server trên Linux
 published: 2026-19-01
-description: 'Muốn có một mail server local để test gửi nhận mail từ các ứng dụng web của mình trên máy local thì làm thế nào? Bài viết này sẽ hướng dẫn các bạn cách dựng một Postfix Mail Server dùng Gmail SMTP đơn giản trên Debian 13.'
+description: 'Muốn có một mail server local để test gửi nhận mail từ các ứng dụng web của mình trên máy local thì làm thế nào? Bài viết này sẽ hướng dẫn các bạn cách dựng một Postfix Mail Server dùng Gmail SMTP đơn giản trên Linux.'
 image: "1736-postfixsmtp1.png"
 tags: [Server, Linux, Mail Server]
 category: 'Công nghệ'
@@ -12,7 +12,7 @@ lang: 'vi'
 # Mở đầu
 
 - Giữa vô vàn các thể loại tạo mail server, hôm nay mình sẽ hướng dẫn các bạn dựng một Postfix Mail Server, ưu điểm là nhanh, nhẹ và dễ cấu hình.
-- Mình sẽ hướng dẫn trên Debian 13, các distro khác tương tự nhé.
+- Mình sẽ hướng dẫn trên Debian 13 và Arch, các distro khác nhau sẽ khác nhau về pacakage, file path nhưng cấu hình thì tương tự nhau.
 
 # Chuẩn bị
 
@@ -24,9 +24,19 @@ lang: 'vi'
 
 # Setup
 
+Ubuntu / Debian:
+
 ```bash
 sudo apt update 
 sudo apt install mailutils postfix -y
+# Cài SASL (bắt buộc để auth Gmail)
+sudo apt install sasl2-bin libsasl2-modules
+```
+
+Arch:
+
+```bash
+sudo pacman -Syu postfix cyrus-sasl mailx
 ```
 
 **mailutils**: Viết thư xong bỏ lên bàn -> gửi ra bưu điện là **postfix** để chuyển đi smtp
@@ -58,9 +68,18 @@ LISTEN 0      100                        0.0.0.0:25         0.0.0.0:*
 LISTEN 0      100                           [::]:25            [::]:*
 ```
 
+> Nếu status chưa active (running) thì start dịch vụ
+
 ```bash
-# Cài SASL (bắt buộc để auth Gmail)
-sudo apt install sasl2-bin libsasl2-modules
+○ postfix.service - Postfix Mail Transport Agent
+     Loaded: loaded (/usr/lib/systemd/system/postfix.service; disabled; preset: disabled)
+     Active: inactive (dead)
+[ble: exit 3]
+```
+
+```bash
+sudo systemctl enable postfix
+sudo systemctl start postfix
 ```
 
 Tạo file auth Gmail
@@ -82,8 +101,34 @@ Nội dung file:
 Hash file & set quyền (rất quan trọng)
 
 ```bash
-sudo postmap /etc/postfix/sasl_passwd
-sudo chmod 600 /etc/postfix/sasl_passwd /etc/postfix/sasl_passwd.db
+sudo postmap /etc/postfix/sasl_passwd &&
+
+#sudo chmod 600 /etc/postfix/sasl_passwd /etc/postfix/sasl_passwd.db => Ubuntu/Debian
+#sudo chmod 600 /etc/postfix/sasl_passwd /etc/postfix/sasl_passwd.lmdb => Arch
+
+sudo chmod 600 /etc/postfix/sasl_passwd*
+```
+
+Kiểm tra file CA certificates để đảm bảo postfix có thể verify SSL của Gmail
+
+```bash
+ls /etc/ssl/certs/ca-certificates.crt
+Permissions Size User Date Modified Name
+lrwxrwxrwx     - root 19 Jun  2024   /etc/ssl/certs/ca-certificates.crt -> ../../ca-certificates/extracted/tls-ca-bundle.pem
+```
+
+Nếu chưa có, cài đặt:
+
+- Debian / Ubuntu:
+
+```bash
+sudo apt install ca-certificates  
+```
+
+- Arch:
+
+```bash
+sudo pacman -Syu ca-certificates
 ```
 
 Cấu hình postfix dùng Gmail SMTP
@@ -92,7 +137,9 @@ Cấu hình postfix dùng Gmail SMTP
 sudo nano /etc/postfix/main.cf
 ```
 
-Nội dung mặc định
+Nội dung mặc định, có thể sẽ khác nhau tùy distro:
+
+- Đây là nội dung file main.cf trên Debian 13
 
 ```txt
 # See /usr/share/postfix/main.cf.dist for a commented, more complete version
@@ -200,22 +247,63 @@ smtp_tls_security_level = encrypt
 smtp_tls_CAfile = /etc/ssl/certs/ca-certificates.crt
 ```
 
+- Còn trên Arch Linux sẽ bị thiếu các option như
+  - smtp_sasl_auth_enable
+  - smtp_sasl_password_maps
+  - smtp_sasl_security_options
+  - smtp_sasl_tls_security_options
+  - smtp_use_tls
+  - smtp_tls_security_level
+  - smtp_tls_CAfile
+
+Chỉ cần copy các dòng này vào cuối file là được
+
+```txt
+****# Basic
+myhostname = localhost
+myorigin = /etc/mailname
+inet_interfaces = loopback-only
+inet_protocols = ipv4
+
+# Relay Gmail
+relayhost = [smtp.gmail.com]:587
+
+# SASL Auth
+smtp_sasl_auth_enable = yes
+smtp_sasl_password_maps = lmdb:/etc/postfix/sasl_passwd
+smtp_sasl_security_options = noanonymous
+smtp_sasl_mechanism_filter = plain, login
+
+# TLS
+smtp_use_tls = yes
+smtp_tls_security_level = encrypt
+smtp_tls_CAfile = /etc/ssl/certs/ca-certificates.crt
+```
+
+Chú ý arch dùng **lmdb** thay vì **hash** cho file sasl_passwd
+
+- `smtp_sasl_password_maps = lmdb:/etc/postfix/sasl_passwd`
+
+> Sự khác này là do cách postfix được build trên từng distro khác nhau
+
 Reload postfix
 
 ```bash
 sudo systemctl restart postfix
 ```
 
+---
+
 # Test gửi mail
 
-```bash
-echo "👻" | mail -s "Sao co\`n chua ngu~? 👿" hoangclw@gmail.com
-```
-
-Với syntax:
+Syntax:
 
 ```bash
 echo "Nội dung thư" | mail -s "Tiêu đề thư" email@gmail.com
+```
+
+```bash
+echo "👻" | mail -s "Sao co\`n chua ngu~? 👿" hoangclw@gmail.com
 ```
 
 ![Test Send Mail](test_mail.png)
