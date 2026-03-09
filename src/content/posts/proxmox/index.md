@@ -120,7 +120,7 @@ auto lo
 iface lo inet loopback
 
 iface nic0 inet manual
-thành
+
 auto vmbr0
 iface vmbr0 inet static
         address 192.168.27.164/24

@@ -134,18 +134,19 @@ Hãy cẩn thận khi thao tác với context, nếu bạn đang ở context rem
 
 [](./npm.png)
 
-- Vấn đề thật sự nằm ở docker context
+## Vấn đề thật sự nằm ở docker context
 
-nhầm giữa:
+mình nhầm giữa:
 
 ```bash
 default  -> local
 fpt      -> ssh://fpt
 ```
 
-Docker CLI **không hiển thị context rõ trong terminal** nên rất dễ nhầm.
+- Docker CLI **không hiển thị context rõ trong terminal** nên rất dễ nhầm.
 
-Đây là lỗi rất phổ biến, có thể devops khác sẽ không dùng docker context, mà sẽ ssh vào server rồi thao tác trực tiếp cho an toàn, nhưng nếu dùng docker context thì sẽ tiện hơn rất nhiều, vì tận dụng được setup, CLI tools ở máy local, nên mình nghĩ là docker nên cải thiện phần này để tránh nhầm lẫn, có thể hiển thị context hiện tại ở prompt hoặc ít nhất là highlight khi đang ở context remote server để tránh nhầm lẫn, hoặc mình tự custom prompt trong terminal được
+- Có thể devops khác sẽ không dùng **docker context**, mà sẽ ssh vào server rồi thao tác trực tiếp cho an toàn, nhưng nếu dùng **docker context** thì sẽ tiện hơn rất nhiều, vì tận dụng được setup, CLI tools ở máy local, nên mình nghĩ là docker nên cải thiện phần này để tránh nhầm lẫn, có thể hiển thị context hiện tại ở prompt hoặc ít nhất là highlight khi đang ở context remote server để tránh nhầm lẫn, hoặc mình tự custom prompt trong terminal để hiển thị context hiện tại cũng được, nhưng mà nếu docker có sẵn thì tốt hơn nhiều rồi :)))
+
 ---
 
 # Docker ps
