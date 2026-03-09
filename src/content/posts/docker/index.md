@@ -145,7 +145,7 @@ mình nhầm giữa:
 ```bash
 default  -> local
 fpt      -> ssh://fpt
-```
+```****
 
 - Docker CLI **không hiển thị context rõ trong terminal** nên rất dễ nhầm.
 
@@ -265,6 +265,140 @@ Dừng tất cả container đang chạy
 
 ```zsh
 docker stop $(docker ps -a -q)
+```
+
+---
+
+# Bind mount và name volume
+
+## Bind mount là gì?
+
+Bind mount = **mount thẳng một thư mục của host vào container**.
+
+```bash
+volumes:
+  - ./data:/data
+```
+
+Nghĩa là
+
+```bash
+Server
+/home/app/data
+        ↓
+Container
+/data
+```
+
+Container ghi gì vào `/data` thì file thật nằm trên host.
+
+Bạn SSH vào server là thấy ngay.
+
+Ví dụ:
+
+```bash
+ls data/
+```
+
+### Ưu điểm
+
+Dễ debug, xem log trực tiếp
+
+```bash
+cat data/config.json
+```
+
+Backup dễ
+
+```bash
+tar czf backup.tar.gz data/
+```
+
+Migrate server dễ, copy folder data sang server mới, chạy lại docker là xong
+
+```bash
+scp -r data new-server
+```
+
+### Nhược điểm
+
+Phụ thuộc filesystem host, nếu deploy sang server khác thì đảm bảo folder đó tồn tại và có quyền truy cập vậy nên không portable
+
+## Name volume là gì?
+
+Name volume = **Docker quản lý storage cho bạn.**
+
+```bash
+volumes:
+  - redis-data:/data
+```
+
+cuối file
+
+```bash
+volumes:
+  redis-data:
+```
+
+Data thật đang nằm ở
+
+```bash
+/var/lib/docker/volumes/redis-data/_data
+```
+
+Docker quản lí, bạn không cần biết path thật của nó, chỉ cần biết tên volume là được, docker sẽ tự mount vào container, bạn có thể dùng lệnh `docker volume` để quản lý volume
+
+### Ưu điểm
+
+- Portable hơn, compose chạy ở đâu cũng được, docker sẽ tự tạo volume và mount vào container, không cần lo về path hay quyền truy cập như bind mount
+- An toàn hơn khi deploy, bạn có thể
+
+```bash
+docker compose down
+docker compose up
+```
+
+data vẫn còn nguyên, không bị xóa mất như bind mount nếu bạn xóa folder data trên host, nhưng với name volume thì docker sẽ giữ lại dữ liệu trong volume, trừ khi bạn xóa volume đó đi bằng lệnh `docker volume rm <volume-name>`
+
+### Nhược điểm
+
+- Khó debbg, để xem log hay backup dữ liệu thì phải dùng lệnh `docker volume` để truy cập vào volume, không thể truy cập trực tiếp như bind mount
+
+```bash
+docker volume inspect redis-data
+```
+
+- Backup khó hơn, phải dùng lệnh `docker run` để tạo một container tạm thời mount volume đó vào rồi backup từ container đó, không thể backup trực tiếp như bind mount
+
+```bash
+docker run --rm \
+ -v redis-data:/data \
+ -v $(pwd):/backup \
+ alpine tar czf /backup/redis.tar.gz /data
+```
+
+## Khi nào nên dùng cái nào?
+
+Đối với bind mount, nên dùng cho môi trường development, khi bạn cần debug, xem log trực tiếp, backup dễ dàng, migrate server nhanh chóng, nhưng không nên dùng cho production vì nó phụ thuộc vào filesystem host, không portable, dễ bị xóa mất dữ liệu nếu xóa folder trên host
+
+Bind mount thường dùng cho
+
+```bash
+config
+cert
+logs
+dev environment
+```
+
+Vì tweak config nhanh
+
+Name volume thường dùng cho
+
+```bash
+database
+queue
+cache
+storage engine
 ```
 
 ---
