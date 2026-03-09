@@ -5,7 +5,7 @@ description: ''
 image: "https://images.viblo.asia/fad7cf1a-772f-43e4-9042-e96d5d903b2b.png"
 tags: [Docker, Containerization, DevOps]
 category: 'Công nghệ'
-draft: true
+draft: false
 lang: 'vi'
 ---
 
@@ -130,6 +130,22 @@ Commands:
 Run 'docker context COMMAND --help' for more information on a command.
 ```
 
+Hãy cẩn thận khi thao tác với context, nếu bạn đang ở context remote server mà chạy lệnh `docker rm -f $(docker ps -a -q)` thì sẽ xóa tất cả container trên con server đó đấy, không phải trên máy local đâu nhé :))) mình đã làm rồi và thót tim, may là mình đã có **workflow deploy lại hoàn toàn tự động**, và **mount volume** để dữ liệu không bị mất, nên chỉ mất thời gian deploy lại chứ không mất dữ liệu gì cả. Coi như là test disaster recovery miễn phí.
+
+[](./npm.png)
+
+- Vấn đề thật sự nằm ở docker context
+
+nhầm giữa:
+
+```bash
+default  -> local
+fpt      -> ssh://fpt
+```
+
+Docker CLI **không hiển thị context rõ trong terminal** nên rất dễ nhầm.
+
+Đây là lỗi rất phổ biến, có thể devops khác sẽ không dùng docker context, mà sẽ ssh vào server rồi thao tác trực tiếp cho an toàn, nhưng nếu dùng docker context thì sẽ tiện hơn rất nhiều, vì tận dụng được setup, CLI tools ở máy local, nên mình nghĩ là docker nên cải thiện phần này để tránh nhầm lẫn, có thể hiển thị context hiện tại ở prompt hoặc ít nhất là highlight khi đang ở context remote server để tránh nhầm lẫn, hoặc mình tự custom prompt trong terminal được
 ---
 
 # Docker ps
