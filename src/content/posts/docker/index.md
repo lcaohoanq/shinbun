@@ -130,9 +130,13 @@ Commands:
 Run 'docker context COMMAND --help' for more information on a command.
 ```
 
-Hãy cẩn thận khi thao tác với context, nếu bạn đang ở context remote server mà chạy lệnh `docker rm -f $(docker ps -a -q)` thì sẽ xóa tất cả container trên con server đó đấy, không phải trên máy local đâu nhé :))) mình đã làm rồi và thót tim, may là mình đã có **workflow deploy lại hoàn toàn tự động**, và **mount volume** để dữ liệu không bị mất, nên chỉ mất thời gian deploy lại chứ không mất dữ liệu gì cả. Coi như là test disaster recovery miễn phí.
+## Hãy cẩn thận khi thao tác với context
 
-[](./npm.png)
+Mình vừa có một phen hú hồn khi rãnh tay prune (container, image) mình tưởng là trên máy mình, nhưng mình chợt vô các api, web đột nhiên tắt hết, mình mới tá hỏa chạy lại lệnh `docker ps` thì thấy là đang ở context remote server, và lệnh `docker rm -f $(docker ps -a -q)` đã xóa tất cả container trên con server đó, may mà mình đã có **workflow deploy** tự động + **mount volume** nên chỉ mất thời gian deploy lại chứ không mất dữ liệu gì cả, coi như là test disaster recovery miễn phí :)))
+
+![](./npm.png)
+
+> Tưởng tưởng chừng này proxy bị xóa hết, và phải tạo lại từ đầu, quá sợ :)
 
 ## Vấn đề thật sự nằm ở docker context
 
