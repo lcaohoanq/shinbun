@@ -359,6 +359,53 @@ pipe 3
 
 ---
 
+# Notify boot bằng Discord
+
+- Mình muốn mỗi lần Proxmox host boot lên thì sẽ gửi một thông báo vào Discord để biết rằng server đã sẵn sàng, có thể bắt đầu làm việc được rồi đó. Mình sẽ dùng systemd để tạo một service chạy một script bash gửi webhook đến Discord mỗi khi server boot lên.
+
+```bash
+root@pve:/home/dulieu# cat /etc/systemd/system/notify-boot.service
+[Unit]
+Description=Gửi thông báo khi có mạng
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/pve-notify.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
+root@pve:/home/dulieu# cat /usr/local/bin/pve-notify.sh
+#!/bin/bash
+
+# Webhook URL của bạn
+WEBHOOK_URL="<YOUR_DISCORD_WEBHOOK_URL>"
+
+HOSTNAME=$(hostname)
+
+# Lấy chính xác IP của bridge vmbr0
+IP_ADDR=$(ip -4 addr show vmbr0 | awk '/inet / {print $2}' | cut -d/ -f1)
+
+# Nếu không tìm thấy IP của vmbr0 thì lấy IP đầu tiên của máy làm dự phòng
+if [ -z "$IP_ADDR" ]; then
+    IP_ADDR=$(hostname -I | awk '{print $1}')
+fi
+
+TIME=$(date "+%H:%M:%S %d/%m/%Y")
+
+# Dùng \n để xuống dòng thay vì nhấn Enter trực tiếp trong code
+MESSAGE="🚀 **Proxmox Server Online!**\n- **Host:** $HOSTNAME\n- **IP:** $IP_ADDR\n- **Thời gian:** $TIME"
+
+# Đóng gói JSON cẩn thận
+PAYLOAD="{\"content\": \"$MESSAGE\"}"
+
+curl -H "Content-Type: application/json" -X POST -d "$PAYLOAD" "$WEBHOOK_URL"
+```
+
+---
+
 # VM vs LXC
 
 ![VM vs LXC](vm_lxc.webp)
