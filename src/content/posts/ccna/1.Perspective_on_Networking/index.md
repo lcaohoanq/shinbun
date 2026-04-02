@@ -1,3 +1,14 @@
+---
+title: Perspective on Networking
+published: 2026-04-02
+description: ''
+image: ''
+tags: [Networking, CCNA]
+category: 'Công nghệ'
+draft: true
+lang: 'vi'
+---
+
 # Perspective on Networking
 
 End-User perspective on networking is often limited to the applications they use, such as web browsers, email clients, and social media platforms. They may not be aware of the underlying network infrastructure that enables these applications to function.

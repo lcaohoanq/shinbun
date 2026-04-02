@@ -1,3 +1,14 @@
+---
+title: TCP/IP Networking Model
+published: 2026-04-02
+description: ''
+image: ''
+tags: [Networking, CCNA]
+category: 'Công nghệ'
+draft: true
+lang: 'vi'
+---
+
 # History Leading to TCP/IP
 
 **OSI model** was developed in the late 1970s and early 1980s by the International Organization for Standardization (ISO) as a framework for understanding and designing network protocols. It was intended to provide a common language and structure for network communication.
