@@ -20,7 +20,7 @@ Im using Omarchy as my main OS for a while, and I want to share my experience wi
 
 # Docs
 
-- Good document, you can find it here: <https://learn.omacom.io/2/the-omarchy-manual>
+- Good document, you can find it here: [Omarchy document](https://learn.omacom.io/2/the-omarchy-manual)
 
 # Install Windows VM
 
