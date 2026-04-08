@@ -2,7 +2,7 @@
 title: AWS Cloud Practitioner Essentials
 published: 2026-03-29
 description: ''
-image: ''
+image: './badge.png'
 tags: [AWS, Badge, Course]
 category: 'Công nghệ'
 draft: true
