@@ -605,3 +605,65 @@ root@jellyfin:~# cd /media/
 root@jellyfin:/media# ls
 aws  aws-funds  ccna  hoidanit-java-springboot  imran-devops  jenkins  linux-bootcamp
 ```
+
+### Notify boot system service
+
+Khởi động lên sẽ thông báo về discord bằng webhook, cần chuẩn bị 2 file `notify-boot.service`,`pve-notify.sh` và WEBHOOK_URL Discord
+
+- /etc/systemd/system/notify-boot.service
+```bash
+[Unit]
+Description=Gửi thông báo khi có mạng
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/pve-notify.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
+```
+
+- /usr/local/bin/pve-notify.sh
+```bash
+#!/bin/bash
+
+# Webhook URL của bạn
+WEBHOOK_URL="REPLACE_WITH_WEBHOOK"
+
+HOSTNAME=$(hostname)
+
+# Lấy chính xác IP của bridge vmbr0
+IP_ADDR=$(ip -4 addr show vmbr0 | awk '/inet / {print $2}' | cut -d/ -f1)
+
+# Nếu không tìm thấy IP của vmbr0 thì lấy IP đầu tiên của máy làm dự phòng
+if [ -z "$IP_ADDR" ]; then
+    IP_ADDR=$(hostname -I | awk '{print $1}')
+fi
+
+TIME=$(date "+%H:%M:%S %d/%m/%Y")
+
+# Dùng \n để xuống dòng thay vì nhấn Enter trực tiếp trong code
+MESSAGE="🚀 **Proxmox Server Online!**\n- **Host:** $HOSTNAME\n- **IP:** $IP_ADDR\n- **Thời gian:** $TIME"
+
+# Đóng gói JSON cẩn thận
+PAYLOAD="{\"content\": \"$MESSAGE\"}"
+
+curl -H "Content-Type: application/json" -X POST -d "$PAYLOAD" "$WEBHOOK_URL
+```
+
+- Start on boot
+
+```bash
+systemctl enable notify-boot.service
+```
+
+- Test
+
+```bash
+systemctl start notify-boot.service
+```
+
+<img width="487" height="474" alt="image" src="https://github.com/user-attachments/assets/61ea9ac5-741e-4d53-a767-219931e4f3fa" />
