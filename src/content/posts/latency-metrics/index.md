@@ -1,8 +1,8 @@
 ---
 title: "Understanding P50, P95, and P99 Latency Metrics"
-published: 2025-03-28
+published: 2026-07-24
 description: "A practical guide to understanding percentile-based latency metrics and why average response times can be misleading."
-image: ""
+image: "./image.png"
 tags: ["performance", "observability", "devops", "monitoring", "backend"]
 category: "Engineering"
 draft: false
