@@ -222,7 +222,7 @@ When using Prometheus, percentile calculations are commonly derived from histogr
 
 For example:
 
-```promql
+```txt
 histogram_quantile(0.50, ...)
 histogram_quantile(0.95, ...)
 histogram_quantile(0.99, ...)
