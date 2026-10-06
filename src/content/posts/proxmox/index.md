@@ -377,6 +377,9 @@ RemainAfterExit=yes
 
 [Install]
 WantedBy=multi-user.target
+```
+
+```bash
 root@pve:/home/dulieu# cat /usr/local/bin/pve-notify.sh
 #!/bin/bash
 
